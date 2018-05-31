@@ -10,6 +10,7 @@ namespace ERP.API.Models
         public byte[] PasswordSalt { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public double Salary { get; set; }
         public DateTime Created { get; set; }
         public DateTime DateOfBirth { get; set; }
         public int PositionId { get; set; }

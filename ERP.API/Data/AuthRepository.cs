@@ -1,3 +1,5 @@
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using ERP.API.Models;
 using Microsoft.EntityFrameworkCore;
@@ -23,15 +25,45 @@ namespace ERP.API.Data
             {
                 return null;
             }
+            
+            return verifyPassword(password, employee) ? employee : null;
+        }
 
-            return employee;
+        private bool verifyPassword(string password, Employee employee)
+        {
+            using(var hmac = new HMACSHA512(employee.PasswordSalt))
+            {
+                var hashedInputPassword = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+                for (int i = 0; i < employee.PasswordHash.Length; i++)
+                {
+                    if(hashedInputPassword[i] != employee.PasswordHash[i])
+                        return false;
+                }
+            }
+            return true;
         }
 
         public async Task<Employee> Register(Employee employee, string password)
         {
+            byte[] passwordHash, passwordSalt;
+            
+            createPasswordHash(password, out passwordHash, out passwordSalt);
+            
+            employee.PasswordHash = passwordHash;
+            employee.PasswordSalt = passwordSalt;
+            
             await this.context.Employees.AddAsync(employee);
             await context.SaveChangesAsync();
             return employee;
+        }
+
+        private void createPasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+        {
+            using(var hmac = new HMACSHA512())
+            {
+                passwordSalt = hmac.Key;
+                passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+            }
         }
     }
 }
