@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,11 @@ namespace ERP.API.Data
         {
             this.context = context;
 
+        }
+
+        public async Task<IEnumerable<Position>> GetPositions()
+        {
+            return await this.context.Positions.ToListAsync();
         }
         public async Task<bool> EmployeeExists(string email)
         {

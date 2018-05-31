@@ -16,6 +16,13 @@ namespace ERP.API.Controllers
             this.repo = repo;
         }
 
+        [HttpGet("positions")]
+        public async Task<IActionResult> GetPositions()
+        {
+            var positions =  await this.repo.GetPositions();
+            return Ok(positions);
+        }
+
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] EmployeeRegisterDto dto)
         {

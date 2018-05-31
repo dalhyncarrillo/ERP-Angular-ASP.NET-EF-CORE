@@ -31,6 +31,7 @@ namespace ERP.API
             services.AddDbContext<DataContext>(options => options.UseSqlServer(connection));
             services.AddScoped<IDataRepository, DataRepository>();
             services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddCors();
 
         }
 
@@ -41,7 +42,7 @@ namespace ERP.API
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
             app.UseMvc();
         }
     }
