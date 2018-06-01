@@ -8,13 +8,14 @@
     </div>
  
     <div class="form-label-group">
-      <input type="email" #inputEmail="ngModel" name="inputEmail" [(ngModel)]="emp.email" class="form-control" placeholder="Email address" required email >
       <label for="inputEmail">Email address</label>
+      <input type="email" #inputEmail="ngModel" name="inputEmail" [(ngModel)]="emp.email" class="form-control" placeholder="Email address" required email >    
+      <p *ngIf="inputEmail.touched && !inputEmail.valid">Enter your email address!</p>
     </div>
   
     <div class="form-label-group">
-      <input type="password" #inputPassword="ngModel" name="inputPassword"[(ngModel)]="emp.password" class="form-control" placeholder="Password" required>
       <label for="inputPassword">Password</label>
+      <input type="password" #inputPassword="ngModel" name="inputPassword"[(ngModel)]="emp.password" class="form-control" placeholder="Password" required>   
     </div>
   
     <div class="checkbox mb-3">

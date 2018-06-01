@@ -1,27 +1,38 @@
-
 <div class="container">
-  <div class="row">
-    <form>
-      <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-      </div>
-      <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-    <div class="form-group">
-      <label for="power">Hero Power</label>
-      <select class="form-control" id="power" required>
-        <option *ngFor="let pos of positions">{{pos.positionName}}</option>
-      </select>
+    <div class="row">
+      <form #registerForm="ngForm" (ngSubmit)="submit()" class="register-form">
+        <div class="form-group">
+          <label>Email address</label>
+          <input type="email" class="form-control" name="inputEmail" [(ngModel)]="employeeToRegister.email" placeholder="Enter email" required email>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" class="form-control"  name="inputPassword" [(ngModel)]="employeeToRegister.password" placeholder="Password" required>
+        </div>
+        <div class="form-group">
+            <label>First Name</label>
+            <input type="text" class="form-control" name="inputFirstName" [(ngModel)]="employeeToRegister.firstName" placeholder="Enter First name" required>
+        </div>
+        <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" class="form-control" name="inputLastName" [(ngModel)]="employeeToRegister.lastName" placeholder="Enter Last name" required>
+        </div>
+        <div class="form-group">
+            <label>Date Of Birth</label>
+            <input type="text" class="form-control" name="inputBirthdate" [(ngModel)]="employeeToRegister.birthdate" placeholder="Enter Birthdate" required>
+        </div>
+        <div class="form-group">
+            <label>Salary</label>
+            <input type="text" class="form-control" name="inputSalary" [(ngModel)]="employeeToRegister.salary" placeholder="Enter Salary" required>
+        </div>
+        <div class="form-group">
+            <label>Position</label>
+            <select class="form-control" name="selectPosition" [(ngModel)]="position" required>
+              <option *ngFor="let pos of positions">{{pos.positionName}}</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
     </div>
   </div>
-</div>
+  

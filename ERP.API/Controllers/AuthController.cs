@@ -44,7 +44,7 @@ namespace ERP.API.Controllers
                 DateOfBirth = dto.DateOfBirth,
                 PositionId = dto.PositionId,
                 Created = DateTime.Now,
-                Salary = 0.0,
+                Salary = dto.Salary,
                 LastUpdated = DateTime.Now               
             };
 

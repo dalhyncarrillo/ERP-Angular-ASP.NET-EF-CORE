@@ -21,7 +21,13 @@ export class AuthService {
         return this.http.post('http://localhost:5000/api/auth/login',emp);
     }
 
-    getPositions(): Observable<Position[]> {
-        return this.http.get('http://localhost:5000/api/auth/positions').map(response => <Position[]>response.json());
+    getPositions() {
+        return this.http.get('http://localhost:5000/api/auth/positions').map(response => { 
+            return response.json()
+        });
+    }
+
+    register(emp: any) {
+        return this.http.post('http://localhost:5000/api/auth/register', emp);
     }
 }
