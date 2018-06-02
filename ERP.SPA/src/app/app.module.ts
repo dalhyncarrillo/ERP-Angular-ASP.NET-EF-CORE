@@ -12,6 +12,11 @@ import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './home/login/login.component';
+import { ItemListComponent } from './items/item-list/item-list.component';
+import { InventoryService } from './_services/inventory.service';
+import { SupplierListComponent } from './suppliers/supplier-list/supplier-list.component';
+import { SupplierService } from './_services/supplier.service';
+import { SupplierDetailComponent } from './suppliers/supplier-detail/supplier-detail.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +24,11 @@ import { LoginComponent } from './home/login/login.component';
     NavComponent,
     HomeComponent,
     LoginComponent,
-    RegisterEmployeeComponent
+    RegisterEmployeeComponent,
+    ItemListComponent,
+    SupplierListComponent,
+    SupplierDetailComponent,
+    
 ],
   imports: [
     BrowserModule,
@@ -28,7 +37,9 @@ import { LoginComponent } from './home/login/login.component';
     FormsModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    InventoryService,
+    SupplierService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,4 +1,6 @@
+import { AuthService } from './../_services/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -7,12 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
   }
 
   logout() {
-    console.log('Log out');
+    localStorage.removeItem('token');
+    this.router.navigate(['']);
+  }
+
+  loggedIn() {
+    return this.authService.isLoggedIn();
   }
 }

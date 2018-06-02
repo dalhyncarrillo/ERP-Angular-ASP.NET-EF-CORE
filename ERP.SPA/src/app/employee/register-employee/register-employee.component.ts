@@ -21,7 +21,7 @@ export class RegisterEmployeeComponent implements OnInit {
   }
 
   getPositions() {
-    this.authService.getPositions().subscribe(data  => {
+    this.authService.getPositions().subscribe((data: Position[])  => {
       this.positions = data;
     });
   }

@@ -1,9 +1,13 @@
 using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using ERP.API.Data;
 using ERP.API.DTOs;
 using ERP.API.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace ERP.API.Controllers
 {
@@ -57,8 +61,23 @@ namespace ERP.API.Controllers
             var employee = await this.repo.Login(employeeLoginDto.Email, employeeLoginDto.Password);
             if(employee == null)
                 return Unauthorized();
-
-            return Ok(employee);
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes("super secret key");
+                    var tokenDescriptor = new SecurityTokenDescriptor
+                    {
+                        Subject = new ClaimsIdentity(new Claim[]
+                        {
+                            new Claim(ClaimTypes.Name, employee.Email),
+                            new Claim(ClaimTypes.NameIdentifier, employee.EmployeeId.ToString())
+                            
+                        }),
+                        Expires = DateTime.Now.AddDays(1),
+                        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
+                        SecurityAlgorithms.HmacSha512Signature)
+                    };
+                    var token = tokenHandler.CreateToken(tokenDescriptor);
+                    var tokenString = tokenHandler.WriteToken(token);
+                    return Ok(new {tokenString});        
         }
         
     }
