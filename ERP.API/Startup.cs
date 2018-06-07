@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using ERP.API.Data;
 using ERP.API.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -31,12 +32,13 @@ namespace ERP.API
         {
             var key = Encoding.ASCII.GetBytes("super secret key");
             services.AddMvc();
+            services.AddAutoMapper();
             var connection = @"Server=DESKTOP-U2AMBJE\SQLEXPRESS;Database=erp;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<DataContext>(options => options.UseSqlServer(connection));
             services.AddScoped<IDataRepository, DataRepository>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddCors();
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => {
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
@@ -46,6 +48,10 @@ namespace ERP.API
                         ValidateAudience = false
                     };
                 });
+            services.AddMvc().AddJsonOptions(opt => 
+            {
+                opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
 
         }
 
@@ -57,8 +63,8 @@ namespace ERP.API
                 app.UseDeveloperExceptionPage();
             }
             app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
-            app.UseMvc();
             app.UseAuthentication();
+            app.UseMvc();
         }
     }
 }

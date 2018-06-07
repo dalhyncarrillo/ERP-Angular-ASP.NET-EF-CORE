@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ERP.API.Models
 {
@@ -10,6 +11,9 @@ namespace ERP.API.Models
         public Supplier Supplier { get; set; }
         public string Status { get; set; }
         public double TotalCost { get; set; }
+        public int ApprovedBy { get; set; }
+        [ForeignKey("ApprovedBy")]
+        public Employee Employee { get; set; }
         public DateTime RequestedDate { get; set; }
         public DateTime ReceivedDate { get; set; }
         public ICollection<OrderItem> OrderItems { get; set; }

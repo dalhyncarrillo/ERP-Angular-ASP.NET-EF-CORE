@@ -6,3 +6,12 @@
   table {
       margin-left: 15px;
   }
+
+  .full-width {
+      width: 100%;
+  }
+
+  .margins {
+      margin-left: 35px;
+      margin-top: 20px;
+  }
