@@ -1,3 +1,4 @@
+import { MatDialogRef } from '@angular/material';
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Supplier } from '../../_models/supplier.model';
@@ -12,7 +13,7 @@ export class SupplierCreateDialogComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
-  constructor(private _formBuilder: FormBuilder, private supplierService: SupplierService) { }
+  constructor(private _formBuilder: FormBuilder, private supplierService: SupplierService, public dialogRef: MatDialogRef<SupplierCreateDialogComponent>) { }
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
@@ -39,16 +40,13 @@ export class SupplierCreateDialogComponent implements OnInit {
       lastUpdated: new Date(2018,6,9),
       status: 'Active',
     };
-    console.log(supplierToSaveToDb);
     this.supplierService.createSupplier(supplierToSaveToDb).subscribe(data => {
       console.log(data);
     },
     error => {
       console.log(error);
     });
-  }
-  adsf() {
-    console.log(Date.now().toString());
+    this.dialogRef.close();
   }
 
 }

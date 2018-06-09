@@ -20,7 +20,7 @@ import { InventoryService } from './_services/inventory.service';
 import { SupplierListComponent } from './suppliers/supplier-list/supplier-list.component';
 import { SupplierService } from './_services/supplier.service';
 import { SupplierDetailComponent } from './suppliers/supplier-detail/supplier-detail.component';
-import { MatStepperModule, MatIconModule, MatInputModule, MatDialogModule, MatDatepickerModule, MatButtonModule, MatTableModule } from '@angular/material';
+import { MatStepperModule, MatIconModule, MatInputModule, MatDialogModule, MatDatepickerModule, MatButtonModule, MatTableModule, MatPaginatorModule } from '@angular/material';
 import { SupplierCreateDialogComponent } from './suppliers/supplier-create-dialog/supplier-create-dialog.component';
 import { ConfirmationDialogComponent } from './ConfirmationDialog/ConfirmationDialog.component';
 
@@ -61,7 +61,8 @@ import { ConfirmationDialogComponent } from './ConfirmationDialog/ConfirmationDi
     MatDialogModule,
     MatIconModule,
     MatInputModule,
-    MatTableModule
+    MatTableModule,
+    MatPaginatorModule,
   ],
   entryComponents: [SupplierCreateDialogComponent, ConfirmationDialogComponent, SupplierListComponent],
   providers: [

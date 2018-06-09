@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Position } from './../_models/position.model';
-import { Http, Headers, RequestOptions, Response } from '@angular/http';
+import { Headers, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';

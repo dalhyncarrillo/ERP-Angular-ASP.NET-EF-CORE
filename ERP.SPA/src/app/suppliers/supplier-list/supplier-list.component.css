@@ -4,11 +4,10 @@
   }
 
   table {
-      margin-left: 15px;
-        width: 100%;
-        padding: 15px;
-        box-shadow: 1px 1px 8px 0px rgba(19, 18, 21, 0.5);
-  }
+    margin-left: 15px;
+      width: 100%;
+      padding: 15px;
+}
 
   .full-width {
       width: 100%;

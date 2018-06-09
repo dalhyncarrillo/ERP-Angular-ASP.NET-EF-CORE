@@ -1,12 +1,12 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InventoryService {
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   getItems() {
     this.http

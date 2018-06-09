@@ -1,25 +1,42 @@
+<div class="row">
+      
+  <div class="mat-elevation-z8 full-width" [class.col-md-4]="selectedSupplier">
+      <mat-form-field class="margins">
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+    <table mat-table [dataSource]="dataSource" >
+  
+      <!-- Position Column -->
+      <ng-container matColumnDef="supplierId">
+        <th mat-header-cell *matHeaderCellDef> # </th>
+        <td mat-cell *matCellDef="let element" (click)="onSupplier(element)"> {{element.supplierId}} </td>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+  
+      <!-- Weight Column -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onSupplier(row)" [class.selected]="row === selectedSupplier"></tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+  <div class="col-md-6">
+    <app-supplier-detail [supplier]="selectedSupplier" (supplierDeleted)="deleteSupplier($event)" *ngIf="selectedSupplier"></app-supplier-detail>
+  </div>
+</div>
 
-    <div class="row">
-      <div [class.col-md-4]="selectedSupplier" class="full-width">
-                <table class="table table-hover">
-                        <thead>
-                                <tr>
-                                  <th scope="col">#</th>
-                                  <th scope="col">Name</th>
-                                  <th scope="col">Status</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr *ngFor="let supplier of suppliers" (click)="onSupplier(supplier)" [class.selected]="supplier === selectedSupplier">
-                                  <th scope="row">{{supplier.supplierId}}</th>
-                                  <td>{{supplier.name}}</td>
-                                  <td>{{supplier.status}}</td>
-                                </tr>
-                              </tbody>                   
-                </table>
-        </div>
-        <div class="col-md-6 margins">
-            <app-supplier-detail [supplier]="selectedSupplier" (supplierDeleted)="deleteSupplier($event)" *ngIf="selectedSupplier"></app-supplier-detail>
-        </div>
-    </div>
-    <!-- <div [class.col-md-4]="selectedSupplier" class="full-width"> -->
+
+
+<!-- Copyright 2018 Google Inc. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->

@@ -1,5 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Position } from './../_models/position.model';
-import { Http, Headers, RequestOptions, Response } from '@angular/http';
+import {  Headers, RequestOptions, Response } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/map';
@@ -16,19 +17,16 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class AuthService {
 
-    constructor(private http: Http) { }
+    constructor(private http: HttpClient) { }
 
     login(emp: any) {
-        return this.http.post(environment.baseurl + 'auth/login',emp).map(response => {
-          var token = response.json();
-        localStorage.setItem('token',token.tokenString);
+        return this.http.post(environment.baseurl + 'auth/login',emp).map(token => {
+        localStorage.setItem('token',token['tokenString']);
       });
     }
 
     getPositions() {
-        return this.http.get(environment.baseurl + 'auth/positions').map(response => { 
-            return response.json()
-        });
+        return this.http.get<Position[]>(environment.baseurl + 'auth/positions');
     }
 
     register(emp: any) {

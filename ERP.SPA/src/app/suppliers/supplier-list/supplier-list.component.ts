@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { SupplierService } from '../../_services/supplier.service';
 import { Supplier } from '../../_models/supplier.model';
+import { MatPaginator, MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-supplier-list',
@@ -8,18 +9,37 @@ import { Supplier } from '../../_models/supplier.model';
   styleUrls: ['./supplier-list.component.css']
 })
 export class SupplierListComponent implements OnInit {
+  
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  suppliers:Supplier [];
+  suppliers:Supplier[];
+ 
+  displayedColumns = ['supplierId', 'name', 'status'];
+
   selectedSupplier;
-  constructor(private supplierService: SupplierService) { }
-
-  ngOnInit() {
-    this.getSuppliers();
+  constructor(private supplierService: SupplierService) {}
+  dataSource;
+  
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
   }
 
+  ngOnInit() {  
+    this.getSuppliers();   
+  }
+
+  setDataSource() {
+    this.dataSource = new MatTableDataSource<Supplier>(this.suppliers);
+    this.dataSource.paginator = this.paginator;
+  }
+
+  
   getSuppliers() {
     this.supplierService.getSuppliers().subscribe(data => {
-      this.suppliers = data;
+    this.suppliers = data;
+    this.setDataSource();  
     });
   }
 
