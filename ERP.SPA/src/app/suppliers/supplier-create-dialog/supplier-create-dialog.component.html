@@ -1,0 +1,55 @@
+<mat-horizontal-stepper [linear]="true" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Fill out Supplier name</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="Supplier name" formControlName="nameCtrl" required>
+      </mat-form-field>
+      <div>
+        <button class="btn btn-primary" matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Fill out Supplier address</ng-template>
+      <mat-form-field>
+          <input matInput placeholder="City" formControlName="cityCtrl" required>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input matInput placeholder="Address" formControlName="addressCtrl" required>
+      </mat-form-field>
+      <div>
+        <button class="btn btn-primary" matStepperNext>Next</button>
+        <button class="btn btn-primary" matStepperPrevious>Back</button>        
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="thirdFormGroup">
+      <form [formGroup]="thirdFormGroup">
+        <ng-template matStepLabel>Fill out Supplier contact</ng-template>
+        <mat-form-field>
+            <input matInput placeholder="Contant Person" formControlName="contactNameCtrl" required>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input matInput placeholder="Phone" formControlName="phoneCtrl" required>
+        </mat-form-field>
+        <div>
+            <button class="btn btn-primary" matStepperNext>Next</button>
+            <button class="btn btn-primary" matStepperPrevious>Back</button> 
+        </div>
+      </form>
+    </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    You are now done.
+    <div>
+        <button class="btn btn-success" (click)="addNewSupplier()" matStepperNext>Add</button>
+        <button class="btn btn-primary" matStepperPrevious>Back</button> 
+      <button class="btn btn-danger" (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
+<button (click)="adsf()">ds</button>

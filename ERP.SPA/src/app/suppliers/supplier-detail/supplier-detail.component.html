@@ -1,4 +1,4 @@
-<div *ngIf="supplier">
+<div class="panel">
     <div class="row">
         <div class="col-md-6">
            <div class="form-group">
@@ -8,7 +8,8 @@
         </div>
         <div class="col-md-6">
            <div class="form-group">
-               <button class="btn btn-primary" (click)="updateSupplier()">Update</button>
+               <br>            
+               <button class="btn btn-primary" (click)="addSupplier()"><i class="fa fa-plus"></i></button>
            </div>
         </div>
       </div>
@@ -55,4 +56,6 @@
            </div>
         </div>
       </div>
+      <button class="btn btn-primary" (click)="updateSupplier()">Update</button>
+      <button class="btn btn-danger" (click)="deleteSupplier()">Delete</button>  
 </div>

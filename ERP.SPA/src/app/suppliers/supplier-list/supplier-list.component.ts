@@ -27,4 +27,11 @@ export class SupplierListComponent implements OnInit {
     this.selectedSupplier = supplier;
   }
 
+  deleteSupplier(supplier: Supplier) {
+    const index: number = this.suppliers.indexOf(supplier);
+    if (index !== -1) {
+        this.suppliers.splice(index, 1);
+    }    
+  }
+
 }

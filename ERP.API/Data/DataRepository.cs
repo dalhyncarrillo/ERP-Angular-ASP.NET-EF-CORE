@@ -15,6 +15,24 @@ namespace ERP.API.Data
 
         }
 
+        public async Task<bool> CreateSupplier(Supplier supplier)
+        {
+            await this.context.Suppliers.AddAsync(supplier);
+            return await this.context.SaveChangesAsync() >=1 ? true : false;
+            
+        }
+
+        public async Task<bool> DeleteSupplier(int supplierToDeleteId)
+        {
+            var supplierToDelete = await this.context.Suppliers.FirstOrDefaultAsync(x => x.SupplierId == supplierToDeleteId);
+            if(supplierToDelete == null)
+                return false;
+
+            this.context.Suppliers.Remove(supplierToDelete);
+            await this.context.SaveChangesAsync();
+            return true;
+        }
+
         public async Task<Supplier> GetSupplier(int supplierId)
         {
             return await this.context.Suppliers.FirstOrDefaultAsync(sup => sup.SupplierId == supplierId);
@@ -27,13 +45,13 @@ namespace ERP.API.Data
 
         public async Task<Supplier> UpdateSupplier(Supplier supplier)
         {
-            var supplierToUpdate = await this.context.Suppliers.FirstOrDefaultAsync(x => x.SupplierId == supplier.SupplierId);
-            if(supplierToUpdate == null)
-                return null;
-            supplierToUpdate.Name = supplier.Name;
-           // this.context.Suppliers.Update(supplierToUpdate);
-            await this.context.SaveChangesAsync();
-            return supplierToUpdate;
+                var supplierToUpdate = await this.context.Suppliers.FirstOrDefaultAsync(x => x.SupplierId == supplier.SupplierId);
+                if(supplierToUpdate == null)
+                    return null;
+
+                supplierToUpdate.Name = supplier.Name;
+                await this.context.SaveChangesAsync();
+                return supplierToUpdate;
         }
     }
 }

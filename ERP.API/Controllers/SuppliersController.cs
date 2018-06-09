@@ -30,6 +30,7 @@ namespace ERP.API.Controllers
             //var suppliers = await this.context.Suppliers.ToListAsync();
             var suppliers = await this.repo.GetSuppliers();
             var suppliersToReturn = mapper.Map<IEnumerable<SupplierListDto>>(suppliers);
+           // return Ok(suppliers);
             return Ok(suppliersToReturn);
         }
 
@@ -43,8 +44,29 @@ namespace ERP.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateSupplier([FromBody] Supplier supplier)
         {
+            
             var updatedSupplier = await this.repo.UpdateSupplier(supplier);
+            if(updatedSupplier == null)
+                return BadRequest("Error change happened");
             return Ok(updatedSupplier);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateSupplier([FromBody] Supplier supplier)
+        {
+            var successful =await this.repo.CreateSupplier(supplier);
+            if(!successful)
+                return BadRequest("Error - Supplier not created");
+            return Ok();
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteSupplier(int id)
+        {
+            var isSupplierDeleted = await this.repo.DeleteSupplier(id);
+            if(!isSupplierDeleted)
+                return BadRequest("Supplier does NOT exist!");
+                
+            return Ok();
         }
     }
 }

@@ -9,5 +9,7 @@ namespace ERP.API.Data
         Task<IEnumerable<Supplier>> GetSuppliers();
         Task<Supplier> GetSupplier(int id);
         Task<Supplier> UpdateSupplier(Supplier supplier);
+        Task<bool> CreateSupplier(Supplier supplier);
+        Task<bool> DeleteSupplier(int id);
     }
 }

@@ -1,3 +1,4 @@
+import { AlertifyService } from './_services/alertify.service';
 import { RegisterEmployeeComponent } from './employee/register-employee/register-employee.component';
 import { AuthService } from './_services/auth.service';
 import { HomeComponent } from './home/home.component';
@@ -6,7 +7,10 @@ import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
+import { JwtModule } from '@auth0/angular-jwt';
+import { HttpClientModule } from '@angular/common/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -17,6 +21,10 @@ import { InventoryService } from './_services/inventory.service';
 import { SupplierListComponent } from './suppliers/supplier-list/supplier-list.component';
 import { SupplierService } from './_services/supplier.service';
 import { SupplierDetailComponent } from './suppliers/supplier-detail/supplier-detail.component';
+import { MatStepperModule, MatIconModule, MatInputModule, MatDialogModule, MatDatepickerModule, MatButtonModule } from '@angular/material';
+import { SupplierCreateDialogComponent } from './suppliers/supplier-create-dialog/supplier-create-dialog.component';
+import { ConfirmationDialogComponent } from './ConfirmationDialog/ConfirmationDialog.component';
+
 
 @NgModule({
   declarations: [
@@ -28,18 +36,40 @@ import { SupplierDetailComponent } from './suppliers/supplier-detail/supplier-de
     ItemListComponent,
     SupplierListComponent,
     SupplierDetailComponent,
-    
+    SupplierCreateDialogComponent,
+    ConfirmationDialogComponent
 ],
   imports: [
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     HttpModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatStepperModule,
+    MatIconModule,
+    MatInputModule,
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('token');
+        },
+        whitelistedDomains: ['localhost:5000']
+      }
+    }),
+    MatStepperModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatIconModule,
+    MatInputModule,
   ],
+  entryComponents: [SupplierCreateDialogComponent, ConfirmationDialogComponent],
   providers: [
     AuthService,
     InventoryService,
-    SupplierService
+    SupplierService,
+    AlertifyService
   ],
   bootstrap: [AppComponent]
 })
