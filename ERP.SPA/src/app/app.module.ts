@@ -6,7 +6,6 @@ import { HomeModule } from './home/home.module';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClientModule } from '@angular/common/http';
@@ -21,7 +20,7 @@ import { InventoryService } from './_services/inventory.service';
 import { SupplierListComponent } from './suppliers/supplier-list/supplier-list.component';
 import { SupplierService } from './_services/supplier.service';
 import { SupplierDetailComponent } from './suppliers/supplier-detail/supplier-detail.component';
-import { MatStepperModule, MatIconModule, MatInputModule, MatDialogModule, MatDatepickerModule, MatButtonModule } from '@angular/material';
+import { MatStepperModule, MatIconModule, MatInputModule, MatDialogModule, MatDatepickerModule, MatButtonModule, MatTableModule } from '@angular/material';
 import { SupplierCreateDialogComponent } from './suppliers/supplier-create-dialog/supplier-create-dialog.component';
 import { ConfirmationDialogComponent } from './ConfirmationDialog/ConfirmationDialog.component';
 
@@ -43,13 +42,12 @@ import { ConfirmationDialogComponent } from './ConfirmationDialog/ConfirmationDi
     ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
-    HttpModule,
+    HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
     MatStepperModule,
     MatIconModule,
-    MatInputModule,
-    HttpClientModule,
+    MatInputModule,  
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {
@@ -63,8 +61,9 @@ import { ConfirmationDialogComponent } from './ConfirmationDialog/ConfirmationDi
     MatDialogModule,
     MatIconModule,
     MatInputModule,
+    MatTableModule
   ],
-  entryComponents: [SupplierCreateDialogComponent, ConfirmationDialogComponent],
+  entryComponents: [SupplierCreateDialogComponent, ConfirmationDialogComponent, SupplierListComponent],
   providers: [
     AuthService,
     InventoryService,

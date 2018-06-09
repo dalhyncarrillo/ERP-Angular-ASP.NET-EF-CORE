@@ -31,7 +31,7 @@ export class SupplierListComponent implements OnInit {
     const index: number = this.suppliers.indexOf(supplier);
     if (index !== -1) {
         this.suppliers.splice(index, 1);
+        this.selectedSupplier = null;
     }    
   }
-
 }

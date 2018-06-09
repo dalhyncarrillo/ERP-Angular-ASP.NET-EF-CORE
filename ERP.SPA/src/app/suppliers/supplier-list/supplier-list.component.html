@@ -19,7 +19,7 @@
                 </table>
         </div>
         <div class="col-md-6 margins">
-            <app-supplier-detail [supplier]="selectedSupplier" *ngIf="selectedSupplier"></app-supplier-detail>
+            <app-supplier-detail [supplier]="selectedSupplier" (supplierDeleted)="deleteSupplier($event)" *ngIf="selectedSupplier"></app-supplier-detail>
         </div>
     </div>
     <!-- <div [class.col-md-4]="selectedSupplier" class="full-width"> -->
