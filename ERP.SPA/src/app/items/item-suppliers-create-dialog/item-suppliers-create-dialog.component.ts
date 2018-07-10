@@ -1,0 +1,61 @@
+import { Supplier } from './../../_models/supplier.model';
+import { ItemService } from './../../_services/item.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { SupplierService } from './../../_services/supplier.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, Inject } from '@angular/core';
+import { Item } from 'src/app/_models/item.model';
+import { ItemSuppliers } from '../../_models/item-suppliers.model';
+
+@Component({
+  selector: 'app-item-suppliers-create-dialog',
+  templateUrl: './item-suppliers-create-dialog.component.html',
+  styleUrls: ['./item-suppliers-create-dialog.component.css']
+})
+export class ItemSuppliersCreateDialogComponent implements OnInit {
+
+  suppliers: Supplier[];
+  itemToSave:any = {};
+
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
+  thirdFormGroup: FormGroup;
+  constructor(private _formBuilder: FormBuilder, 
+              private supplierService: SupplierService, 
+              private itemService: ItemService, 
+              public dialogRef: MatDialogRef<ItemSuppliersCreateDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public item: Item) { }
+
+  ngOnInit() {
+    this.getSuppliers();
+    this.firstFormGroup = this._formBuilder.group({
+      supplierCtrl: ['', Validators.required],
+      leadTimeCtrl: ['', Validators.required]
+    });
+    this.secondFormGroup = this._formBuilder.group({
+      retailPriceCtrl: ['', Validators.required],
+      unitCostCtrl: ['', Validators.required]
+    });
+ 
+  }
+
+  getSuppliers() {
+    this.supplierService.getSuppliers().subscribe(data => {
+      this.suppliers = data;
+    });
+  }
+  addNewItemSupplier() {
+    let itemSupplierToCreate = {
+      itemId: this.item.itemId,
+      
+      supplierId: this.firstFormGroup.get('supplierCtrl').value.supplierId,
+      leadTime: this.firstFormGroup.get('leadTimeCtrl').value,
+
+      retailPrice: this.secondFormGroup.get('retailPriceCtrl').value,
+      unitCost: this.secondFormGroup.get('unitCostCtrl').value,
+    }
+
+    this.itemService.createItemSuppliers(itemSupplierToCreate).subscribe();
+    this.dialogRef.close();
+  }
+}

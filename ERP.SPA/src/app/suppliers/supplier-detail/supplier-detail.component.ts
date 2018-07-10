@@ -39,8 +39,8 @@ export class SupplierDetailComponent implements OnInit, OnChanges {
 
   deleteSupplier() {
     let dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      height: '450px',
-      width: '700px',
+      height: '250px',
+      width: '500px',
       data: { message: 'Are you sure you want to delete?\n' + this.supplier.name}
     });
     dialogRef.afterClosed().subscribe(result => {

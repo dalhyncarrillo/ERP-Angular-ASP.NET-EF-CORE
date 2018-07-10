@@ -9,7 +9,6 @@ namespace ERP.API.Data
         { }
 
         public DbSet<Item> Items { get; set; }
-        public DbSet<Inventory> Inventories { get; set; }
         public DbSet<ItemSupplier> ItemSuppliers { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
@@ -23,12 +22,6 @@ namespace ERP.API.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-             modelBuilder.Entity<Inventory>()
-                .HasKey(c => new { c.InventoryId});
-
-            modelBuilder.Entity<Inventory>()
-                .HasKey(c => new { c.InventoryId});                
-
             modelBuilder.Entity<ItemSupplier>()
                 .HasKey(c => new { c.ItemId, c.SupplierId });
             

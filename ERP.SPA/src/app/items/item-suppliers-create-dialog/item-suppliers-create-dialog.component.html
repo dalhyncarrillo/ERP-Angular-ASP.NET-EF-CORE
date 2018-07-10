@@ -1,0 +1,46 @@
+<mat-horizontal-stepper [linear]="true" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+          <ng-template matStepLabel>Select Supplier</ng-template>
+          <mat-form-field>
+              <mat-select matInput placeholder="Choose one" formControlName="supplierCtrl" required>
+                  <mat-option *ngFor="let supplier of suppliers" [value]="supplier">
+                    {{supplier.name}}
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+          <br>
+          <mat-form-field>
+            <input matInput placeholder="Lead Time" formControlName="leadTimeCtrl" required>
+          </mat-form-field>
+          <div>
+              <button class="btn btn-primary" matStepperNext>Next</button>
+          </div>
+        </form>
+    </mat-step>   
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Fill out Retail price and Unit Cost</ng-template>
+        <mat-form-field>
+            <input matInput placeholder="Retail Price" formControlName="retailPriceCtrl" required>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input matInput placeholder="Unit Cost" formControlName="unitCostCtrl" required>
+        </mat-form-field>
+        <div>
+          <button class="btn btn-primary" matStepperNext>Next</button>
+          <button class="btn btn-primary" matStepperPrevious>Back</button>        
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      You are now done.
+      <div>
+          <button class="btn btn-success" (click)="addNewItemSupplier()" matStepperNext>Add</button>
+          <button class="btn btn-primary" matStepperPrevious>Back</button> 
+        <button class="btn btn-danger" (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>

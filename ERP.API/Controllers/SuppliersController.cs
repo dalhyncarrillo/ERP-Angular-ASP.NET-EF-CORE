@@ -18,7 +18,7 @@ namespace ERP.API.Controllers
     {
         private readonly IDataRepository repo;
         private readonly IMapper mapper;
-        public SuppliersController(IDataRepository repo, DataContext context, IMapper mapper)
+        public SuppliersController(IDataRepository repo, IMapper mapper)
         {
             this.mapper = mapper;
             this.repo = repo;
@@ -54,7 +54,7 @@ namespace ERP.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateSupplier([FromBody] Supplier supplier)
         {
-            var successful =await this.repo.CreateSupplier(supplier);
+            var successful =await this.repo.Add(supplier);
             if(!successful)
                 return BadRequest("Error - Supplier not created");
             return Ok();
@@ -62,11 +62,12 @@ namespace ERP.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSupplier(int id)
         {
-            var isSupplierDeleted = await this.repo.DeleteSupplier(id);
-            if(!isSupplierDeleted)
-                return BadRequest("Supplier does NOT exist!");
-                
-            return Ok();
+            var supplierToDelete =  await this.repo.GetSupplier(id);
+            if(supplierToDelete != null) {
+                this.repo.Delete(supplierToDelete); 
+                return Ok();
+            }            
+            return BadRequest("Supplier does NOT exist!");
         }
     }
 }

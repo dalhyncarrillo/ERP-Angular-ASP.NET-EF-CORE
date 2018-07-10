@@ -11,9 +11,10 @@ using System;
 namespace ERP.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20180702221940_Add IsPrimary field to ItemSupplier")]
+    partial class AddIsPrimaryfieldtoItemSupplier
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -100,20 +101,38 @@ namespace ERP.API.Migrations
                     b.ToTable("GeneralLedgers");
                 });
 
+            modelBuilder.Entity("ERP.API.Models.Inventory", b =>
+                {
+                    b.Property<int>("InventoryId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<double>("AvgCost");
+
+                    b.Property<int>("ItemId");
+
+                    b.Property<DateTime>("LastUpdated");
+
+                    b.Property<int>("QuantityOnHand");
+
+                    b.Property<int>("QuantityOrdered");
+
+                    b.Property<double>("UnitCost");
+
+                    b.HasKey("InventoryId");
+
+                    b.HasIndex("ItemId");
+
+                    b.ToTable("Inventories");
+                });
+
             modelBuilder.Entity("ERP.API.Models.Item", b =>
                 {
                     b.Property<int>("ItemId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<double>("AvgCost");
-
                     b.Property<DateTime>("LastUpdated");
 
                     b.Property<string>("Name");
-
-                    b.Property<int>("QuantityOnHand");
-
-                    b.Property<int>("QuantityOrdered");
 
                     b.Property<double>("RetailPrice");
 
@@ -248,6 +267,14 @@ namespace ERP.API.Migrations
                     b.HasOne("ERP.API.Models.DebitAccount", "DebitAccount")
                         .WithMany()
                         .HasForeignKey("DebitAccountId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ERP.API.Models.Inventory", b =>
+                {
+                    b.HasOne("ERP.API.Models.Item", "Item")
+                        .WithMany()
+                        .HasForeignKey("ItemId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
