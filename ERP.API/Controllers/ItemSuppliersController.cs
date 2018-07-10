@@ -26,16 +26,31 @@ namespace ERP.API.Controllers
         [HttpGet("{itemId}")]
         public async Task<IActionResult> GetItemSuppliers(int itemId) 
         {   
-            var itemSuppliers = await this.repository.GetItemSupplier(itemId);
+            var itemSuppliers = await this.repository.GetItemSuppliers(itemId);
             var itemSuppliersToReturn = mapper.Map<IEnumerable<ItemSupplierDto>>(itemSuppliers);
             return Ok(itemSuppliersToReturn);
+        }
+
+        [HttpGet("{itemId}/{supplierId}")]
+        public async Task<IActionResult> GetItemSupplier(int itemId, int supplierId) 
+        {   
+            var itemSupplier = await this.repository.GetItemSupplier(itemId, supplierId);
+            var itemSupplierToReturn = mapper.Map<ItemSupplierDto>(itemSupplier);
+            if (itemSupplier == null) {
+                return BadRequest("This supplier does NOT belong to this item!");
+                
+            }
+            return Ok(itemSupplierToReturn);
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateItemSuppliers([FromBody] ItemSupplier itemSupplier)
         {
-           var successful = await this.repository.Add(itemSupplier);
-           if(!successful)
+            var item =  await this.repository.GetItemSupplier(itemSupplier.ItemId, itemSupplier.SupplierId);
+            if(item != null)
+                return BadRequest("Error - This supplier already belongs to this item!");
+             var successful = await this.repository.Add(itemSupplier);
+            if(!successful)
                 return BadRequest("Error - Item Supplier NOT created");
             return Ok(itemSupplier);
         }

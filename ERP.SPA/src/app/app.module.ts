@@ -5,7 +5,6 @@ import { AlertifyService } from './_services/alertify.service';
 import { RegisterEmployeeComponent } from './employee/register-employee/register-employee.component';
 import { AuthService } from './_services/auth.service';
 import { HomeComponent } from './home/home.component';
-import { HomeModule } from './home/home.module';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';

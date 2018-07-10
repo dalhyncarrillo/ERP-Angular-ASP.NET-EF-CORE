@@ -7,6 +7,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { environment } from '../../environments/environment';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 /*
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
@@ -17,7 +18,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class AuthService {
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private jwtHelper: JwtHelperService) { }
 
     login(emp: any) {
         return this.http.post(environment.baseurl + 'auth/login',emp).map(token => {
@@ -34,10 +35,11 @@ export class AuthService {
     }
 
     isLoggedIn() {
-        var token =  localStorage.getItem('token');
-        if(token === null) {
-          return true;
-        }
-        return false;
+        // var token =  localStorage.getItem('token');
+        // if(token === null) {
+        //   return true;
+        // }
+        // return false;
+        return !this.jwtHelper.isTokenExpired();
     }
 }

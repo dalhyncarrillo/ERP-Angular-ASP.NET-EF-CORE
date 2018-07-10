@@ -66,8 +66,13 @@ namespace ERP.API.Data
         {
            return await this.context.Items.FirstOrDefaultAsync(item => item.ItemId == id);
         }
+        
+        public Task<Item> UpdateItem(Item item)
+        {
+            throw new System.NotImplementedException();
+        }
 
-        public async Task<IEnumerable<ItemSupplier>> GetItemSupplier(int itemId) {
+        public async Task<IEnumerable<ItemSupplier>> GetItemSuppliers(int itemId) {
             return await this.context.ItemSuppliers
             .Where(item => item.ItemId == itemId)
             .Include(item => item.Supplier).OrderByDescending(itemSupplier => itemSupplier.IsPrimary).ToListAsync();
@@ -84,9 +89,11 @@ namespace ERP.API.Data
         //     return supps;
         }
 
-        public Task<Item> UpdateItem(Item item)
-        {
-            throw new System.NotImplementedException();
+         public async Task<ItemSupplier> GetItemSupplier(int itemId, int supplierId) {
+             var itemSupplier = await this.context.ItemSuppliers.FirstOrDefaultAsync(itemSupp => itemSupp.ItemId == itemId && itemSupp.SupplierId == supplierId);
+             if(itemSupplier == null)
+                return null;
+            return itemSupplier;
         }
     }
 }

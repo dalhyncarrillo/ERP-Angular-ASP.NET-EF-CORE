@@ -14,7 +14,8 @@ namespace ERP.API.Data
         Task<Supplier> UpdateSupplier(Supplier supplier);
         Task<IEnumerable<Item>> GetItems();
         Task<Item> GetItem(int id);
-        Task<IEnumerable<ItemSupplier>> GetItemSupplier(int supplierId);
+        Task<IEnumerable<ItemSupplier>> GetItemSuppliers(int itemId);
+        Task<ItemSupplier> GetItemSupplier(int itemId, int supplierId);
         Task<Item> UpdateItem(Item item);
     }
 }

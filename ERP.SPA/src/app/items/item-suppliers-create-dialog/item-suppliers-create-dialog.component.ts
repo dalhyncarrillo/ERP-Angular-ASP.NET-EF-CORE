@@ -1,3 +1,4 @@
+import { AlertifyService } from './../../_services/alertify.service';
 import { Supplier } from './../../_models/supplier.model';
 import { ItemService } from './../../_services/item.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
@@ -20,7 +21,8 @@ export class ItemSuppliersCreateDialogComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
-  constructor(private _formBuilder: FormBuilder, 
+  constructor(private alertifyService: AlertifyService,
+              private _formBuilder: FormBuilder, 
               private supplierService: SupplierService, 
               private itemService: ItemService, 
               public dialogRef: MatDialogRef<ItemSuppliersCreateDialogComponent>,
@@ -55,7 +57,13 @@ export class ItemSuppliersCreateDialogComponent implements OnInit {
       unitCost: this.secondFormGroup.get('unitCostCtrl').value,
     }
 
-    this.itemService.createItemSuppliers(itemSupplierToCreate).subscribe();
+    this.itemService.createItemSuppliers(itemSupplierToCreate).subscribe(
+      data => {
+        this.alertifyService.success('Supplier added to the item!');
+      },
+      error => {
+        this.alertifyService.error(error);
+      });
     this.dialogRef.close();
   }
 }
