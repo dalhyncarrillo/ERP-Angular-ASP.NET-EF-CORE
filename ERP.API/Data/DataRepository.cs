@@ -20,10 +20,10 @@ namespace ERP.API.Data
            return await this.context.SaveChangesAsync() >= 1 ? true : false;
         }
 
-        public async void Delete<T>(T entity) where T : class
+        public void Delete<T>(T entity) where T : class
         {
             this.context.Remove(entity);
-            await this.context.SaveChangesAsync();
+            this.context.SaveChangesAsync();
         }
 
         public Task<T> UpdateEntity<T>(T entity) where T : class
@@ -33,7 +33,11 @@ namespace ERP.API.Data
 
          public async Task<Supplier> GetSupplier(int supplierId)
         {
-            return await this.context.Suppliers.FirstOrDefaultAsync(sup => sup.SupplierId == supplierId);
+            var supplier = await this.context.Suppliers.FirstOrDefaultAsync(sup => sup.SupplierId == supplierId);
+            if(supplier == null)
+                return null;
+
+            return supplier;
         }
 
         public async Task<IEnumerable<Supplier>> GetSuppliers() 
@@ -44,18 +48,18 @@ namespace ERP.API.Data
         public async Task<Supplier> UpdateSupplier(Supplier supplier)
         {
             var supplierToUpdate = await GetSupplier(supplier.SupplierId);
-                if(supplierToUpdate == null)
-                    return null;
+            if(supplierToUpdate == null)
+                return null;
 
-                supplierToUpdate.Name = supplier.Name;
-                supplierToUpdate.Address = supplier.Address;
-                supplierToUpdate.City = supplier.City;
-                supplierToUpdate.ContactName = supplier.ContactName;
-                supplierToUpdate.PhoneNumber = supplier.PhoneNumber;
-                supplierToUpdate.Status = supplier.Status;
-                
-                await this.context.SaveChangesAsync();
-                return supplierToUpdate;
+            supplierToUpdate.Name = supplier.Name;
+            supplierToUpdate.Address = supplier.Address;
+            supplierToUpdate.City = supplier.City;
+            supplierToUpdate.ContactName = supplier.ContactName;
+            supplierToUpdate.PhoneNumber = supplier.PhoneNumber;
+            supplierToUpdate.Status = supplier.Status;
+              
+            await this.context.SaveChangesAsync();
+            return supplierToUpdate;
         }
 
         public async Task<IEnumerable<Item>> GetItems()
@@ -90,10 +94,8 @@ namespace ERP.API.Data
         }
 
          public async Task<ItemSupplier> GetItemSupplier(int itemId, int supplierId) {
-             var itemSupplier = await this.context.ItemSuppliers.FirstOrDefaultAsync(itemSupp => itemSupp.ItemId == itemId && itemSupp.SupplierId == supplierId);
-             if(itemSupplier == null)
-                return null;
-            return itemSupplier;
+            var itemSupplier = await this.context.ItemSuppliers.FirstOrDefaultAsync(itemSupp => itemSupp.ItemId == itemId && itemSupp.SupplierId == supplierId);
+            return itemSupplier == null ? null : itemSupplier;
         }
     }
 }

@@ -6,12 +6,11 @@ import { RegisterEmployeeComponent } from './employee/register-employee/register
 import { AuthService } from './_services/auth.service';
 import { HomeComponent } from './home/home.component';
 import { RouterModule } from '@angular/router';
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClientModule } from '@angular/common/http';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -22,10 +21,10 @@ import { ItemService } from './_services/item.service';
 import { SupplierListComponent } from './suppliers/supplier-list/supplier-list.component';
 import { SupplierService } from './_services/supplier.service';
 import { SupplierDetailComponent } from './suppliers/supplier-detail/supplier-detail.component';
-import { MatStepperModule, MatIconModule, MatInputModule, MatDialogModule, MatDatepickerModule, MatButtonModule, MatTableModule, MatPaginatorModule, MatSelectModule, MatSortModule } from '@angular/material';
 import { SupplierCreateDialogComponent } from './suppliers/supplier-create-dialog/supplier-create-dialog.component';
 import { ConfirmationDialogComponent } from './ConfirmationDialog/ConfirmationDialog.component';
-import {TabsModule} from 'ngx-bootstrap';
+import { TabsModule } from 'ngx-bootstrap';
+import { AppMaterialModule } from './/app-material.module';
 
 
 @NgModule({
@@ -45,15 +44,12 @@ import {TabsModule} from 'ngx-bootstrap';
     ConfirmationDialogComponent
 ],
   imports: [
+    TabsModule.forRoot(),
+    AppMaterialModule,
     ReactiveFormsModule,
-    BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    BrowserAnimationsModule,
-    MatStepperModule,
-    MatIconModule,
-    MatInputModule,  
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {
@@ -62,20 +58,7 @@ import {TabsModule} from 'ngx-bootstrap';
         whitelistedDomains: ['localhost:5000']
       }
     }),
-    MatStepperModule,
-    MatDatepickerModule,
-    MatDialogModule,
-    MatIconModule,
-    MatInputModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatSelectModule,
-    TabsModule.forRoot()
   ],
-  //TODO MIERT VAN AZ KOMMENTELTBEN SupplierListComponent??? 2018.07.10
-  //entryComponents: [SupplierCreateDialogComponent, ConfirmationDialogComponent, SupplierListComponent, ItemCreateDialogComponent, ItemSuppliersCreateDialogComponent],
-  entryComponents: [SupplierCreateDialogComponent, ConfirmationDialogComponent, ItemCreateDialogComponent, ItemSuppliersCreateDialogComponent],
   providers: [
     AuthService,
     ItemService,

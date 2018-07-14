@@ -33,7 +33,7 @@ namespace ERP.API
             var key = Encoding.ASCII.GetBytes("super secret key");
             services.AddMvc();
             services.AddAutoMapper();
-            var connection = @"Server=DESKTOP-U2AMBJE\SQLEXPRESS;Database=erp;Trusted_Connection=True;ConnectRetryCount=0";
+            var connection = @"Server=DESKTOP-U2AMBJE\SQLEXPRESS;Database=erp;Trusted_Connection=True;ConnectRetryCount=0;MultipleActiveResultSets=True";
             services.AddDbContext<DataContext>(options => options.UseSqlServer(connection));
             services.AddScoped<IDataRepository, DataRepository>();
             services.AddScoped<IAuthRepository, AuthRepository>();
