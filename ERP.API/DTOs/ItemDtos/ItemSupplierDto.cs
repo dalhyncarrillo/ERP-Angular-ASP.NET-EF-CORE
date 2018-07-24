@@ -4,6 +4,8 @@ namespace ERP.API.DTOs.ItemDtos
 {
     public class ItemSupplierDto
     {
+        public int ItemId { get; set; }
+        public string ItemName { get; set; }
         public string SupplierName { get; set; }
         public double UnitCost { get; set; }
         public int LeadTime { get; set; }

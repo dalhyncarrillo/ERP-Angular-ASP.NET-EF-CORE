@@ -46,20 +46,23 @@ export class ItemSuppliersCreateDialogComponent implements OnInit {
       this.suppliers = data;
     });
   }
-  addNewItemSupplier() {
+  createNewItemSupplier() {
     let itemSupplierToCreate = {
       itemId: this.item.itemId,
-      
+      itemName: this.item.name,
       supplierId: this.firstFormGroup.get('supplierCtrl').value.supplierId,
+      supplierName: this.firstFormGroup.get('supplierCtrl').value.name,
       leadTime: this.firstFormGroup.get('leadTimeCtrl').value,
 
       retailPrice: this.secondFormGroup.get('retailPriceCtrl').value,
       unitCost: this.secondFormGroup.get('unitCostCtrl').value,
+      isPrimary: false
     }
 
     this.itemService.createItemSuppliers(itemSupplierToCreate).subscribe(
       data => {
         this.alertifyService.success('Supplier added to the item!');
+        this.itemService.itemSuppliers.push(itemSupplierToCreate);
       },
       error => {
         console.log(error);

@@ -13,18 +13,23 @@ import { Router } from '@angular/router';
   templateUrl: './supplier-detail.component.html',
   styleUrls: ['./supplier-detail.component.css']
 })
-export class SupplierDetailComponent implements OnInit, OnChanges {
+export class SupplierDetailComponent implements OnChanges {
 
   @Output() supplierDeleted = new EventEmitter<Supplier>(); 
   @Input() supplier: Supplier;
   constructor(private aleritfyService: AlertifyService, private supplierService: SupplierService, private dialog: MatDialog, private router: Router) { }
 
-  ngOnInit() {
-  }
   ngOnChanges() {
     this.getSupplier();
   }
-
+  getSupplier() {
+    this.supplierService.getSupplier(this.supplier.supplierId).subscribe((supplierDetail: Supplier) => {
+      this.supplier.city = supplierDetail.city;
+      this.supplier.address = supplierDetail.address;
+      this.supplier.contactName = supplierDetail.contactName;
+      this.supplier.phoneNumber = supplierDetail.phoneNumber;
+    });
+  }
   updateSupplier() {
     this.supplierService.updateSupplier(this.supplier).subscribe( data => {
     });
@@ -51,14 +56,4 @@ export class SupplierDetailComponent implements OnInit, OnChanges {
       }
     });
   }
-
-  getSupplier() {
-    this.supplierService.getSupplier(this.supplier.supplierId).subscribe((supplierDetail: Supplier) => {
-      this.supplier.city = supplierDetail.city;
-      this.supplier.address = supplierDetail.address;
-      this.supplier.contactName = supplierDetail.contactName;
-      this.supplier.phoneNumber = supplierDetail.phoneNumber;
-    });
-  }
-
 }

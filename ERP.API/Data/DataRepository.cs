@@ -76,7 +76,8 @@ namespace ERP.API.Data
             throw new System.NotImplementedException();
         }
 
-        public async Task<IEnumerable<ItemSupplier>> GetItemSuppliers(int itemId) {
+        public async Task<IEnumerable<ItemSupplier>> GetItemSuppliers(int itemId) 
+        {
             return await this.context.ItemSuppliers
             .Where(item => item.ItemId == itemId)
             .Include(item => item.Supplier).OrderByDescending(itemSupplier => itemSupplier.IsPrimary).ToListAsync();
@@ -93,9 +94,30 @@ namespace ERP.API.Data
         //     return supps;
         }
 
-         public async Task<ItemSupplier> GetItemSupplier(int itemId, int supplierId) {
+        public async Task<ItemSupplier> GetItemSupplier(int itemId, int supplierId) 
+        {
             var itemSupplier = await this.context.ItemSuppliers.FirstOrDefaultAsync(itemSupp => itemSupp.ItemId == itemId && itemSupp.SupplierId == supplierId);
             return itemSupplier == null ? null : itemSupplier;
+        }
+
+        public async Task<IEnumerable<ItemSupplier>> GetItemsOfSupplier(int supplierId) 
+        {
+            return await this.context.ItemSuppliers.Where(itemSuppliers => itemSuppliers.SupplierId == supplierId).Include(itemSupp => itemSupp.Item).ToListAsync();
+
+        }
+
+        public async Task<IEnumerable<Order>> GetOrders() 
+        {
+            return await this.context.Orders.Include(order => order.Supplier).ToListAsync();
+        }
+        public async Task<Order> GetOrder(int id)
+        {
+           return await this.context.Orders.FirstOrDefaultAsync(order => order.OrderId == id);
+        }
+
+        public async Task<IEnumerable<OrderItem>> GetOrderItems(int orderId) 
+        {
+            return await this.context.OrderItems.Where(order => order.OrderId == orderId).Include(order => order.Item).ToListAsync();
         }
     }
 }

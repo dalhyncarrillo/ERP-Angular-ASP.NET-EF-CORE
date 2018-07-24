@@ -1,26 +1,26 @@
-import { ItemCreateDialogComponent } from './../item-create-dialog/item-create-dialog.component';
-import { ItemService } from '../../_services/item.service';
-import { Item } from '../../_models/item.model';
-
+import { OrderCreateDialogComponent } from './../order-create-dialog/order-create-dialog.component';
+import { OrderService } from './../../_services/order.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource, MatDialog, MatSort } from '@angular/material';
 
+import { Order } from '../../_models/order.model';
+
 @Component({
-  selector: 'app-item-list',
-  templateUrl: './item-list.component.html',
-  styleUrls: ['./item-list.component.css']
+  selector: 'app-order-list',
+  templateUrl: './order-list.component.html',
+  styleUrls: ['./order-list.component.css']
 })
-export class ItemListComponent implements OnInit {
+export class OrderListComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  items: Item[];
+  orders: Order[];
  
-  displayedColumns = ['itemId', 'name', 'retailPrice', 'quantityOnHand'];
+  displayedColumns = ['orderId',  'status', 'supplierName', 'requestedDate', 'totalCost'];
 
-  selectedItem;
-  constructor(private itemService: ItemService, private dialog: MatDialog) {}
+  selectedOrder;
+  constructor(private orderService: OrderService, private dialog: MatDialog) {}
   dataSource;
   
   applyFilter(filterValue: string) {
@@ -30,32 +30,34 @@ export class ItemListComponent implements OnInit {
   }
 
   ngOnInit() {  
-    this.getItems();   
+    this.getOrders();   
   }
 
-  getItems() {
-    this.itemService.getItems().subscribe(data => {
-    this.items = data;
+  getOrders() {
+    this.orderService.getOrders().subscribe(data => {
+    this.orders = data;
     this.setDataSource();  
     });
   }
-  
+
   setDataSource() {
-    this.dataSource = new MatTableDataSource<Item>(this.items);
+    this.dataSource = new MatTableDataSource<Order>(this.orders);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
-  onItem(item: any) {
-    this.selectedItem = item;
+  onOrder(order: any) {
+    this.selectedOrder = order;
   }
 
-  addItem() {
-      let dialogRef = this.dialog.open(ItemCreateDialogComponent, {
-      height: '450px',
+
+  addOrder() {
+    let dialogRef = this.dialog.open(OrderCreateDialogComponent, {
+      height: '1700px',
       width: '1700px',
     });
   }
+
 
   // deleteSupplier(supplier: Supplier) {
   //   const index: number = this.suppliers.indexOf(supplier);

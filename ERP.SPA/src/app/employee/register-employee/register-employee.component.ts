@@ -10,6 +10,8 @@ import { post } from 'selenium-webdriver/http';
   templateUrl: './register-employee.component.html',
   styleUrls: ['./register-employee.component.css']
 })
+
+//TODO
 export class RegisterEmployeeComponent implements OnInit {
   
   employeeToRegister:any ={};
@@ -25,6 +27,11 @@ export class RegisterEmployeeComponent implements OnInit {
     this.getPositions();
     this.createRegisterForm();
 
+  }
+  getPositions() {
+    this.authService.getPositions().subscribe((data: Position[])  => {
+      this.positions = data;
+    });
   }
 
   createRegisterForm() {
@@ -59,17 +66,7 @@ export class RegisterEmployeeComponent implements OnInit {
   }
   }
 
-  getPositions() {
-    this.authService.getPositions().subscribe((data: Position[])  => {
-      this.positions = data;
-    });
+  onSubmit() {
+    this.authService.register(this.employeeToRegister).subscribe();
   }
-
-  submit() {
-    console.log(this.registerForm.value);
-    console.log(this.registerForm.get('confirmPassword').valid);
-  //  this.authService.register(this.employeeToRegister).subscribe();
-  }
-
-
 }

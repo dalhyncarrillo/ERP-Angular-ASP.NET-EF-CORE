@@ -1,3 +1,6 @@
+import { OrderCreateDialogComponent } from './order/order-create-dialog/order-create-dialog.component';
+import { OrderDetailComponent } from './order/order-detail/order-detail.component';
+import { OrderListComponent } from './order/order-list/order-list.component';
 import { ItemSuppliersCreateDialogComponent } from './items/item-suppliers-create-dialog/item-suppliers-create-dialog.component';
 import { ItemCreateDialogComponent } from './items/item-create-dialog/item-create-dialog.component';
 import { ItemDetailComponent } from './items/item-detail/item-detail.component';
@@ -18,6 +21,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './home/login/login.component';
 import { ItemListComponent } from './items/item-list/item-list.component';
 import { ItemService } from './_services/item.service';
+import { OrderService } from './_services/order.service';
 import { SupplierListComponent } from './suppliers/supplier-list/supplier-list.component';
 import { SupplierService } from './_services/supplier.service';
 import { SupplierDetailComponent } from './suppliers/supplier-detail/supplier-detail.component';
@@ -41,6 +45,9 @@ import { AppMaterialModule } from './/app-material.module';
     SupplierListComponent,
     SupplierDetailComponent,
     SupplierCreateDialogComponent,
+    OrderListComponent,
+    OrderDetailComponent,
+    OrderCreateDialogComponent,
     ConfirmationDialogComponent
 ],
   imports: [
@@ -63,7 +70,8 @@ import { AppMaterialModule } from './/app-material.module';
     AuthService,
     ItemService,
     SupplierService,
-    AlertifyService
+    AlertifyService,
+    OrderService
   ],
   bootstrap: [AppComponent]
 })

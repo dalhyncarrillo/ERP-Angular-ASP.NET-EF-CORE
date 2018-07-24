@@ -1,3 +1,4 @@
+import { OrderListComponent } from './order/order-list/order-list.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { ItemListComponent } from './items/item-list/item-list.component';
 import { NgModule } from '@angular/core';
@@ -10,6 +11,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterEmployeeComponent, canActivate: [AuthGuard]},
   { path: 'items', component: ItemListComponent, canActivate: [AuthGuard]},
   { path: 'suppliers', component: SupplierListComponent, canActivate: [AuthGuard]},
+  { path: 'orders', component: OrderListComponent, canActivate: [AuthGuard]},
   { path: '**', redirectTo: 'home', pathMatch: 'full'}
 ]; 
 

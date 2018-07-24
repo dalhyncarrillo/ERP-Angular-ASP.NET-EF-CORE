@@ -1,5 +1,6 @@
 using AutoMapper;
 using ERP.API.DTOs.ItemDtos;
+using ERP.API.DTOs.OrderDtos;
 using ERP.API.DTOs.SupplierDtos;
 using ERP.API.Models;
 
@@ -12,6 +13,22 @@ namespace ERP.API.Helpers
             CreateMap<Supplier, SupplierListDto>();
 
             CreateMap<ItemSupplier, ItemSupplierDto>()
+                .ForMember(dest => dest.SupplierName, opt => {
+                    opt.MapFrom(src => src.Supplier.Name);
+            });
+
+            CreateMap<ItemSupplier, ItemSupplierDto>()
+                .ForMember(dest => dest.SupplierName, opt => {
+                    opt.MapFrom(src => src.Supplier.Name);
+            });
+
+            CreateMap<ItemSupplier, ItemSupplierDto>()
+                .ForMember(dest => dest.ItemName, opt => {
+                    opt.MapFrom(src => src.Item.Name);
+            });
+
+
+            CreateMap<Order, OrderListDto>()
                 .ForMember(dest => dest.SupplierName, opt => {
                     opt.MapFrom(src => src.Supplier.Name);
             });

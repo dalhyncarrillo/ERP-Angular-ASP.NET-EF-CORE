@@ -19,16 +19,23 @@ export class ItemDetailComponent implements OnInit {
   constructor(private aleritfyService: AlertifyService, private itemService: ItemService, private dialog: MatDialog, private router: Router) { }
 
   ngOnInit() {
-    
+
   }
 
   ngOnChanges() {
     this.getItem();
     this.getSuppliers();
   }
-  getSuppliers() {
+
+  getItem() {
+    this.itemService.getItem(this.item.itemId).subscribe((item: Item) => {
+      this.item = item;
+    });
+  }
+   getSuppliers() {
     this.itemService.getItemSuppliers(this.item.itemId).subscribe(data => {
-     this.itemSuppliers = data;
+      this.itemService.itemSuppliers = data;
+      this.itemSuppliers = this.itemService.itemSuppliers;
     });
  }
  addSupplier() {
@@ -67,10 +74,4 @@ export class ItemDetailComponent implements OnInit {
   //     }
   //   });
   // }
-
-  getItem() {
-    this.itemService.getItem(this.item.itemId).subscribe((item: Item) => {
-      this.item = item;
-    });
-  }
 }
