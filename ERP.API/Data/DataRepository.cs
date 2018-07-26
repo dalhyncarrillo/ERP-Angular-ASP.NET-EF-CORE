@@ -115,9 +115,16 @@ namespace ERP.API.Data
            return await this.context.Orders.FirstOrDefaultAsync(order => order.OrderId == id);
         }
 
+        public async Task<bool> CreateOrder(Order orderToCreate)
+        {
+            await this.context.Orders.AddAsync(orderToCreate);
+            return await this.context.SaveChangesAsync() >= 1 ? true : false;
+        }
         public async Task<IEnumerable<OrderItem>> GetOrderItems(int orderId) 
         {
             return await this.context.OrderItems.Where(order => order.OrderId == orderId).Include(order => order.Item).ToListAsync();
         }
+
+
     }
 }

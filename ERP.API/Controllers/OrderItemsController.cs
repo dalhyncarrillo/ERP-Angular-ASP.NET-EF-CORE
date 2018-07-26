@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using ERP.API.Data;
+using ERP.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,6 +23,21 @@ namespace ERP.API.Controllers
         {
             var orderItems = await this.repository.GetOrderItems(id);
             return Ok(orderItems);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateOrderItems([FromBody] OrderItem orderItemToCreate) 
+        {
+            bool succeeded = false;
+            if(orderItemToCreate != null)
+            {
+                succeeded = await this.repository.Add(orderItemToCreate);
+            }
+            if(succeeded)
+                return Ok();
+            else
+                return BadRequest();
+
         }
     }
 }

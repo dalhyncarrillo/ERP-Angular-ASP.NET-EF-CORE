@@ -1,3 +1,5 @@
+import { OrderService } from './../../_services/order.service';
+import { Order } from './../../_models/order.model';
 import { MatTableDataSource } from "@angular/material";
 import { OrderItems } from "./../../_models/order-items.model";
 import { ItemSuppliers } from "./../../_models/item-suppliers.model";
@@ -19,7 +21,7 @@ export class OrderCreateDialogComponent implements OnInit {
   itemSuppliers: ItemSuppliers[];
   itemsToOrder: OrderItems[] = [];
 
-  registerForm: FormGroup;
+  creationForm: FormGroup;
   today = new Date();
   minRequestDate = new Date(
     this.today.getFullYear(),
@@ -43,10 +45,7 @@ export class OrderCreateDialogComponent implements OnInit {
   dataSource;
   selection = new SelectionModel<OrderItems>(true, []);
 
-  constructor(
-    private supplierService: SupplierService,
-    private itemService: ItemService
-  ) {}
+  constructor(private supplierService: SupplierService, private itemService: ItemService, private orderService: OrderService) {}
 
   ngOnInit() {
     this.getSuppliers();
@@ -60,35 +59,72 @@ export class OrderCreateDialogComponent implements OnInit {
   }
 
   createOrderCreationForm() {
-    this.registerForm = new FormGroup({
+    this.creationForm = new FormGroup({
       supplier: new FormControl("", [Validators.required]),
-      requestDate: new FormControl(new Date().toISOString(), [
-        Validators.required
-      ]),
+      requestDate: new FormControl(new Date().toISOString(), [Validators.required]),
       selectedItemSupplier: new FormControl("", [Validators.required]),
-      unitCost: new FormControl({ value: "", disabled: true }, [
-        Validators.required
-      ]),
+      unitCost: new FormControl({ value: "", disabled: true }, [Validators.required]),
       quantity: new FormControl("", [Validators.required]),
-      totalCost: new FormControl({ value: "", disabled: true }, [
-        Validators.required
-      ])
+      totalCost: new FormControl({ value: "", disabled: true }, [Validators.required]),
+  //    orderItemsTable: new FormControl("", [Validators.required])
     });
   }
+
+  onSubmit() {
+    let orderToCreate: Order = {
+      orderId: 0,
+      supplierId: this.creationForm.get('supplier').value.supplierId,
+      supplierName: this.creationForm.get('supplier').value.name,
+      status: 'Requested',
+      totalCost: this.calculateTotalCost(),
+      requestedDate: this.creationForm.get('requestDate').value,
+      createdBy: 2,
+      receivedDate: null,
+      approvedBy: null
+    };
+
+    this.orderService.createOrder(orderToCreate).subscribe(data => {
+      console.log(data);
+      this.orderService.createOrderItem(this.itemsToOrder).subscribe( data => {
+      });
+    },
+    error => {
+      console.log(error);
+    });
+    console.log(orderToCreate);
+  }
+  onSupplierSelected(supplier: Supplier) {
+    this.itemService.getItemsOfSupplier(supplier.supplierId).subscribe(data => {
+      this.itemSuppliers = data;
+    });
+    
+    if(this.dataSource !== undefined) {
+      this.dataSource.data.splice(0, this.dataSource.data.length);
+      this.dataSource = new MatTableDataSource<OrderItems>();
+    }
+  }
+
+  onItemSupplierSelected(itemSupplier: ItemSuppliers) {
+    this.creationForm.get("unitCost").setValue(itemSupplier.unitCost);
+  }
+
   onAddItem() {
     let itemToBeAdded: OrderItems = {
-      itemId: this.registerForm.get("selectedItemSupplier").value.itemId,
+      itemId: this.creationForm.get("selectedItemSupplier").value.itemId,
       orderId: 2,
-      quantity: this.registerForm.get("quantity").value,
-      unitCost: this.registerForm.get("selectedItemSupplier").value.unitCost,
+      quantity: this.creationForm.get("quantity").value,
+      unitCost: this.creationForm.get("selectedItemSupplier").value.unitCost,
       totalCost:
-        this.registerForm.get("quantity").value *
-        this.registerForm.get("selectedItemSupplier").value.unitCost
+        this.creationForm.get("quantity").value *
+        this.creationForm.get("selectedItemSupplier").value.unitCost
     };
     this.itemsToOrder.push(itemToBeAdded);
     this.dataSource = new MatTableDataSource<OrderItems>(this.itemsToOrder);
   }
 
+  calculateTotalCost() {
+    return this.itemsToOrder.map(t => t.totalCost).reduce((acc, value) => acc + value, 0);
+  }
   onRemoveItem() {
     this.selection.selected.forEach(item => {
       this.dataSource.data.splice(this.dataSource.data.indexOf(item), 1);
@@ -98,17 +134,7 @@ export class OrderCreateDialogComponent implements OnInit {
     this.selection = new SelectionModel<OrderItems>(true, []);
   }
 
-  supplierSelected(supplier: Supplier) {
-    this.itemService.getItemsOfSupplier(supplier.supplierId).subscribe(data => {
-      this.itemSuppliers = data;
-    });
-  }
-  onItemSupplierSelected(itemSupplier: ItemSuppliers) {
-    this.registerForm.get("unitCost").setValue(itemSupplier.unitCost);
-  }
-  onSubmit() {
-    console.log(this.registerForm.get("requestDate").value);
-  }
+
 
   masterToggle() {
     this.isAllSelected()

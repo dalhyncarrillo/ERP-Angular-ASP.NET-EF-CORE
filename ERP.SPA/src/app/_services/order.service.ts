@@ -18,7 +18,16 @@ export class OrderService {
   getOrderDetails(orderId: number) {
     return this.http.get<Order>(environment.baseurl + 'Orders/' + orderId);
   }
+  
   getOrderItems(orderId: number) {
     return this.http.get<OrderItems[]>(environment.baseurl + 'OrderItems/' + orderId);
+  }
+
+  createOrder(orderToCreate: Order) {
+    return this.http.post(environment.baseurl + 'orders', orderToCreate);
+  }
+
+  createOrderItem(itemsOfOrderToCreate: OrderItems[]) {
+    return this.http.post(environment.baseurl + 'orderItems', itemsOfOrderToCreate);
   }
 }

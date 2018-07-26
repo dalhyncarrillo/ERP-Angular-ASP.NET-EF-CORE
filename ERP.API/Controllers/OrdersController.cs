@@ -37,5 +37,19 @@ namespace ERP.API.Controllers
             var order = await this.repository.GetOrder(id);
             return Ok(order);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateOrder([FromBody] Order orderToCreate) 
+        {
+            bool creationSucceeded = false;
+            if(orderToCreate != null)
+            {
+               creationSucceeded = await this.repository.Add(orderToCreate);
+            }
+            if(creationSucceeded)
+                return Ok();
+            
+            return BadRequest();
+        }
     }
 }

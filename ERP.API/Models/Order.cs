@@ -12,14 +12,14 @@ namespace ERP.API.Models
         public Supplier Supplier { get; set; }
         public string Status { get; set; }
         public double TotalCost { get; set; }
-        public int ApprovedBy { get; set; }
+        public System.Nullable<int> ApprovedBy { get; set; }
         [ForeignKey("ApprovedBy")]
         public Employee Employee { get; set; }
         public int CreatedBy { get; set; }
         [ForeignKey("CreatedBy")]
         public Employee CreatorEmployee { get; set; }
         public DateTime RequestedDate { get; set; }
-        public DateTime ReceivedDate { get; set; }
+        public System.Nullable<DateTime> ReceivedDate { get; set; }
         public ICollection<OrderItem> OrderItems { get; set; }
         [Timestamp]  
         public byte[] Timestamp { get; set; }  
