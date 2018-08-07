@@ -1,3 +1,4 @@
+import { OrderItemsComponent } from './order/order-items/order-items.component';
 import { OrderCreateDialogComponent } from './order/order-create-dialog/order-create-dialog.component';
 import { OrderDetailComponent } from './order/order-detail/order-detail.component';
 import { OrderListComponent } from './order/order-list/order-list.component';
@@ -48,6 +49,7 @@ import { AppMaterialModule } from './/app-material.module';
     OrderListComponent,
     OrderDetailComponent,
     OrderCreateDialogComponent,
+    OrderItemsComponent,
     ConfirmationDialogComponent
 ],
   imports: [

@@ -48,5 +48,13 @@ namespace ERP.API.Controllers
             }          
             return BadRequest();
         }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateOrder([FromBody] Order orderToUpdate)
+        {
+            var updatedOrder = await this.repository.UpdateOrder(orderToUpdate);
+            if(updatedOrder == null)
+                return BadRequest("Error change happened");
+            return Ok(updatedOrder);
+        }
     }
 }

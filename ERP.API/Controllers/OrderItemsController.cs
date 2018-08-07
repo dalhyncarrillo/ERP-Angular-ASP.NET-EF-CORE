@@ -44,5 +44,18 @@ namespace ERP.API.Controllers
             */
             return Ok();
         }
+
+        [HttpDelete("{orderId}/{itemId}")]
+        public async Task<IActionResult> RemoveOrderItems(int orderId, int itemId)
+        {
+            var orderItemsToDelete =  await this.repository.GetSingleOrderItems(orderId, itemId);
+
+            if(orderItemsToDelete != null) {
+                await this.repository.Delete(orderItemsToDelete); 
+                return Ok();
+            }
+                        
+            return BadRequest("Order Item does NOT exist!");
+        }
     }
 }

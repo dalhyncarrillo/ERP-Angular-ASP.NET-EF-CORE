@@ -11,7 +11,7 @@
                         <div class="col-md-6">
                            <div class="form-group">
                                <label>Status</label>
-                               <input type="text" class="form-control" name="status" [(ngModel)]="order.status"  required>
+                               <input type="text" class="form-control" name="status" [(ngModel)]="order.status"  required disabled>
                            </div>
                         </div>
                       </div>
@@ -66,28 +66,12 @@
                               </div>
                           </div>
 
-                         <button class="btn btn-primary" (click)="updateItem()">Update</button>
-                         <button class="btn btn-danger" (click)="deleteItem()">Delete</button>  
+                         <button class="btn btn-primary" (click)="onApproveOrder()"  *ngIf="getStatusOfOrder() ==='Requested'">Approve</button>
+                         <button class="btn btn-primary" (click)="onReceiveOrder()"  *ngIf="getStatusOfOrder() ==='Approved'">Receive</button>
+                         <!-- <button class="btn btn-danger" (click)="deleteItem()">Delete</button>   -->
         </tab>
         <tab heading="Items">
-            <table>
-                <tr>
-                    <th>Item Id</th>
-                    <th>Item Name</th>
-                    <th>Unit Cost</th>
-                    <th>Quantity</th>
-                    <th>Total Cost</th>
-                </tr>
-                <tr *ngFor="let orderItems of orderItems">
-                    <td>{{orderItems.itemId}}</td>
-                    <td>{{orderItems.itemId}}</td>
-                    <td>{{orderItems.unitCost}}</td>
-                    <td>{{orderItems.quantity}}</td>
-                    <td>{{orderItems.totalCost}}</td>
-                    <td>delete</td>
-                </tr>
-            </table>
-            <button class="btn btn-primary toolBar" (click)="addSupplier()"><i class="fa fa-plus"></i></button>
+          <app-order-items [order]="order" ></app-order-items>
         </tab>
     </tabset>
 </div>

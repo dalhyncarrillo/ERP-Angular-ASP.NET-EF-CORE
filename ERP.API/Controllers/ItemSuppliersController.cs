@@ -30,7 +30,8 @@ namespace ERP.API.Controllers
             var itemSuppliersToReturn = mapper.Map<IEnumerable<ItemSupplierDto>>(itemSuppliers);
             return Ok(itemSuppliersToReturn);
         }
-        //NEM TALALOM HOL VAN EZ AZ API HASZNALATBAN
+        //NEM TALALOM HOL VAN EZ AZ API HASZNALATBAN 
+        //2018/08/07 - tovabbra sem talaltam hibat 
         /* 
         [HttpGet("{itemId}/{supplierId}")]
         public async Task<IActionResult> GetItemSupplier(int itemId, int supplierId) 

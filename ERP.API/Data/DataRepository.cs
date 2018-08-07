@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using ERP.API.Models;
@@ -26,10 +27,10 @@ namespace ERP.API.Data
             return await this.context.SaveChangesAsync() >= 1 ? true : false;
         }
 
-        public void Delete<T>(T entity) where T : class
+        public async Task<bool> Delete<T>(T entity) where T : class
         {
             this.context.Remove(entity);
-            this.context.SaveChangesAsync();
+            return await this.context.SaveChangesAsync() >= 1 ? true : false;
         }
 
         public Task<T> UpdateEntity<T>(T entity) where T : class
@@ -126,9 +127,32 @@ namespace ERP.API.Data
             await this.context.Orders.AddAsync(orderToCreate);
             return await this.context.SaveChangesAsync() >= 1 ? true : false;
         }
+
+        public async Task<Order> UpdateOrder(Order order)
+        {
+            var orderToUpdate = await this.GetOrder(order.OrderId);
+            if(orderToUpdate == null)
+                return null;
+            //     Debug.WriteLine("------------------------------------------------------");
+            // Debug.WriteLine("hello");
+            // Debug.WriteLine(order.ApprovedBy);
+
+            orderToUpdate.Status = order.Status;
+            orderToUpdate.TotalCost = order.TotalCost;
+            orderToUpdate.ApprovedBy = order.ApprovedBy;
+            orderToUpdate.ReceivedDate = order.ReceivedDate;
+
+            await this.context.SaveChangesAsync();
+            return orderToUpdate;
+        }
         public async Task<IEnumerable<OrderItem>> GetOrderItems(int orderId) 
         {
             return await this.context.OrderItems.Where(order => order.OrderId == orderId).Include(order => order.Item).ToListAsync();
+        }
+
+        public async Task<OrderItem> GetSingleOrderItems(int orderId, int itemId) 
+        {
+            return await this.context.OrderItems.Where(order => order.OrderId == orderId && order.ItemId == itemId).FirstOrDefaultAsync();
         }
 
 

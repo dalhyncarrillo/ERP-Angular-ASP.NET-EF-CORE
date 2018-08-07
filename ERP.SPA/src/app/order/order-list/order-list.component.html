@@ -34,7 +34,7 @@
       </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onOrder(row)" [class.selected]="row === selectedOrder"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onOrderSelected(row)" [class.selected]="row === selectedOrder"></tr>
   </table>
 
   <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>

@@ -10,7 +10,7 @@ namespace ERP.API.DTOs.OrderDtos
         public string SupplierName { get; set; }
         public string Status { get; set; }
         public double TotalCost { get; set; }
-        public int ApprovedBy { get; set; }
+        public System.Nullable<int> ApprovedBy { get; set; }
         public int CreatedBy { get; set; }
         public DateTime RequestedDate { get; set; }
         public DateTime ReceivedDate { get; set; }

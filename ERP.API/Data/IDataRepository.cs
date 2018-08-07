@@ -9,7 +9,7 @@ namespace ERP.API.Data
     {
         Task<T> UpdateEntity<T>(T entity) where T: class;
         Task<T> Add<T>(T entity) where T: class;
-        void Delete<T>(T entity) where T: class;
+        Task<bool> Delete<T>(T entity) where T: class;
         Task<IEnumerable<Supplier>> GetSuppliers();
         Task<Supplier> GetSupplier(int id);
         Task<Supplier> UpdateSupplier(Supplier supplier);
@@ -22,6 +22,8 @@ namespace ERP.API.Data
         Task<IEnumerable<Order>> GetOrders();
         Task<Order> GetOrder(int id);
         Task<IEnumerable<OrderItem>> GetOrderItems(int orderId);
+        Task<OrderItem> GetSingleOrderItems(int orderId, int itemId);
         Task<bool> AddOrderItem(IEnumerable<OrderItem> orderItems);
+        Task<Order> UpdateOrder(Order order);
     }
 }

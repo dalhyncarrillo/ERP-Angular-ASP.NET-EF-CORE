@@ -46,8 +46,9 @@ export class OrderListComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  onOrder(order: any) {
+  onOrderSelected(order: any) {
     this.selectedOrder = order;
+    console.log(this.selectedOrder);
   }
 
 

@@ -65,7 +65,7 @@ namespace ERP.API.Controllers
         {
             var supplierToDelete =  await this.repo.GetSupplier(id);
             if(supplierToDelete != null) {
-                this.repo.Delete(supplierToDelete); 
+                await this.repo.Delete(supplierToDelete); 
                 return Ok();
             }            
             return BadRequest("Supplier does NOT exist!");
