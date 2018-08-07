@@ -59,8 +59,8 @@ namespace ERP.API.Controllers
             var item =  await this.repository.GetItemSupplier(itemSupplier.ItemId, itemSupplier.SupplierId);
             if(item != null)
                 return BadRequest("Error - This supplier already belongs to this item!");
-             var successful = await this.repository.Add(itemSupplier);
-            if(!successful)
+             var supplierCreated = await this.repository.Add(itemSupplier);
+            if(supplierCreated == null)
                 return BadRequest("Error - Item Supplier NOT created");
             return Ok(itemSupplier);
         }

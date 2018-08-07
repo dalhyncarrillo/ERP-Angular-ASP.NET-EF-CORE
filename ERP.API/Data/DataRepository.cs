@@ -13,11 +13,17 @@ namespace ERP.API.Data
         {
             this.context = context;
         }
-
-        public async Task<bool> Add<T>(T entity) where T : class
+        public async Task<T> Add<T>(T entity) where T : class
         {
-           await this.context.AddAsync(entity);
-           return await this.context.SaveChangesAsync() >= 1 ? true : false;
+            var createdEntity = await this.context.AddAsync(entity);
+            await this.context.SaveChangesAsync();
+            return createdEntity.Entity;
+        }
+
+        public async Task<bool> AddOrderItem(IEnumerable<OrderItem> orderItems)
+        {
+            await this.context.AddRangeAsync(orderItems);
+            return await this.context.SaveChangesAsync() >= 1 ? true : false;
         }
 
         public void Delete<T>(T entity) where T : class

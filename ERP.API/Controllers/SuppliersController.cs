@@ -55,8 +55,9 @@ namespace ERP.API.Controllers
         public async Task<IActionResult> CreateSupplier([FromBody] Supplier supplier)
         {
             var successful =await this.repo.Add(supplier);
-            if(!successful)
+            if(successful == null)
                 return BadRequest("Error - Supplier not created");
+            
             return Ok();
         }
         [HttpDelete("{id}")]

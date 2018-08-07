@@ -51,8 +51,8 @@ namespace ERP.API.Controllers
        [HttpPost]
        public async Task<IActionResult> CreateItem([FromBody] Item item)
        {
-           var successful = await this.repository.Add(item);
-           if(!successful)
+           var itemCreated = await this.repository.Add(item);
+           if(itemCreated == null)
                 return BadRequest("Error - Item NOT created");
             return Ok(item);
        }

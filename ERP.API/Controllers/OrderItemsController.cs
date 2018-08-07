@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using ERP.API.Data;
@@ -26,18 +27,22 @@ namespace ERP.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateOrderItems([FromBody] OrderItem orderItemToCreate) 
+        //TODO
+        public async Task<IActionResult> CreateOrderItems([FromBody] List<OrderItem> orderItemToCreate) 
         {
-            bool succeeded = false;
+            await this.repository.AddOrderItem(orderItemToCreate);
+            /*
+            OrderItem createdOrderItem = null; 
             if(orderItemToCreate != null)
             {
-                succeeded = await this.repository.Add(orderItemToCreate);
+                createdOrderItem = await this.repository.Add(orderItemToCreate);
             }
-            if(succeeded)
-                return Ok();
-            else
+            if(createdOrderItem == null)
+            {
                 return BadRequest();
-
+            }
+            */
+            return Ok();
         }
     }
 }

@@ -41,14 +41,11 @@ namespace ERP.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateOrder([FromBody] Order orderToCreate) 
         {
-            bool creationSucceeded = false;
             if(orderToCreate != null)
             {
-               creationSucceeded = await this.repository.Add(orderToCreate);
-            }
-            if(creationSucceeded)
-                return Ok();
-            
+               var entity = await this.repository.Add(orderToCreate);
+                return Ok(entity);
+            }          
             return BadRequest();
         }
     }

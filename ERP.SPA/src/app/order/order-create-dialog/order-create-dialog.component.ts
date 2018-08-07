@@ -1,9 +1,10 @@
+import { AlertifyService } from './../../_services/alertify.service';
 import { OrderService } from './../../_services/order.service';
 import { Order } from './../../_models/order.model';
 import { MatTableDataSource } from "@angular/material";
 import { OrderItems } from "./../../_models/order-items.model";
 import { ItemSuppliers } from "./../../_models/item-suppliers.model";
-import { Item } from "src/app/_models/item.model";
+import { MatDialogRef } from '@angular/material';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Supplier } from "./../../_models/supplier.model";
 import { Component, OnInit } from "@angular/core";
@@ -45,7 +46,7 @@ export class OrderCreateDialogComponent implements OnInit {
   dataSource;
   selection = new SelectionModel<OrderItems>(true, []);
 
-  constructor(private supplierService: SupplierService, private itemService: ItemService, private orderService: OrderService) {}
+  constructor(private dialogRef: MatDialogRef<OrderCreateDialogComponent>, private supplierService: SupplierService, private itemService: ItemService, private orderService: OrderService, private alertify:AlertifyService) {}
 
   ngOnInit() {
     this.getSuppliers();
@@ -84,15 +85,19 @@ export class OrderCreateDialogComponent implements OnInit {
     };
 
     this.orderService.createOrder(orderToCreate).subscribe(data => {
-      console.log(data);
-      this.orderService.createOrderItem(this.itemsToOrder).subscribe( data => {
+      let newlyCreatedOrderId = data['orderId'];
+
+      this.itemsToOrder.forEach(x => x.orderId = newlyCreatedOrderId);
+      this.orderService.createOrderItem(this.itemsToOrder).subscribe( data => { 
+        this.alertify.success('Order created successfully!\n ID: ' + newlyCreatedOrderId);
+        this.dialogRef.close();    
       });
     },
     error => {
-      console.log(error);
+      this.alertify.error('Error: An error has occured: ' + error);
     });
-    console.log(orderToCreate);
   }
+
   onSupplierSelected(supplier: Supplier) {
     this.itemService.getItemsOfSupplier(supplier.supplierId).subscribe(data => {
       this.itemSuppliers = data;
@@ -110,16 +115,30 @@ export class OrderCreateDialogComponent implements OnInit {
 
   onAddItem() {
     let itemToBeAdded: OrderItems = {
+      orderId: 0,
       itemId: this.creationForm.get("selectedItemSupplier").value.itemId,
-      orderId: 2,
       quantity: this.creationForm.get("quantity").value,
       unitCost: this.creationForm.get("selectedItemSupplier").value.unitCost,
       totalCost:
         this.creationForm.get("quantity").value *
         this.creationForm.get("selectedItemSupplier").value.unitCost
     };
-    this.itemsToOrder.push(itemToBeAdded);
+    if(this.doesItemsToOrderContainItem(itemToBeAdded)) {
+      this.alertify.error('Item is already in the basket!');
+    } else {
+      this.itemsToOrder.push(itemToBeAdded);
+    }
     this.dataSource = new MatTableDataSource<OrderItems>(this.itemsToOrder);
+  }
+
+  private doesItemsToOrderContainItem(itemToBeAdded: OrderItems) {
+    let contains = false;
+    this.itemsToOrder.forEach((itemsToOrder) => {
+      if(itemsToOrder.itemId === itemToBeAdded.itemId) {
+        contains =  true;
+      }
+    });
+    return contains;
   }
 
   calculateTotalCost() {
@@ -133,8 +152,6 @@ export class OrderCreateDialogComponent implements OnInit {
     });
     this.selection = new SelectionModel<OrderItems>(true, []);
   }
-
-
 
   masterToggle() {
     this.isAllSelected()
