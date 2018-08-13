@@ -68,6 +68,7 @@ namespace ERP.API.Controllers
                         Subject = new ClaimsIdentity(new Claim[]
                         {
                             new Claim(ClaimTypes.Name, employee.Email),
+                            new Claim(ClaimTypes.Role, employee.PositionId.ToString()),
                             new Claim(ClaimTypes.NameIdentifier, employee.EmployeeId.ToString())
                             
                         }),
