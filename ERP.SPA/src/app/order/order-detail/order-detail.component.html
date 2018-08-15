@@ -1,0 +1,77 @@
+<div class="panel">
+    <tabset>
+        <tab heading="Order">
+                <div class="row">
+                        <div class="col-md-6">
+                           <div class="form-group">
+                               <label>Order Id</label>
+                               <input type="text" class="form-control" name="orderId" [(ngModel)]="order.orderId" disabled>
+                           </div>
+                        </div>
+                        <div class="col-md-6">
+                           <div class="form-group">
+                               <label>Status</label>
+                               <input type="text" class="form-control" name="status" [(ngModel)]="order.status"  required disabled>
+                           </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                         <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Supplier Id</label>
+                                <input type="text" class="form-control" name="supplierId" [(ngModel)]="order.supplierId" required disabled>
+                            </div>
+                         </div>
+                         <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Supplier Name</label>
+                                <input type="text" class="form-control" name="supplierName" [(ngModel)]="order.supplierName" required disabled>
+                            </div>
+                         </div>
+                       </div>
+                       <div class="row">
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                  <label>Created By</label>
+                                  <input type="text" class="form-control" name="createdById" [(ngModel)]="order.createdBy" required disabled>
+                              </div>
+                           </div>
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                  <label>Approved By</label>
+                                  <input type="text" class="form-control" name="approvedById" [(ngModel)]="order.approvedBy" required disabled> 
+                              </div>
+                           </div>
+                         </div>
+                         <div class="row">
+                            <div class="col-md-6">
+                               <div class="form-group">
+                                   <label>Requesed Date</label>
+                                   <input type="text" class="form-control" name="requestedDate" [(ngModel)]="order.requestedDate" required disabled>
+                               </div>
+                            </div>
+                            <div class="col-md-6">
+                               <div class="form-group">
+                                   <label>Received Date</label>
+                                   <input type="text" class="form-control" name="receivedDate" [(ngModel)]="order.receivedDate" required disabled> 
+                               </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label>Total Cost</label>
+                                      <input type="text" class="form-control" name="totalCost" [(ngModel)]="order.totalCost" required disabled> 
+                                  </div>
+                              </div>
+                          </div>
+
+                         <button class="btn btn-primary" (click)="onApproveOrder()"  *ngIf="getStatusOfOrder() ==='Requested'">Approve</button>
+                         <button class="btn btn-primary" (click)="onReceiveOrder()"  *ngIf="getStatusOfOrder() ==='Approved'">Receive</button>
+                         <!-- <button class="btn btn-danger" (click)="deleteItem()">Delete</button>   -->
+        </tab>
+        <tab heading="Items">
+          <app-order-items [order]="order" ></app-order-items>
+        </tab>
+    </tabset>
+</div>
