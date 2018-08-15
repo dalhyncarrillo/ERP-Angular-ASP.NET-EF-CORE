@@ -10,6 +10,7 @@ import { EmployeeListComponent } from './employee/employee-list/employee-list.co
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'employees', component: EmployeeListComponent, canActivate: [AuthGuard]},
+  { path: 'register', component: RegisterEmployeeComponent, canActivate: [AuthGuard]},
   { path: 'items', component: ItemListComponent, canActivate: [AuthGuard]},
   { path: 'suppliers', component: SupplierListComponent, canActivate: [AuthGuard]},
   { path: 'orders', component: OrderListComponent, canActivate: [AuthGuard]},

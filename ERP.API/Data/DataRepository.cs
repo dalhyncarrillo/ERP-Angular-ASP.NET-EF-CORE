@@ -155,6 +155,11 @@ namespace ERP.API.Data
             return await this.context.OrderItems.Where(order => order.OrderId == orderId && order.ItemId == itemId).FirstOrDefaultAsync();
         }
 
+        public async Task<IEnumerable<Employee>> GetEmployees()
+        {
+            return await this.context.Employees.Include(employee => employee.Position).ToListAsync();
+        }
+
 
     }
 }

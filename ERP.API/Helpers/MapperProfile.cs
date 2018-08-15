@@ -1,4 +1,5 @@
 using AutoMapper;
+using ERP.API.DTOs.EmployeeDtos;
 using ERP.API.DTOs.ItemDtos;
 using ERP.API.DTOs.OrderDtos;
 using ERP.API.DTOs.SupplierDtos;
@@ -31,6 +32,11 @@ namespace ERP.API.Helpers
             CreateMap<Order, OrderListDto>()
                 .ForMember(dest => dest.SupplierName, opt => {
                     opt.MapFrom(src => src.Supplier.Name);
+            });
+
+             CreateMap<Employee, EmployeeListDto>()
+                .ForMember(dest => dest.PositionName, opt => {
+                    opt.MapFrom(src => src.Position.PositionName);
             });
         }
     }

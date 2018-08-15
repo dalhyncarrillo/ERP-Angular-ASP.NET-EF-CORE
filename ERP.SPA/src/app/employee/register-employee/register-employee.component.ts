@@ -4,6 +4,8 @@ import { Employee } from './../../_models/employee.model';
 import { AuthService } from './../../_services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { post } from 'selenium-webdriver/http';
+import { AlertifyService } from 'src/app/_services/alertify.service';
+import { Router } from '../../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-register-employee',
@@ -21,7 +23,7 @@ export class RegisterEmployeeComponent implements OnInit {
   registerForm: FormGroup;
 
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private alertify: AlertifyService, private router: Router ) { }
   
   ngOnInit() {
     this.getPositions();
@@ -70,8 +72,14 @@ export class RegisterEmployeeComponent implements OnInit {
     if(this.registerForm.valid) {
       this.employeeToRegister = Object.assign({}, this.registerForm.value);
       this.employeeToRegister.positionId = this.registerForm.get('position').value.positionId;
-      console.log(this.employeeToRegister);
-      this.authService.register(this.employeeToRegister).subscribe();
+      this.authService.register(this.employeeToRegister).subscribe( success => {
+        
+        this.alertify.success('Employee successfully registered!')
+        this.router.navigate(['employees']);
+      },
+      error => {
+        this.alertify.error('Error: ' + error.error);
+      });
     }
 
   }

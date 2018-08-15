@@ -4,7 +4,8 @@ export interface Employee {
     firstName: string,
     lastName: string,
     dateOfBirt: Date,
-    positionId: number,
     salary: number,
+    positionId: number,
+    positionName: string
   //  lastUpdate: Date,
 }
