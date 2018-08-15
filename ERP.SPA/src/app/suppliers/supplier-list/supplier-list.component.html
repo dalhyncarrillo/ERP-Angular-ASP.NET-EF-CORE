@@ -1,5 +1,7 @@
-<div class="row">
-      
+<div class="toolBar">
+  <button class="btn btn-primary" (click)="addSupplier()"><i class="fa fa-plus"></i></button>
+</div>
+<div class="row">     
   <div class="mat-elevation-z8 full-width" [class.col-md-4]="selectedSupplier">
       <mat-form-field class="margins">
           <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">

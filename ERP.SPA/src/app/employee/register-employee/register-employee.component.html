@@ -3,9 +3,9 @@
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
         <div class="form-group">
           <label>Email address</label>
-          <input type="email" class="form-control" formControlName="emailAddress" placeholder="Enter email" [ngClass]="{'is-invalid' : registerForm.get('emailAddress').errors && registerForm.get('emailAddress').touched}">
-          <p class="validation-error-message" *ngIf="registerForm.get('emailAddress').hasError('required') && registerForm.get('emailAddress').touched">Email address is required!</p>
-          <p class="validation-error-message" *ngIf="registerForm.get('emailAddress').hasError('email') && registerForm.get('emailAddress').touched">The format of the provided e-mail address is NOT correct!</p>
+          <input type="email" class="form-control" formControlName="email" placeholder="Enter email" [ngClass]="{'is-invalid' : registerForm.get('email').errors && registerForm.get('email').touched}">
+          <p class="validation-error-message" *ngIf="registerForm.get('email').hasError('required') && registerForm.get('email').touched">Email address is required!</p>
+          <p class="validation-error-message" *ngIf="registerForm.get('email').hasError('email') && registerForm.get('email').touched">The format of the provided e-mail address is NOT correct!</p>
         </div>
         <div class="form-group">
           <label>Password</label>

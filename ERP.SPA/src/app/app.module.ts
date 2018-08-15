@@ -30,6 +30,7 @@ import { SupplierCreateDialogComponent } from './suppliers/supplier-create-dialo
 import { ConfirmationDialogComponent } from './ConfirmationDialog/ConfirmationDialog.component';
 import { TabsModule } from 'ngx-bootstrap';
 import { AppMaterialModule } from './/app-material.module';
+import { EmployeeListComponent } from './employee/employee-list/employee-list.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { AppMaterialModule } from './/app-material.module';
     OrderDetailComponent,
     OrderCreateDialogComponent,
     OrderItemsComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    EmployeeListComponent
 ],
   imports: [
     TabsModule.forRoot(),

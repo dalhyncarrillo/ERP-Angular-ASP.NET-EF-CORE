@@ -35,13 +35,6 @@ export class SupplierDetailComponent implements OnChanges {
     });
   }
 
-  addSupplier() {
-    let dialogRef = this.dialog.open(SupplierCreateDialogComponent, {
-      height: '450px',
-      width: '1700px',
-    });
-  }
-
   deleteSupplier() {
     let dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       height: '250px',

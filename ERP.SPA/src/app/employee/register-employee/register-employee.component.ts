@@ -14,7 +14,7 @@ import { post } from 'selenium-webdriver/http';
 //TODO
 export class RegisterEmployeeComponent implements OnInit {
   
-  employeeToRegister:any ={};
+  employeeToRegister: Employee;
   position:string;
   positions: Position[];
 
@@ -36,7 +36,7 @@ export class RegisterEmployeeComponent implements OnInit {
 
   createRegisterForm() {
     this.registerForm = new FormGroup({
-      emailAddress: new FormControl('',[Validators.required, Validators.email]),
+      email: new FormControl('',[Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(12)]),
       confirmPassword: new FormControl('', Validators.required),
       firstName: new FormControl('', Validators.required),
@@ -67,6 +67,12 @@ export class RegisterEmployeeComponent implements OnInit {
   }
 
   onSubmit() {
-    this.authService.register(this.employeeToRegister).subscribe();
+    if(this.registerForm.valid) {
+      this.employeeToRegister = Object.assign({}, this.registerForm.value);
+      this.employeeToRegister.positionId = this.registerForm.get('position').value.positionId;
+      console.log(this.employeeToRegister);
+      this.authService.register(this.employeeToRegister).subscribe();
+    }
+
   }
 }

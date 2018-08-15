@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SupplierService } from '../../_services/supplier.service';
 import { Supplier } from '../../_models/supplier.model';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
+import { SupplierCreateDialogComponent } from 'src/app/suppliers/supplier-create-dialog/supplier-create-dialog.component';
 
 @Component({
   selector: 'app-supplier-list',
@@ -17,7 +18,7 @@ export class SupplierListComponent implements OnInit {
   displayedColumns = ['supplierId', 'name', 'status'];
 
   selectedSupplier;
-  constructor(private supplierService: SupplierService) {}
+  constructor(private supplierService: SupplierService, private dialog: MatDialog) {}
   dataSource;
   
   applyFilter(filterValue: string) {
@@ -28,6 +29,13 @@ export class SupplierListComponent implements OnInit {
 
   ngOnInit() {  
     this.getSuppliers();   
+  }
+
+  addSupplier() {
+    let dialogRef = this.dialog.open(SupplierCreateDialogComponent, {
+      height: '450px',
+      width: '1700px',
+    });
   }
 
   setDataSource() {

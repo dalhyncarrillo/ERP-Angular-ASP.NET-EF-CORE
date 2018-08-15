@@ -6,9 +6,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { RegisterEmployeeComponent } from './employee/register-employee/register-employee.component';
 import { SupplierListComponent } from './suppliers/supplier-list/supplier-list.component';
+import { EmployeeListComponent } from './employee/employee-list/employee-list.component';
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
-  { path: 'register', component: RegisterEmployeeComponent, canActivate: [AuthGuard]},
+  { path: 'employees', component: EmployeeListComponent, canActivate: [AuthGuard]},
   { path: 'items', component: ItemListComponent, canActivate: [AuthGuard]},
   { path: 'suppliers', component: SupplierListComponent, canActivate: [AuthGuard]},
   { path: 'orders', component: OrderListComponent, canActivate: [AuthGuard]},
