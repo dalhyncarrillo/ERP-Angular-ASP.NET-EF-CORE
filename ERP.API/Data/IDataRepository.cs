@@ -27,5 +27,7 @@ namespace ERP.API.Data
         Task<Order> UpdateOrder(Order order);
 
         Task<IEnumerable<Employee>> GetEmployees();
+        Task<Employee> GetEmployee(string employeeEmail);
+        Task<Employee> UpdateEmployee(Employee employeeToUpdate);
     }
 }

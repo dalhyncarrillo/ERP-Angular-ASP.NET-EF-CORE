@@ -38,6 +38,8 @@ namespace ERP.API.Helpers
                 .ForMember(dest => dest.PositionName, opt => {
                     opt.MapFrom(src => src.Position.PositionName);
             });
+
+            CreateMap<Employee, EmployeeDetailedDto>();
         }
     }
 }

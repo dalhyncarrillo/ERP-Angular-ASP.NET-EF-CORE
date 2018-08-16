@@ -3,6 +3,7 @@ import { Router } from '../../../../node_modules/@angular/router';
 import { MatPaginator, MatDialog, MatTableDataSource, MatSort } from '../../../../node_modules/@angular/material';
 import { Employee } from '../../_models/employee.model';
 import { EmployeeService } from '../../_services/employee.service';
+import { AlertifyService } from '../../_services/alertify.service';
 
 @Component({
   selector: 'app-employee-list',
@@ -13,7 +14,7 @@ export class EmployeeListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   
-  constructor(private router: Router, private employeeService: EmployeeService, private dialog: MatDialog) {}
+  constructor(private alertify: AlertifyService, private router: Router, private employeeService: EmployeeService, private dialog: MatDialog) {}
 
   createEmployee() {
     this.router.navigate(['register']);
@@ -52,7 +53,12 @@ export class EmployeeListComponent implements OnInit {
   }
 
   onEmployee(employee: any) {
-    this.selectedEmployee = employee;
+    const positionId = localStorage.getItem('positionId');
+    if(positionId !== '1') {
+      this.alertify.error('You do NOT have permission to see the profile');
+    } else {
+      this.selectedEmployee = employee;
+    }
   }
 
   // deleteSupplier(supplier: Supplier) {

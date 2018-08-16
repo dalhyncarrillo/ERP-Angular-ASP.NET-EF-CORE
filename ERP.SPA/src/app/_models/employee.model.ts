@@ -1,9 +1,8 @@
 export interface Employee {
     email: string,
-    password: string,
     firstName: string,
     lastName: string,
-    dateOfBirt: Date,
+    dateOfBirth: Date,
     salary: number,
     positionId: number,
     positionName: string

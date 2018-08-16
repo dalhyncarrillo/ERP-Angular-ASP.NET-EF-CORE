@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ERP.API.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     public class EmployeesController : Controller
     {
@@ -31,6 +31,27 @@ namespace ERP.API.Controllers
             var employees = await this.repo.GetEmployees();
             var employeesToReturn = mapper.Map<IEnumerable<EmployeeListDto>>(employees);
             return Ok(employeesToReturn);
+        }
+
+        [HttpGet("{employeeEmail}")]
+        public async Task<IActionResult> GetEmployee(string employeeEmail)
+        {
+            var employee = await this.repo.GetEmployee(employeeEmail);
+            if(employee == null)
+                return NotFound("The employee is not found");
+            var employeeToReturn = this.mapper.Map<EmployeeDetailedDto>(employee);
+            
+            return Ok(employeeToReturn);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateEmployee([FromBody] Employee employeeToUpdate)
+        {
+           var updatedEmployee = await this.repo.UpdateEmployee(employeeToUpdate);
+           if(updatedEmployee == null)
+                return NotFound("The employee is NOT found");
+            
+           return Ok(updatedEmployee);
         }
     }
 }

@@ -35,18 +35,20 @@ namespace ERP.API.Data
 
         public Task<T> UpdateEntity<T>(T entity) where T : class
         {
+            // public void Update<T>(T item) where T: Entity
+            // {
+            //     // assume Entity base class have an Id property for all items
+            //     var entity = _collection.Find(item.Id);
+            //     if (entity == null)
+            //     {
+            //         return;
+            //     }
+
+            //     _context.Entry(entity).CurrentValues.SetValues(item);
+            // }
+
             throw new System.NotImplementedException();
         }
-
-         public async Task<Supplier> GetSupplier(int supplierId)
-        {
-            var supplier = await this.context.Suppliers.FirstOrDefaultAsync(sup => sup.SupplierId == supplierId);
-            if(supplier == null)
-                return null;
-
-            return supplier;
-        }
-
         public async Task<IEnumerable<Supplier>> GetSuppliers() 
         {
             return await this.context.Suppliers.ToListAsync();
@@ -67,6 +69,10 @@ namespace ERP.API.Data
               
             await this.context.SaveChangesAsync();
             return supplierToUpdate;
+        }
+        public async Task<Supplier> GetSupplier(int supplierId)
+        {
+            return await this.context.Suppliers.FirstOrDefaultAsync(sup => sup.SupplierId == supplierId);
         }
 
         public async Task<IEnumerable<Item>> GetItems()
@@ -160,6 +166,27 @@ namespace ERP.API.Data
             return await this.context.Employees.Include(employee => employee.Position).ToListAsync();
         }
 
+        public async Task<Employee> GetEmployee(string employeeEmail)
+        {
+            return await this.context.Employees.FirstOrDefaultAsync(employee => employee.Email.Equals(employeeEmail));
+        }
 
+        public async Task<Employee> UpdateEmployee(Employee employeeToUpdate)
+        {
+            var employee = await this.GetEmployee(employeeToUpdate.Email);
+
+            if(employee == null)
+                return null;
+
+            employee.FirstName = employeeToUpdate.FirstName;
+            employee.LastName = employeeToUpdate.LastName;
+            employee.DateOfBirth = employeeToUpdate.DateOfBirth;
+            employee.Salary = employeeToUpdate.Salary;
+            employee.PositionId = employeeToUpdate.PositionId;
+
+            await this.context.SaveChangesAsync();
+
+            return employee;
+        }
     }
 }
