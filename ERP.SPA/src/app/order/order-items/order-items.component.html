@@ -1,3 +1,4 @@
+<button class="btn btn-primary toolBar" (click)="onUpdateChanges()" *ngIf="changeOccured">Update</button>
 <table>
   <tr>
       <th>Item Id</th>
@@ -15,4 +16,4 @@
       <button class="btn btn-danger" (click)="onDeleteItem(orderItems)" [disabled]="getStatusOfOrder() === 'Approved' ? true : false">Delete</button>
   </tr>
 </table>
-<button class="btn btn-primary toolBar" (click)="addItem()" [disabled]="getStatusOfOrder() === 'Approved' ? true : false"><i class="fa fa-plus"></i></button>
+<button class="btn btn-primary toolBar" (click)="onAddItem()" [disabled]="getStatusOfOrder() === 'Approved' ? true : false"><i class="fa fa-plus"></i></button>

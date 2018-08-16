@@ -26,6 +26,7 @@ export class AuthService {
         localStorage.setItem('token',token['tokenString']);
         this.decodedToken = (this.jwtHelper.decodeToken(token['tokenString']));
         localStorage.setItem('positionId', this.decodedToken.role);
+        localStorage.setItem('employeeId', this.decodedToken.nameid);
       });
     }
 

@@ -79,7 +79,7 @@ export class OrderCreateDialogComponent implements OnInit {
       status: 'Requested',
       totalCost: this.calculateTotalCost(),
       requestedDate: this.creationForm.get('requestDate').value,
-      createdBy: 2,
+      createdBy: +localStorage.getItem('employeeId'),
       receivedDate: null,
       approvedBy: null
     };
@@ -94,7 +94,7 @@ export class OrderCreateDialogComponent implements OnInit {
       });
     },
     error => {
-      this.alertify.error('Error: An error has occured: ' + error);
+      this.alertify.error('Error: An error has occured: ' + error.error);
     });
   }
 

@@ -14,12 +14,14 @@ export class OrderItemsComponent implements OnChanges {
 
   @Input() order: Order;
   orderItems: OrderItems[];
+  changeOccured: boolean = false;
 
   constructor(private orderService: OrderService, private dialog: MatDialog) { }
 
   ngOnChanges() {
     // this.getOrderDetails();
-     this.getOrderitems();
+    this.changeOccured = false;
+    this.getOrderitems();
    }
 
   getOrderitems() {
@@ -32,7 +34,13 @@ export class OrderItemsComponent implements OnChanges {
     return this.order.status;
   }
 
+  onAddItem() {
+    this.changeOccured = true;
+  }
+
   onDeleteItem(orderItem: OrderItems ) {
+    this.changeOccured = true;
+
     let dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       height: '250px',
       width: '500px',
@@ -45,6 +53,10 @@ export class OrderItemsComponent implements OnChanges {
         });
       }
     });
+  }
+
+  onUpdateChanges() {
+
   }
 
 }
