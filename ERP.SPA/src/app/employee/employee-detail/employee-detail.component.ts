@@ -2,20 +2,38 @@ import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { Employee } from '../../_models/employee.model';
 import { EmployeeService } from '../../_services/employee.service';
 import { AlertifyService } from '../../_services/alertify.service';
+import { FormGroup, FormControl, Validators } from '../../../../node_modules/@angular/forms';
 
 @Component({
   selector: 'app-employee-detail',
   templateUrl: './employee-detail.component.html',
   styleUrls: ['./employee-detail.component.css']
 })
-export class EmployeeDetailComponent implements OnChanges {
+export class EmployeeDetailComponent implements OnInit, OnChanges {
 
+  employeeForm: FormGroup;
   @Input() employee: Employee;
+  
   constructor(private alertify:AlertifyService ,private employeeService: EmployeeService) { }
+
+  ngOnInit() {
+    // this.createEmployeeForm();
+  }
+
+  // createEmployeeForm() {
+  //   this.employeeForm = new FormGroup({
+  //     firstName: new FormControl('', Validators.required),
+  //     lastName: new FormControl('', Validators.required),
+  //     dateOfBirth: new FormControl('', Validators.required),
+  //     salary: new FormControl('', Validators.required),
+  //     position: new FormControl('', Validators.required),
+  //   });
+  // }
 
   ngOnChanges() {
     this.getEmployeeDetail();
   }
+  
 
   getEmployeeDetail() {
     this.employeeService.getEmployee(this.employee.email).subscribe(data => {
