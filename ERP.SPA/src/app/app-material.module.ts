@@ -9,7 +9,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CdkTableModule} from '@angular/cdk/table';
 import { MatStepperModule, MatIconModule, MatInputModule, MatDialogModule, MatDatepickerModule, MatButtonModule, MatTableModule, MatPaginatorModule, MatSelectModule, MatSortModule, MatNativeDateModule, MatCheckboxModule } from '@angular/material';
+<<<<<<< HEAD
 import { OrderAddItemComponent } from './order/order-add-item/order-add-item.component';
+=======
+>>>>>>> fbbcba95f7e0961ae37c9072f544b05f5b099790
 
 @NgModule({
   imports: [
@@ -51,7 +54,11 @@ import { OrderAddItemComponent } from './order/order-add-item/order-add-item.com
   ],
   //TODO MIERT VAN AZ KOMMENTELTBEN SupplierListComponent??? 2018.07.10
   //entryComponents: [SupplierCreateDialogComponent, ConfirmationDialogComponent, SupplierListComponent, ItemCreateDialogComponent, ItemSuppliersCreateDialogComponent],
+<<<<<<< HEAD
   entryComponents: [SupplierCreateDialogComponent, ConfirmationDialogComponent, ItemCreateDialogComponent, ItemSuppliersCreateDialogComponent, OrderCreateDialogComponent, OrderAddItemComponent],
+=======
+  entryComponents: [SupplierCreateDialogComponent, ConfirmationDialogComponent, ItemCreateDialogComponent, ItemSuppliersCreateDialogComponent, OrderCreateDialogComponent],
+>>>>>>> fbbcba95f7e0961ae37c9072f544b05f5b099790
   declarations: []
 })
 export class AppMaterialModule { }

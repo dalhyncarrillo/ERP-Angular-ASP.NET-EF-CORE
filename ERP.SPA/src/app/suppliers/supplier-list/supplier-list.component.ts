@@ -1,8 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SupplierService } from '../../_services/supplier.service';
 import { Supplier } from '../../_models/supplier.model';
+<<<<<<< HEAD
 import { MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
 import { SupplierCreateDialogComponent } from 'src/app/suppliers/supplier-create-dialog/supplier-create-dialog.component';
+=======
+import { MatPaginator, MatTableDataSource } from '@angular/material';
+>>>>>>> fbbcba95f7e0961ae37c9072f544b05f5b099790
 
 @Component({
   selector: 'app-supplier-list',
@@ -18,7 +22,11 @@ export class SupplierListComponent implements OnInit {
   displayedColumns = ['supplierId', 'name', 'status'];
 
   selectedSupplier;
+<<<<<<< HEAD
   constructor(private supplierService: SupplierService, private dialog: MatDialog) {}
+=======
+  constructor(private supplierService: SupplierService) {}
+>>>>>>> fbbcba95f7e0961ae37c9072f544b05f5b099790
   dataSource;
   
   applyFilter(filterValue: string) {
@@ -31,6 +39,7 @@ export class SupplierListComponent implements OnInit {
     this.getSuppliers();   
   }
 
+<<<<<<< HEAD
   addSupplier() {
     let dialogRef = this.dialog.open(SupplierCreateDialogComponent, {
       height: '450px',
@@ -38,6 +47,8 @@ export class SupplierListComponent implements OnInit {
     });
   }
 
+=======
+>>>>>>> fbbcba95f7e0961ae37c9072f544b05f5b099790
   setDataSource() {
     this.dataSource = new MatTableDataSource<Supplier>(this.suppliers);
     this.dataSource.paginator = this.paginator;

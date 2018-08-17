@@ -33,7 +33,11 @@ namespace ERP.API
             var key = Encoding.ASCII.GetBytes("super secret key");
             services.AddMvc();
             services.AddAutoMapper();
+<<<<<<< HEAD
             var connection = @"Server=QUICKBORN_HP;Database=erp;Trusted_Connection=True;ConnectRetryCount=0;MultipleActiveResultSets=True";
+=======
+            var connection = @"Server=DESKTOP-U2AMBJE\SQLEXPRESS;Database=erp;Trusted_Connection=True;ConnectRetryCount=0;MultipleActiveResultSets=True";
+>>>>>>> fbbcba95f7e0961ae37c9072f544b05f5b099790
             services.AddDbContext<DataContext>(options => options.UseSqlServer(connection));
             services.AddScoped<IDataRepository, DataRepository>();
             services.AddScoped<IAuthRepository, AuthRepository>();

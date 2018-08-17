@@ -18,15 +18,22 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class AuthService {
 
+<<<<<<< HEAD
     decodedToken;
+=======
+    decodedToken: string;
+>>>>>>> fbbcba95f7e0961ae37c9072f544b05f5b099790
     constructor(private http: HttpClient, private jwtHelper: JwtHelperService) { }
 
     login(emp: any) {
         return this.http.post(environment.baseurl + 'auth/login',emp).map(token => {
         localStorage.setItem('token',token['tokenString']);
         this.decodedToken = (this.jwtHelper.decodeToken(token['tokenString']));
+<<<<<<< HEAD
         localStorage.setItem('positionId', this.decodedToken.role);
         localStorage.setItem('employeeId', this.decodedToken.nameid);
+=======
+>>>>>>> fbbcba95f7e0961ae37c9072f544b05f5b099790
       });
     }
 
