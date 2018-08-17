@@ -32,6 +32,7 @@ import { TabsModule } from 'ngx-bootstrap';
 import { AppMaterialModule } from './/app-material.module';
 import { EmployeeListComponent } from './employee/employee-list/employee-list.component';
 import { EmployeeDetailComponent } from './employee/employee-detail/employee-detail.component';
+import { OrderAddItemComponent } from './order/order-add-item/order-add-item.component';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { EmployeeDetailComponent } from './employee/employee-detail/employee-det
     OrderItemsComponent,
     ConfirmationDialogComponent,
     EmployeeListComponent,
-    EmployeeDetailComponent
+    EmployeeDetailComponent,
+    OrderAddItemComponent
 ],
   imports: [
     TabsModule.forRoot(),

@@ -7,12 +7,12 @@
       <th>Quantity</th>
       <th>Total Cost</th>
   </tr>
-  <tr *ngFor="let orderItems of orderItems">
-      <td>{{orderItems.itemId}}</td>
-      <td>{{orderItems.itemId}}</td>
-      <td>{{orderItems.unitCost}}</td>
-      <td>{{orderItems.quantity}}</td>
-      <td>{{orderItems.totalCost}}</td>
+  <tr *ngFor="let orderItem of orderItems">
+      <td>{{orderItem.itemId}}</td>
+      <td>{{orderItem.itemId}}</td>
+      <td>{{orderItem.unitCost}}</td>
+      <td>{{orderItem.quantity}}</td>
+      <td>{{orderItem.totalCost}}</td>
       <button class="btn btn-danger" (click)="onDeleteItem(orderItems)" [disabled]="getStatusOfOrder() === 'Approved' ? true : false">Delete</button>
   </tr>
 </table>

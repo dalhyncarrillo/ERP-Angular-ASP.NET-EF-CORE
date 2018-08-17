@@ -3,7 +3,10 @@ import { MatDialog } from '@angular/material';
 import { OrderService } from './../../_services/order.service';
 import { OrderItems } from './../../_models/order-items.model';
 import { Order } from './../../_models/order.model';
-import { Component, OnChanges, Input } from '@angular/core';
+import { Component, OnChanges, Input, OnInit } from '@angular/core';
+import { ItemService } from '../../_services/item.service';
+import { ItemSuppliers } from '../../_models/item-suppliers.model';
+import { OrderAddItemComponent } from '../order-add-item/order-add-item.component';
 
 @Component({
   selector: 'app-order-items',
@@ -14,9 +17,10 @@ export class OrderItemsComponent implements OnChanges {
 
   @Input() order: Order;
   orderItems: OrderItems[];
+  itemSuppliers: ItemSuppliers[];
   changeOccured: boolean = false;
 
-  constructor(private orderService: OrderService, private dialog: MatDialog) { }
+  constructor(private orderService: OrderService, private itemService: ItemService,private dialog: MatDialog) { }
 
   ngOnChanges() {
     // this.getOrderDetails();
@@ -36,6 +40,14 @@ export class OrderItemsComponent implements OnChanges {
 
   onAddItem() {
     this.changeOccured = true;
+    let dialogRef = this.dialog.open(OrderAddItemComponent, {
+      height: '800px',
+      width: '1200px',
+      data: {order: this.order, orderItems: this.orderItems}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
   }
 
   onDeleteItem(orderItem: OrderItems ) {
@@ -48,9 +60,7 @@ export class OrderItemsComponent implements OnChanges {
     });
     dialogRef.afterClosed().subscribe(result => {
       if(result === 'yes') {
-        this.orderService.removeOrderItem(orderItem.orderId, orderItem.itemId).subscribe(data => {
-            console.log(data);
-        });
+          this.orderItems.splice(this.orderItems.findIndex(element => element.itemId === orderItem.itemId), 1);
       }
     });
   }

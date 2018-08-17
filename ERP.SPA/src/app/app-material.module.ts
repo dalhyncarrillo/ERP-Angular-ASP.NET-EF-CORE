@@ -9,6 +9,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CdkTableModule} from '@angular/cdk/table';
 import { MatStepperModule, MatIconModule, MatInputModule, MatDialogModule, MatDatepickerModule, MatButtonModule, MatTableModule, MatPaginatorModule, MatSelectModule, MatSortModule, MatNativeDateModule, MatCheckboxModule } from '@angular/material';
+import { OrderAddItemComponent } from './order/order-add-item/order-add-item.component';
 
 @NgModule({
   imports: [
@@ -50,7 +51,7 @@ import { MatStepperModule, MatIconModule, MatInputModule, MatDialogModule, MatDa
   ],
   //TODO MIERT VAN AZ KOMMENTELTBEN SupplierListComponent??? 2018.07.10
   //entryComponents: [SupplierCreateDialogComponent, ConfirmationDialogComponent, SupplierListComponent, ItemCreateDialogComponent, ItemSuppliersCreateDialogComponent],
-  entryComponents: [SupplierCreateDialogComponent, ConfirmationDialogComponent, ItemCreateDialogComponent, ItemSuppliersCreateDialogComponent, OrderCreateDialogComponent],
+  entryComponents: [SupplierCreateDialogComponent, ConfirmationDialogComponent, ItemCreateDialogComponent, ItemSuppliersCreateDialogComponent, OrderCreateDialogComponent, OrderAddItemComponent],
   declarations: []
 })
 export class AppMaterialModule { }
