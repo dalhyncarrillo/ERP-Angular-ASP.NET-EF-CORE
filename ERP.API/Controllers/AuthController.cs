@@ -37,13 +37,8 @@ namespace ERP.API.Controllers
             if(doesExist)
                 return BadRequest("Email is already taken!");
             
-<<<<<<< HEAD
             // dto.FirstName = dto.FirstName.ToLower();
             // dto.LastName = dto.LastName.ToLower();
-=======
-            dto.FirstName = dto.FirstName.ToLower();
-            dto.LastName = dto.LastName.ToLower();
->>>>>>> fbbcba95f7e0961ae37c9072f544b05f5b099790
 
             var employeeToBeCreated = new Employee() 
             {
@@ -63,11 +58,7 @@ namespace ERP.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] EmployeeLoginDto employeeLoginDto)
         {
-<<<<<<< HEAD
            var employee = await this.repo.Login(employeeLoginDto.Email, employeeLoginDto.Password);
-=======
-            var employee = await this.repo.Login(employeeLoginDto.Email, employeeLoginDto.Password);
->>>>>>> fbbcba95f7e0961ae37c9072f544b05f5b099790
             if(employee == null)
                 return Unauthorized();
             var tokenHandler = new JwtSecurityTokenHandler();

@@ -42,7 +42,6 @@ export class EmployeeDetailComponent implements OnInit, OnChanges {
       this.employee.dateOfBirth = data.dateOfBirth;
       this.employee.positionId = data.positionId;
       this.employee.salary = data.salary;
-      console.log(this.employee);
     });
   }
 

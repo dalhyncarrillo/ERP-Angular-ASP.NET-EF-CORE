@@ -45,6 +45,16 @@ namespace ERP.API.Controllers
             return Ok();
         }
 
+        [HttpPut("{orderId}")]
+        public async Task<IActionResult> UpdateOrderItems([FromBody] List<OrderItem> orderitemsToUpdate, int orderId)
+        {
+           var succeeded = await this.repository.UpdateOrderItems(orderitemsToUpdate, orderId);
+           if(!succeeded)
+            return BadRequest("Update NOT succeeded!");
+
+            return Ok();
+        }
+
         [HttpDelete("{orderId}/{itemId}")]
         public async Task<IActionResult> RemoveOrderItems(int orderId, int itemId)
         {

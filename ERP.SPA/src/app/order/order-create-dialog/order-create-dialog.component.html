@@ -1,116 +1,112 @@
 <form [formGroup]="creationForm" (ngSubmit)="onSubmit()" class="register-form">
-        <div class="form-group">
-            <label>Supplier</label>
-            <br>
-            <mat-form-field>
-                <mat-select matInput placeholder="Choose one" formControlName="supplier">
-                    <mat-option *ngFor="let supplier of suppliers" [value]="supplier" (click)="onSupplierSelected(supplier)">
-                        {{supplier.name}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-    
-        <div class="form-group">
-            <label>Request Date</label>
-            <br>
-            <mat-form-field>
-                <input matInput [min]="minRequestDate" [max]="maxRequestDate" [matDatepicker]="picker" placeholder="Choose a date">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-        </div>
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-            <ng-container matColumnDef="select">
-                <th mat-header-cell *matHeaderCellDef>
-                    <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
-                    </mat-checkbox>
-                </th>
-                <td mat-cell *matCellDef="let row">
-                    <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
-                    </mat-checkbox>
-                </td>
-                <td mat-footer-cell *matFooterCellDef></td>
-            </ng-container>
-    
-            <ng-container matColumnDef="itemId">
-                <th mat-header-cell *matHeaderCellDef> No. </th>
-                <td mat-cell *matCellDef="let element"> {{element.itemId}} </td>
-                <td mat-footer-cell *matFooterCellDef> Total </td>
-            </ng-container>
-    
-            <ng-container matColumnDef="itemName">
-                <th mat-header-cell *matHeaderCellDef> Name </th>
-                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-                <td mat-footer-cell *matFooterCellDef></td>
-            </ng-container>
-    
-            <ng-container matColumnDef="unitCost">
-                <th mat-header-cell *matHeaderCellDef> Unit Cost </th>
-                <td mat-cell *matCellDef="let element"> {{element.unitCost}} </td>
-                <td mat-footer-cell *matFooterCellDef></td>
-            </ng-container>
-    
-            <ng-container matColumnDef="quantity">
-                <th mat-header-cell *matHeaderCellDef> Quantity </th>
-                <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
-                <td mat-footer-cell *matFooterCellDef></td>
-            </ng-container>
-    
-            <ng-container matColumnDef="totalCost">
-                <th mat-header-cell *matHeaderCellDef> Total Cost </th>
-                <td mat-cell *matCellDef="let element"> {{element.totalCost | currency}} </td>
-                <td mat-footer-cell *matFooterCellDef> {{calculateTotalCost() | currency}} </td>
-            </ng-container>
-    
-    
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></tr>
-            <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
-        </table>
+    <div class="form-group">
+        <label>Supplier</label>
         <br>
-        <div class="row">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <mat-form-field>
-                        <mat-select matInput placeholder="Choose one" formControlName="selectedItemSupplier">
-                            <mat-option *ngFor="let itemSupplier of itemSuppliers"  [value]="itemSupplier" (click)="onItemSupplierSelected(itemSupplier)">
-                                {{itemSupplier.itemName}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label>Unit Cost</label>
-                    <input type="text" formControlName="unitCost" class="form-control">
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label>Quantity</label>
-<<<<<<< HEAD
-                    <input type="number" formControlName="quantity" pattern="^[1-9]+[0-9]*$" class="form-control">
-=======
-                    <input type="number" formControlName="quantity" class="form-control">
->>>>>>> fbbcba95f7e0961ae37c9072f544b05f5b099790
-                </div>
-            </div>
-            <!-- <div class="col-md-2">
-                <div class="form-group">
-                    <label>Total Cost</label>
-                    <input type="text" formControlName="totalCost" class="form-control">
-                </div>
-            </div> -->
-            <div class="col-md-2">
-                <div class="form-group">
-                    <br>
-                    <button type="button" [disabled]="!creationForm.valid" class="btn btn-success" (click)="onAddItem()">Add</button>
-                    <button type="button" class="btn btn-danger" (click)="onRemoveItem()">Remove</button>
-                </div>
+        <mat-form-field>
+            <mat-select matInput placeholder="Choose one" formControlName="supplier">
+                <mat-option *ngFor="let supplier of suppliers" [value]="supplier" (click)="onSupplierSelected(supplier)">
+                    {{supplier.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="form-group">
+        <label>Request Date</label>
+        <br>
+        <mat-form-field>
+            <input matInput [min]="minRequestDate" [max]="maxRequestDate" [matDatepicker]="picker" placeholder="Choose a date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
+                </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
+                </mat-checkbox>
+            </td>
+            <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+
+        <ng-container matColumnDef="itemId">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <td mat-cell *matCellDef="let element"> {{element.itemId}} </td>
+            <td mat-footer-cell *matFooterCellDef> Total </td>
+        </ng-container>
+
+        <ng-container matColumnDef="itemName">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+
+        <ng-container matColumnDef="unitCost">
+            <th mat-header-cell *matHeaderCellDef> Unit Cost </th>
+            <td mat-cell *matCellDef="let element"> {{element.unitCost}} </td>
+            <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+
+        <ng-container matColumnDef="quantity">
+            <th mat-header-cell *matHeaderCellDef> Quantity </th>
+            <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+            <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+
+        <ng-container matColumnDef="totalCost">
+            <th mat-header-cell *matHeaderCellDef> Total Cost </th>
+            <td mat-cell *matCellDef="let element"> {{element.totalCost | currency}} </td>
+            <td mat-footer-cell *matFooterCellDef> {{calculateTotalCost() | currency}} </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></tr>
+        <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+    </table>
+    <br>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <mat-form-field>
+                    <mat-select matInput placeholder="Choose one" formControlName="selectedItemSupplier">
+                        <mat-option *ngFor="let itemSupplier of itemSuppliers"  [value]="itemSupplier" (click)="onItemSupplierSelected(itemSupplier)">
+                            {{itemSupplier.itemName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
         </div>
-    
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>Unit Cost</label>
+                <input type="text" formControlName="unitCost" class="form-control">
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>Quantity</label>
+                <input type="number" formControlName="quantity" pattern="^[1-9]+[0-9]*$" class="form-control">
+            </div>
+        </div>
+        <!-- <div class="col-md-2">
+            <div class="form-group">
+                <label>Total Cost</label>
+                <input type="text" formControlName="totalCost" class="form-control">
+            </div>
+        </div> -->
+        <div class="col-md-2">
+            <div class="form-group">
+                <br>
+                <button type="button" [disabled]="!creationForm.valid" class="btn btn-success" (click)="onAddItem()">Add</button>
+                <button type="button" class="btn btn-danger" (click)="onRemoveItem()">Remove</button>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="creationForm.invalid">Submit</button>
+</form>

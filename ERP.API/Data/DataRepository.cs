@@ -21,12 +21,6 @@ namespace ERP.API.Data
             return createdEntity.Entity;
         }
 
-        public async Task<bool> AddOrderItem(IEnumerable<OrderItem> orderItems)
-        {
-            await this.context.AddRangeAsync(orderItems);
-            return await this.context.SaveChangesAsync() >= 1 ? true : false;
-        }
-
         public async Task<bool> Delete<T>(T entity) where T : class
         {
             this.context.Remove(entity);
@@ -35,7 +29,6 @@ namespace ERP.API.Data
 
         public Task<T> UpdateEntity<T>(T entity) where T : class
         {
-<<<<<<< HEAD
             // public void Update<T>(T item) where T: Entity
             // {
             //     // assume Entity base class have an Id property for all items
@@ -50,20 +43,6 @@ namespace ERP.API.Data
 
             throw new System.NotImplementedException();
         }
-=======
-            throw new System.NotImplementedException();
-        }
-
-         public async Task<Supplier> GetSupplier(int supplierId)
-        {
-            var supplier = await this.context.Suppliers.FirstOrDefaultAsync(sup => sup.SupplierId == supplierId);
-            if(supplier == null)
-                return null;
-
-            return supplier;
-        }
-
->>>>>>> fbbcba95f7e0961ae37c9072f544b05f5b099790
         public async Task<IEnumerable<Supplier>> GetSuppliers() 
         {
             return await this.context.Suppliers.ToListAsync();
@@ -85,13 +64,10 @@ namespace ERP.API.Data
             await this.context.SaveChangesAsync();
             return supplierToUpdate;
         }
-<<<<<<< HEAD
         public async Task<Supplier> GetSupplier(int supplierId)
         {
             return await this.context.Suppliers.FirstOrDefaultAsync(sup => sup.SupplierId == supplierId);
         }
-=======
->>>>>>> fbbcba95f7e0961ae37c9072f544b05f5b099790
 
         public async Task<IEnumerable<Item>> GetItems()
         {
@@ -169,9 +145,31 @@ namespace ERP.API.Data
             await this.context.SaveChangesAsync();
             return orderToUpdate;
         }
+
+        public async Task<bool> AddOrderItem(IEnumerable<OrderItem> orderItems)
+        {
+            await this.context.OrderItems.AddRangeAsync(orderItems);
+            return await this.context.SaveChangesAsync() >= 1 ? true : false;
+        }
         public async Task<IEnumerable<OrderItem>> GetOrderItems(int orderId) 
         {
             return await this.context.OrderItems.Where(order => order.OrderId == orderId).Include(order => order.Item).ToListAsync();
+        }
+
+        public async Task<bool> UpdateOrderItems(IEnumerable<OrderItem> orderItemsToUpdate, int orderId)
+        {
+            if(orderItemsToUpdate.ToArray().Length == 0) 
+            {
+                return false;
+            }
+            
+            var itemsToDelete = await this.GetOrderItems(orderId);
+            foreach (var item in itemsToDelete)
+            {
+                await this.Delete(item);
+            }
+
+            return await this.AddOrderItem(orderItemsToUpdate);
         }
 
         public async Task<OrderItem> GetSingleOrderItems(int orderId, int itemId) 
@@ -179,7 +177,6 @@ namespace ERP.API.Data
             return await this.context.OrderItems.Where(order => order.OrderId == orderId && order.ItemId == itemId).FirstOrDefaultAsync();
         }
 
-<<<<<<< HEAD
         public async Task<IEnumerable<Employee>> GetEmployees()
         {
             return await this.context.Employees.Include(employee => employee.Position).ToListAsync();
@@ -207,8 +204,5 @@ namespace ERP.API.Data
 
             return employee;
         }
-=======
-
->>>>>>> fbbcba95f7e0961ae37c9072f544b05f5b099790
     }
 }

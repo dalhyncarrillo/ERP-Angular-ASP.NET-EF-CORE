@@ -23,16 +23,17 @@ export class ItemCreateDialogComponent implements OnInit {
   ngOnInit() {
     this.getSuppliers();
     this.firstFormGroup = this._formBuilder.group({
-      nameCtrl: ['', Validators.required]
-    });
-    this.secondFormGroup = this._formBuilder.group({
-      retailPriceCtrl: ['', Validators.required],
-      unitCostCtrl: ['', Validators.required]
-    });
-    this.thirdFormGroup = this._formBuilder.group({
       supplierCtrl: ['', Validators.required],
       leadTimeCtrl: ['', Validators.required]
     });
+    this.secondFormGroup = this._formBuilder.group({
+      nameCtrl: ['', Validators.required]
+    });
+    this.thirdFormGroup = this._formBuilder.group({
+      retailPriceCtrl: ['', Validators.required],
+      unitCostCtrl: ['', Validators.required]
+    });
+
   }
 
   getSuppliers() {
@@ -42,11 +43,11 @@ export class ItemCreateDialogComponent implements OnInit {
   }
   addNewItem() {
     this.itemToSave = {
-      name: this.firstFormGroup.get('nameCtrl').value,
-      retailPrice: this.secondFormGroup.get('retailPriceCtrl').value,
-      unitCost: this.secondFormGroup.get('unitCostCtrl').value,
-      supplierId: this.thirdFormGroup.get('supplierCtrl').value.supplierId,
-      leadTime: this.thirdFormGroup.get('leadTimeCtrl').value,
+      supplierId: this.firstFormGroup.get('supplierCtrl').value.supplierId,
+      leadTime: this.firstFormGroup.get('leadTimeCtrl').value,
+      name: this.secondFormGroup.get('nameCtrl').value,
+      retailPrice: this.thirdFormGroup.get('retailPriceCtrl').value,
+      unitCost: this.thirdFormGroup.get('unitCostCtrl').value,
       isPrimary: true,
       quantityOnHand: 0,
       quantityOrdered: 0,

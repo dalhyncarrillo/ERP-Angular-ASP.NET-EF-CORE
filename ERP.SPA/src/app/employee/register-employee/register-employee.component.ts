@@ -4,11 +4,8 @@ import { Employee } from './../../_models/employee.model';
 import { AuthService } from './../../_services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { post } from 'selenium-webdriver/http';
-<<<<<<< HEAD
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { Router } from '../../../../node_modules/@angular/router';
-=======
->>>>>>> fbbcba95f7e0961ae37c9072f544b05f5b099790
 
 @Component({
   selector: 'app-register-employee',
@@ -19,22 +16,14 @@ import { Router } from '../../../../node_modules/@angular/router';
 //TODO
 export class RegisterEmployeeComponent implements OnInit {
   
-<<<<<<< HEAD
   employeeToRegister: Employee;
-=======
-  employeeToRegister:any ={};
->>>>>>> fbbcba95f7e0961ae37c9072f544b05f5b099790
   position:string;
   positions: Position[];
 
   registerForm: FormGroup;
 
 
-<<<<<<< HEAD
   constructor(private authService: AuthService, private alertify: AlertifyService, private router: Router ) { }
-=======
-  constructor(private authService: AuthService) { }
->>>>>>> fbbcba95f7e0961ae37c9072f544b05f5b099790
   
   ngOnInit() {
     this.getPositions();
@@ -49,11 +38,7 @@ export class RegisterEmployeeComponent implements OnInit {
 
   createRegisterForm() {
     this.registerForm = new FormGroup({
-<<<<<<< HEAD
       email: new FormControl('',[Validators.required, Validators.email]),
-=======
-      emailAddress: new FormControl('',[Validators.required, Validators.email]),
->>>>>>> fbbcba95f7e0961ae37c9072f544b05f5b099790
       password: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(12)]),
       confirmPassword: new FormControl('', Validators.required),
       firstName: new FormControl('', Validators.required),
@@ -84,7 +69,6 @@ export class RegisterEmployeeComponent implements OnInit {
   }
 
   onSubmit() {
-<<<<<<< HEAD
     if(this.registerForm.valid) {
       this.employeeToRegister = Object.assign({}, this.registerForm.value);
       this.employeeToRegister.positionId = this.registerForm.get('position').value.positionId;
@@ -98,8 +82,5 @@ export class RegisterEmployeeComponent implements OnInit {
       });
     }
 
-=======
-    this.authService.register(this.employeeToRegister).subscribe();
->>>>>>> fbbcba95f7e0961ae37c9072f544b05f5b099790
   }
 }

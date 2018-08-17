@@ -48,7 +48,6 @@ export class OrderListComponent implements OnInit {
 
   onOrderSelected(order: any) {
     this.selectedOrder = order;
-    console.log(this.selectedOrder);
   }
 
 

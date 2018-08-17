@@ -34,7 +34,7 @@
         </mat-form-field>
         <br>
         <mat-form-field>
-          <input matInput placeholder="Phone" formControlName="phoneCtrl" required>
+          <input matInput placeholder="Phone" formControlName="phoneCtrl" pattern="^[0-9]*$" required>
         </mat-form-field>
         <div>
             <button class="btn btn-primary" matStepperNext>Next</button>

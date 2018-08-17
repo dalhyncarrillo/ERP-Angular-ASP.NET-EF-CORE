@@ -1,5 +1,5 @@
 <div class="panel">
-  <form  #form="ngForm" (ngSubmit)="onSubmit()">
+  <form  #form="ngForm">
       <div class="row">
           <div class="col-md-6">
             <div class="form-group">
@@ -48,7 +48,7 @@
                 </div>
               </div>
       
-          <button class="btn btn-primary" [disabled]="form.invalid" (click)="updateEmployee()">Update</button>
+          <button class="btn btn-primary" type="button" [disabled]="form.invalid" (click)="updateEmployee()">Update</button>
   </form>
 </div>  
  

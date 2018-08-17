@@ -35,6 +35,10 @@ export class OrderService {
     return this.http.post(environment.baseurl + 'orderItems', itemsOfOrderToCreate);
   }
 
+  updateOrderItem(orderItemsToUpdate: OrderItems[], orderId: number) {
+    return this.http.put(environment.baseurl + 'orderItems/' + orderId , orderItemsToUpdate);
+  }
+
   removeOrderItem(orderId: number, itemId: number) {
     return this.http.delete(environment.baseurl + 'orderItems/' + orderId + '/' + itemId);
   }

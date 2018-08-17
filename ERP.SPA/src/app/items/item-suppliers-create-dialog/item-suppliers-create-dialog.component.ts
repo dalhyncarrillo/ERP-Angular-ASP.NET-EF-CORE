@@ -65,7 +65,6 @@ export class ItemSuppliersCreateDialogComponent implements OnInit {
         this.itemService.itemSuppliers.push(itemSupplierToCreate);
       },
       error => {
-        console.log(error);
         this.alertifyService.error('This supplier already belongs to the item!');
       });
     this.dialogRef.close();

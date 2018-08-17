@@ -30,12 +30,9 @@ import { SupplierCreateDialogComponent } from './suppliers/supplier-create-dialo
 import { ConfirmationDialogComponent } from './ConfirmationDialog/ConfirmationDialog.component';
 import { TabsModule } from 'ngx-bootstrap';
 import { AppMaterialModule } from './/app-material.module';
-<<<<<<< HEAD
 import { EmployeeListComponent } from './employee/employee-list/employee-list.component';
 import { EmployeeDetailComponent } from './employee/employee-detail/employee-detail.component';
 import { OrderAddItemComponent } from './order/order-add-item/order-add-item.component';
-=======
->>>>>>> fbbcba95f7e0961ae37c9072f544b05f5b099790
 
 
 @NgModule({
@@ -56,14 +53,10 @@ import { OrderAddItemComponent } from './order/order-add-item/order-add-item.com
     OrderDetailComponent,
     OrderCreateDialogComponent,
     OrderItemsComponent,
-<<<<<<< HEAD
     ConfirmationDialogComponent,
     EmployeeListComponent,
     EmployeeDetailComponent,
     OrderAddItemComponent
-=======
-    ConfirmationDialogComponent
->>>>>>> fbbcba95f7e0961ae37c9072f544b05f5b099790
 ],
   imports: [
     TabsModule.forRoot(),

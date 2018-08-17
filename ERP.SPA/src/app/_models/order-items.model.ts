@@ -1,3 +1,5 @@
+import { Item } from "./item.model";
+
 export interface OrderItems {
     orderId: number;
     itemId: number;
