@@ -29,14 +29,14 @@ export class OrderDetailComponent implements OnChanges {
   getOrderDetails() {
 
     this.orderService.getOrderDetails(this.order.orderId).subscribe(data => {
-      console.log('getOrderDetail DATA: ' + data);
       this.order = data;    
     });
   }
 
   onApproveOrder() {
+    this.order.approvedBy = +localStorage.getItem('employeeId');
     this.order.status = 'Approved';
-    this.orderService.updateOrder(this.order).subscribe(data => {
+    this.orderService.approveOrder(this.order).subscribe(data => {
       if(data['status'] === 'Approved') {
         this.alertifyService.success('Order approved successfully');
       }

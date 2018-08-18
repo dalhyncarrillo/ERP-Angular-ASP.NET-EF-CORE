@@ -48,13 +48,23 @@ namespace ERP.API.Controllers
             return Ok(item);
        }
 
-       [HttpPost]
-       public async Task<IActionResult> CreateItem([FromBody] Item item)
-       {
-           var itemCreated = await this.repository.Add(item);
-           if(itemCreated == null)
-                return BadRequest("Error - Item NOT created");
-            return Ok(item);
-       }
+        [HttpPost]
+        public async Task<IActionResult> CreateItem([FromBody] Item item)
+        {
+            var itemCreated = await this.repository.Add(item);
+            if(itemCreated == null)
+                    return BadRequest("Error - Item NOT created");
+                return Ok(item);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Updateitem([FromBody] Item itemToUpdate)
+        {
+            var updatedItem = await this.repository.UpdateItem(itemToUpdate);
+            if(updatedItem == null)
+                return NotFound("This item is NOT found");
+            
+            return Ok(updatedItem);
+        }
     }
 }

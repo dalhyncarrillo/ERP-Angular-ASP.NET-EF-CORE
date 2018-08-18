@@ -9,7 +9,7 @@ namespace ERP.API.Data
 {
     public class DataRepository : IDataRepository
     {
-        private readonly DataContext context;
+        private  DataContext context;
         public DataRepository(DataContext context)
         {
             this.context = context;
@@ -78,9 +78,21 @@ namespace ERP.API.Data
            return await this.context.Items.FirstOrDefaultAsync(item => item.ItemId == id);
         }
         
-        public Task<Item> UpdateItem(Item item)
+        public async Task<Item> UpdateItem(Item item)
         {
-            throw new System.NotImplementedException();
+            var itemToUpdate = await this.GetItem(item.ItemId);
+            if(itemToUpdate == null)
+                return null;
+                
+            itemToUpdate.AvgCost = item.AvgCost;
+            itemToUpdate.Name = item.Name;
+            itemToUpdate.QuantityOnHand = item.QuantityOnHand;
+            itemToUpdate.QuantityOrdered = item.QuantityOrdered;
+            itemToUpdate.RetailPrice = item.RetailPrice;
+
+            await this.context.SaveChangesAsync();
+            return itemToUpdate;
+
         }
 
         public async Task<IEnumerable<ItemSupplier>> GetItemSuppliers(int itemId) 
@@ -162,7 +174,7 @@ namespace ERP.API.Data
             {
                 return false;
             }
-            
+
             var itemsToDelete = await this.GetOrderItems(orderId);
             foreach (var item in itemsToDelete)
             {
