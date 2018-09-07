@@ -1,3 +1,4 @@
+
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SupplierService } from '../../_services/supplier.service';
 import { Supplier } from '../../_models/supplier.model';
@@ -19,7 +20,7 @@ export class SupplierListComponent implements OnInit {
 
   selectedSupplier;
   constructor(private supplierService: SupplierService, private dialog: MatDialog) {}
-  dataSource;
+  dataSource = new MatTableDataSource<Supplier>();
   
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -35,20 +36,22 @@ export class SupplierListComponent implements OnInit {
     let dialogRef = this.dialog.open(SupplierCreateDialogComponent, {
       height: '450px',
       width: '1700px',
+    }).afterClosed().subscribe(result => {
+      this.suppliers.push(result);
+      this.setDataSource();
     });
   }
 
-  setDataSource() {
-    this.dataSource = new MatTableDataSource<Supplier>(this.suppliers);
-    this.dataSource.paginator = this.paginator;
-  }
-
-  
   getSuppliers() {
     this.supplierService.getSuppliers().subscribe(data => {
     this.suppliers = data;
     this.setDataSource();  
     });
+  }
+
+  setDataSource() {
+    this.dataSource.data = this.suppliers;
+    this.dataSource.paginator = this.paginator;
   }
 
   onSupplier(supplier: any) {
@@ -60,6 +63,7 @@ export class SupplierListComponent implements OnInit {
     if (index !== -1) {
         this.suppliers.splice(index, 1);
         this.selectedSupplier = null;
+        this.setDataSource();
     }    
   }
 }

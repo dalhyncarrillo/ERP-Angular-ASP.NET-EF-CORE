@@ -60,7 +60,7 @@ export class ItemCreateDialogComponent implements OnInit {
     error => {
       console.log(error);
     });
-    this.dialogRef.close();
+    this.dialogRef.close(this.itemToSave);
   }
 
   addNewItemSuppliers() {

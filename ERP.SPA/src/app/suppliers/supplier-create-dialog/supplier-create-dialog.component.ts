@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Supplier } from '../../_models/supplier.model';
 import { SupplierService } from '../../_services/supplier.service';
+import { AlertifyService } from '../../_services/alertify.service';
 
 @Component({
   selector: 'app-supplier-create-dialog',
@@ -13,7 +14,9 @@ export class SupplierCreateDialogComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
-  constructor(private _formBuilder: FormBuilder, private supplierService: SupplierService, public dialogRef: MatDialogRef<SupplierCreateDialogComponent>) { }
+
+  supplierToSaveToDb: Supplier;
+  constructor(private alertify: AlertifyService, private _formBuilder: FormBuilder, private supplierService: SupplierService, public dialogRef: MatDialogRef<SupplierCreateDialogComponent>) { }
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
@@ -30,7 +33,7 @@ export class SupplierCreateDialogComponent implements OnInit {
   }
 
   addNewSupplier() {
-    let supplierToSaveToDb: Supplier = {
+    this.supplierToSaveToDb = {
       supplierId: 0,
       name: this.firstFormGroup.get('nameCtrl').value,
       city: this.secondFormGroup.get('cityCtrl').value,
@@ -40,13 +43,13 @@ export class SupplierCreateDialogComponent implements OnInit {
       lastUpdated: new Date(2018,6,9),
       status: 'Active',
     };
-    this.supplierService.createSupplier(supplierToSaveToDb).subscribe(data => {
-      console.log(data);
+    this.supplierService.createSupplier(this.supplierToSaveToDb).subscribe(data  => {
+      this.supplierToSaveToDb.supplierId = data['supplierId'];
     },
     error => {
-      console.log(error);
+      this.alertify.error('Error: ' + error);
     });
-    this.dialogRef.close();
+    this.dialogRef.close(this.supplierToSaveToDb);
   }
 
 }

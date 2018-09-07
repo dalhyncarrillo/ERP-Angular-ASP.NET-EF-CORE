@@ -54,12 +54,13 @@ namespace ERP.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateSupplier([FromBody] Supplier supplier)
         {
-            var successful =await this.repo.Add(supplier);
-            if(successful == null)
+            var createdSupplier =await this.repo.Add(supplier);
+            if(createdSupplier == null)
                 return BadRequest("Error - Supplier not created");
             
-            return Ok();
+            return Ok(createdSupplier);
         }
+        
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSupplier(int id)
         {

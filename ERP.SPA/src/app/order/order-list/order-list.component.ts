@@ -21,7 +21,7 @@ export class OrderListComponent implements OnInit {
 
   selectedOrder;
   constructor(private orderService: OrderService, private dialog: MatDialog) {}
-  dataSource;
+  dataSource = new MatTableDataSource<Order>();
   
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -41,7 +41,7 @@ export class OrderListComponent implements OnInit {
   }
 
   setDataSource() {
-    this.dataSource = new MatTableDataSource<Order>(this.orders);
+    this.dataSource.data = this.orders;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
@@ -55,16 +55,9 @@ export class OrderListComponent implements OnInit {
     let dialogRef = this.dialog.open(OrderCreateDialogComponent, {
       height: '1700px',
       width: '1700px',
+    }).afterClosed().subscribe(result => {
+      this.orders.push(result);
+      this.setDataSource();
     });
   }
-
-
-  // deleteSupplier(supplier: Supplier) {
-  //   const index: number = this.suppliers.indexOf(supplier);
-  //   if (index !== -1) {
-  //       this.suppliers.splice(index, 1);
-  //       this.selectedSupplier = null;
-  //   }    
-  // }
-
 }

@@ -21,7 +21,7 @@ export class ItemListComponent implements OnInit {
 
   selectedItem;
   constructor(private itemService: ItemService, private dialog: MatDialog) {}
-  dataSource;
+  dataSource = new MatTableDataSource<Item>();
   
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -41,7 +41,7 @@ export class ItemListComponent implements OnInit {
   }
   
   setDataSource() {
-    this.dataSource = new MatTableDataSource<Item>(this.items);
+    this.dataSource.data = this.items;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
@@ -54,15 +54,9 @@ export class ItemListComponent implements OnInit {
       let dialogRef = this.dialog.open(ItemCreateDialogComponent, {
       height: '450px',
       width: '1700px',
+    }).afterClosed().subscribe(result => {
+      this.items.push(result);
+      this.setDataSource();
     });
   }
-
-  // deleteSupplier(supplier: Supplier) {
-  //   const index: number = this.suppliers.indexOf(supplier);
-  //   if (index !== -1) {
-  //       this.suppliers.splice(index, 1);
-  //       this.selectedSupplier = null;
-  //   }    
-  // }
-
 }

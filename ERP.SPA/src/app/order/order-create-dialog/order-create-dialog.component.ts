@@ -85,12 +85,12 @@ export class OrderCreateDialogComponent implements OnInit {
     };
 
     this.orderService.createOrder(orderToCreate).subscribe(data => {
-      let newlyCreatedOrderId = data['orderId'];
+      orderToCreate.orderId = data['orderId'];
 
-      this.itemsToOrder.forEach(x => x.orderId = newlyCreatedOrderId);
+      this.itemsToOrder.forEach(x => x.orderId = orderToCreate.orderId);
       this.orderService.createOrderItem(this.itemsToOrder).subscribe( data => { 
-        this.alertify.success('Order created successfully!\n ID: ' + newlyCreatedOrderId);
-        this.dialogRef.close();    
+        this.alertify.success('Order created successfully!\n ID: ' + orderToCreate.orderId);
+        this.dialogRef.close(orderToCreate);    
       });
     },
     error => {
