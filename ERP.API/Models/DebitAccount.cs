@@ -4,5 +4,6 @@ namespace ERP.API.Models
     {
         public int DebitAccountId { get; set; }
         public string Name { get; set; }
+        public double Amount { get; set; }
     }
 }

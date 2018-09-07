@@ -1,4 +1,4 @@
-<button class="btn btn-primary toolBar" (click)="onSaveChanges()" *ngIf="changeOccured">Save Changes</button>
+<button class="btn btn-primary toolBar" (click)="onSaveChanges()" *ngIf="changeOccured" [disabled]="getStatusOfOrder() === 'Requested' ? false : true">Save Changes</button>
 <table>
   <tr>
       <th>Item Id</th>
@@ -13,11 +13,11 @@
       <td>{{orderItem.unitCost}}</td>
       <td>{{orderItem.quantity}}</td>
       <td>{{orderItem.totalCost}}</td>
-      <button class="btn btn-danger" (click)="onDeleteItem(orderItems)" [disabled]="getStatusOfOrder() === 'Approved' ? true : false">Delete</button>
+      <button class="btn btn-danger" (click)="onDeleteItem(orderItems)" [disabled]="getStatusOfOrder() === 'Requested' ? false : true">Delete</button>
   </tr>
   <tr>
       <th>Order Total Cost:</th>
       <th>{{getOrderTotalCost()}}</th>
   </tr>
 </table>
-<button class="btn btn-primary toolBar" (click)="onAddItem()" [disabled]="getStatusOfOrder() === 'Approved' ? true : false"><i class="fa fa-plus"></i></button>
+<button class="btn btn-primary toolBar" (click)="onAddItem()" [disabled]="getStatusOfOrder() === 'Requested' ? false : true"><i class="fa fa-plus"></i></button>

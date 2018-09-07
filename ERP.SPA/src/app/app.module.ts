@@ -33,6 +33,7 @@ import { AppMaterialModule } from './/app-material.module';
 import { EmployeeListComponent } from './employee/employee-list/employee-list.component';
 import { EmployeeDetailComponent } from './employee/employee-detail/employee-detail.component';
 import { OrderAddItemComponent } from './order/order-add-item/order-add-item.component';
+import { AccountingComponent } from './accounting/accounting.component';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { OrderAddItemComponent } from './order/order-add-item/order-add-item.com
     ConfirmationDialogComponent,
     EmployeeListComponent,
     EmployeeDetailComponent,
-    OrderAddItemComponent
+    OrderAddItemComponent,
+    AccountingComponent
 ],
   imports: [
     TabsModule.forRoot(),

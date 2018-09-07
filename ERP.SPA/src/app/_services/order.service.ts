@@ -27,6 +27,10 @@ export class OrderService {
     return this.http.put(environment.baseurl + 'orders/approve', orderToApprove);
   }
 
+  receiveOrder(orderToReceive: Order) {
+    return this.http.put(environment.baseurl + 'orders/receive', orderToReceive);
+  }
+
   createOrder(orderToCreate: Order) {
     return this.http.post(environment.baseurl + 'orders', orderToCreate);
   }

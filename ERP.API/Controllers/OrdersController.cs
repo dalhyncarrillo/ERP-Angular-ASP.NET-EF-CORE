@@ -86,5 +86,36 @@ namespace ERP.API.Controllers
                 }
             }
         }
+
+        [HttpPut("receive")]
+        public async Task<IActionResult> ReceiveOrder([FromBody] Order orderToUpdate)
+        {
+            var updatedOrder = await this.repository.UpdateOrder(orderToUpdate);
+            if(updatedOrder == null)
+                return BadRequest("Error change happened");
+                
+            await this.updateItemQuantities(orderToUpdate.OrderId);
+            
+            return Ok(updatedOrder);
+        }
+
+
+        private async Task updateItemQuantities(int orderId)
+        {
+            var orderItems = await this.repository.GetOrderItems(orderId);
+            var items =  await this.repository.GetItems();
+            foreach (var orderItem in orderItems)
+            {
+                foreach (var item in items)
+                {
+                    if(item.ItemId == orderItem.ItemId)
+                    {
+                        item.QuantityOrdered -= orderItem.Quantity;
+                        item.QuantityOnHand += orderItem.Quantity;
+                        await this.repository.UpdateItem(item);
+                    }
+                }
+            }
+        }
     }
 }

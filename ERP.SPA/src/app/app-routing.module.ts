@@ -1,3 +1,4 @@
+import { AccountingComponent } from './accounting/accounting.component';
 import { OrderListComponent } from './order/order-list/order-list.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { ItemListComponent } from './items/item-list/item-list.component';
@@ -9,6 +10,7 @@ import { SupplierListComponent } from './suppliers/supplier-list/supplier-list.c
 import { EmployeeListComponent } from './employee/employee-list/employee-list.component';
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
+  { path: 'accounting', component: AccountingComponent},
   { path: 'employees', component: EmployeeListComponent, canActivate: [AuthGuard]},
   { path: 'register', component: RegisterEmployeeComponent, canActivate: [AuthGuard]},
   { path: 'items', component: ItemListComponent, canActivate: [AuthGuard]},

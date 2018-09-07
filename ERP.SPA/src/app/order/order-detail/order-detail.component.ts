@@ -45,6 +45,11 @@ export class OrderDetailComponent implements OnChanges {
 
   //TODO IMPLEMENT
   onReceiveOrder() {
-    console.log('order received');
+    this.order.status = 'Received';
+    this.orderService.receiveOrder(this.order).subscribe(data => {
+      if(data['status'] === 'Received') {
+        this.alertifyService.success('Order received successfully');
+      }
+    });
   }
 }

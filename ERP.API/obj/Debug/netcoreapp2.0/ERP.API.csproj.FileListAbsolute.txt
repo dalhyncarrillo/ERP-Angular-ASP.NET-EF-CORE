@@ -8,3 +8,4 @@ C:\Users\Jordan\Desktop\Projects\Szakdolgozat\ERP\ERP.API\obj\Debug\netcoreapp2.
 C:\Users\Jordan\Desktop\Projects\Szakdolgozat\ERP\ERP.API\obj\Debug\netcoreapp2.0\ERP.API.AssemblyInfo.cs
 C:\Users\Jordan\Desktop\Projects\Szakdolgozat\ERP\ERP.API\obj\Debug\netcoreapp2.0\ERP.API.dll
 C:\Users\Jordan\Desktop\Projects\Szakdolgozat\ERP\ERP.API\obj\Debug\netcoreapp2.0\ERP.API.pdb
+C:\Users\Jordan\Desktop\Projects\Szakdolgozat\ERP\ERP.API\obj\Debug\netcoreapp2.0\ERP.API.csprojResolveAssemblyReference.cache
