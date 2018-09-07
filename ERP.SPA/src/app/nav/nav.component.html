@@ -1,27 +1,41 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary" *ngIf="loggedIn()">
-        <a class="navbar-brand" [routerLink]="['/home']">Navbar</a>
-        <button class="navbar-toggler" type="button" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+  <a class="navbar-brand">Navbar</a>
+  <button class="navbar-toggler" type="button" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/home']">{{ "home" | translate }}</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/employees']">{{"employees" | translate}}</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/suppliers']">Suppliers</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/items']">Items</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/orders']">Orders</a>
+      </li>
+    </ul>
+    <div class="btn-group" style="margin-right: 100px">
+        <button appDropdown type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Action
         </button>
-      
-        <div class="collapse navbar-collapse">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item" routerLinkActive="active">
-              <a class="nav-link" [routerLink]="['/accounting']">Accounting</a>
-            </li>
-            <li class="nav-item" routerLinkActive="active">
-              <a class="nav-link" [routerLink]="['/employees']">Employees</a>
-            </li>
-            <li class="nav-item" routerLinkActive="active">
-              <a class="nav-link" [routerLink]="['/suppliers']">Suppliers</a>
-            </li>
-            <li class="nav-item" routerLinkActive="active">
-              <a class="nav-link" [routerLink]="['/items']">Items</a>
-            </li>
-            <li class="nav-item" routerLinkActive="active">
-              <a class="nav-link" [routerLink]="['/orders']">Orders</a>
-            </li>
-          </ul>
-            <button class="btn btn-secondary my-2 my-sm-0" type="button" (click)="logout()">Logout</button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item"  *ngIf="currentLang === 'hu'" (click)="changeLang('en')">English</a>
+          <a class="dropdown-item" *ngIf="currentLang === 'en'"  (click)="changeLang('hu')">Magyar</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" (click)="logout()">Logout</a>
         </div>
-      </nav>
+      </div>
+
+    
+      
+  </div>
+</nav>

@@ -1,3 +1,4 @@
+import { DropdownDirective } from './_directives/dropdown.directive';
 import { OrderItemsComponent } from './order/order-items/order-items.component';
 import { OrderCreateDialogComponent } from './order/order-create-dialog/order-create-dialog.component';
 import { OrderDetailComponent } from './order/order-detail/order-detail.component';
@@ -9,11 +10,10 @@ import { AlertifyService } from './_services/alertify.service';
 import { RegisterEmployeeComponent } from './employee/register-employee/register-employee.component';
 import { AuthService } from './_services/auth.service';
 import { HomeComponent } from './home/home.component';
-import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { JwtModule } from '@auth0/angular-jwt';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 
 import { AppComponent } from './app.component';
@@ -35,6 +35,12 @@ import { EmployeeDetailComponent } from './employee/employee-detail/employee-det
 import { OrderAddItemComponent } from './order/order-add-item/order-add-item.component';
 import { AccountingComponent } from './accounting/accounting.component';
 
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -58,9 +64,17 @@ import { AccountingComponent } from './accounting/accounting.component';
     EmployeeListComponent,
     EmployeeDetailComponent,
     OrderAddItemComponent,
-    AccountingComponent
+    AccountingComponent,
+    DropdownDirective
 ],
   imports: [
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: (createTranslateLoader),
+          deps: [HttpClient]
+      }
+    }),
     TabsModule.forRoot(),
     AppMaterialModule,
     ReactiveFormsModule,

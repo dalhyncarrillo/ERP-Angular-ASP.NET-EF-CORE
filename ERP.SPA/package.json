@@ -23,6 +23,8 @@
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/router": "^6.0.3",
     "@auth0/angular-jwt": "^2.0.0",
+    "@ngx-translate/core": "^10.0.2",
+    "@ngx-translate/http-loader": "^3.0.1",
     "alertifyjs": "^1.11.1",
     "bootstrap": "^4.1.1",
     "bootswatch": "^4.1.1",
