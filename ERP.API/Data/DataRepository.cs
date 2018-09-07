@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -27,42 +28,57 @@ namespace ERP.API.Data
             return await this.context.SaveChangesAsync() >= 1 ? true : false;
         }
 
-        public Task<T> UpdateEntity<T>(T entity) where T : class
+        public async Task<T> UpdateEntity<T>(T entity) where T : class
         {
-            // public void Update<T>(T item) where T: Entity
-            // {
-            //     // assume Entity base class have an Id property for all items
-            //     var entity = _collection.Find(item.Id);
-            //     if (entity == null)
-            //     {
-            //         return;
-            //     }
-
-            //     _context.Entry(entity).CurrentValues.SetValues(item);
-            // }
-
-            throw new System.NotImplementedException();
+            this.context.Update(entity);
+            bool succeeded = await this.SaveChangesAsync();
+            
+            return succeeded == true ? entity : null;
         }
         public async Task<IEnumerable<Supplier>> GetSuppliers() 
         {
             return await this.context.Suppliers.ToListAsync();
         }
 
+        private async Task<bool> SaveChangesAsync()
+        {
+            try 
+            {                                
+                await this.context.SaveChangesAsync();
+                return true;
+            }
+            catch (DbUpdateConcurrencyException ex)  
+            {  
+                var inEntry = ex.Entries.Single();  
+                var dbEntry = inEntry.GetDatabaseValues();  
+        
+            
+                var inModel = inEntry.Entity as Supplier;  
+                var dbModel = dbEntry.ToObject() as Supplier;  
+            
+                var conflicts = new Dictionary<string, string>();  
+            
+                return false;
+            }  
+        }
         public async Task<Supplier> UpdateSupplier(Supplier supplier)
         {
-            var supplierToUpdate = await GetSupplier(supplier.SupplierId);
-            if(supplierToUpdate == null)
-                return null;
+            // var supplierToUpdate = await GetSupplier(supplier.SupplierId);
+            // if(supplierToUpdate == null)
+            //     return null;
 
-            supplierToUpdate.Name = supplier.Name;
-            supplierToUpdate.Address = supplier.Address;
-            supplierToUpdate.City = supplier.City;
-            supplierToUpdate.ContactName = supplier.ContactName;
-            supplierToUpdate.PhoneNumber = supplier.PhoneNumber;
-            supplierToUpdate.Status = supplier.Status;
-              
-            await this.context.SaveChangesAsync();
-            return supplierToUpdate;
+            // supplierToUpdate.Name = supplier.Name;
+            // supplierToUpdate.Address = supplier.Address;
+            // supplierToUpdate.City = supplier.City;
+            // supplierToUpdate.ContactName = supplier.ContactName;
+            // supplierToUpdate.PhoneNumber = supplier.PhoneNumber;
+            // supplierToUpdate.Status = supplier.Status;
+            this.context.Suppliers.Update(supplier); 
+
+
+            bool succeeded = await this.SaveChangesAsync();
+            return succeeded == true ? supplier : null;
+
         }
         public async Task<Supplier> GetSupplier(int supplierId)
         {

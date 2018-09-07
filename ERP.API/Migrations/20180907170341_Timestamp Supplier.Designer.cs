@@ -11,9 +11,10 @@ using System;
 namespace ERP.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20180907170341_Timestamp Supplier")]
+    partial class TimestampSupplier
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -231,15 +232,13 @@ namespace ERP.API.Migrations
 
                     b.Property<string>("ContactName");
 
+                    b.Property<DateTime>("LastUpdated");
+
                     b.Property<string>("Name");
 
                     b.Property<string>("PhoneNumber");
 
                     b.Property<string>("Status");
-
-                    b.Property<byte[]>("Timestamp")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate();
 
                     b.HasKey("SupplierId");
 

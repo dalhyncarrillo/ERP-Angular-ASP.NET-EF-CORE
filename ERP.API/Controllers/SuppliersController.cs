@@ -7,12 +7,13 @@ using ERP.API.DTOs;
 using ERP.API.DTOs.SupplierDtos;
 using ERP.API.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace ERP.API.Controllers
 {
-    [Authorize]
+  //  [Authorize]
     [Route("api/[controller]")]
     public class SuppliersController : Controller
     {
@@ -43,9 +44,8 @@ namespace ERP.API.Controllers
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateSupplier([FromBody] Supplier supplier)
-        {
-            
-            var updatedSupplier = await this.repo.UpdateSupplier(supplier);
+        {       
+            var updatedSupplier = await this.repo.UpdateEntity(supplier);
             if(updatedSupplier == null)
                 return BadRequest("Error change happened");
             return Ok(updatedSupplier);

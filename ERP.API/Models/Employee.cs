@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace ERP.API.Models
 {
@@ -16,6 +17,9 @@ namespace ERP.API.Models
         public int PositionId { get; set; }
         public Position Position { get; set; }
         public DateTime LastUpdated { get; set; }
+
+        [Timestamp] 
+        public byte[] Timestamp { get; set; } 
 
     }
 }

@@ -7,5 +7,6 @@ export interface Supplier {
     address: string;
     status: string;
     lastUpdated: Date;
+    timestamp?: string[];
 }
 

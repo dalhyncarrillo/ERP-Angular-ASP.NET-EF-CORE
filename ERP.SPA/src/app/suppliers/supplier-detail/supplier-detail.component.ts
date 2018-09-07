@@ -23,15 +23,17 @@ export class SupplierDetailComponent implements OnChanges {
     this.getSupplier();
   }
   getSupplier() {
+    
+    console.log('GET SUPPLIER');
     this.supplierService.getSupplier(this.supplier.supplierId).subscribe((supplierDetail: Supplier) => {
-      this.supplier.city = supplierDetail.city;
-      this.supplier.address = supplierDetail.address;
-      this.supplier.contactName = supplierDetail.contactName;
-      this.supplier.phoneNumber = supplierDetail.phoneNumber;
+      this.supplier = supplierDetail;
     });
+
   }
   updateSupplier() {
-    this.supplierService.updateSupplier(this.supplier).subscribe( data => {
+    console.log(this.supplier);
+    this.supplierService.updateSupplier(this.supplier).subscribe((updatedSupplier: Supplier) => {
+      this.supplier = updatedSupplier;
       this.aleritfyService.success('Supplier successfully updated!');
     },
     error => {

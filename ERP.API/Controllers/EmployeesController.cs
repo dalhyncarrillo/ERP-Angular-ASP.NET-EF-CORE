@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using ERP.API.DTOs.EmployeeDtos;
 using ERP.API.DTOs.SupplierDtos;
 using ERP.API.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -47,11 +49,30 @@ namespace ERP.API.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateEmployee([FromBody] Employee employeeToUpdate)
         {
-           var updatedEmployee = await this.repo.UpdateEmployee(employeeToUpdate);
-           if(updatedEmployee == null)
-                return NotFound("The employee is NOT found");
+            try 
+            {
+                var updatedEmployee = await this.repo.UpdateEmployee(employeeToUpdate);
+                if(updatedEmployee == null)
+                    return NotFound("The employee is NOT found");
+                
+                return Ok(updatedEmployee);
+            }
+            catch (DbUpdateConcurrencyException ex)  
+            {  
+                var inEntry = ex.Entries.Single();  
+                var dbEntry = inEntry.GetDatabaseValues();  
             
-           return Ok(updatedEmployee);
+                if (dbEntry == null)  
+                    return StatusCode(StatusCodes.Status500InternalServerError,   
+                        "Actor was deleted by another user");  
+            
+                var inModel = inEntry.Entity as Employee;  
+                var dbModel = dbEntry.ToObject() as Employee;  
+            
+                var conflicts = new Dictionary<string, string>();  
+            
+                return StatusCode(StatusCodes.Status412PreconditionFailed, conflicts);  
+            }  
         }
     }
 }
