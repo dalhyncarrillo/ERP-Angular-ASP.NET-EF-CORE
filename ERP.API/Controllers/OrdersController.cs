@@ -61,7 +61,8 @@ namespace ERP.API.Controllers
         [HttpPut("approve")]
         public async Task<IActionResult> ApproveOrder([FromBody] Order orderToUpdate)
         {
-            var updatedOrder = await this.repository.UpdateOrder(orderToUpdate);
+            orderToUpdate.Status = "Approved";
+            var updatedOrder = await this.repository.UpdateEntity(orderToUpdate);
             if(updatedOrder == null)
                 return BadRequest("Error change happened");
                 
@@ -81,7 +82,7 @@ namespace ERP.API.Controllers
                     if(item.ItemId == orderItem.ItemId)
                     {
                         item.QuantityOrdered += orderItem.Quantity;
-                        await this.repository.UpdateItem(item);
+                        await this.repository.UpdateEntity(item);
                     }
                 }
             }
@@ -90,7 +91,8 @@ namespace ERP.API.Controllers
         [HttpPut("receive")]
         public async Task<IActionResult> ReceiveOrder([FromBody] Order orderToUpdate)
         {
-            var updatedOrder = await this.repository.UpdateOrder(orderToUpdate);
+            orderToUpdate.Status = "Received";
+            var updatedOrder = await this.repository.UpdateEntity(orderToUpdate);
             if(updatedOrder == null)
                 return BadRequest("Error change happened");
                 
@@ -98,7 +100,6 @@ namespace ERP.API.Controllers
             
             return Ok(updatedOrder);
         }
-
 
         private async Task updateItemQuantities(int orderId)
         {
@@ -112,7 +113,7 @@ namespace ERP.API.Controllers
                     {
                         item.QuantityOrdered -= orderItem.Quantity;
                         item.QuantityOnHand += orderItem.Quantity;
-                        await this.repository.UpdateItem(item);
+                        await this.repository.UpdateEntity(item);
                     }
                 }
             }

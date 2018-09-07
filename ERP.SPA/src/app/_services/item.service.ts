@@ -33,4 +33,8 @@ export class ItemService {
   createItemSuppliers(itemSuppliersToCreate) {
     return this.http.post(environment.baseurl + 'itemSuppliers', itemSuppliersToCreate);
   }
+
+  updateItem(itemToTupdate) {
+    return this.http.put(environment.baseurl + 'items', itemToTupdate);
+  }
 }

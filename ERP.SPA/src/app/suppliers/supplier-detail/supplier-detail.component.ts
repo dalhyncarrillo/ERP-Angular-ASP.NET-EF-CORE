@@ -24,14 +24,12 @@ export class SupplierDetailComponent implements OnChanges {
   }
   getSupplier() {
     
-    console.log('GET SUPPLIER');
     this.supplierService.getSupplier(this.supplier.supplierId).subscribe((supplierDetail: Supplier) => {
       this.supplier = supplierDetail;
     });
 
   }
   updateSupplier() {
-    console.log(this.supplier);
     this.supplierService.updateSupplier(this.supplier).subscribe((updatedSupplier: Supplier) => {
       this.supplier = updatedSupplier;
       this.aleritfyService.success('Supplier successfully updated!');

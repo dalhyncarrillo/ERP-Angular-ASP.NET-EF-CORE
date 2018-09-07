@@ -6,4 +6,5 @@ export interface OrderItems {
     unitCost: number;
     quantity: number;
     totalCost: number;
+    timestamp?;
 }

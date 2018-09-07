@@ -7,5 +7,5 @@ export interface Item {
     unitCost: number;
     quantityOnHand: number;
     quantityOrdered: number;
-    lastUpdated: Date;
+    timestamp?;
 }

@@ -48,7 +48,14 @@ export class ItemDetailComponent implements OnInit {
  }
 
   updateItem() {
-
+    this.itemService.updateItem(this.item).subscribe((success: Item) => {
+      this.item = success;
+      this.aleritfyService.success('Item updated successfully!');
+    },
+    error => {
+      this.aleritfyService.error('Error: ' + error.error);
+      this.getItem();
+    });
   }
 
   deleteItem() {

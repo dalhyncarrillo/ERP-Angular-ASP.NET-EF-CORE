@@ -6,5 +6,5 @@ export interface Employee {
     salary: number,
     positionId: number,
     positionName: string
-  //  lastUpdate: Date,
+    timestamp?;
 }

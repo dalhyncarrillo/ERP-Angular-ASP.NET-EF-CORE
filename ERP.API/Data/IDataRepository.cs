@@ -12,7 +12,6 @@ namespace ERP.API.Data
         Task<bool> Delete<T>(T entity) where T: class;
         Task<IEnumerable<Supplier>> GetSuppliers();
         Task<Supplier> GetSupplier(int id);
-        Task<Supplier> UpdateSupplier(Supplier supplier);
         Task<IEnumerable<Item>> GetItems();
         Task<Item> GetItem(int id);
         Task<IEnumerable<ItemSupplier>> GetItemSuppliers(int itemId);
@@ -29,6 +28,5 @@ namespace ERP.API.Data
         Task<Order> UpdateOrder(Order order);
         Task<IEnumerable<Employee>> GetEmployees();
         Task<Employee> GetEmployee(string employeeEmail);
-        Task<Employee> UpdateEmployee(Employee employeeToUpdate);
     }
 }

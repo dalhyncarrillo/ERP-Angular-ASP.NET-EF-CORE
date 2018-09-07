@@ -5,5 +5,5 @@ export interface ItemSuppliers {
     unitCost: number;
     leadTime: number;
     isPrimary: boolean;
- //   lastUpdated: Date;
+    timestamp?;
 }

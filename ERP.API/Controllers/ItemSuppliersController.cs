@@ -30,21 +30,7 @@ namespace ERP.API.Controllers
             var itemSuppliersToReturn = mapper.Map<IEnumerable<ItemSupplierDto>>(itemSuppliers);
             return Ok(itemSuppliersToReturn);
         }
-        //NEM TALALOM HOL VAN EZ AZ API HASZNALATBAN 
-        //2018/08/07 - tovabbra sem talaltam hibat 
-        /* 
-        [HttpGet("{itemId}/{supplierId}")]
-        public async Task<IActionResult> GetItemSupplier(int itemId, int supplierId) 
-        {   
-            var itemSupplier = await this.repository.GetItemSupplier(itemId, supplierId);
-            var itemSupplierToReturn = mapper.Map<ItemSupplierDto>(itemSupplier);
-            if (itemSupplier == null) {
-                return BadRequest("This supplier does NOT belong to this item!");
-                
-            }
-            return Ok(itemSupplierToReturn);
-        }
-        */
+
         [HttpGet("supplierId/{supplierId}")]
         public async Task<IActionResult> GetItemsOfSupplier(int supplierId)
         {

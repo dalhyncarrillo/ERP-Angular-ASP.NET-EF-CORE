@@ -61,25 +61,6 @@ namespace ERP.API.Data
                 return false;
             }  
         }
-        public async Task<Supplier> UpdateSupplier(Supplier supplier)
-        {
-            // var supplierToUpdate = await GetSupplier(supplier.SupplierId);
-            // if(supplierToUpdate == null)
-            //     return null;
-
-            // supplierToUpdate.Name = supplier.Name;
-            // supplierToUpdate.Address = supplier.Address;
-            // supplierToUpdate.City = supplier.City;
-            // supplierToUpdate.ContactName = supplier.ContactName;
-            // supplierToUpdate.PhoneNumber = supplier.PhoneNumber;
-            // supplierToUpdate.Status = supplier.Status;
-            this.context.Suppliers.Update(supplier); 
-
-
-            bool succeeded = await this.SaveChangesAsync();
-            return succeeded == true ? supplier : null;
-
-        }
         public async Task<Supplier> GetSupplier(int supplierId)
         {
             return await this.context.Suppliers.FirstOrDefaultAsync(sup => sup.SupplierId == supplierId);
@@ -92,23 +73,6 @@ namespace ERP.API.Data
         public async Task<Item> GetItem(int id)
         {
            return await this.context.Items.FirstOrDefaultAsync(item => item.ItemId == id);
-        }
-        
-        public async Task<Item> UpdateItem(Item item)
-        {
-            var itemToUpdate = await this.GetItem(item.ItemId);
-            if(itemToUpdate == null)
-                return null;
-                
-            itemToUpdate.AvgCost = item.AvgCost;
-            itemToUpdate.Name = item.Name;
-            itemToUpdate.QuantityOnHand = item.QuantityOnHand;
-            itemToUpdate.QuantityOrdered = item.QuantityOrdered;
-            itemToUpdate.RetailPrice = item.RetailPrice;
-
-            await this.context.SaveChangesAsync();
-            return itemToUpdate;
-
         }
 
         public async Task<IEnumerable<ItemSupplier>> GetItemSuppliers(int itemId) 
@@ -155,25 +119,6 @@ namespace ERP.API.Data
             await this.context.Orders.AddAsync(orderToCreate);
             return await this.context.SaveChangesAsync() >= 1 ? true : false;
         }
-
-        public async Task<Order> UpdateOrder(Order order)
-        {
-            var orderToUpdate = await this.GetOrder(order.OrderId);
-            if(orderToUpdate == null)
-                return null;
-            //     Debug.WriteLine("------------------------------------------------------");
-            // Debug.WriteLine("hello");
-            // Debug.WriteLine(order.ApprovedBy);
-
-            orderToUpdate.Status = order.Status;
-            orderToUpdate.TotalCost = order.TotalCost;
-            orderToUpdate.ApprovedBy = order.ApprovedBy;
-            orderToUpdate.ReceivedDate = order.ReceivedDate;
-
-            await this.context.SaveChangesAsync();
-            return orderToUpdate;
-        }
-
         public async Task<bool> AddOrderItem(IEnumerable<OrderItem> orderItems)
         {
             await this.context.OrderItems.AddRangeAsync(orderItems);
@@ -215,22 +160,14 @@ namespace ERP.API.Data
             return await this.context.Employees.FirstOrDefaultAsync(employee => employee.Email.Equals(employeeEmail));
         }
 
-        public async Task<Employee> UpdateEmployee(Employee employeeToUpdate)
+        public Task<Item> UpdateItem(Item item)
         {
-            var employee = await this.GetEmployee(employeeToUpdate.Email);
+            throw new NotImplementedException();
+        }
 
-            if(employee == null)
-                return null;
-
-            employee.FirstName = employeeToUpdate.FirstName;
-            employee.LastName = employeeToUpdate.LastName;
-            employee.DateOfBirth = employeeToUpdate.DateOfBirth;
-            employee.Salary = employeeToUpdate.Salary;
-            employee.PositionId = employeeToUpdate.PositionId;
-
-            await this.context.SaveChangesAsync();
-
-            return employee;
+        public Task<Order> UpdateOrder(Order order)
+        {
+            throw new NotImplementedException();
         }
     }
 }

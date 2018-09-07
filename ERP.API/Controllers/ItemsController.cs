@@ -60,7 +60,7 @@ namespace ERP.API.Controllers
         [HttpPut]
         public async Task<IActionResult> Updateitem([FromBody] Item itemToUpdate)
         {
-            var updatedItem = await this.repository.UpdateItem(itemToUpdate);
+            var updatedItem = await this.repository.UpdateEntity(itemToUpdate);
             if(updatedItem == null)
                 return NotFound("This item is NOT found");
             

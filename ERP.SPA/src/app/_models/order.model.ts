@@ -8,4 +8,5 @@ export interface Order {
     createdBy: number;
     requestedDate: Date;
     receivedDate: Date;
+    timestamp?;
 }
