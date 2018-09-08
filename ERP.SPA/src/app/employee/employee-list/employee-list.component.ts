@@ -1,3 +1,4 @@
+import { AuthService } from './../../_services/auth.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '../../../../node_modules/@angular/router';
 import { MatPaginator, MatDialog, MatTableDataSource, MatSort } from '../../../../node_modules/@angular/material';
@@ -14,7 +15,7 @@ export class EmployeeListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   
-  constructor(private alertify: AlertifyService, private router: Router, private employeeService: EmployeeService, private dialog: MatDialog) {}
+  constructor(private authService: AuthService, private alertify: AlertifyService, private router: Router, private employeeService: EmployeeService, private dialog: MatDialog) {}
 
   createEmployee() {
     this.router.navigate(['register']);
@@ -53,11 +54,10 @@ export class EmployeeListComponent implements OnInit {
   }
 
   onEmployee(employee: any) {
-    const positionId = localStorage.getItem('positionId');
-    if(positionId !== '1') {
-      this.alertify.error('You do NOT have permission to see the profile');
-    } else {
+    if(this.authService.isReadEmployeeDataAllowed()) {
       this.selectedEmployee = employee;
+    } else {
+      this.alertify.error(this.authService.NO_PERMISSION_ERROR_MESSAGE);
     }
   }
 

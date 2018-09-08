@@ -10,5 +10,7 @@ namespace ERP.API.Data
         Task<Employee> Register(Employee employee, string password);
         Task<Employee> Login (string email, string password);
         Task<bool> EmployeeExists(string email);
+        Task<IEnumerable<EmployeeRole>> GetEmployeeRoles(int employeeId);
+        Task<Role> GetRoles();
     }
 }

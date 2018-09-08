@@ -1,55 +1,62 @@
 <div class="panel">
-  <form  #form="ngForm">
-      <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label>Email</label>
-              <input type="text" class="form-control" name="inputEmail" [(ngModel)]="employee.email" required disabled>
-            </div>
-          </div>
-          <div class="col-md-6">
-              <div class="form-group">
-                <label>Date Of Birth</label>
-                <input type="text" class="form-control" name="inputDateOfBirth" [(ngModel)]="employee.dateOfBirth" required disabled>
-              </div>
-            </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label>First Name</label>
-              <input type="text" class="form-control" name="inputFirstName" #inputFirstName="ngModel" [(ngModel)]="employee.firstName" required>
-              <p class="validation-error-message" *ngIf="inputFirstName.invalid">First Name is REQUIRED!</p>
-
-            </div>
-          </div>
-            <div class="col-md-6">
-               <div class="form-group">
-                <label>Last Name</label>
-                <input type="text" class="form-control" name="inputLastname" #inputLastname="ngModel"  [(ngModel)]="employee.lastName" required>
-                <p class="validation-error-message" *ngIf="inputLastname.invalid">Last Name is REQUIRED!</p>
-               </div>
-            </div>
-          </div>
-      
-          <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>Salary</label>
-                  <input type="number" class="form-control" #inputSalary="ngModel" name="inputSalary" [(ngModel)]="employee.salary" pattern="^[1-9]+[0-9]*$" required>
-                  <p class="validation-error-message" *ngIf="inputSalary.invalid">Salary is REQUIRED!</p>
-                </div>
-              </div>
+  <tabset>
+    <tab heading="Details">
+        <form  #form="ngForm">
+            <div class="row">
                 <div class="col-md-6">
-                   <div class="form-group">
-                    <label>Position</label>
-                    <input type="text" class="form-control" name="inputPosition" [(ngModel)]="employee.positionName" required>
-                   </div>
+                  <div class="form-group">
+                    <label>Email</label>
+                    <input type="text" class="form-control" name="inputEmail" [(ngModel)]="employee.email" required disabled>
+                  </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Date Of Birth</label>
+                      <input type="text" class="form-control" name="inputDateOfBirth" [(ngModel)]="employee.dateOfBirth" required disabled>
+                    </div>
+                  </div>
               </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>First Name</label>
+                    <input type="text" class="form-control" name="inputFirstName" #inputFirstName="ngModel" [(ngModel)]="employee.firstName" required>
+                    <p class="validation-error-message" *ngIf="inputFirstName.invalid">First Name is REQUIRED!</p>
       
-          <button class="btn btn-primary" type="button" [disabled]="form.invalid" (click)="updateEmployee()">Update</button>
-  </form>
+                  </div>
+                </div>
+                  <div class="col-md-6">
+                     <div class="form-group">
+                      <label>Last Name</label>
+                      <input type="text" class="form-control" name="inputLastname" #inputLastname="ngModel"  [(ngModel)]="employee.lastName" required>
+                      <p class="validation-error-message" *ngIf="inputLastname.invalid">Last Name is REQUIRED!</p>
+                     </div>
+                  </div>
+                </div>
+            
+                <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Salary</label>
+                        <input type="number" class="form-control" #inputSalary="ngModel" name="inputSalary" [(ngModel)]="employee.salary" pattern="^[1-9]+[0-9]*$" required>
+                        <p class="validation-error-message" *ngIf="inputSalary.invalid">Salary is REQUIRED!</p>
+                      </div>
+                    </div>
+                      <div class="col-md-6">
+                         <div class="form-group">
+                          <label>Position</label>
+                          <input type="text" class="form-control" name="inputPosition" [(ngModel)]="employee.positionName" required>
+                         </div>
+                      </div>
+                    </div>
+            
+                <button class="btn btn-primary" type="button" [disabled]="form.invalid" (click)="updateEmployee()">Update</button>
+        </form>
+    </tab>
+    <tab heading="Roles">
+      <app-employee-role [employee]="employee"></app-employee-role>
+    </tab>
+  </tabset> 
 </div>  
  
 

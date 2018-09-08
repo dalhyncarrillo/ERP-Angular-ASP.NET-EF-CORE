@@ -21,7 +21,7 @@ namespace ERP.API.Data
         Task<IEnumerable<Order>> GetOrders();
         Task<Order> GetOrder(int id);
         Task<IEnumerable<OrderItem>> GetOrderItems(int orderId);
-
+        Task<bool> SaveChangesAsync();
         Task<bool> UpdateOrderItems(IEnumerable<OrderItem> orderItemsToUpdate, int orderId);
         Task<OrderItem> GetSingleOrderItems(int orderId, int itemId);
         Task<bool> AddOrderItem(IEnumerable<OrderItem> orderItems);

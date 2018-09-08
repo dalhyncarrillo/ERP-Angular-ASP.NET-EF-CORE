@@ -49,9 +49,14 @@ namespace ERP.API.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateEmployee([FromBody] Employee employeeToUpdate)
         {
+            var employee = await this.repo.GetEmployee(employeeToUpdate.Email);
+
+            employeeToUpdate.PasswordHash = employee.PasswordHash;
+            employeeToUpdate.PasswordSalt = employee.PasswordSalt;
+
             var updatedEmployee = await this.repo.UpdateEntity(employeeToUpdate);
             if(updatedEmployee == null)
-               return NotFound("The employee is NOT found");
+                return BadRequest("The record you are trying to update has been modified!");
             return Ok(updatedEmployee);
         }
     }

@@ -40,7 +40,7 @@ namespace ERP.API.Data
             return await this.context.Suppliers.ToListAsync();
         }
 
-        private async Task<bool> SaveChangesAsync()
+        public async Task<bool> SaveChangesAsync()
         {
             try 
             {                                
@@ -49,15 +49,6 @@ namespace ERP.API.Data
             }
             catch (DbUpdateConcurrencyException ex)  
             {  
-                var inEntry = ex.Entries.Single();  
-                var dbEntry = inEntry.GetDatabaseValues();  
-        
-            
-                var inModel = inEntry.Entity as Supplier;  
-                var dbModel = dbEntry.ToObject() as Supplier;  
-            
-                var conflicts = new Dictionary<string, string>();  
-            
                 return false;
             }  
         }
@@ -80,17 +71,6 @@ namespace ERP.API.Data
             return await this.context.ItemSuppliers
             .Where(item => item.ItemId == itemId)
             .Include(item => item.Supplier).OrderByDescending(itemSupplier => itemSupplier.IsPrimary).ToListAsync();
-        //    IEnumerable<ItemSupplier> supps =  (IEnumerable<ItemSupplier>)this.context.ItemSuppliers.Where(item => item.ItemId == itemId).Join(
-        //     context.Suppliers,
-        //     item => item.ItemId,
-        //     supplier => supplier.SupplierId,
-        //     (item, supplier) => new {
-        //         unitCost = item.UnitCost,
-        //         supplierName = supplier.Name,
-        //         key = supplier.SupplierId
-        //     }).ToListAsync();
-
-        //     return supps;
         }
 
         public async Task<ItemSupplier> GetItemSupplier(int itemId, int supplierId) 

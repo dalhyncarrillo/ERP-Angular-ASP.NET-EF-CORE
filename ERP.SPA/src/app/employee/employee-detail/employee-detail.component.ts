@@ -1,3 +1,4 @@
+import { AuthService } from './../../_services/auth.service';
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { Employee } from '../../_models/employee.model';
 import { EmployeeService } from '../../_services/employee.service';
@@ -14,7 +15,7 @@ export class EmployeeDetailComponent implements OnInit, OnChanges {
   employeeForm: FormGroup;
   @Input() employee: Employee;
   
-  constructor(private alertify:AlertifyService ,private employeeService: EmployeeService) { }
+  constructor(private authService: AuthService, private alertify:AlertifyService ,private employeeService: EmployeeService) { }
 
   ngOnInit() {
     // this.createEmployeeForm();
@@ -37,22 +38,30 @@ export class EmployeeDetailComponent implements OnInit, OnChanges {
 
   getEmployeeDetail() {
     this.employeeService.getEmployee(this.employee.email).subscribe(data => {
+      this.employee.employeeId = data.employeeId;
       this.employee.firstName = data.firstName;
       this.employee.lastName = data.lastName;
       this.employee.dateOfBirth = data.dateOfBirth;
       this.employee.positionId = data.positionId;
       this.employee.salary = data.salary;
+      this.employee.timestamp = data.timestamp;
     });
   }
 
   updateEmployee() {
-    this.employeeService.updateEmployee(this.employee).subscribe(success => {
-      this.alertify.success('Employee updated successfully!');
-    },
-    error => {
-      this.alertify.error('Error: ' + error.error);
+    if(this.authService.isUpdateEmployeeDataAllowed()) {
+      this.employeeService.updateEmployee(this.employee).subscribe(success => {
+        this.alertify.success('Employee updated successfully!');
+      },
+      error => {
+        this.alertify.error('Error: ' + error.error);
+        this.getEmployeeDetail();
+      });
+    } else {
+      this.alertify.error(this.authService.NO_PERMISSION_ERROR_MESSAGE);
       this.getEmployeeDetail();
-    });
+    }
+  
   }
 
 }

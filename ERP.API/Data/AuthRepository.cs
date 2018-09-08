@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -70,6 +72,16 @@ namespace ERP.API.Data
                 passwordSalt = hmac.Key;
                 passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
             }
+        }
+
+        public async Task<IEnumerable<EmployeeRole>> GetEmployeeRoles(int employeeId)
+        {
+            return await this.context.EmployeeRoles.Where(employeeRole => employeeRole.EmployeeId == employeeId).Include(employeeRole => employeeRole.Role ).ToListAsync();
+        }
+
+        public Task<Role> GetRoles()
+        {
+            throw new NotImplementedException();
         }
     }
 }

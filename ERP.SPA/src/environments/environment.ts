@@ -4,7 +4,8 @@
 
 export const environment = {
   baseurl: 'http://localhost:5000/api/',
-  production: false
+  production: false,
+  noPermissionErrorMessage: 'You do NOT have permission for this operation!'
 };
 
 /*

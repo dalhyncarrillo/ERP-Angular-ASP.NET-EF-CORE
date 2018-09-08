@@ -1,0 +1,16 @@
+<button class="btn btn-primary toolBar" (click)="onSaveChanges()" *ngIf="changeOccured">Save Changes</button>
+<table>
+  <tr>
+      <th>Role Id</th>
+      <th>Role Name En</th>
+      <th>Role Name Hu</th>
+
+  </tr>
+  <tr *ngFor="let role of employeeRoles">
+      <td>{{role.roleId}}</td>
+      <td>{{role.roleNameEn}}</td>
+      <td>{{role.roleNameHu}}</td>
+      <button class="btn btn-danger" (click)="onDeleteRole(role)">Delete</button>
+  </tr>
+</table>
+<button class="btn btn-primary toolBar" (click)="onAddRole()"><i class="fa fa-plus"></i></button>

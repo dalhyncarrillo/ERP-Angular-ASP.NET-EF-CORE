@@ -18,6 +18,8 @@ namespace ERP.API.Data
         public DbSet<CreditAccount> CreditAccounts { get; set; }
         public DbSet<DebitAccount> DebitAccounts { get; set; }
         public DbSet<GeneralLedger> GeneralLedgers { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<EmployeeRole> EmployeeRoles { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -27,6 +29,9 @@ namespace ERP.API.Data
             
             modelBuilder.Entity<OrderItem>()
                 .HasKey(c => new { c.OrderId, c.ItemId });
+            
+            modelBuilder.Entity<EmployeeRole>()
+                .HasKey(c => new { c.EmployeeId, c.RoleId });
         }  
     }
 }

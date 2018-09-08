@@ -1,3 +1,5 @@
+import { AlertifyService } from 'src/app/_services/alertify.service';
+import { AuthService } from './../../_services/auth.service';
 import { OrderCreateDialogComponent } from './../order-create-dialog/order-create-dialog.component';
 import { OrderService } from './../../_services/order.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -20,7 +22,7 @@ export class OrderListComponent implements OnInit {
   displayedColumns = ['orderId',  'status', 'supplierName', 'requestedDate', 'totalCost'];
 
   selectedOrder;
-  constructor(private orderService: OrderService, private dialog: MatDialog) {}
+  constructor(private orderService: OrderService, private dialog: MatDialog, private authService: AuthService, private alertifyService: AlertifyService) {}
   dataSource = new MatTableDataSource<Order>();
   
   applyFilter(filterValue: string) {
@@ -52,12 +54,20 @@ export class OrderListComponent implements OnInit {
 
 
   addOrder() {
-    let dialogRef = this.dialog.open(OrderCreateDialogComponent, {
-      height: '1700px',
-      width: '1700px',
-    }).afterClosed().subscribe(result => {
-      this.orders.push(result);
-      this.setDataSource();
-    });
+    if(this.authService.isPurchaseAllowed()) {
+      let dialogRef = this.dialog.open(OrderCreateDialogComponent, {
+        height: '1700px',
+        width: '1700px',
+      }).afterClosed().subscribe(result => {
+        if(result != null) {
+          this.orders.push(result);
+          this.setDataSource();
+        }
+      });
+
+    } else {
+      this.alertifyService.error(this.authService.NO_PERMISSION_ERROR_MESSAGE);
+    }
+
   }
 }

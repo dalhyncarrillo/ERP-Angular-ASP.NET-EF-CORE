@@ -1,3 +1,4 @@
+import { AuthService } from './../../_services/auth.service';
 import { AlertifyService } from './../../_services/alertify.service';
 import { OrderItems } from './../../_models/order-items.model';
 import { OrderService } from './../../_services/order.service';
@@ -16,10 +17,9 @@ export class OrderDetailComponent implements OnChanges {
   @Input() order: Order;
   orderItems: OrderItems[];
 
-  constructor(private orderService: OrderService, private alertifyService: AlertifyService) { }
+  constructor(private authService: AuthService, private orderService: OrderService, private alertifyService: AlertifyService) { }
 
   ngOnChanges() {
-    console.log(this.order);
     this.getOrderDetails();
   }
 
@@ -35,6 +35,14 @@ export class OrderDetailComponent implements OnChanges {
   }
 
   onApproveOrder() {
+    if(this.authService.isApproveAllowed()) {
+      this.approveOrder();
+    } else {
+      this.alertifyService.error(this.authService.NO_PERMISSION_ERROR_MESSAGE);
+    }
+  }
+
+  private approveOrder() {
     this.order.approvedBy = +localStorage.getItem('employeeId');
     this.orderService.approveOrder(this.order).subscribe((success: Order) => {
       if(success.status === 'Approved') {
@@ -48,6 +56,15 @@ export class OrderDetailComponent implements OnChanges {
   }
 
   onReceiveOrder() {
+    if(this.authService.isReceiveAllowed()) {
+      this.receiveOrder();
+    } else {
+      this.alertifyService.error(this.authService.NO_PERMISSION_ERROR_MESSAGE);
+    }
+  
+  }
+
+  private receiveOrder() {
     this.orderService.receiveOrder(this.order).subscribe((success: Order) => {
       if(success.status === 'Received') {
         this.order = success;

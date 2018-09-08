@@ -52,7 +52,7 @@ namespace ERP.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateOrder([FromBody] Order orderToUpdate)
         {
-            var updatedOrder = await this.repository.UpdateOrder(orderToUpdate);
+            var updatedOrder = await this.repository.UpdateEntity(orderToUpdate);
             if(updatedOrder == null)
                 return BadRequest("Error change happened");
             return Ok(updatedOrder);

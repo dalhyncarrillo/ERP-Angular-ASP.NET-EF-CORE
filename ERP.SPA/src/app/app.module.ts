@@ -37,6 +37,7 @@ import { AccountingComponent } from './accounting/accounting.component';
 
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { EmployeeRoleComponent } from './employee/employee-role/employee-role.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -65,7 +66,8 @@ export function createTranslateLoader(http: HttpClient) {
     EmployeeDetailComponent,
     OrderAddItemComponent,
     AccountingComponent,
-    DropdownDirective
+    DropdownDirective,
+    EmployeeRoleComponent
 ],
   imports: [
     TranslateModule.forRoot({

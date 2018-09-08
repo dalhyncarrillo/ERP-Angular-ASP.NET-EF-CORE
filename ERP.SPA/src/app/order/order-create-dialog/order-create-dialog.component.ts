@@ -83,11 +83,12 @@ export class OrderCreateDialogComponent implements OnInit {
       receivedDate: null,
       approvedBy: null
     };
-
+    console.log(orderToCreate);
     this.orderService.createOrder(orderToCreate).subscribe(data => {
       orderToCreate.orderId = data['orderId'];
 
       this.itemsToOrder.forEach(x => x.orderId = orderToCreate.orderId);
+
       this.orderService.createOrderItem(this.itemsToOrder).subscribe( data => { 
         this.alertify.success('Order created successfully!\n ID: ' + orderToCreate.orderId);
         this.dialogRef.close(orderToCreate);    

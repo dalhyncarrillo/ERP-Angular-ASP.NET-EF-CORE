@@ -11,9 +11,10 @@ using System;
 namespace ERP.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20180908072518_Add employee required attribute")]
+    partial class Addemployeerequiredattribute
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -87,19 +88,6 @@ namespace ERP.API.Migrations
                     b.HasIndex("PositionId");
 
                     b.ToTable("Employees");
-                });
-
-            modelBuilder.Entity("ERP.API.Models.EmployeeRole", b =>
-                {
-                    b.Property<int>("EmployeeId");
-
-                    b.Property<int>("RoleId");
-
-                    b.HasKey("EmployeeId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("EmployeeRoles");
                 });
 
             modelBuilder.Entity("ERP.API.Models.GeneralLedger", b =>
@@ -244,20 +232,6 @@ namespace ERP.API.Migrations
                     b.ToTable("Positions");
                 });
 
-            modelBuilder.Entity("ERP.API.Models.Role", b =>
-                {
-                    b.Property<int>("RoleId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("RoleNameEn");
-
-                    b.Property<string>("RoleNameHu");
-
-                    b.HasKey("RoleId");
-
-                    b.ToTable("Roles");
-                });
-
             modelBuilder.Entity("ERP.API.Models.Supplier", b =>
                 {
                     b.Property<int>("SupplierId")
@@ -289,19 +263,6 @@ namespace ERP.API.Migrations
                     b.HasOne("ERP.API.Models.Position", "Position")
                         .WithMany("Employees")
                         .HasForeignKey("PositionId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("ERP.API.Models.EmployeeRole", b =>
-                {
-                    b.HasOne("ERP.API.Models.Employee", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("ERP.API.Models.Role", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

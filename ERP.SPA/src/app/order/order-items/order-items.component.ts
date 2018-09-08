@@ -44,6 +44,13 @@ export class OrderItemsComponent implements OnChanges {
   }
 
   onAddItem() {
+    if(this.currentUserCreatedOrder()) {
+     this.openAddItemDialog();
+    } else {
+      this.alertify.error('NO permission - You did NOT create this order');
+    }
+  }
+  private openAddItemDialog() {
     this.changeOccured = true;
     let dialogRef = this.dialog.open(OrderAddItemComponent, {
       height: '800px',
@@ -54,8 +61,15 @@ export class OrderItemsComponent implements OnChanges {
       console.log(result);
     });
   }
-
   onDeleteItem(orderItem: OrderItems ) {
+    if(this.currentUserCreatedOrder()) {
+      this.deleteItem(orderItem);
+    } else {
+      this.alertify.error('NO permission - You did NOT create this order');
+    }
+  }
+
+  private deleteItem(orderItem: OrderItems) {
     this.changeOccured = true;
 
     let dialogRef = this.dialog.open(ConfirmationDialogComponent, {
@@ -70,6 +84,11 @@ export class OrderItemsComponent implements OnChanges {
     });
   }
 
+  private currentUserCreatedOrder() {
+    return this.order.createdBy === +localStorage.getItem('employeeId') ? true : false;
+  }
+
+
   onSaveChanges() {
     if(this.orderItems.length == 0) {
       this.alertify.error('Error: Your BASKET is empty!');
@@ -77,10 +96,12 @@ export class OrderItemsComponent implements OnChanges {
       this.orderService.updateOrderItem(this.orderItems, this.order.orderId).subscribe( data => {
         this.order.totalCost = this.getOrderTotalCost();
         
-        this.orderService.updateOrder(this.order).subscribe(data => {
+        this.orderService.updateOrder(this.order).subscribe((success: Order) => {
+          this.order = success;
           this.alertify.success('Your order has been successfully UPDATED!');   
         },error => {
           this.alertify.error('Error: ' + error.error);
+          this.getOrderitems();
         });
       });
     }
