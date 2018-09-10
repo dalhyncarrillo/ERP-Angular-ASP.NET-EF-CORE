@@ -8,49 +8,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ERP.API.Data
 {
-    public class DataRepository : IDataRepository
+    public class DataRepository : BaseRepository, IDataRepository
     {
-        private  DataContext context;
-        public DataRepository(DataContext context)
+        public DataRepository(DataContext context) : base(context)
         {
-            this.context = context;
-        }
-        public async Task<T> Add<T>(T entity) where T : class
-        {
-            var createdEntity = await this.context.AddAsync(entity);
-            await this.context.SaveChangesAsync();
-            return createdEntity.Entity;
-        }
 
-        public async Task<bool> Delete<T>(T entity) where T : class
-        {
-            this.context.Remove(entity);
-            return await this.context.SaveChangesAsync() >= 1 ? true : false;
         }
-
-        public async Task<T> UpdateEntity<T>(T entity) where T : class
-        {
-            this.context.Update(entity);
-            bool succeeded = await this.SaveChangesAsync();
-            
-            return succeeded == true ? entity : null;
-        }
+        
         public async Task<IEnumerable<Supplier>> GetSuppliers() 
         {
             return await this.context.Suppliers.ToListAsync();
-        }
-
-        public async Task<bool> SaveChangesAsync()
-        {
-            try 
-            {                                
-                await this.context.SaveChangesAsync();
-                return true;
-            }
-            catch (DbUpdateConcurrencyException ex)  
-            {  
-                return false;
-            }  
         }
         public async Task<Supplier> GetSupplier(int supplierId)
         {

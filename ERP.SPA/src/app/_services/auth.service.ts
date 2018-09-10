@@ -11,12 +11,6 @@ import 'rxjs/add/observable/throw';
 import { environment } from '../../environments/environment';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-/*
-import { Http, Headers, RequestOptions, Response } from '@angular/http';
-import { Injectable } from '@angular/core';
-
-*/
-
 @Injectable()
 export class AuthService implements OnChanges {
 
@@ -54,6 +48,17 @@ export class AuthService implements OnChanges {
 
     isLoggedIn() {
         return !this.jwtHelper.isTokenExpired();
+    }
+
+    DeleteEmployeeRole(employeeId: number, roleId: number) {
+        return this.http.delete(environment.baseurl + 'auth/' + employeeId + '/' + roleId);
+    }
+
+    createEmployeeRole(employeeId: number, roleId: number) {
+        return this.http.post(environment.baseurl + 'auth/employeerole', {employeeId, roleId});
+    }
+    GetRolesThatEmployeeNotHave(employeeId: number) {
+        return this.http.get<Role[]>(environment.baseurl + 'auth/availableroles/' + employeeId);
     }
 
     isPurchaseAllowed() {

@@ -9,12 +9,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ERP.API.Data
 {
-    public class AuthRepository : IAuthRepository
+    public class AuthRepository : BaseRepository, IAuthRepository
     {
-        private readonly DataContext context;
-        public AuthRepository(DataContext context)
+        public AuthRepository(DataContext context) : base(context)
         {
-            this.context = context;
 
         }
 
@@ -78,10 +76,15 @@ namespace ERP.API.Data
         {
             return await this.context.EmployeeRoles.Where(employeeRole => employeeRole.EmployeeId == employeeId).Include(employeeRole => employeeRole.Role ).ToListAsync();
         }
-
-        public Task<Role> GetRoles()
+        public async Task<EmployeeRole> GetSingleEmployeeRole(int employeeId, int roleId)
         {
-            throw new NotImplementedException();
+            return await this.context.EmployeeRoles.FirstOrDefaultAsync(employeeRole => employeeRole.EmployeeId == employeeId && employeeRole.RoleId == roleId);
+        }
+
+        public async Task<IEnumerable<Role>> GetRolesThatEmployeeNotHave(int employeeId)
+        {
+            List<int> roles = await this.context.EmployeeRoles.Where(employeeRole => employeeRole.EmployeeId == employeeId).Select(role => role.RoleId).ToListAsync();
+            return await this.context.Roles.Where(role => !roles.Contains(role.RoleId)).ToListAsync();
         }
     }
 }

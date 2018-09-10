@@ -15,7 +15,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ERP.API.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     public class EmployeesController : Controller
     {

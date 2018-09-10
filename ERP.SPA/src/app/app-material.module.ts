@@ -1,3 +1,4 @@
+import { EmployeeRoleAddDialogComponent } from './employee/employee-role-add-dialog/employee-role-add-dialog.component';
 import { OrderCreateDialogComponent } from './order/order-create-dialog/order-create-dialog.component';
 import { ItemSuppliersCreateDialogComponent } from './items/item-suppliers-create-dialog/item-suppliers-create-dialog.component';
 import { ItemCreateDialogComponent } from './items/item-create-dialog/item-create-dialog.component';
@@ -49,9 +50,7 @@ import { OrderAddItemComponent } from './order/order-add-item/order-add-item.com
     MatSelectModule,
     MatCheckboxModule
   ],
-  //TODO MIERT VAN AZ KOMMENTELTBEN SupplierListComponent??? 2018.07.10
-  //entryComponents: [SupplierCreateDialogComponent, ConfirmationDialogComponent, SupplierListComponent, ItemCreateDialogComponent, ItemSuppliersCreateDialogComponent],
-  entryComponents: [SupplierCreateDialogComponent, ConfirmationDialogComponent, ItemCreateDialogComponent, ItemSuppliersCreateDialogComponent, OrderCreateDialogComponent, OrderAddItemComponent],
+  entryComponents: [SupplierCreateDialogComponent, ConfirmationDialogComponent, ItemCreateDialogComponent, ItemSuppliersCreateDialogComponent, OrderCreateDialogComponent, OrderAddItemComponent, EmployeeRoleAddDialogComponent],
   declarations: []
 })
 export class AppMaterialModule { }

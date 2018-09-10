@@ -95,5 +95,34 @@ namespace ERP.API.Controllers
             return Ok(new { tokenString, employeeCurrentRoles });
         }
 
+        [HttpDelete("{employeeId}/{roleId}")]
+        public async Task<IActionResult> DeleteEmployeeRole(int employeeId, int roleId)
+        {   
+            var employeeRole = await this.repo.GetSingleEmployeeRole(employeeId, roleId);
+         if(employeeRole != null)
+            {
+                await this.repo.Delete(employeeRole);
+                return Ok();
+            }
+                
+            return BadRequest("An Error occured during execution.");
+        }
+      
+        [HttpGet("availableroles/{employeeId}")]
+        public async Task<IActionResult> GetRolesThatEmployeeNotHave(int employeeId)
+        {
+            var roles = await this.repo.GetRolesThatEmployeeNotHave(employeeId);
+            return Ok(roles);
+        }
+        [HttpPost("employeerole")]
+        public async Task<IActionResult> CreateEmployeeRole([FromBody]EmployeeRole employeeRole)
+        {
+            var createdEmployeeRole = await this.repo.Add(employeeRole);
+            if(createdEmployeeRole == null)
+                return BadRequest("An Error orccured during execution");
+
+            return Ok(createdEmployeeRole);
+        }
+
     }
 }

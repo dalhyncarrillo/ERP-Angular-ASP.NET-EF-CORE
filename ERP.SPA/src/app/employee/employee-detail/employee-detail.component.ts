@@ -10,26 +10,13 @@ import { FormGroup, FormControl, Validators } from '../../../../node_modules/@an
   templateUrl: './employee-detail.component.html',
   styleUrls: ['./employee-detail.component.css']
 })
-export class EmployeeDetailComponent implements OnInit, OnChanges {
+export class EmployeeDetailComponent implements OnChanges {
 
   employeeForm: FormGroup;
   @Input() employee: Employee;
   
   constructor(private authService: AuthService, private alertify:AlertifyService ,private employeeService: EmployeeService) { }
 
-  ngOnInit() {
-    // this.createEmployeeForm();
-  }
-
-  // createEmployeeForm() {
-  //   this.employeeForm = new FormGroup({
-  //     firstName: new FormControl('', Validators.required),
-  //     lastName: new FormControl('', Validators.required),
-  //     dateOfBirth: new FormControl('', Validators.required),
-  //     salary: new FormControl('', Validators.required),
-  //     position: new FormControl('', Validators.required),
-  //   });
-  // }
 
   ngOnChanges() {
     this.getEmployeeDetail();
@@ -38,7 +25,6 @@ export class EmployeeDetailComponent implements OnInit, OnChanges {
 
   getEmployeeDetail() {
     this.employeeService.getEmployee(this.employee.email).subscribe(data => {
-      this.employee.employeeId = data.employeeId;
       this.employee.firstName = data.firstName;
       this.employee.lastName = data.lastName;
       this.employee.dateOfBirth = data.dateOfBirth;
