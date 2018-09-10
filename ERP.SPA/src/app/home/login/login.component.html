@@ -2,24 +2,29 @@
   <form class="form-signin" #signinForm="ngForm" (ngSubmit)="login()">
     <div class="text-center mb-4">
       <img class="mb-4" src="" alt="LOGO ELERES" width="72" height="72">
-      <h1 >Sign in</h1>
+      <h1 >{{"signIn"| translate}}</h1>
       <hr>
       <p></p>
     </div>
  
     <div class="form-label-group">
-      <label for="inputEmail">Email address</label>
-      <input type="email" #inputEmail="ngModel" name="inputEmail"[ngClass]="{'is-invalid':inputEmail.touched && !inputEmail.valid}" [(ngModel)]="emp.email" class="form-control" placeholder="Email address" required email >    
+      <label for="inputEmail">{{"emailAddress" | translate}}</label>
+      <input type="email" #inputEmail="ngModel" name="inputEmail"[ngClass]="{'is-invalid':inputEmail.touched && !inputEmail.valid}" [(ngModel)]="emp.email" class="form-control" placeholder="{{'emailAddress'|translate}}" required email >    
       <p *ngIf="inputEmail.touched && !inputEmail.valid" class="validation-error-message">Enter your email address!</p>
     </div>
   
     <div class="form-label-group"  [ngClass]="{'has-error':inputPassword.touched && !inputPassword.valid}">
-      <label for="inputPassword">Password</label>
-      <input type="password" #inputPassword="ngModel" name="inputPassword" [ngClass]="{'is-invalid':inputPassword.touched && !inputPassword.valid}" [(ngModel)]="emp.password" class="form-control" placeholder="Password" required>  
+      <label for="inputPassword">{{"password" |translate}}</label>
+      <input type="password" #inputPassword="ngModel" name="inputPassword" [ngClass]="{'is-invalid':inputPassword.touched && !inputPassword.valid}" [(ngModel)]="emp.password" class="form-control" placeholder="{{'password'|translate}}" required>  
       <p *ngIf="inputPassword.touched && !inputPassword.valid" class="validation-error-message">Enter your password!</p> 
     </div>
     <br>
-    <button class="btn btn-lg btn-primary btn-block" [disabled]="!signinForm.valid" type="submit">Sign in</button>
+
+    <button class="btn btn-lg btn-primary btn-block" [disabled]="!signinForm.valid" type="submit">{{"signIn"|translate}}</button>
+    <div class="text-muted text-center">
+      <img  style="width: 30px; height: 20px;" (click)="onFlagClick('hu')" *ngIf="this.languageService.currentLang == 'en'" src="assets\icons\Custom-Icon-Design-All-Country-Flag-Hungary-Flag.ico">
+      <img style="width: 30px; height: 20px;" (click)="onFlagClick('en')"*ngIf="this.languageService.currentLang == 'hu'" src="assets\icons\United-Kingdom-Flag.png">
+    </div>
     <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2018</p>
   </form>
 

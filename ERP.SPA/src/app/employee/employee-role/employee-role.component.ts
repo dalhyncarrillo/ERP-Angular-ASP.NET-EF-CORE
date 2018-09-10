@@ -6,6 +6,8 @@ import { AuthService } from './../../_services/auth.service';
 import { Role } from './../../_models/role.model';
 import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageService } from '../../_services/language.service';
 
 @Component({
   selector: 'app-employee-role',
@@ -17,12 +19,15 @@ export class EmployeeRoleComponent implements OnChanges {
 
   changeOccured = false;
   employeeRoles: Role[];
-  constructor(private authService: AuthService, private dialog: MatDialog, private alertifyService: AlertifyService) { }
+  constructor(private language: LanguageService, private authService: AuthService, private dialog: MatDialog, private alertifyService: AlertifyService) { }
 
   ngOnChanges() {
    this.getEmployeeRoles();
   }
 
+   getCurrentLang() {
+    return this.language.currentLang;
+  }
   getEmployeeRoles() {
     this.authService.getEmployeeRoles(this.employee.employeeId).subscribe((success: Role[]) => {
       this.employeeRoles = success;

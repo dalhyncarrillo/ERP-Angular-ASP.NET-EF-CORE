@@ -14,17 +14,17 @@
       </ng-container>
   
       <ng-container matColumnDef="firstName">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{"firstName" | translate}} </th>
         <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
       </ng-container>
   
       <ng-container matColumnDef="lastName">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{"lastName" | translate}} </th>
         <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
       </ng-container>
 
       <ng-container matColumnDef="position">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Position </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{"position" | translate}} </th>
         <td mat-cell *matCellDef="let element"> {{element.positionName}} </td>
       </ng-container>
   

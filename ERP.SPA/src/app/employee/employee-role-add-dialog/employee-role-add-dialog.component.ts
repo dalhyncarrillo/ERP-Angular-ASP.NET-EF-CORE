@@ -1,3 +1,4 @@
+import { LanguageService } from './../../_services/language.service';
 import { AlertifyService } from './../../_services/alertify.service';
 import { AuthService } from './../../_services/auth.service';
 import { Component, OnInit, Inject } from '@angular/core';
@@ -16,6 +17,7 @@ export class EmployeeRoleAddDialogComponent implements OnInit {
   constructor(private alertifyService: AlertifyService,
     private authService: AuthService,
     public dialogRef: MatDialogRef<EmployeeRoleAddDialogComponent>,
+    public languageService: LanguageService,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {

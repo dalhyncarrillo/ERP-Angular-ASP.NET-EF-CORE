@@ -1,14 +1,13 @@
 <table>
   <tr>
       <th>Role Id</th>
-      <th>Role Name En</th>
-      <th>Role Name Hu</th>
+      <th>{{"roleName" |translate}}</th>
 
   </tr>
   <tr *ngFor="let role of roles" (click)="onRoleSelected(role)" [class.selected]="role === selectedRole">
       <td>{{role.roleId}}</td>
-      <td>{{role.roleNameEn}}</td>
-      <td>{{role.roleNameHu}}</td>
+      <td *ngIf="this.languageService.currentLang == 'en'">{{role.roleNameEn}}</td>
+      <td *ngIf="this.languageService.currentLang == 'hu'">{{role.roleNameHu}}</td>
   </tr>
 </table>
 <button class="btn button-success" (click)="createEmployeeRole()" [disabled]="!selectedRole">Create</button>

@@ -1,4 +1,32 @@
 {
+    "signIn": "Bejelentkezés",
+    "emailAddress": "Email cím",
+    "password":"Jelszó",
+    "delete":"Törlés",
+    "update":"Módosít",
+ 
     "home" : "Főoldal",
-    "employees" : "Alkalmazottak"
+    "employees" : "Alkalmazottak",
+    "suppliers":"Beszállítók",
+    "orders":"Rendelések",
+    "items": "Áruk",
+    "settings":"Beállítás",
+    "logout":"Kijelentkezés",
+
+    "firstName":"Keresztnév",
+    "lastName":"Vezetéknév",
+    "position":"Pozíció",
+    "details":"Részletek",
+    "roleName" : "Jogosultság",
+    "salary":"Bér",
+    "dateOfBirth":"Születési dátum",
+
+    "supplier": "Beszállító",
+    "name":"Név",
+    "city":"Város",
+    "address":"Cím",
+    "contactPerson":"Kapcsolat tartó",
+    "phone": "Telefonszám"
+
+
 }

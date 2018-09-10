@@ -13,25 +13,25 @@
         <a class="nav-link" [routerLink]="['/employees']">{{"employees" | translate}}</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/suppliers']">Suppliers</a>
+        <a class="nav-link" [routerLink]="['/suppliers']">{{"suppliers" | translate}}</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/items']">Items</a>
+        <a class="nav-link" [routerLink]="['/items']">{{"items"| translate}}</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/orders']">Orders</a>
+        <a class="nav-link" [routerLink]="['/orders']">{{"orders"| translate}}</a>
       </li>
     </ul>
     <div class="btn-group" style="margin-right: 100px">
         <button appDropdown type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Action
+          {{"settings" |translate}}
         </button>
         <div class="dropdown-menu">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item"  *ngIf="currentLang === 'hu'" (click)="changeLang('en')">English</a>
-          <a class="dropdown-item" *ngIf="currentLang === 'en'"  (click)="changeLang('hu')">Magyar</a>
+          <a class="dropdown-item" >Profile</a>
+          <a class="dropdown-item"  *ngIf="this.languageService.currentLang === 'hu'" (click)="changeLang('en')">English</a>
+          <a class="dropdown-item" *ngIf="this.languageService.currentLang === 'en'"  (click)="changeLang('hu')">Magyar</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" (click)="logout()">Logout</a>
+          <a class="dropdown-item" (click)="logout()">{{"logout" |translate}}</a>
         </div>
       </div>
 

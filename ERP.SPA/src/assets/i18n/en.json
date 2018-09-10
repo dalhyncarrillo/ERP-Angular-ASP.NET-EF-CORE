@@ -1,4 +1,32 @@
 {
+    "signIn": "Sign In",   
+    "emailAddress": "Email address",
+    "password": "Password",
+    "delete":"Delete",
+    "update":"Update",
+
     "home" : "Home",
-    "employees" : "Employees"
+    "employees" : "Employees",
+    "suppliers":"Suppliers",
+    "orders":"Orders",
+    "items": "Items",
+    "settings":"Settings",
+    "logout":"Logout",
+
+    
+    "firstName":"First Name",
+    "lastName":"Last Name",
+    "position":"Position",
+    "details":"Details",
+    "roleName" : "Role Name",
+    "salary":"Salary",
+    "dateOfBirth":"Date of Birth",
+
+    
+    "supplier": "Supplier",
+    "name":"Name",
+    "city":"City",
+    "address":"Address",
+    "contactPerson":"Contact Person",
+    "phone": "Phone"
 }

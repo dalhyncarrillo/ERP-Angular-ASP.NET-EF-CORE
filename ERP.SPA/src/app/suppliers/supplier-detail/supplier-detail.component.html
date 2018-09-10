@@ -15,13 +15,13 @@
    <div class="row">
      <div class="col-md-6">
         <div class="form-group">
-            <label>Supplier Id</label>
+            <label>{{"supplier"| translate }} Id</label>
             <input type="text" class="form-control" name="inputSupplierId" [(ngModel)]="supplier.supplierId" required disabled>
         </div>
      </div>
      <div class="col-md-6">
         <div class="form-group">
-            <label>Supplier Name</label>
+            <label>{{"supplierName" | translate}}</label>
             <input type="text" class="form-control" name="inputName" [(ngModel)]="supplier.name"  required>
         </div>
      </div>
@@ -29,13 +29,13 @@
    <div class="row">
       <div class="col-md-6">
          <div class="form-group">
-             <label>City</label>
+             <label>{{"city" |translate}}</label>
              <input type="text" class="form-control" name="inputCity" [(ngModel)]="supplier.city" required>
          </div>
       </div>
       <div class="col-md-6">
          <div class="form-group">
-             <label>Address</label>
+             <label>{{"address" |translate}}</label>
              <input type="text" class="form-control" name="inputAddress" [(ngModel)]="supplier.address" required>
          </div>
       </div>
@@ -43,17 +43,17 @@
     <div class="row">
         <div class="col-md-6">
            <div class="form-group">
-               <label>Contact person</label>
+               <label>{{"contactPerson" |translate}}</label>
                <input type="text" class="form-control" name="inputContactName" [(ngModel)]="supplier.contactName" required>
            </div>
         </div>
         <div class="col-md-6">
            <div class="form-group">
-               <label>Phone</label>
+               <label>{{"phone"|translate}}</label>
                <input type="text" class="form-control" name="inputPhone" [(ngModel)]="supplier.phoneNumber" required>
            </div>
         </div>
       </div>
-      <button class="btn btn-primary" (click)="updateSupplier()">Update</button>
-      <button class="btn btn-danger" (click)="deleteSupplier()">Delete</button>  
+      <button class="btn btn-primary" (click)="updateSupplier()">{{"update"|translate}}</button>
+      <button class="btn btn-danger" (click)="deleteSupplier()">{{"delete"|translate}}</button>  
 </div>

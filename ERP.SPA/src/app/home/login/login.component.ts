@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../_services/auth.service';
 import { AlertifyService } from '../../_services/alertify.service';
+import { LanguageService } from '../../_services/language.service';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,7 @@ import { AlertifyService } from '../../_services/alertify.service';
 })
 export class LoginComponent implements OnInit {
   emp: any = {};
-  constructor(private authService: AuthService, private alertify: AlertifyService) { }
+  constructor(private languageService: LanguageService, private authService: AuthService, private alertify: AlertifyService) { }
 
   ngOnInit() {
   }
@@ -23,6 +24,10 @@ export class LoginComponent implements OnInit {
       error => {
         this.alertify.error('Email or password is invalid!');
     });
+  }
+
+  onFlagClick(lang: string) {
+    this.languageService.changeLang(lang);
   }
 
 }

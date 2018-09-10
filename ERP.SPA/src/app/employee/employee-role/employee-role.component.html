@@ -1,14 +1,13 @@
 <table>
   <tr>
       <th>Role Id</th>
-      <th>Role Name En</th>
-      <th>Role Name Hu</th>
+      <th>{{"roleName" |translate}}</th>
 
   </tr>
   <tr *ngFor="let role of employeeRoles">
       <td>{{role.roleId}}</td>
-      <td>{{role.roleNameEn}}</td>
-      <td>{{role.roleNameHu}}</td>
+      <td *ngIf="getCurrentLang() == 'en'">{{role.roleNameEn}}</td>
+      <td *ngIf="getCurrentLang() == 'hu'">{{role.roleNameHu}}</td>
       <button class="btn btn-danger" (click)="onDeleteRole(role)">Delete</button>
   </tr>
 </table>

@@ -1,6 +1,6 @@
 <div class="panel">
   <tabset>
-    <tab heading="Details">
+    <tab heading="{{'details' | translate}}">
         <form  #form="ngForm">
             <div class="row">
                 <div class="col-md-6">
@@ -11,7 +11,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                      <label>Date Of Birth</label>
+                      <label>{{"dateOfBirth" | translate}}</label>
                       <input type="text" class="form-control" name="inputDateOfBirth" [(ngModel)]="employee.dateOfBirth" required disabled>
                     </div>
                   </div>
@@ -19,7 +19,7 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>First Name</label>
+                    <label>{{"firstName" | translate}}</label>
                     <input type="text" class="form-control" name="inputFirstName" #inputFirstName="ngModel" [(ngModel)]="employee.firstName" required>
                     <p class="validation-error-message" *ngIf="inputFirstName.invalid">First Name is REQUIRED!</p>
       
@@ -27,7 +27,7 @@
                 </div>
                   <div class="col-md-6">
                      <div class="form-group">
-                      <label>Last Name</label>
+                      <label>{{"lastName" | translate}}</label>
                       <input type="text" class="form-control" name="inputLastname" #inputLastname="ngModel"  [(ngModel)]="employee.lastName" required>
                       <p class="validation-error-message" *ngIf="inputLastname.invalid">Last Name is REQUIRED!</p>
                      </div>
@@ -37,23 +37,23 @@
                 <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Salary</label>
+                        <label>{{"salary" | translate}}</label>
                         <input type="number" class="form-control" #inputSalary="ngModel" name="inputSalary" [(ngModel)]="employee.salary" pattern="^[1-9]+[0-9]*$" required>
                         <p class="validation-error-message" *ngIf="inputSalary.invalid">Salary is REQUIRED!</p>
                       </div>
                     </div>
                       <div class="col-md-6">
                          <div class="form-group">
-                          <label>Position</label>
+                          <label>{{"position" | translate}}</label>
                           <input type="text" class="form-control" name="inputPosition" [(ngModel)]="employee.positionName" required>
                          </div>
                       </div>
                     </div>
             
-                <button class="btn btn-primary" type="button" [disabled]="form.invalid" (click)="updateEmployee()">Update</button>
+                <button class="btn btn-primary" type="button" [disabled]="form.invalid" (click)="updateEmployee()">{{"update" | translate}}</button>
         </form>
     </tab>
-    <tab heading="Roles">
+    <tab heading="{{'roleName' | translate}}">
       <app-employee-role [employee]="employee"></app-employee-role>
     </tab>
   </tabset> 
