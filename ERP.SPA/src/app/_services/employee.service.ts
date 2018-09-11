@@ -14,8 +14,8 @@ export class EmployeeService {
     return this.http.get<Employee[]>(environment.baseurl + 'employees');
   }
 
-  getEmployee(employeeEmail: string) {
-    return this.http.get<Employee>(environment.baseurl + 'employees/' + employeeEmail);
+  getEmployee(employeeId: number) {
+    return this.http.get<Employee>(environment.baseurl + 'employees/' + employeeId);
   }
 
   updateEmployee(employeeToUpdate: Employee) {

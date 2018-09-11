@@ -47,7 +47,10 @@ namespace ERP.API.Helpers
             });
             
     
-            CreateMap<Employee, EmployeeDetailedDto>();
+            CreateMap<Employee, EmployeeDetailedDto>()
+             .ForMember(dest => dest.PositionName, opt => {
+                    opt.MapFrom(src => src.Position.PositionName);
+            });
         }
     }
 }

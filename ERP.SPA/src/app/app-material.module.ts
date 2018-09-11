@@ -1,3 +1,4 @@
+import { EmployeeChangePasswordDialogComponent } from './employee/employee-change-password-dialog/employee-change-password-dialog.component';
 import { EmployeeRoleAddDialogComponent } from './employee/employee-role-add-dialog/employee-role-add-dialog.component';
 import { OrderCreateDialogComponent } from './order/order-create-dialog/order-create-dialog.component';
 import { ItemSuppliersCreateDialogComponent } from './items/item-suppliers-create-dialog/item-suppliers-create-dialog.component';
@@ -50,7 +51,16 @@ import { OrderAddItemComponent } from './order/order-add-item/order-add-item.com
     MatSelectModule,
     MatCheckboxModule
   ],
-  entryComponents: [SupplierCreateDialogComponent, ConfirmationDialogComponent, ItemCreateDialogComponent, ItemSuppliersCreateDialogComponent, OrderCreateDialogComponent, OrderAddItemComponent, EmployeeRoleAddDialogComponent],
+  entryComponents: [
+    SupplierCreateDialogComponent, 
+    ConfirmationDialogComponent,
+    ItemCreateDialogComponent, 
+    ItemSuppliersCreateDialogComponent, 
+    OrderCreateDialogComponent, 
+    OrderAddItemComponent,
+    EmployeeRoleAddDialogComponent,
+    EmployeeChangePasswordDialogComponent
+  ],
   declarations: []
 })
 export class AppMaterialModule { }

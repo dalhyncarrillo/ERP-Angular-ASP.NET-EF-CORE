@@ -35,10 +35,10 @@ namespace ERP.API.Controllers
             return Ok(employeesToReturn);
         }
 
-        [HttpGet("{employeeEmail}")]
-        public async Task<IActionResult> GetEmployee(string employeeEmail)
+        [HttpGet("{employeeId}")]
+        public async Task<IActionResult> GetEmployee(int employeeId)
         {
-            var employee = await this.repo.GetEmployee(employeeEmail);
+            var employee = await this.repo.GetEmployee(employeeId);
             if(employee == null)
                 return NotFound("The employee is not found");
             var employeeToReturn = this.mapper.Map<EmployeeDetailedDto>(employee);
@@ -49,7 +49,7 @@ namespace ERP.API.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateEmployee([FromBody] Employee employeeToUpdate)
         {
-            var employee = await this.repo.GetEmployee(employeeToUpdate.Email);
+            var employee = await this.repo.GetEmployee(employeeToUpdate.EmployeeId);
 
             employeeToUpdate.PasswordHash = employee.PasswordHash;
             employeeToUpdate.PasswordSalt = employee.PasswordSalt;

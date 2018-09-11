@@ -39,33 +39,18 @@ export class RegisterEmployeeComponent implements OnInit {
   createRegisterForm() {
     this.registerForm = new FormGroup({
       email: new FormControl('',[Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(12)]),
-      confirmPassword: new FormControl('', Validators.required),
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
       dateOfBirth: new FormControl('', Validators.required),
       salary: new FormControl('', Validators.required),
       position: new FormControl('', Validators.required),
-    }, this.passwordMatchValidator);
-  }
-
-  passwordMatchValidator(g: FormGroup) {
-     return g.get('password').value === g.get('confirmPassword').value ? null : {'mismatch': true};
+    });
   }
 
   salaryNumberValidator() {
 
   var numbers = new RegExp(/^[0-9]+$/);
   var code = this.registerForm.get('salary').value;
-  
-  if(numbers.test(code))
-  {
-      console.log('code is numbers');
-  }
-  else
-  {
-      console.log("enter numbers only");
-  }
   }
 
   onSubmit() {

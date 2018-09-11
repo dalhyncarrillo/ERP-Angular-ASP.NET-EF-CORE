@@ -23,9 +23,14 @@ export class AuthService implements OnChanges {
     ngOnChanges() {
         
     }
+    register(emp: any) {
+        return this.http.post(environment.baseurl + 'auth/register', emp);
+    }
+
     login(emp: any) {
         return this.http.post(environment.baseurl + 'auth/login',emp).map(token => {
         localStorage.setItem('token',token['tokenString']);
+        localStorage.setItem('isFirstLogin', token['isFirstLogin']);
         this.employeeRoles = token['employeeCurrentRoles'];
 
         this.decodedToken = (this.jwtHelper.decodeToken(token['tokenString']));
@@ -34,16 +39,16 @@ export class AuthService implements OnChanges {
       });
     }
 
+    changePassword(email: string, currentPassword: string, newPassword) {
+        return this.http.post(environment.baseurl + 'auth/changepassword', {email, currentPassword, newPassword});
+    }
+
     getPositions() {
         return this.http.get<Position[]>(environment.baseurl + 'auth/positions');
     }
 
     getEmployeeRoles(employeeId: number) {
         return this.http.get<Role[]>(environment.baseurl + 'auth/roles/' + employeeId);
-    }
-
-    register(emp: any) {
-        return this.http.post(environment.baseurl + 'auth/register', emp);
     }
 
     isLoggedIn() {

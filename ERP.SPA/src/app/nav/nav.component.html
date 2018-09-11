@@ -27,7 +27,7 @@
           {{"settings" |translate}}
         </button>
         <div class="dropdown-menu">
-          <a class="dropdown-item" >Profile</a>
+          <a class="dropdown-item" [routerLink]="['/employees','profile']">Profile</a>
           <a class="dropdown-item"  *ngIf="this.languageService.currentLang === 'hu'" (click)="changeLang('en')">English</a>
           <a class="dropdown-item" *ngIf="this.languageService.currentLang === 'en'"  (click)="changeLang('hu')">Magyar</a>
           <div class="dropdown-divider"></div>

@@ -5,7 +5,7 @@ namespace ERP.API.Models
     public class DebitAccount
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int AccountId { get; set; }
+        public int DebitAccountId { get; set; }
         public string Name { get; set; }
         public double Amount { get; set; }
     }

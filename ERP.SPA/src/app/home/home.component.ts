@@ -13,6 +13,9 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
+  isFirstLogin() {
+    return localStorage.getItem('isFirstLogin');
+  }
   loggedIn() {
     return this.authService.isLoggedIn();
   }

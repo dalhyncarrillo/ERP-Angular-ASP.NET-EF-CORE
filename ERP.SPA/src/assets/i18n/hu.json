@@ -20,6 +20,7 @@
     "roleName" : "Jogosultság",
     "salary":"Bér",
     "dateOfBirth":"Születési dátum",
+    "changePassword": "Jelszó Változtatás",
 
     "supplier": "Beszállító",
     "name":"Név",

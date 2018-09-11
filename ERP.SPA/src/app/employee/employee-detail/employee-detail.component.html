@@ -1,4 +1,4 @@
-<div class="panel">
+<div class="panel" *ngIf="employee">
   <tabset>
     <tab heading="{{'details' | translate}}">
         <form  #form="ngForm">
@@ -20,7 +20,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>{{"firstName" | translate}}</label>
-                    <input type="text" class="form-control" name="inputFirstName" #inputFirstName="ngModel" [(ngModel)]="employee.firstName" required>
+                    <input type="text" class="form-control" name="inputFirstName" #inputFirstName="ngModel" [(ngModel)]="employee.firstName" required [disabled]="isMyProfile">
                     <p class="validation-error-message" *ngIf="inputFirstName.invalid">First Name is REQUIRED!</p>
       
                   </div>
@@ -28,7 +28,7 @@
                   <div class="col-md-6">
                      <div class="form-group">
                       <label>{{"lastName" | translate}}</label>
-                      <input type="text" class="form-control" name="inputLastname" #inputLastname="ngModel"  [(ngModel)]="employee.lastName" required>
+                      <input type="text" class="form-control" name="inputLastname" #inputLastname="ngModel"  [(ngModel)]="employee.lastName" required [disabled]="isMyProfile">
                       <p class="validation-error-message" *ngIf="inputLastname.invalid">Last Name is REQUIRED!</p>
                      </div>
                   </div>
@@ -38,19 +38,20 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>{{"salary" | translate}}</label>
-                        <input type="number" class="form-control" #inputSalary="ngModel" name="inputSalary" [(ngModel)]="employee.salary" pattern="^[1-9]+[0-9]*$" required>
+                        <input type="number" class="form-control" #inputSalary="ngModel" name="inputSalary" [(ngModel)]="employee.salary" pattern="^[1-9]+[0-9]*$" required [disabled]="isMyProfile">
                         <p class="validation-error-message" *ngIf="inputSalary.invalid">Salary is REQUIRED!</p>
                       </div>
                     </div>
                       <div class="col-md-6">
                          <div class="form-group">
                           <label>{{"position" | translate}}</label>
-                          <input type="text" class="form-control" name="inputPosition" [(ngModel)]="employee.positionName" required>
+                          <input type="text" class="form-control" name="inputPosition" [(ngModel)]="employee.positionName" required [disabled]="isMyProfile">
                          </div>
                       </div>
                     </div>
             
-                <button class="btn btn-primary" type="button" [disabled]="form.invalid" (click)="updateEmployee()">{{"update" | translate}}</button>
+                <button class="btn btn-primary" type="button" *ngIf="!isMyProfile" [disabled]="form.invalid" (click)="updateEmployee()">{{"update" | translate}}</button>
+                <button class="btn btn-primary" type="button" *ngIf="isMyProfile" (click)="onChangePassword()">{{"changePassword" | translate}}</button>
         </form>
     </tab>
     <tab heading="{{'roleName' | translate}}">

@@ -58,22 +58,47 @@ namespace ERP.API.Controllers
                 LastName = dto.LastName,
                 DateOfBirth = dto.DateOfBirth,
                 PositionId = dto.PositionId,
-                Created = DateTime.Now,
+                Created = DateTime.Parse(DateTime.Now.ToString("MM/dd/yyyy H:mm")),
                 Salary = dto.Salary,
-                LastUpdated = DateTime.Now
+                LastUpdated = DateTime.Parse(DateTime.Now.ToString("MM/dd/yyyy H:mm"))
             };
+            var defaultPassword = dto.FirstName.ToLower();
+            var createdEmployee = await this.repo.Register(employeeToBeCreated, defaultPassword);
 
-            var createdEmployee = await this.repo.Register(employeeToBeCreated, dto.Password);
             return StatusCode(201);
+        }
+
+        [HttpPost("changepassword")]
+        public async Task<IActionResult> ChangePassword([FromBody] EmployeeChangePasswordDto dto)
+        {
+            byte[] passwordHash, passwordSalt;
+            var employee = await this.repo.VerifyEmployee(dto.Email, dto.currentPassword);
+            if (employee == null)
+                return Unauthorized();
+
+            this.repo.createPasswordHash(dto.newPassword, out passwordHash, out passwordSalt);
+
+            employee.PasswordHash = passwordHash;
+            employee.PasswordSalt = passwordSalt;
+            employee.LastUpdated =  DateTime.Parse(DateTime.Now.ToString("MM/dd/yyyy H:mm"));
+
+            await this.repo.SaveChangesAsync();
+
+            return Ok();                
+
+
         }
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] EmployeeLoginDto employeeLoginDto)
         {
-            var employee = await this.repo.Login(employeeLoginDto.Email, employeeLoginDto.Password);
+            var employee = await this.repo.VerifyEmployee(employeeLoginDto.Email, employeeLoginDto.Password);
             if (employee == null)
                 return Unauthorized();
+
+            var isFirstLogin = DateTime.Equals(employee.Created, employee.LastUpdated) ? true : false;
+
             var employeeRoles = await this.repo.GetEmployeeRoles(employee.EmployeeId);
-            var employeeCurrentRoles = this.mapper.Map<IEnumerable<EmployeeRoleDto>>(employeeRoles);
+            var employeeRolesToReturn = this.mapper.Map<IEnumerable<EmployeeRoleDto>>(employeeRoles);
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes("super secret key");
@@ -81,8 +106,8 @@ namespace ERP.API.Controllers
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                            new Claim(ClaimTypes.Name, employee.Email),
-                            new Claim(ClaimTypes.Role, employee.PositionId.ToString()),
+                    new Claim(ClaimTypes.Name, employee.Email),
+                    new Claim(ClaimTypes.Role, employee.PositionId.ToString()),
                      new Claim(ClaimTypes.NameIdentifier, employee.EmployeeId.ToString())
 
                 }),
@@ -92,7 +117,7 @@ namespace ERP.API.Controllers
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var tokenString = tokenHandler.WriteToken(token);
-            return Ok(new { tokenString, employeeCurrentRoles });
+            return Ok(new { tokenString, employeeRolesToReturn, isFirstLogin });
         }
 
         [HttpDelete("{employeeId}/{roleId}")]

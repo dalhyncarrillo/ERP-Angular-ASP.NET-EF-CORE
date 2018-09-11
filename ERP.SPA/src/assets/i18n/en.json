@@ -21,6 +21,7 @@
     "roleName" : "Role Name",
     "salary":"Salary",
     "dateOfBirth":"Date of Birth",
+    "changePassword": "Change Password",
 
     
     "supplier": "Supplier",

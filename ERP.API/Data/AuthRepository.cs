@@ -24,14 +24,13 @@ namespace ERP.API.Data
         {
             return await this.context.Employees.AnyAsync(emp => emp.Email == email);
         }
-        public async Task<Employee> Login(string email, string password)
+        public async Task<Employee> VerifyEmployee(string email, string password)
         {
             var employee = await this.context.Employees.FirstOrDefaultAsync(emp => emp.Email == email);
             if(employee == null) 
             {
                 return null;
             }
-            
             return verifyPassword(password, employee) ? employee : null;
         }
 
@@ -63,7 +62,7 @@ namespace ERP.API.Data
             return employee;
         }
 
-        private void createPasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+        public void createPasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             using(var hmac = new HMACSHA512())
             {

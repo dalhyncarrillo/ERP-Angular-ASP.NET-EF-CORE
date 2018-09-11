@@ -102,9 +102,9 @@ namespace ERP.API.Data
             return await this.context.Employees.Include(employee => employee.Position).ToListAsync();
         }
 
-        public async Task<Employee> GetEmployee(string employeeEmail)
+        public async Task<Employee> GetEmployee(int employeeId)
         {
-            return await this.context.Employees.FirstOrDefaultAsync(employee => employee.Email.Equals(employeeEmail));
+            return await this.context.Employees.Include(employee => employee.Position).FirstOrDefaultAsync(employee => employee.EmployeeId == employeeId);
         }
 
         public Task<Item> UpdateItem(Item item)

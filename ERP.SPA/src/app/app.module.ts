@@ -39,6 +39,7 @@ import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { EmployeeRoleComponent } from './employee/employee-role/employee-role.component';
 import { EmployeeRoleAddDialogComponent } from './employee/employee-role-add-dialog/employee-role-add-dialog.component';
+import { EmployeeChangePasswordDialogComponent } from './employee/employee-change-password-dialog/employee-change-password-dialog.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -69,7 +70,8 @@ export function createTranslateLoader(http: HttpClient) {
     AccountingComponent,
     DropdownDirective,
     EmployeeRoleComponent,
-    EmployeeRoleAddDialogComponent
+    EmployeeRoleAddDialogComponent,
+    EmployeeChangePasswordDialogComponent
 ],
   imports: [
     TranslateModule.forRoot({
