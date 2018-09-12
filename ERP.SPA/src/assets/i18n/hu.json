@@ -22,6 +22,9 @@
     "dateOfBirth":"Születési dátum",
     "changePassword": "Jelszó Változtatás",
 
+    "currentPassword": "Jelenlegi Jelszó",
+    "confirmPassword": "Jelszó megerősítése",
+
     "supplier": "Beszállító",
     "name":"Név",
     "city":"Város",

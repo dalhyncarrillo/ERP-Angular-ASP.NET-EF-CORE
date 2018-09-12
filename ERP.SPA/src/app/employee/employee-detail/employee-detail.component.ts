@@ -4,6 +4,7 @@ import { AuthService } from './../../_services/auth.service';
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { Employee } from '../../_models/employee.model';
 import { EmployeeService } from '../../_services/employee.service';
+import { Position } from './../../_models/position.model';
 import { AlertifyService } from '../../_services/alertify.service';
 import { FormGroup, FormControl, Validators } from '../../../../node_modules/@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -18,6 +19,7 @@ export class EmployeeDetailComponent implements OnChanges, OnInit {
 
   employeeForm: FormGroup;
   @Input() employee: Employee;
+  positions: Position[];
   isMyProfile:boolean = false;
   
   constructor(private dialog: MatDialog, private authService: AuthService, private alertify:AlertifyService ,private employeeService: EmployeeService) { }
@@ -28,6 +30,7 @@ export class EmployeeDetailComponent implements OnChanges, OnInit {
 
   ngOnChanges() {
     this.checkIfItIsMyProfile();
+    this.getPositions();
   }
 
   checkIfItIsMyProfile() {
@@ -38,14 +41,18 @@ export class EmployeeDetailComponent implements OnChanges, OnInit {
       this.getEmployeeDetail(this.employee.employeeId);
     }
   }
+
+  getPositions() {
+    this.authService.getPositions().subscribe((success: Position[]) => {
+      this.positions = success;
+    });
+  }
   
 
   getEmployeeDetail(employeeId: number) {
     this.employeeService.getEmployee(employeeId).subscribe(data => {
-      console.log(data);
      this.employee = data;
     });
-    console.log(this.employee);
   }
 
   updateEmployee() {
@@ -63,12 +70,12 @@ export class EmployeeDetailComponent implements OnChanges, OnInit {
     }
   }
 
-  onChangePassword() {
-    let dialotRef = this.dialog.open(EmployeeChangePasswordDialogComponent,{
-      height: '350px',
-      width: '400px',
-      data: { employee: this.employee}
-    });
-  }
+  // onChangePassword() {
+  //   let dialotRef = this.dialog.open(EmployeeChangePasswordDialogComponent,{
+  //     height: '350px',
+  //     width: '400px',
+  //     data: { employee: this.employee}
+  //   });
+  // }
 
 }

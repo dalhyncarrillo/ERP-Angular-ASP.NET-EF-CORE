@@ -31,7 +31,7 @@ export class AuthService implements OnChanges {
         return this.http.post(environment.baseurl + 'auth/login',emp).map(token => {
         localStorage.setItem('token',token['tokenString']);
         localStorage.setItem('isFirstLogin', token['isFirstLogin']);
-        this.employeeRoles = token['employeeCurrentRoles'];
+        this.employeeRoles = token['employeeRolesToReturn'];
 
         this.decodedToken = (this.jwtHelper.decodeToken(token['tokenString']));
         localStorage.setItem('positionId', this.decodedToken.role);

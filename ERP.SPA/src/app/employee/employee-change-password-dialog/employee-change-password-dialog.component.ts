@@ -1,8 +1,10 @@
+import { Employee } from './../../_models/employee.model';
+import { EmployeeService } from './../../_services/employee.service';
 import { AlertifyService } from './../../_services/alertify.service';
 import { AuthService } from './../../_services/auth.service';
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employee-change-password-dialog',
@@ -12,14 +14,19 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class EmployeeChangePasswordDialogComponent implements OnInit {
 
   form: FormGroup;
+  employee: Employee;
+
   constructor(
     private alertifyService: AlertifyService,
-    public dialogRef: MatDialogRef<EmployeeChangePasswordDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    public authService: AuthService) {}
+    private router: Router,
+    public authService: AuthService,
+    private employeeService: EmployeeService) {}
 
 
   ngOnInit() {
+    this.employeeService.getEmployee(+localStorage.getItem('employeeId')).subscribe((success: Employee) => {
+      this.employee = success;
+    });
     this.form = new FormGroup({
       currentPassword: new FormControl('',[Validators.required, Validators.minLength(4), Validators.maxLength(12)]),
       password: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(12)]),
@@ -31,8 +38,9 @@ export class EmployeeChangePasswordDialogComponent implements OnInit {
     return g.get('password').value === g.get('confirmPassword').value ? null : {'mismatch': true};
  }
   onSubmitChangePassword() {
-    this.authService.changePassword(this.data.employee.email, this.form.get('currentPassword').value, this.form.get('password').value).subscribe( success => {
-      this.dialogRef.close();
+    this.authService.changePassword(this.employee.email, this.form.get('currentPassword').value, this.form.get('password').value).subscribe( success => {
+      localStorage.clear();
+      this.router.navigate(['/']);
     },
     error => {
       this.alertifyService.error(error);

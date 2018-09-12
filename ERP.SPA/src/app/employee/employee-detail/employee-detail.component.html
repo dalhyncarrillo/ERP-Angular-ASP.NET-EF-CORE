@@ -45,13 +45,20 @@
                       <div class="col-md-6">
                          <div class="form-group">
                           <label>{{"position" | translate}}</label>
-                          <input type="text" class="form-control" name="inputPosition" [(ngModel)]="employee.positionName" required [disabled]="isMyProfile">
+                          <br>
+                          <mat-form-field>
+                              <mat-select matInput placeholder="employee.position" [(ngModel)]="employee.positionName">
+                                  <mat-option *ngFor="let position of positions" [value]="position">
+                                    {{position.positionName}}
+                                  </mat-option>
+                              </mat-select>
+                          </mat-form-field>
                          </div>
                       </div>
                     </div>
             
                 <button class="btn btn-primary" type="button" *ngIf="!isMyProfile" [disabled]="form.invalid" (click)="updateEmployee()">{{"update" | translate}}</button>
-                <button class="btn btn-primary" type="button" *ngIf="isMyProfile" (click)="onChangePassword()">{{"changePassword" | translate}}</button>
+                <button class="btn btn-primary" type="button" *ngIf="isMyProfile" [routerLink]="['/employees','changepassword']" >{{"changePassword" | translate}}</button>
         </form>
     </tab>
     <tab heading="{{'roleName' | translate}}">

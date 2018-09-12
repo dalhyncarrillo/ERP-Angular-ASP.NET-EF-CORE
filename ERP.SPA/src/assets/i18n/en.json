@@ -23,6 +23,11 @@
     "dateOfBirth":"Date of Birth",
     "changePassword": "Change Password",
 
+    "currentPassword": "Current Password",
+    "confirmPassword": "Confirm Password",
+    
+
+
     
     "supplier": "Supplier",
     "name":"Name",
