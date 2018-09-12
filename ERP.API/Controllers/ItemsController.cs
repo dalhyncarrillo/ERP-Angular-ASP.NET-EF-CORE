@@ -21,22 +21,19 @@ namespace ERP.API.Controllers
             this.mapper = mapper;
             this.repository = repository;
         }
-
-        // [HttpPost]
-        // public async Task<IActionResult> CreateItem([FromBody] Item itemToCreate) 
-        // {
-        //     bool isCreationSucceeded = await this.repository.CreateItem(itemToCreate);
-
-        //     if(isCreationSucceeded)
-        //     return Ok();  
-        
-        //     return BadRequest("Error - Item is not created!"); 
-        // }
-
+      
         [HttpGet]
         public async Task<IActionResult> GetItems()
         {
             var items = await this.repository.GetItems();
+            var itemsToReturn = mapper.Map<IEnumerable<ItemListDto>>(items);
+            return Ok(itemsToReturn);
+        }
+
+        [HttpGet("active")]
+        public async Task<IActionResult> GetActiveItems()
+        {
+            var items = await this.repository.GetActiveItems();
             var itemsToReturn = mapper.Map<IEnumerable<ItemListDto>>(items);
             return Ok(itemsToReturn);
         }

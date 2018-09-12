@@ -49,12 +49,12 @@ export class OrderCreateDialogComponent implements OnInit {
   constructor(private dialogRef: MatDialogRef<OrderCreateDialogComponent>, private supplierService: SupplierService, private itemService: ItemService, private orderService: OrderService, private alertify:AlertifyService) {}
 
   ngOnInit() {
-    this.getSuppliers();
+    this.getActiveSuppliers();
     this.createOrderCreationForm();
   }
 
-  getSuppliers() {
-    this.supplierService.getSuppliers().subscribe(data => {
+  getActiveSuppliers() {
+    this.supplierService.getActiveSuppliers().subscribe(data => {
       this.suppliers = data;
     });
   }

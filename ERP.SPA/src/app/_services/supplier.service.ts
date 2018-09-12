@@ -22,6 +22,10 @@ export class SupplierService {
     return this.http.get<Supplier[]>(environment.baseurl + 'suppliers');
   }
 
+  getActiveSuppliers() {
+    return this.http.get<Supplier[]>(environment.baseurl + 'suppliers/active');
+  }
+
   getSupplier(supplierId: number) {
     return this.http.get<Supplier>(environment.baseurl + 'suppliers/' + supplierId);
   }

@@ -15,8 +15,11 @@ import { Router } from '@angular/router';
 })
 export class SupplierDetailComponent implements OnChanges {
 
-  @Output() supplierDeleted = new EventEmitter<Supplier>(); 
+  @Output() supplierUpdated = new EventEmitter<Supplier>(); 
   @Input() supplier: Supplier;
+
+  statuses = ['Active', 'NO'];
+  selectedStatus: string;
   constructor(private aleritfyService: AlertifyService, private supplierService: SupplierService, private dialog: MatDialog, private router: Router) { }
 
   ngOnChanges() {
@@ -33,6 +36,7 @@ export class SupplierDetailComponent implements OnChanges {
     this.supplierService.updateSupplier(this.supplier).subscribe((updatedSupplier: Supplier) => {
       this.supplier = updatedSupplier;
       this.aleritfyService.success('Supplier successfully updated!');
+      this.supplierUpdated.emit(updatedSupplier);
     },
     error => {
       this.aleritfyService.error('Error: ' + error.error);
@@ -40,18 +44,5 @@ export class SupplierDetailComponent implements OnChanges {
     });
   }
 
-  deleteSupplier() {
-    let dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      height: '250px',
-      width: '500px',
-      data: { message: 'Are you sure you want to delete?\n' + this.supplier.name}
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if(result === 'yes') {
-        this.supplierService.deleteSupplier(this.supplier).subscribe(data => {
-            this.supplierDeleted.emit(this.supplier);
-        });
-      }
-    });
-  }
+
 }

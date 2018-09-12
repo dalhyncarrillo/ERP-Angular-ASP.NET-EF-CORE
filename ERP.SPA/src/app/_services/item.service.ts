@@ -14,6 +14,10 @@ export class ItemService {
     return this.http.get<Item[]>(environment.baseurl + 'items');
   }
 
+  getActiveItems() {
+    return this.http.get<Item[]>(environment.baseurl + 'items/active');
+  }
+
   getItem(itemId: number) {
     return this.http.get<Item>(environment.baseurl + 'items/' + itemId);
   }

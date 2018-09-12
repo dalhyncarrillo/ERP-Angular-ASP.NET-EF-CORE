@@ -10,6 +10,8 @@ namespace ERP.API.Data
 {
     public class DataRepository : BaseRepository, IDataRepository
     {
+        private static string ACTIVE_ENTITY = "Active";
+
         public DataRepository(DataContext context) : base(context)
         {
 
@@ -115,6 +117,16 @@ namespace ERP.API.Data
         public Task<Order> UpdateOrder(Order order)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<Supplier>> GetActiveSuppliers()
+        {
+            return await this.context.Suppliers.Where(supplier => supplier.Status.Equals(ACTIVE_ENTITY)).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Item>> GetActiveItems()
+        {
+            return await this.context.Items.Where(item => item.Status.Equals(ACTIVE_ENTITY)).ToListAsync();
         }
     }
 }

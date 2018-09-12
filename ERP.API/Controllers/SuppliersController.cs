@@ -28,10 +28,16 @@ namespace ERP.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetSuppliers()
         {
-            //var suppliers = await this.context.Suppliers.ToListAsync();
             var suppliers = await this.repo.GetSuppliers();
             var suppliersToReturn = mapper.Map<IEnumerable<SupplierListDto>>(suppliers);
-           // return Ok(suppliers);
+            return Ok(suppliersToReturn);
+        }
+
+        [HttpGet("active")]
+        public async Task<IActionResult> GetActiveSuppliers()
+        {
+            var suppliers = await this.repo.GetActiveSuppliers();
+            var suppliersToReturn = mapper.Map<IEnumerable<SupplierListDto>>(suppliers);
             return Ok(suppliersToReturn);
         }
 

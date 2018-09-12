@@ -55,8 +55,10 @@ export class ItemListComponent implements OnInit {
       height: '450px',
       width: '1700px',
     }).afterClosed().subscribe(result => {
-      this.items.push(result);
-      this.setDataSource();
+      if(result != null) {
+        this.items.push(result);
+        this.setDataSource();
+      }
     });
   }
 }

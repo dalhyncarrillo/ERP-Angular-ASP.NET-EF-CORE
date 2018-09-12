@@ -11,8 +11,10 @@ namespace ERP.API.Data
         Task<T> Add<T>(T entity) where T: class;
         Task<bool> Delete<T>(T entity) where T: class;
         Task<IEnumerable<Supplier>> GetSuppliers();
+        Task<IEnumerable<Supplier>> GetActiveSuppliers();
         Task<Supplier> GetSupplier(int id);
         Task<IEnumerable<Item>> GetItems();
+        Task<IEnumerable<Item>> GetActiveItems();
         Task<Item> GetItem(int id);
         Task<IEnumerable<ItemSupplier>> GetItemSuppliers(int itemId);
         Task<ItemSupplier> GetItemSupplier(int itemId, int supplierId);

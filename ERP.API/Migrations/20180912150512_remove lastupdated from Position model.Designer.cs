@@ -11,8 +11,8 @@ using System;
 namespace ERP.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20180605203620_Add approvedBy to Order table, GL tables created")]
-    partial class AddapprovedBytoOrdertableGLtablescreated
+    [Migration("20180912150512_remove lastupdated from Position model")]
+    partial class removelastupdatedfromPositionmodel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,54 +21,39 @@ namespace ERP.API.Migrations
                 .HasAnnotation("ProductVersion", "2.0.2-rtm-10011")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ERP.API.Models.CreditAccount", b =>
-                {
-                    b.Property<int>("CreditAccountId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("CreditAccountId");
-
-                    b.ToTable("CreditAccounts");
-                });
-
-            modelBuilder.Entity("ERP.API.Models.DebitAccount", b =>
-                {
-                    b.Property<int>("DebitAccountId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("DebitAccountId");
-
-                    b.ToTable("DebitAccounts");
-                });
-
             modelBuilder.Entity("ERP.API.Models.Employee", b =>
                 {
                     b.Property<int>("EmployeeId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("Created");
+                    b.Property<DateTime?>("Created");
 
                     b.Property<DateTime>("DateOfBirth");
 
-                    b.Property<string>("Email");
+                    b.Property<string>("Email")
+                        .IsRequired();
 
-                    b.Property<string>("FirstName");
+                    b.Property<string>("FirstName")
+                        .IsRequired();
 
-                    b.Property<string>("LastName");
+                    b.Property<string>("LastName")
+                        .IsRequired();
 
-                    b.Property<DateTime>("LastUpdated");
+                    b.Property<DateTime?>("LastUpdated");
 
-                    b.Property<byte[]>("PasswordHash");
+                    b.Property<byte[]>("PasswordHash")
+                        .IsRequired();
 
-                    b.Property<byte[]>("PasswordSalt");
+                    b.Property<byte[]>("PasswordSalt")
+                        .IsRequired();
 
                     b.Property<int>("PositionId");
 
                     b.Property<double>("Salary");
+
+                    b.Property<byte[]>("Timestamp")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
 
                     b.HasKey("EmployeeId");
 
@@ -77,52 +62,17 @@ namespace ERP.API.Migrations
                     b.ToTable("Employees");
                 });
 
-            modelBuilder.Entity("ERP.API.Models.GeneralLedger", b =>
+            modelBuilder.Entity("ERP.API.Models.EmployeeRole", b =>
                 {
-                    b.Property<int>("TransactionId")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("EmployeeId");
 
-                    b.Property<double>("Amount");
+                    b.Property<int>("RoleId");
 
-                    b.Property<int>("CreditAccountId");
+                    b.HasKey("EmployeeId", "RoleId");
 
-                    b.Property<int>("DebitAccountId");
+                    b.HasIndex("RoleId");
 
-                    b.Property<DateTime>("LastUpdated");
-
-                    b.Property<DateTime>("Occured");
-
-                    b.HasKey("TransactionId");
-
-                    b.HasIndex("CreditAccountId");
-
-                    b.HasIndex("DebitAccountId");
-
-                    b.ToTable("GeneralLedgers");
-                });
-
-            modelBuilder.Entity("ERP.API.Models.Inventory", b =>
-                {
-                    b.Property<int>("InventoryId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<double>("AvgCost");
-
-                    b.Property<int>("ItemId");
-
-                    b.Property<DateTime>("LastUpdated");
-
-                    b.Property<int>("QuantityOnHand");
-
-                    b.Property<int>("QuantityOrdered");
-
-                    b.Property<double>("UnitCost");
-
-                    b.HasKey("InventoryId");
-
-                    b.HasIndex("ItemId");
-
-                    b.ToTable("Inventories");
+                    b.ToTable("EmployeeRoles");
                 });
 
             modelBuilder.Entity("ERP.API.Models.Item", b =>
@@ -130,11 +80,21 @@ namespace ERP.API.Migrations
                     b.Property<int>("ItemId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("LastUpdated");
+                    b.Property<double>("AvgCost");
 
                     b.Property<string>("Name");
 
+                    b.Property<int>("QuantityOnHand");
+
+                    b.Property<int>("QuantityOrdered");
+
                     b.Property<double>("RetailPrice");
+
+                    b.Property<string>("Status");
+
+                    b.Property<byte[]>("Timestamp")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
 
                     b.HasKey("ItemId");
 
@@ -147,9 +107,13 @@ namespace ERP.API.Migrations
 
                     b.Property<int>("SupplierId");
 
-                    b.Property<DateTime>("LastUpdated");
+                    b.Property<bool>("IsPrimary");
 
                     b.Property<int>("LeadTime");
+
+                    b.Property<byte[]>("Timestamp")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
 
                     b.Property<double>("UnitCost");
 
@@ -165,11 +129,11 @@ namespace ERP.API.Migrations
                     b.Property<int>("OrderId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("ApprovedBy");
+                    b.Property<int?>("ApprovedBy");
 
-                    b.Property<DateTime>("LastUpdated");
+                    b.Property<int>("CreatedBy");
 
-                    b.Property<DateTime>("ReceivedDate");
+                    b.Property<DateTime?>("ReceivedDate");
 
                     b.Property<DateTime>("RequestedDate");
 
@@ -177,11 +141,17 @@ namespace ERP.API.Migrations
 
                     b.Property<int>("SupplierId");
 
+                    b.Property<byte[]>("Timestamp")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
+
                     b.Property<double>("TotalCost");
 
                     b.HasKey("OrderId");
 
                     b.HasIndex("ApprovedBy");
+
+                    b.HasIndex("CreatedBy");
 
                     b.HasIndex("SupplierId");
 
@@ -194,9 +164,11 @@ namespace ERP.API.Migrations
 
                     b.Property<int>("ItemId");
 
-                    b.Property<DateTime>("LastUpdated");
-
                     b.Property<int>("Quantity");
+
+                    b.Property<byte[]>("Timestamp")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
 
                     b.Property<double>("TotalCost");
 
@@ -223,6 +195,20 @@ namespace ERP.API.Migrations
                     b.ToTable("Positions");
                 });
 
+            modelBuilder.Entity("ERP.API.Models.Role", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("RoleNameEn");
+
+                    b.Property<string>("RoleNameHu");
+
+                    b.HasKey("RoleId");
+
+                    b.ToTable("Roles");
+                });
+
             modelBuilder.Entity("ERP.API.Models.Supplier", b =>
                 {
                     b.Property<int>("SupplierId")
@@ -234,13 +220,15 @@ namespace ERP.API.Migrations
 
                     b.Property<string>("ContactName");
 
-                    b.Property<DateTime>("LastUpdated");
-
                     b.Property<string>("Name");
 
                     b.Property<string>("PhoneNumber");
 
                     b.Property<string>("Status");
+
+                    b.Property<byte[]>("Timestamp")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
 
                     b.HasKey("SupplierId");
 
@@ -255,24 +243,16 @@ namespace ERP.API.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("ERP.API.Models.GeneralLedger", b =>
+            modelBuilder.Entity("ERP.API.Models.EmployeeRole", b =>
                 {
-                    b.HasOne("ERP.API.Models.CreditAccount", "CreditAccount")
+                    b.HasOne("ERP.API.Models.Employee", "Employee")
                         .WithMany()
-                        .HasForeignKey("CreditAccountId")
+                        .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("ERP.API.Models.DebitAccount", "DebitAccount")
+                    b.HasOne("ERP.API.Models.Role", "Role")
                         .WithMany()
-                        .HasForeignKey("DebitAccountId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("ERP.API.Models.Inventory", b =>
-                {
-                    b.HasOne("ERP.API.Models.Item", "Item")
-                        .WithMany()
-                        .HasForeignKey("ItemId")
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -293,7 +273,11 @@ namespace ERP.API.Migrations
                 {
                     b.HasOne("ERP.API.Models.Employee", "Employee")
                         .WithMany()
-                        .HasForeignKey("ApprovedBy")
+                        .HasForeignKey("ApprovedBy");
+
+                    b.HasOne("ERP.API.Models.Employee", "CreatorEmployee")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("ERP.API.Models.Supplier", "Supplier")

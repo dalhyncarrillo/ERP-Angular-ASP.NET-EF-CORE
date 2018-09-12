@@ -13,7 +13,7 @@ import { SupplierService } from '../../_services/supplier.service';
 export class ItemCreateDialogComponent implements OnInit {
 
   suppliers: Supplier[];
-  itemToSave:any = {};í
+  itemToSave:any = {};
 
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
@@ -21,7 +21,7 @@ export class ItemCreateDialogComponent implements OnInit {
   constructor(private _formBuilder: FormBuilder, private supplierService: SupplierService,private itemService: ItemService, public dialogRef: MatDialogRef<ItemCreateDialogComponent>) { }
 
   ngOnInit() {
-    this.getSuppliers();
+    this.getActiveSuppliers();
     this.firstFormGroup = this._formBuilder.group({
       supplierCtrl: ['', Validators.required],
       leadTimeCtrl: ['', Validators.required]
@@ -36,8 +36,8 @@ export class ItemCreateDialogComponent implements OnInit {
 
   }
 
-  getSuppliers() {
-    this.supplierService.getSuppliers().subscribe(data => {
+  getActiveSuppliers() {
+    this.supplierService.getActiveSuppliers().subscribe(data => {
       this.suppliers = data;
     });
   }
@@ -49,9 +49,9 @@ export class ItemCreateDialogComponent implements OnInit {
       retailPrice: this.thirdFormGroup.get('retailPriceCtrl').value,
       unitCost: this.thirdFormGroup.get('unitCostCtrl').value,
       isPrimary: true,
+      status: 'Active',
       quantityOnHand: 0,
       quantityOrdered: 0,
-      lastUpdated: new Date(2018,6,9),
     };
     this.itemService.createItem(this.itemToSave).subscribe(data => {
       this.itemToSave.itemId = data['itemId'];

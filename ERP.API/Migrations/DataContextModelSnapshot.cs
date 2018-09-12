@@ -20,34 +20,6 @@ namespace ERP.API.Migrations
                 .HasAnnotation("ProductVersion", "2.0.2-rtm-10011")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ERP.API.Models.CreditAccount", b =>
-                {
-                    b.Property<int>("CreditAccountId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<double>("Amount");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("CreditAccountId");
-
-                    b.ToTable("CreditAccounts");
-                });
-
-            modelBuilder.Entity("ERP.API.Models.DebitAccount", b =>
-                {
-                    b.Property<int>("DebitAccountId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<double>("Amount");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("DebitAccountId");
-
-                    b.ToTable("DebitAccounts");
-                });
-
             modelBuilder.Entity("ERP.API.Models.Employee", b =>
                 {
                     b.Property<int>("EmployeeId")
@@ -102,30 +74,6 @@ namespace ERP.API.Migrations
                     b.ToTable("EmployeeRoles");
                 });
 
-            modelBuilder.Entity("ERP.API.Models.GeneralLedger", b =>
-                {
-                    b.Property<int>("TransactionId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<double>("Amount");
-
-                    b.Property<int>("CreditAccountId");
-
-                    b.Property<int>("DebitAccountId");
-
-                    b.Property<string>("Description");
-
-                    b.Property<DateTime>("Occured");
-
-                    b.HasKey("TransactionId");
-
-                    b.HasIndex("CreditAccountId");
-
-                    b.HasIndex("DebitAccountId");
-
-                    b.ToTable("GeneralLedgers");
-                });
-
             modelBuilder.Entity("ERP.API.Models.Item", b =>
                 {
                     b.Property<int>("ItemId")
@@ -140,6 +88,8 @@ namespace ERP.API.Migrations
                     b.Property<int>("QuantityOrdered");
 
                     b.Property<double>("RetailPrice");
+
+                    b.Property<string>("Status");
 
                     b.Property<byte[]>("Timestamp")
                         .IsConcurrencyToken()
@@ -235,8 +185,6 @@ namespace ERP.API.Migrations
                     b.Property<int>("PositionId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("LastUpdated");
-
                     b.Property<string>("PositionName");
 
                     b.HasKey("PositionId");
@@ -302,19 +250,6 @@ namespace ERP.API.Migrations
                     b.HasOne("ERP.API.Models.Role", "Role")
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("ERP.API.Models.GeneralLedger", b =>
-                {
-                    b.HasOne("ERP.API.Models.CreditAccount", "CreditAccount")
-                        .WithMany()
-                        .HasForeignKey("CreditAccountId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("ERP.API.Models.DebitAccount", "DebitAccount")
-                        .WithMany()
-                        .HasForeignKey("DebitAccountId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

@@ -37,8 +37,10 @@ export class SupplierListComponent implements OnInit {
       height: '450px',
       width: '1700px',
     }).afterClosed().subscribe(result => {
-      this.suppliers.push(result);
-      this.setDataSource();
+      if(result != null) {
+        this.suppliers.push(result);
+        this.setDataSource();
+      }
     });
   }
 
@@ -58,12 +60,12 @@ export class SupplierListComponent implements OnInit {
     this.selectedSupplier = supplier;
   }
 
-  deleteSupplier(supplier: Supplier) {
-    const index: number = this.suppliers.indexOf(supplier);
-    if (index !== -1) {
-        this.suppliers.splice(index, 1);
-        this.selectedSupplier = null;
-        this.setDataSource();
-    }    
+  updateSupplier(updatedSupplier: Supplier) {
+    for (let index = 0; index < this.suppliers.length; index++) {
+      const element = this.suppliers[index];
+      if(element.supplierId === updatedSupplier.supplierId)
+        this.suppliers[index] = updatedSupplier;
+    }
+    this.setDataSource();
   }
 }

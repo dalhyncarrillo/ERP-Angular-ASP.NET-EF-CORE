@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace ERP.API.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class recreateDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,13 +15,45 @@ namespace ERP.API.Migrations
                 {
                     ItemId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    LastUpdated = table.Column<DateTime>(nullable: false),
+                    AvgCost = table.Column<double>(nullable: false),
                     Name = table.Column<string>(nullable: true),
-                    RetailPrice = table.Column<double>(nullable: false)
+                    QuantityOnHand = table.Column<int>(nullable: false),
+                    QuantityOrdered = table.Column<int>(nullable: false),
+                    RetailPrice = table.Column<double>(nullable: false),
+                    Status = table.Column<string>(nullable: true),
+                    Timestamp = table.Column<byte[]>(rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Items", x => x.ItemId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Positions",
+                columns: table => new
+                {
+                    PositionId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    LastUpdated = table.Column<DateTime>(nullable: false),
+                    PositionName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Positions", x => x.PositionId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Roles",
+                columns: table => new
+                {
+                    RoleId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    RoleNameEn = table.Column<string>(nullable: true),
+                    RoleNameHu = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Roles", x => x.RoleId);
                 });
 
             migrationBuilder.CreateTable(
@@ -33,10 +65,10 @@ namespace ERP.API.Migrations
                     Address = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: true),
                     ContactName = table.Column<string>(nullable: true),
-                    LastUpdated = table.Column<DateTime>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<string>(nullable: true),
-                    Status = table.Column<string>(nullable: true)
+                    Status = table.Column<string>(nullable: true),
+                    Timestamp = table.Column<byte[]>(rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -44,26 +76,31 @@ namespace ERP.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Inventories",
+                name: "Employees",
                 columns: table => new
                 {
-                    InventoryId = table.Column<int>(nullable: false)
+                    EmployeeId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AvgCost = table.Column<double>(nullable: false),
-                    ItemId = table.Column<int>(nullable: false),
-                    LastUpdated = table.Column<DateTime>(nullable: false),
-                    QuantityOnHand = table.Column<int>(nullable: false),
-                    QuantityOrdered = table.Column<int>(nullable: false),
-                    UnitCost = table.Column<double>(nullable: false)
+                    Created = table.Column<DateTime>(nullable: true),
+                    DateOfBirth = table.Column<DateTime>(nullable: false),
+                    Email = table.Column<string>(nullable: false),
+                    FirstName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(nullable: false),
+                    LastUpdated = table.Column<DateTime>(nullable: true),
+                    PasswordHash = table.Column<byte[]>(nullable: false),
+                    PasswordSalt = table.Column<byte[]>(nullable: false),
+                    PositionId = table.Column<int>(nullable: false),
+                    Salary = table.Column<double>(nullable: false),
+                    Timestamp = table.Column<byte[]>(rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Inventories", x => x.InventoryId);
+                    table.PrimaryKey("PK_Employees", x => x.EmployeeId);
                     table.ForeignKey(
-                        name: "FK_Inventories_Items_ItemId",
-                        column: x => x.ItemId,
-                        principalTable: "Items",
-                        principalColumn: "ItemId",
+                        name: "FK_Employees_Positions_PositionId",
+                        column: x => x.PositionId,
+                        principalTable: "Positions",
+                        principalColumn: "PositionId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -73,8 +110,9 @@ namespace ERP.API.Migrations
                 {
                     ItemId = table.Column<int>(nullable: false),
                     SupplierId = table.Column<int>(nullable: false),
-                    LastUpdated = table.Column<DateTime>(nullable: false),
+                    IsPrimary = table.Column<bool>(nullable: false),
                     LeadTime = table.Column<int>(nullable: false),
+                    Timestamp = table.Column<byte[]>(rowVersion: true, nullable: true),
                     UnitCost = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
@@ -95,21 +133,59 @@ namespace ERP.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "EmployeeRoles",
+                columns: table => new
+                {
+                    EmployeeId = table.Column<int>(nullable: false),
+                    RoleId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EmployeeRoles", x => new { x.EmployeeId, x.RoleId });
+                    table.ForeignKey(
+                        name: "FK_EmployeeRoles_Employees_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "Employees",
+                        principalColumn: "EmployeeId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EmployeeRoles_Roles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "Roles",
+                        principalColumn: "RoleId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Orders",
                 columns: table => new
                 {
                     OrderId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    LastUpdated = table.Column<DateTime>(nullable: false),
-                    ReceivedDate = table.Column<DateTime>(nullable: false),
+                    ApprovedBy = table.Column<int>(nullable: true),
+                    CreatedBy = table.Column<int>(nullable: false),
+                    ReceivedDate = table.Column<DateTime>(nullable: true),
                     RequestedDate = table.Column<DateTime>(nullable: false),
                     Status = table.Column<string>(nullable: true),
                     SupplierId = table.Column<int>(nullable: false),
+                    Timestamp = table.Column<byte[]>(rowVersion: true, nullable: true),
                     TotalCost = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Orders", x => x.OrderId);
+                    table.ForeignKey(
+                        name: "FK_Orders_Employees_ApprovedBy",
+                        column: x => x.ApprovedBy,
+                        principalTable: "Employees",
+                        principalColumn: "EmployeeId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Orders_Employees_CreatedBy",
+                        column: x => x.CreatedBy,
+                        principalTable: "Employees",
+                        principalColumn: "EmployeeId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Orders_Suppliers_SupplierId",
                         column: x => x.SupplierId,
@@ -124,8 +200,8 @@ namespace ERP.API.Migrations
                 {
                     OrderId = table.Column<int>(nullable: false),
                     ItemId = table.Column<int>(nullable: false),
-                    LastUpdated = table.Column<DateTime>(nullable: false),
                     Quantity = table.Column<int>(nullable: false),
+                    Timestamp = table.Column<byte[]>(rowVersion: true, nullable: true),
                     TotalCost = table.Column<double>(nullable: false),
                     UnitCost = table.Column<double>(nullable: false)
                 },
@@ -147,9 +223,14 @@ namespace ERP.API.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Inventories_ItemId",
-                table: "Inventories",
-                column: "ItemId");
+                name: "IX_EmployeeRoles_RoleId",
+                table: "EmployeeRoles",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Employees_PositionId",
+                table: "Employees",
+                column: "PositionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ItemSuppliers_SupplierId",
@@ -162,6 +243,16 @@ namespace ERP.API.Migrations
                 column: "ItemId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Orders_ApprovedBy",
+                table: "Orders",
+                column: "ApprovedBy");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_CreatedBy",
+                table: "Orders",
+                column: "CreatedBy");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Orders_SupplierId",
                 table: "Orders",
                 column: "SupplierId");
@@ -170,7 +261,7 @@ namespace ERP.API.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Inventories");
+                name: "EmployeeRoles");
 
             migrationBuilder.DropTable(
                 name: "ItemSuppliers");
@@ -179,13 +270,22 @@ namespace ERP.API.Migrations
                 name: "OrderItems");
 
             migrationBuilder.DropTable(
+                name: "Roles");
+
+            migrationBuilder.DropTable(
                 name: "Items");
 
             migrationBuilder.DropTable(
                 name: "Orders");
 
             migrationBuilder.DropTable(
+                name: "Employees");
+
+            migrationBuilder.DropTable(
                 name: "Suppliers");
+
+            migrationBuilder.DropTable(
+                name: "Positions");
         }
     }
 }

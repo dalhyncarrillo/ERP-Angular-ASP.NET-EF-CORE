@@ -33,7 +33,7 @@
     <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
   </div>
   <div class="col-md-6">
-    <app-supplier-detail [supplier]="selectedSupplier" (supplierDeleted)="deleteSupplier($event)" *ngIf="selectedSupplier"></app-supplier-detail>
+    <app-supplier-detail [supplier]="selectedSupplier" (supplierUpdated)="updateSupplier($event)" *ngIf="selectedSupplier"></app-supplier-detail>
   </div>
 </div>
 
