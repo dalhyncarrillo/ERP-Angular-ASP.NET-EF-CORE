@@ -61,24 +61,4 @@ export class ItemDetailComponent implements OnInit {
   deleteItem() {
 
   }
-
-  // updateSupplier() {
-  //   this.supplierService.updateSupplier(this.supplier).subscribe( data => {
-  //   });
-  // }
-
-  // deleteSupplier() {
-  //   let dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-  //     height: '450px',
-  //     width: '700px',
-  //     data: { message: 'Are you sure you want to delete?\n' + this.supplier.name}
-  //   });
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     if(result === 'yes') {
-  //       this.supplierService.deleteSupplier(this.supplier).subscribe(data => {
-  //           this.supplierDeleted.emit(this.supplier);
-  //       });
-  //     }
-  //   });
-  // }
 }

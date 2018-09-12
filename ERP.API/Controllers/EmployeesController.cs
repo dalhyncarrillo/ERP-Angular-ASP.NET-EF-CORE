@@ -50,14 +50,21 @@ namespace ERP.API.Controllers
         public async Task<IActionResult> UpdateEmployee([FromBody] Employee employeeToUpdate)
         {
             var employee = await this.repo.GetEmployee(employeeToUpdate.EmployeeId);
+            if(employee == null)
+                return null;
 
-            employeeToUpdate.PasswordHash = employee.PasswordHash;
-            employeeToUpdate.PasswordSalt = employee.PasswordSalt;
+            employee.FirstName = employeeToUpdate.FirstName;
+            employee.LastName = employeeToUpdate.LastName;
+            employee.DateOfBirth = employeeToUpdate.DateOfBirth;
+            employee.Salary = employeeToUpdate.Salary;
+            employee.PositionId = employeeToUpdate.PositionId;
 
-            var updatedEmployee = await this.repo.UpdateEntity(employeeToUpdate);
-            if(updatedEmployee == null)
-                return BadRequest("The record you are trying to update has been modified!");
-            return Ok(updatedEmployee);
+            await this.repo.SaveChangesAsync();
+
+            return Ok();
+            // if(updatedEmployee == null)
+            //     return BadRequest("The record you are trying to update has been modified!");
+            //return Ok(updatedEmployee);
         }
     }
 }

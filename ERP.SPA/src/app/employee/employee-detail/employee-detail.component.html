@@ -1,4 +1,4 @@
-<div class="panel" *ngIf="employee">
+<div class="panel" *ngIf="employee && selectedPosition">
   <tabset>
     <tab heading="{{'details' | translate}}">
         <form  #form="ngForm">
@@ -47,7 +47,7 @@
                           <label>{{"position" | translate}}</label>
                           <br>
                           <mat-form-field>
-                              <mat-select matInput placeholder="employee.position" [(ngModel)]="employee.positionName">
+                              <mat-select matInput [(value)]="selectedPosition" [disabled]="isMyProfile">
                                   <mat-option *ngFor="let position of positions" [value]="position">
                                     {{position.positionName}}
                                   </mat-option>

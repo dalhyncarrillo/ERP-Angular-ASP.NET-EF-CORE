@@ -60,12 +60,10 @@ export class EmployeeListComponent implements OnInit {
       this.alertify.error(this.authService.NO_PERMISSION_ERROR_MESSAGE);
     }
   }
+  employeeUpdatedInDetailComponent(updatedEmployee: Employee) {
+    let indexOfEmployeeUpdated = this.employees.indexOf(this.selectedEmployee);
+    this.employees[indexOfEmployeeUpdated] = updatedEmployee;
+    this.setDataSource();
 
-  // deleteSupplier(supplier: Supplier) {
-  //   const index: number = this.suppliers.indexOf(supplier);
-  //   if (index !== -1) {
-  //       this.suppliers.splice(index, 1);
-  //       this.selectedSupplier = null;
-  //   }    
-  // }
+  }
 }

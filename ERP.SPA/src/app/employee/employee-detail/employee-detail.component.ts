@@ -1,7 +1,7 @@
 import { EmployeeChangePasswordDialogComponent } from './../employee-change-password-dialog/employee-change-password-dialog.component';
 import { MatDialog } from '@angular/material';
 import { AuthService } from './../../_services/auth.service';
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { Employee } from '../../_models/employee.model';
 import { EmployeeService } from '../../_services/employee.service';
 import { Position } from './../../_models/position.model';
@@ -16,21 +16,30 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EmployeeDetailComponent implements OnChanges, OnInit {
 
+  @Input() employee: Employee;
+  @Output() employeeUpdatedEvent = new EventEmitter<Employee>();
 
   employeeForm: FormGroup;
-  @Input() employee: Employee;
+
   positions: Position[];
+  selectedPosition: Position;
   isMyProfile:boolean = false;
   
   constructor(private dialog: MatDialog, private authService: AuthService, private alertify:AlertifyService ,private employeeService: EmployeeService) { }
   
   ngOnInit(): void {
+    this.getPositions();
     this.checkIfItIsMyProfile();
   }
 
   ngOnChanges() {
-    this.checkIfItIsMyProfile();
-    this.getPositions();
+    this.getEmployeeDetail(this.employee.employeeId);
+  }
+
+  getPositions() {
+    this.authService.getPositions().subscribe((success: Position[]) => {
+      this.positions = success;
+    });
   }
 
   checkIfItIsMyProfile() {
@@ -42,23 +51,31 @@ export class EmployeeDetailComponent implements OnChanges, OnInit {
     }
   }
 
-  getPositions() {
-    this.authService.getPositions().subscribe((success: Position[]) => {
-      this.positions = success;
+    getEmployeeDetail(employeeId: number) {
+    this.employeeService.getEmployee(employeeId).subscribe((data: Employee) => {
+      this.employee = data;
+      this.setSelectedPosition();
     });
   }
-  
 
-  getEmployeeDetail(employeeId: number) {
-    this.employeeService.getEmployee(employeeId).subscribe(data => {
-     this.employee = data;
-    });
+  setSelectedPosition() {
+    if(this.positions != null) {
+      this.positions.forEach(element => {
+        if(element.positionId === this.employee.positionId) {
+          this.selectedPosition = element;
+        }
+      })
+    }
   }
 
   updateEmployee() {
+    this.employee.positionId = this.selectedPosition.positionId;
+    this.employee.positionName = this.selectedPosition.positionName;
+
     if(this.authService.isUpdateEmployeeDataAllowed()) {
       this.employeeService.updateEmployee(this.employee).subscribe(success => {
         this.alertify.success('Employee updated successfully!');
+        this.employeeUpdatedEvent.emit(this.employee);
       },
       error => {
         this.alertify.error('Error: ' + error.error);
@@ -69,13 +86,4 @@ export class EmployeeDetailComponent implements OnChanges, OnInit {
       this.getEmployeeDetail(this.employee.employeeId);
     }
   }
-
-  // onChangePassword() {
-  //   let dialotRef = this.dialog.open(EmployeeChangePasswordDialogComponent,{
-  //     height: '350px',
-  //     width: '400px',
-  //     data: { employee: this.employee}
-  //   });
-  // }
-
 }

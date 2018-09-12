@@ -83,7 +83,6 @@ export class OrderCreateDialogComponent implements OnInit {
       receivedDate: null,
       approvedBy: null
     };
-    console.log(orderToCreate);
     this.orderService.createOrder(orderToCreate).subscribe(data => {
       orderToCreate.orderId = data['orderId'];
 

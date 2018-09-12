@@ -35,7 +35,7 @@
     <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
   </div>
   <div class="col-md-6">
-    <app-employee-detail *ngIf="selectedEmployee" [employee]="selectedEmployee"></app-employee-detail>
+    <app-employee-detail *ngIf="selectedEmployee" [employee]="selectedEmployee" (employeeUpdatedEvent)="employeeUpdatedInDetailComponent($event)" ></app-employee-detail>
   </div>
 </div>
 

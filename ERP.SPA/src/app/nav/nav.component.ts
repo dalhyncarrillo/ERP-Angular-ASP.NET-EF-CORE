@@ -11,7 +11,7 @@ import { TranslateService } from '../../../node_modules/@ngx-translate/core';
 })
 export class NavComponent implements OnInit {
 
-  constructor(private languageService: LanguageService, private router: Router, private authService: AuthService) { }
+  constructor(public languageService: LanguageService, private router: Router, private authService: AuthService) { }
 
   changeLang(lang: string) {
     this.languageService.changeLang(lang);
