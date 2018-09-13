@@ -10,13 +10,13 @@
     <div class="form-label-group">
       <label for="inputEmail">{{"emailAddress" | translate}}</label>
       <input type="email" #inputEmail="ngModel" name="inputEmail"[ngClass]="{'is-invalid':inputEmail.touched && !inputEmail.valid}" [(ngModel)]="emp.email" class="form-control" placeholder="{{'emailAddress'|translate}}" required email >    
-      <p *ngIf="inputEmail.touched && !inputEmail.valid" class="validation-error-message">Enter your email address!</p>
+      <p *ngIf="inputEmail.touched && !inputEmail.valid" class="validation-error-message">{{"enterEmail" | translate}}</p>
     </div>
   
     <div class="form-label-group"  [ngClass]="{'has-error':inputPassword.touched && !inputPassword.valid}">
       <label for="inputPassword">{{"password" |translate}}</label>
       <input type="password" #inputPassword="ngModel" name="inputPassword" [ngClass]="{'is-invalid':inputPassword.touched && !inputPassword.valid}" [(ngModel)]="emp.password" class="form-control" placeholder="{{'password'|translate}}" required>  
-      <p *ngIf="inputPassword.touched && !inputPassword.valid" class="validation-error-message">Enter your password!</p> 
+      <p *ngIf="inputPassword.touched && !inputPassword.valid" class="validation-error-message">{{"enterPassword" | translate}}</p> 
     </div>
     <br>
 

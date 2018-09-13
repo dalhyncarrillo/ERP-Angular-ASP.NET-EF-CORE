@@ -4,6 +4,8 @@
     "password": "Password",
     "delete":"Delete",
     "update":"Update",
+    "enterEmail":"Enter your e-mail address",
+    "enterPassword": "Enter your password",
 
     "home" : "Home",
     "employees" : "Employees",
@@ -34,5 +36,22 @@
     "city":"City",
     "address":"Address",
     "contactPerson":"Contact Person",
-    "phone": "Phone"
+    "phone": "Phone",
+
+    "loginSuccess":"You successfully logged in.",
+    "loginError": "Invalid email or password!",
+    "updateSuccess": "Update is successful!",
+    "deleteSuccess": "Delete is successful!",
+    "createSuccess": "Create is successful!",
+    "supplierAddSuccess": "Supplier successfully added to the item",
+    "supplierAddError": "This supplier already belongs to the item!",
+    "orderCreateSuccess": "Order created successfully",
+    "itemAlreadyInBasket": "The item is already in the basket",
+    "noPermission": "You do NOT have permission for this operation",
+    "orderApprovedSuccess": "Order approved successfully",
+    "orderReceivedSuccess": "Order received successfully",
+    "youNotCreatedOrder": "No permission - You did NOT created this order",
+    "basketEmpty": "Error: Your basket is empty"
+
+
 }

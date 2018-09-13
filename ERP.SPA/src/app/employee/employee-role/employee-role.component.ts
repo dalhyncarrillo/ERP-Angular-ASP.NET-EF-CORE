@@ -33,9 +33,6 @@ export class EmployeeRoleComponent implements OnChanges {
       this.employeeRoles = success;
     })
   }
-  onSaveChanges() {
-
-  }
 
   onDeleteRole(role: Role) {
 
@@ -47,7 +44,7 @@ export class EmployeeRoleComponent implements OnChanges {
     dialogRef.afterClosed().subscribe(result => {
       if(result === 'yes') {
         this.authService.DeleteEmployeeRole(this.employee.employeeId, role.roleId).subscribe(success => {
-          this.alertifyService.success('Role successfully deleted!');
+          this.alertifyService.success('deleteSuccess');
           this.employeeRoles.splice(this.employeeRoles.findIndex(element => element.roleId === role.roleId), 1);
         },
         error => {
@@ -66,6 +63,7 @@ export class EmployeeRoleComponent implements OnChanges {
     
     dialogRef.afterClosed().subscribe(result => {
       if(result != null) {
+        this.alertifyService.success('createSuccess');
         this.employeeRoles.push(result);
       }
     });

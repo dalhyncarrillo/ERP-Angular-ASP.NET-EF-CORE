@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class LanguageService {
 
-  DEFAULT_LANGUAGE = 'en'
+  DEFAULT_LANGUAGE = 'en';
   currentLang = this.DEFAULT_LANGUAGE;
 
   constructor(private translate: TranslateService) { 
@@ -18,5 +18,9 @@ export class LanguageService {
   changeLang(lang: string) {
     this.currentLang = lang;
     this.translate.use(lang);
+  }
+
+  getNotifyMessage(messageType: string) {
+    return this.translate.get(messageType);
   }
 }

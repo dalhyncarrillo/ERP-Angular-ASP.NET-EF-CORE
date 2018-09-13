@@ -14,7 +14,7 @@ export class EmployeeRoleAddDialogComponent implements OnInit {
 
   roles: Role[];
   selectedRole: Role;
-  constructor(private alertifyService: AlertifyService,
+  constructor(
     private authService: AuthService,
     public dialogRef: MatDialogRef<EmployeeRoleAddDialogComponent>,
     public languageService: LanguageService,
@@ -24,7 +24,7 @@ export class EmployeeRoleAddDialogComponent implements OnInit {
     this.authService.GetRolesThatEmployeeNotHave(this.data.employeeId).subscribe((success: Role[]) => {
       this.roles = success;
     })
-    
+   
   }
 
   onRoleSelected(role) {
@@ -33,7 +33,6 @@ export class EmployeeRoleAddDialogComponent implements OnInit {
 
   createEmployeeRole() {
     this.authService.createEmployeeRole(this.data.employeeId, this.selectedRole.roleId).subscribe(success => {
-      this.alertifyService.success('Role successfully added to employee');
       this.dialogRef.close(this.selectedRole);
     });
   }

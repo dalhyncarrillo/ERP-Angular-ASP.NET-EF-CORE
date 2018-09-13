@@ -18,7 +18,7 @@ export class SupplierDetailComponent implements OnChanges {
   @Output() supplierUpdated = new EventEmitter<Supplier>(); 
   @Input() supplier: Supplier;
 
-  statuses = ['Active', 'NO'];
+  statuses = ['Active', 'Inactive'];
   selectedStatus: string;
   constructor(private aleritfyService: AlertifyService, private supplierService: SupplierService, private dialog: MatDialog, private router: Router) { }
 
@@ -35,7 +35,7 @@ export class SupplierDetailComponent implements OnChanges {
   updateSupplier() {
     this.supplierService.updateSupplier(this.supplier).subscribe((updatedSupplier: Supplier) => {
       this.supplier = updatedSupplier;
-      this.aleritfyService.success('Supplier successfully updated!');
+      this.aleritfyService.success('updateSuccess');
       this.supplierUpdated.emit(updatedSupplier);
     },
     error => {

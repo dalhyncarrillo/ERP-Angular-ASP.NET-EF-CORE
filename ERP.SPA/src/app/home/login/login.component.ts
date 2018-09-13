@@ -15,19 +15,17 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-
   public login() {
     this.authService.login(this.emp).subscribe(
       success=> {
-        this.alertify.success('You logged in successfully!');
+        this.alertify.success('loginSuccess');
     },
       error => {
-        this.alertify.error('Email or password is invalid!');
+        this.alertify.error('loginError');
     });
   }
 
   onFlagClick(lang: string) {
     this.languageService.changeLang(lang);
   }
-
 }

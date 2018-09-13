@@ -4,6 +4,8 @@
     "password":"Jelszó",
     "delete":"Törlés",
     "update":"Módosít",
+    "enterEmail":"E-mail cím kitöltése kötelező!",
+    "enterPassword": "Jelszó kitöltése kötelező!",
  
     "home" : "Főoldal",
     "employees" : "Alkalmazottak",
@@ -30,7 +32,20 @@
     "city":"Város",
     "address":"Cím",
     "contactPerson":"Kapcsolat tartó",
-    "phone": "Telefonszám"
+    "phone": "Telefonszám",
 
-
+    "loginSuccess":"Sikeresen bejelentkeztél.",
+    "loginError": "Hibás e-mail vagy jelszó!",
+    "updateSuccess": "Sikeres módosítás!",
+    "deleteSuccess": "Sikeres törlés!",
+    "createSuccess": "Sikeres létrehozás!",
+    "supplierAddSuccess": "Beszállító sikeresen hozzáadva az áruhoz",
+    "supplierAddError": "Beszállító már hozzá lett adva az áruhoz!",
+    "orderCreateSuccess": "Rendelés sikeresen létrehozva",
+    "itemAlreadyInBasket": "Az áru már hozzá van adva a kosárhoz",
+    "noPermission": "Nincs engedélyed ehhez a művelethez",
+    "orderApprovedSuccess": "Rendelés sikeresen elfogadva",
+    "orderReceivedSuccess": "Rendelés sikeresen átvéve",
+    "youNotCreatedOrder": "Művelet megtagadva - Nem te hoztad létre a rendelést",
+    "basketEmpty": "Hiba: A Kosár nem lehet üres"
 }

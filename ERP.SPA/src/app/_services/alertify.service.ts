@@ -1,17 +1,23 @@
 import { Injectable } from '@angular/core';
+import { LanguageService } from './language.service';
 //var alertify = require('alertifyjs');
 declare let alertify: any;
 
 @Injectable()
 export class AlertifyService {
 
-constructor() { }
+constructor(private languageService: LanguageService) { }
 
   success(message: string) {
-    alertify.success(message);
+    this.languageService.getNotifyMessage(message).subscribe(res => {
+      alertify.success(res);
+    })
+
   }
 
   error(message: string) {
-    alertify.error(message);
+    this.languageService.getNotifyMessage(message).subscribe(res => {
+      alertify.error(res);
+    })
   }  
 }

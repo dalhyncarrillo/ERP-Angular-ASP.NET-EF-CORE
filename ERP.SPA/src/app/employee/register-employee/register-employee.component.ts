@@ -59,7 +59,7 @@ export class RegisterEmployeeComponent implements OnInit {
       this.employeeToRegister.positionId = this.registerForm.get('position').value.positionId;
       this.authService.register(this.employeeToRegister).subscribe( success => {
         
-        this.alertify.success('Employee successfully registered!')
+        this.alertify.success('createSuccess')
         this.router.navigate(['employees']);
       },
       error => {

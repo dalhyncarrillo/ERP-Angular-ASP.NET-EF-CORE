@@ -47,7 +47,7 @@ export class OrderItemsComponent implements OnChanges {
     if(this.currentUserCreatedOrder()) {
      this.openAddItemDialog();
     } else {
-      this.alertify.error('NO permission - You did NOT create this order');
+      this.alertify.error('youNotCreatedOrder');
     }
   }
   private openAddItemDialog() {
@@ -65,7 +65,7 @@ export class OrderItemsComponent implements OnChanges {
     if(this.currentUserCreatedOrder()) {
       this.deleteItem(orderItem);
     } else {
-      this.alertify.error('NO permission - You did NOT create this order');
+      this.alertify.error('youNotCreatedOrder');
     }
   }
 
@@ -91,14 +91,14 @@ export class OrderItemsComponent implements OnChanges {
 
   onSaveChanges() {
     if(this.orderItems.length == 0) {
-      this.alertify.error('Error: Your BASKET is empty!');
+      this.alertify.error('basketEmpty');
     } else {
       this.orderService.updateOrderItem(this.orderItems, this.order.orderId).subscribe( data => {
         this.order.totalCost = this.getOrderTotalCost();
         
         this.orderService.updateOrder(this.order).subscribe((success: Order) => {
           this.order = success;
-          this.alertify.success('Your order has been successfully UPDATED!');   
+          this.alertify.success('updateSuccess');   
         },error => {
           this.alertify.error('Error: ' + error.error);
           this.getOrderitems();

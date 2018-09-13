@@ -38,7 +38,7 @@ export class OrderDetailComponent implements OnChanges {
     if(this.authService.isApproveAllowed()) {
       this.approveOrder();
     } else {
-      this.alertifyService.error(this.authService.NO_PERMISSION_ERROR_MESSAGE);
+      this.alertifyService.error('noPermission');
     }
   }
 
@@ -47,7 +47,7 @@ export class OrderDetailComponent implements OnChanges {
     this.orderService.approveOrder(this.order).subscribe((success: Order) => {
       if(success.status === 'Approved') {
         this.order = success;
-        this.alertifyService.success('Order approved successfully');
+        this.alertifyService.success('orderApprovedSuccess');
       }
     },
     error => {
@@ -59,7 +59,7 @@ export class OrderDetailComponent implements OnChanges {
     if(this.authService.isReceiveAllowed()) {
       this.receiveOrder();
     } else {
-      this.alertifyService.error(this.authService.NO_PERMISSION_ERROR_MESSAGE);
+      this.alertifyService.error('noPermission');
     }
   
   }
@@ -68,7 +68,7 @@ export class OrderDetailComponent implements OnChanges {
     this.orderService.receiveOrder(this.order).subscribe((success: Order) => {
       if(success.status === 'Received') {
         this.order = success;
-        this.alertifyService.success('Order received successfully');
+        this.alertifyService.success('orderReceivedSuccess');
       }
     },
     error => {

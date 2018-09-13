@@ -74,7 +74,7 @@ export class EmployeeDetailComponent implements OnChanges, OnInit {
 
     if(this.authService.isUpdateEmployeeDataAllowed()) {
       this.employeeService.updateEmployee(this.employee).subscribe(success => {
-        this.alertify.success('Employee updated successfully!');
+        this.alertify.success('updateSuccess');
         this.employeeUpdatedEvent.emit(this.employee);
       },
       error => {

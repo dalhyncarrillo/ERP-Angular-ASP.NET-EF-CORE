@@ -89,12 +89,12 @@ export class OrderCreateDialogComponent implements OnInit {
       this.itemsToOrder.forEach(x => x.orderId = orderToCreate.orderId);
 
       this.orderService.createOrderItem(this.itemsToOrder).subscribe( data => { 
-        this.alertify.success('Order created successfully!\n ID: ' + orderToCreate.orderId);
+        this.alertify.success('orderCreateSuccess');
         this.dialogRef.close(orderToCreate);    
       });
     },
     error => {
-      this.alertify.error('Error: An error has occured: ' + error.error);
+      this.alertify.error('Error: ' + error.error);
     });
   }
 
@@ -124,7 +124,7 @@ export class OrderCreateDialogComponent implements OnInit {
         this.creationForm.get("selectedItemSupplier").value.unitCost
     };
     if(this.doesItemsToOrderContainItem(itemToBeAdded)) {
-      this.alertify.error('Item is already in the basket!');
+      this.alertify.error('itemAlreadyInBasket');
     } else {
       this.itemsToOrder.push(itemToBeAdded);
     }

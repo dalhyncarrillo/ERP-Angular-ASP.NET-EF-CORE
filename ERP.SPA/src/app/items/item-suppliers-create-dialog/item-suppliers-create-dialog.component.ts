@@ -61,11 +61,11 @@ export class ItemSuppliersCreateDialogComponent implements OnInit {
 
     this.itemService.createItemSuppliers(itemSupplierToCreate).subscribe(
       data => {
-        this.alertifyService.success('Supplier added to the item!');
+        this.alertifyService.success('supplierAddSuccess');
         this.itemService.itemSuppliers.push(itemSupplierToCreate);
       },
       error => {
-        this.alertifyService.error('This supplier already belongs to the item!');
+        this.alertifyService.error('supplierAddError');
       });
     this.dialogRef.close();
   }
