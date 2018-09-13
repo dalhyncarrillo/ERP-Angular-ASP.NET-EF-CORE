@@ -1,3 +1,4 @@
+import { StatusService } from './../../_services/status.service';
 import { ItemSuppliersCreateDialogComponent } from './../item-suppliers-create-dialog/item-suppliers-create-dialog.component';
 import { ItemSuppliers } from './../../_models/item-suppliers.model';
 import { Router } from '@angular/router';
@@ -16,7 +17,8 @@ export class ItemDetailComponent implements OnInit {
 
   @Input() item: Item;
   itemSuppliers: ItemSuppliers[];
-  constructor(private aleritfyService: AlertifyService, private itemService: ItemService, private dialog: MatDialog, private router: Router) { }
+  statuses: string [];
+  constructor(private statusService: StatusService, private aleritfyService: AlertifyService, private itemService: ItemService, private dialog: MatDialog, private router: Router) { }
 
   ngOnInit() {
 
@@ -25,6 +27,7 @@ export class ItemDetailComponent implements OnInit {
   ngOnChanges() {
     this.getItem();
     this.getSuppliers();
+    this.getStatuses();
   }
 
   getItem() {
@@ -37,15 +40,18 @@ export class ItemDetailComponent implements OnInit {
       this.itemService.itemSuppliers = data;
       this.itemSuppliers = this.itemService.itemSuppliers;
     });
- }
+  }
+  getStatuses() {
+    this.statuses = this.statusService.getStatuses();
+  }
+
  addSupplier() {
   let dialogRef = this.dialog.open(ItemSuppliersCreateDialogComponent, {
     height: '450px',
     width: '1700px',
     data: this.item 
-  });
-   
- }
+    });
+  }
 
   updateItem() {
     this.itemService.updateItem(this.item).subscribe((success: Item) => {

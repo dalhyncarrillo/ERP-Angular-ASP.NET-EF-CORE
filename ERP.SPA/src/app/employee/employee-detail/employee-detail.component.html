@@ -12,7 +12,8 @@
                 <div class="col-md-6">
                     <div class="form-group">
                       <label>{{"dateOfBirth" | translate}}</label>
-                      <input type="text" class="form-control" name="inputDateOfBirth" [(ngModel)]="employee.dateOfBirth" required disabled>
+                      <!-- <input type="text" class="form-control" name="inputDateOfBirth" [(ngModel)]="employee.dateOfBirth" required disabled> -->
+                      <input type="text" class="form-control" name="inputDateOfBirth" [ngModel]="employee.dateOfBirth | date : 'mediumDate'" (ngModelChange)="employee.dateOfBirth = $event" required disabled>
                     </div>
                   </div>
               </div>

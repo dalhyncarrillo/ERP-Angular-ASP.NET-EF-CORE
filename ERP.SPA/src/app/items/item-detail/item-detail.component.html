@@ -3,6 +3,21 @@
         <tab heading="Details">
                 <div class="row">
                         <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    <br>
+                                    <mat-form-field>
+                                        <mat-select matInput [(value)]="item.status">
+                                            <mat-option *ngFor="let status of statuses" [value]="status">
+                                              {{status}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                             </div>
+                </div>
+                <div class="row">
+                        <div class="col-md-6">
                            <div class="form-group">
                                <label>Item Id</label>
                                <input type="text" class="form-control" name="inputItemId" [(ngModel)]="item.itemId" disabled>

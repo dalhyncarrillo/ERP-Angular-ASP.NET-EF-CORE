@@ -1,3 +1,4 @@
+import { StatusService } from './../../_services/status.service';
 import { ConfirmationDialogComponent } from './../../ConfirmationDialog/ConfirmationDialog.component';
 import { AlertifyService } from './../../_services/alertify.service';
 import { SupplierCreateDialogComponent } from './../supplier-create-dialog/supplier-create-dialog.component';
@@ -18,19 +19,24 @@ export class SupplierDetailComponent implements OnChanges {
   @Output() supplierUpdated = new EventEmitter<Supplier>(); 
   @Input() supplier: Supplier;
 
-  statuses = ['Active', 'Inactive'];
+  statuses: string[];
   selectedStatus: string;
-  constructor(private aleritfyService: AlertifyService, private supplierService: SupplierService, private dialog: MatDialog, private router: Router) { }
+  constructor(private statusService: StatusService, private aleritfyService: AlertifyService, private supplierService: SupplierService, private dialog: MatDialog, private router: Router) { }
 
   ngOnChanges() {
     this.getSupplier();
+    this.getStatuses();
+
   }
   getSupplier() {
     
     this.supplierService.getSupplier(this.supplier.supplierId).subscribe((supplierDetail: Supplier) => {
       this.supplier = supplierDetail;
     });
+  }
 
+  getStatuses() {
+    this.statuses = this.statusService.getStatuses();
   }
   updateSupplier() {
     this.supplierService.updateSupplier(this.supplier).subscribe((updatedSupplier: Supplier) => {

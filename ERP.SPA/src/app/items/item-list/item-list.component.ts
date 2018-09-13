@@ -17,7 +17,7 @@ export class ItemListComponent implements OnInit {
 
   items: Item[];
  
-  displayedColumns = ['itemId', 'name', 'retailPrice', 'quantityOnHand'];
+  displayedColumns = ['itemId', 'name', 'retailPrice', 'quantityOnHand', 'status'];
 
   selectedItem;
   constructor(private itemService: ItemService, private dialog: MatDialog) {}
