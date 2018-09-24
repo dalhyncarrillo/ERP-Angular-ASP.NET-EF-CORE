@@ -40,7 +40,7 @@
   <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>
   <div class="col-md-6">
-    <app-order-detail [order]="selectedOrder" *ngIf="selectedOrder"></app-order-detail> 
+    <app-order-detail [order]="selectedOrder" (orderDeletedEvent)="orderDeleted($event)" *ngIf="selectedOrder"></app-order-detail> 
   </div>
 </div>
 

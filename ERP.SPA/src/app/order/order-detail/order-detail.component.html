@@ -68,7 +68,7 @@
 
                          <button class="btn btn-primary" (click)="onApproveOrder()"  *ngIf="getStatusOfOrder() ==='Requested'">Approve</button>
                          <button class="btn btn-primary" (click)="onReceiveOrder()"  *ngIf="getStatusOfOrder() ==='Approved'">Receive</button>
-                         <!-- <button class="btn btn-danger" (click)="deleteItem()">Delete</button>   -->
+                         <button class="btn btn-danger" (click)="onDeleteOrder()" *ngIf="isDeletableOrder()">Delete Order</button>  
         </tab>
         <tab heading="Items">
           <app-order-items [order]="order" ></app-order-items>

@@ -62,40 +62,39 @@ export class OrderCreateDialogComponent implements OnInit {
   createOrderCreationForm() {
     this.creationForm = new FormGroup({
       supplier: new FormControl("", [Validators.required]),
-      requestDate: new FormControl(new Date().toISOString(), [Validators.required]),
+      requestDate: new FormControl("", [Validators.required]),
       selectedItemSupplier: new FormControl("", [Validators.required]),
       unitCost: new FormControl({ value: "", disabled: true }, [Validators.required]),
       quantity: new FormControl("", [Validators.required]),
-      totalCost: new FormControl({ value: "", disabled: true }, [Validators.required]),
-  //    orderItemsTable: new FormControl("", [Validators.required])
+      totalCost: new FormControl({ value: "", disabled: true }, [Validators.required])
     });
   }
 
   onSubmit() {
-    let orderToCreate: Order = {
-      orderId: 0,
-      supplierId: this.creationForm.get('supplier').value.supplierId,
-      supplierName: this.creationForm.get('supplier').value.name,
-      status: 'Requested',
-      totalCost: this.calculateTotalCost(),
-      requestedDate: this.creationForm.get('requestDate').value,
-      createdBy: +localStorage.getItem('employeeId'),
-      receivedDate: null,
-      approvedBy: null
-    };
-    this.orderService.createOrder(orderToCreate).subscribe(data => {
-      orderToCreate.orderId = data['orderId'];
-
-      this.itemsToOrder.forEach(x => x.orderId = orderToCreate.orderId);
-
-      this.orderService.createOrderItem(this.itemsToOrder).subscribe( data => { 
-        this.alertify.success('orderCreateSuccess');
-        this.dialogRef.close(orderToCreate);    
+      let orderToCreate: Order = {
+        orderId: 0,
+        supplierId: this.creationForm.get('supplier').value.supplierId,
+        supplierName: this.creationForm.get('supplier').value.name,
+        status: 'Requested',
+        totalCost: this.calculateTotalCost(),
+        requestedDate: this.creationForm.get('requestDate').value,
+        createdBy: +localStorage.getItem('employeeId'),
+        receivedDate: null,
+        approvedBy: null
+      };
+      this.orderService.createOrder(orderToCreate).subscribe(data => {
+        orderToCreate.orderId = data['orderId'];
+  
+        this.itemsToOrder.forEach(x => x.orderId = orderToCreate.orderId);
+  
+        this.orderService.createOrderItem(this.itemsToOrder).subscribe( data => { 
+          this.alertify.success('orderCreateSuccess');
+          this.dialogRef.close(orderToCreate);    
+        });
+      },
+      error => {
+        this.alertify.error('Error: ' + error.error);
       });
-    },
-    error => {
-      this.alertify.error('Error: ' + error.error);
-    });
   }
 
   onSupplierSelected(supplier: Supplier) {

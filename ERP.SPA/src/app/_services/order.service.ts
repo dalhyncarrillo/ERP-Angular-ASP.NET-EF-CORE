@@ -23,6 +23,10 @@ export class OrderService {
     return this.http.put(environment.baseurl + 'orders/' + orderToUpdate.orderId, orderToUpdate);
   }
 
+  deleteOrder(orderToDelete: Order) {
+    return this.http.delete(environment.baseurl + 'orders/' + orderToDelete.orderId);
+  }
+
   approveOrder(orderToApprove: Order) {
     return this.http.put(environment.baseurl + 'orders/approve', orderToApprove);
   }

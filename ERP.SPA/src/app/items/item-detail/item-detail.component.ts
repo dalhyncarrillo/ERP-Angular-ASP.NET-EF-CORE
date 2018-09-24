@@ -63,8 +63,4 @@ export class ItemDetailComponent implements OnInit {
       this.getItem();
     });
   }
-
-  deleteItem() {
-
-  }
 }

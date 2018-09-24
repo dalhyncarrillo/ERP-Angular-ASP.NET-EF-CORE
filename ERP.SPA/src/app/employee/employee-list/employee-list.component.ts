@@ -64,6 +64,5 @@ export class EmployeeListComponent implements OnInit {
     let indexOfEmployeeUpdated = this.employees.indexOf(this.selectedEmployee);
     this.employees[indexOfEmployeeUpdated] = updatedEmployee;
     this.setDataSource();
-
   }
 }

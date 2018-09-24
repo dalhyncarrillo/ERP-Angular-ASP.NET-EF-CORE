@@ -39,6 +39,17 @@ namespace ERP.API.Controllers
             return Ok(order);
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteOrder(int id) 
+        {
+            var orderToDelete =  await this.repository.GetOrder(id);
+            if(orderToDelete != null) {
+                await this.repository.Delete(orderToDelete); 
+                return Ok();
+            }            
+            return BadRequest();
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateOrder([FromBody] Order orderToCreate) 
         {

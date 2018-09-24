@@ -1,9 +1,11 @@
+import { ConfirmationDialogComponent } from './../../ConfirmationDialog/ConfirmationDialog.component';
+import { MatDialog } from '@angular/material';
 import { AuthService } from './../../_services/auth.service';
 import { AlertifyService } from './../../_services/alertify.service';
 import { OrderItems } from './../../_models/order-items.model';
 import { OrderService } from './../../_services/order.service';
 import { Order } from './../../_models/order.model';
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { SELECT_VALUE_ACCESSOR } from '../../../../node_modules/@angular/forms/src/directives/select_control_value_accessor';
 
 @Component({
@@ -16,8 +18,9 @@ export class OrderDetailComponent implements OnChanges {
 
   @Input() order: Order;
   orderItems: OrderItems[];
+  @Output() orderDeletedEvent = new EventEmitter<Order>();
 
-  constructor(private authService: AuthService, private orderService: OrderService, private alertifyService: AlertifyService) { }
+  constructor(private authService: AuthService, private orderService: OrderService, private alertifyService: AlertifyService, private dialog: MatDialog) { }
 
   ngOnChanges() {
     this.getOrderDetails();
@@ -40,6 +43,24 @@ export class OrderDetailComponent implements OnChanges {
     } else {
       this.alertifyService.error('noPermission');
     }
+  }
+
+  onDeleteOrder() {
+    let dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      height: '250px',
+      width: '500px',
+      data: { message: 'Are you sure you want to delete this order?'}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result === 'yes') {
+        this.orderService.deleteOrder(this.order).subscribe(success => {
+          this.orderDeletedEvent.emit(this.order);
+        },
+        error => {
+          this.alertifyService.error(error.error);
+        })
+      }
+    });
   }
 
   private approveOrder() {
@@ -74,5 +95,12 @@ export class OrderDetailComponent implements OnChanges {
     error => {
       this.alertifyService.error('Error: ' + error.error);
     });
+  }
+
+  isDeletableOrder() {
+     if( (this.getStatusOfOrder() ==='Requested') && (this.order.createdBy === +localStorage.getItem('employeeId'))) {
+        return true;
+     }
+     return false;
   }
 }

@@ -68,6 +68,11 @@ export class OrderListComponent implements OnInit {
     } else {
       this.alertifyService.error(this.authService.NO_PERMISSION_ERROR_MESSAGE);
     }
+  }
 
+  orderDeleted(order: Order) {
+    this.orders.splice(this.orders.indexOf(order), 1);
+    this.selectedOrder = null;
+    this.setDataSource();
   }
 }

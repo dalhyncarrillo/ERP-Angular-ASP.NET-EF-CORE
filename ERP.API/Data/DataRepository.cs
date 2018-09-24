@@ -50,7 +50,7 @@ namespace ERP.API.Data
 
         public async Task<IEnumerable<ItemSupplier>> GetItemsOfSupplier(int supplierId) 
         {
-            return await this.context.ItemSuppliers.Where(itemSuppliers => itemSuppliers.SupplierId == supplierId).Include(itemSupp => itemSupp.Item).ToListAsync();
+            return await this.context.ItemSuppliers.Where(itemSuppliers => itemSuppliers.SupplierId == supplierId && itemSuppliers.Item.Status.Equals("Active")).Include(itemSupp => itemSupp.Item).ToListAsync();
 
         }
 

@@ -15,7 +15,7 @@
         <label>Request Date</label>
         <br>
         <mat-form-field>
-            <input matInput [min]="minRequestDate" [max]="maxRequestDate" [matDatepicker]="picker" placeholder="Choose a date">
+            <input matInput [min]="minRequestDate" formControlName="requestDate" [max]="maxRequestDate" [matDatepicker]="picker" placeholder="Choose a date">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
@@ -90,7 +90,7 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label>Quantity</label>
-                <input type="number" formControlName="quantity" pattern="^[1-9]+[0-9]*$" class="form-control">
+                <input type="number" formControlName="quantity"  pattern="^[1-9]+[0-9]*$" class="form-control">
             </div>
         </div>
         <!-- <div class="col-md-2">
@@ -102,11 +102,11 @@
         <div class="col-md-2">
             <div class="form-group">
                 <br>
-                <button type="button" [disabled]="!creationForm.valid" class="btn btn-success" (click)="onAddItem()">Add</button>
+                <button type="button" [disabled]="creationForm.get('quantity').hasError('required') || creationForm.get('selectedItemSupplier').hasError('required')" class="btn btn-success" (click)="onAddItem()">Add</button>
                 <button type="button" class="btn btn-danger" (click)="onRemoveItem()">Remove</button>
             </div>
         </div>
     </div>
 
-    <button type="submit" class="btn btn-primary" [disabled]="creationForm.invalid">Submit</button>
+    <button type="submit" class="btn btn-primary" [disabled]="creationForm.invalid || itemsToOrder.length === 0">Submit</button>
 </form>
