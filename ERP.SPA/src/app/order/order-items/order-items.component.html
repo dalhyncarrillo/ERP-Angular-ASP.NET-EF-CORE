@@ -1,5 +1,5 @@
 <button class="btn btn-primary toolBar" (click)="onSaveChanges()" *ngIf="changeOccured" [disabled]="getStatusOfOrder() === 'Requested' ? false : true">Save Changes</button>
-<table>
+<table class="tableFormat">
   <tr>
       <th>Item Id</th>
       <th>Item Name</th>
@@ -9,7 +9,7 @@
   </tr>
   <tr *ngFor="let orderItem of orderItems">
       <td>{{orderItem.itemId}}</td>
-      <td>{{orderItem.itemId}}</td>
+      <td>{{orderItem.itemName}}</td>
       <td>{{orderItem.unitCost}}</td>
       <td>{{orderItem.quantity}}</td>
       <td>{{orderItem.totalCost}}</td>

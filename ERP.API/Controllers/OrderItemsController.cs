@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using ERP.API.Data;
+using ERP.API.DTOs.OrderDtos;
 using ERP.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +24,11 @@ namespace ERP.API.Controllers
         public async Task<IActionResult> GetOrderItems(int id) 
         {
             var orderItems = await this.repository.GetOrderItems(id);
-            return Ok(orderItems);
+            if(orderItems == null)
+                return NotFound();
+
+            var orderItemsToReturn = this.mapper.Map<IEnumerable<OrderItemDto>>(orderItems);
+            return Ok(orderItemsToReturn);
         }
 
         [HttpPost]

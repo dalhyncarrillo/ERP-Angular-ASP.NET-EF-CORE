@@ -95,7 +95,6 @@ export class OrderItemsComponent implements OnChanges {
     } else {
       this.orderService.updateOrderItem(this.orderItems, this.order.orderId).subscribe( data => {
         this.order.totalCost = this.getOrderTotalCost();
-        
         this.orderService.updateOrder(this.order).subscribe((success: Order) => {
           this.order = success;
           this.alertify.success('updateSuccess');   

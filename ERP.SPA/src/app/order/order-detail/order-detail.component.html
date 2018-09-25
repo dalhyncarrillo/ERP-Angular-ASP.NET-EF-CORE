@@ -47,13 +47,13 @@
                             <div class="col-md-6">
                                <div class="form-group">
                                    <label>Requesed Date</label>
-                                   <input type="text" class="form-control" name="requestedDate" [(ngModel)]="order.requestedDate" required disabled>
+                                   <input type="text" class="form-control" name="requestedDate" [ngModel]="order.requestedDate | amFromUtc | amLocal | amDateFormat: 'YYYY-MM-DD HH:mm'" (ngModelChange)="order.requestedDate = $event" required disabled>
                                </div>
                             </div>
                             <div class="col-md-6">
                                <div class="form-group">
                                    <label>Received Date</label>
-                                   <input type="text" class="form-control" name="receivedDate" [(ngModel)]="order.receivedDate" required disabled> 
+                                   <input type="text" class="form-control" name="receivedDate" [ngModel]="order.receivedDate | date: 'mediumDate'" required disabled> 
                                </div>
                             </div>
                           </div>

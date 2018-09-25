@@ -1,3 +1,4 @@
+import { RequestOptions } from '@angular/http';
 import { AlertifyService } from './../../_services/alertify.service';
 import { OrderService } from './../../_services/order.service';
 import { Order } from './../../_models/order.model';
@@ -63,38 +64,12 @@ export class OrderCreateDialogComponent implements OnInit {
     this.creationForm = new FormGroup({
       supplier: new FormControl("", [Validators.required]),
       requestDate: new FormControl("", [Validators.required]),
+      requestTime: new FormControl("", [Validators.required]),
       selectedItemSupplier: new FormControl("", [Validators.required]),
       unitCost: new FormControl({ value: "", disabled: true }, [Validators.required]),
       quantity: new FormControl("", [Validators.required]),
       totalCost: new FormControl({ value: "", disabled: true }, [Validators.required])
     });
-  }
-
-  onSubmit() {
-      let orderToCreate: Order = {
-        orderId: 0,
-        supplierId: this.creationForm.get('supplier').value.supplierId,
-        supplierName: this.creationForm.get('supplier').value.name,
-        status: 'Requested',
-        totalCost: this.calculateTotalCost(),
-        requestedDate: this.creationForm.get('requestDate').value,
-        createdBy: +localStorage.getItem('employeeId'),
-        receivedDate: null,
-        approvedBy: null
-      };
-      this.orderService.createOrder(orderToCreate).subscribe(data => {
-        orderToCreate.orderId = data['orderId'];
-  
-        this.itemsToOrder.forEach(x => x.orderId = orderToCreate.orderId);
-  
-        this.orderService.createOrderItem(this.itemsToOrder).subscribe( data => { 
-          this.alertify.success('orderCreateSuccess');
-          this.dialogRef.close(orderToCreate);    
-        });
-      },
-      error => {
-        this.alertify.error('Error: ' + error.error);
-      });
   }
 
   onSupplierSelected(supplier: Supplier) {
@@ -116,6 +91,7 @@ export class OrderCreateDialogComponent implements OnInit {
     let itemToBeAdded: OrderItems = {
       orderId: 0,
       itemId: this.creationForm.get("selectedItemSupplier").value.itemId,
+      itemName: this.creationForm.get("selectedItemSupplier").value.itemName,
       quantity: this.creationForm.get("quantity").value,
       unitCost: this.creationForm.get("selectedItemSupplier").value.unitCost,
       totalCost:
@@ -150,6 +126,44 @@ export class OrderCreateDialogComponent implements OnInit {
       this.dataSource = new MatTableDataSource<OrderItems>(this.dataSource.data);
     });
     this.selection = new SelectionModel<OrderItems>(true, []);
+  }
+
+  onSubmit() {
+    let requestDate = this.generateDateTime();
+    let orderToCreate: Order = {
+      orderId: 0,
+      supplierId: this.creationForm.get('supplier').value.supplierId,
+      supplierName: this.creationForm.get('supplier').value.name,
+      status: 'Requested',
+      totalCost: this.calculateTotalCost(),
+      requestedDate: requestDate,
+      createdBy: +localStorage.getItem('employeeId'),
+      receivedDate: null,
+      approvedBy: null
+    };
+    this.orderService.createOrder(orderToCreate).subscribe(data => {
+      orderToCreate.orderId = data['orderId'];
+
+      this.itemsToOrder.forEach(x => x.orderId = orderToCreate.orderId);
+
+      this.orderService.createOrderItem(this.itemsToOrder).subscribe( data => { 
+        this.alertify.success('orderCreateSuccess');
+        this.dialogRef.close(orderToCreate);    
+      });
+    },
+    error => {
+      this.alertify.error('Error: ' + error.error);
+    });
+  }
+
+  generateDateTime(): Date {
+    let year = this.creationForm.get('requestDate').value.getFullYear();
+    let month = this.creationForm.get('requestDate').value.getMonth();
+    let day = this.creationForm.get('requestDate').value.getDate();
+    let hour = this.creationForm.get('requestTime').value.getHours();
+    let minute = this.creationForm.get('requestTime').value.getMinutes();
+
+    return new Date(year, month, day, hour, minute);
   }
 
   masterToggle() {

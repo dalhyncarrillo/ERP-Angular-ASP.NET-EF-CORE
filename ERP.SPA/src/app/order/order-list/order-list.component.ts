@@ -37,8 +37,8 @@ export class OrderListComponent implements OnInit {
 
   getOrders() {
     this.orderService.getOrders().subscribe(data => {
-    this.orders = data;
-    this.setDataSource();  
+      this.orders = data;
+      this.setDataSource();  
     });
   }
 

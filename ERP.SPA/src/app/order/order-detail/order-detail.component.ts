@@ -37,14 +37,6 @@ export class OrderDetailComponent implements OnChanges {
     });
   }
 
-  onApproveOrder() {
-    if(this.authService.isApproveAllowed()) {
-      this.approveOrder();
-    } else {
-      this.alertifyService.error('noPermission');
-    }
-  }
-
   onDeleteOrder() {
     let dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       height: '250px',
@@ -61,6 +53,14 @@ export class OrderDetailComponent implements OnChanges {
         })
       }
     });
+  }
+
+  onApproveOrder() {
+    if(this.authService.isApproveAllowed()) {
+      this.approveOrder();
+    } else {
+      this.alertifyService.error('noPermission');
+    }
   }
 
   private approveOrder() {
@@ -81,8 +81,7 @@ export class OrderDetailComponent implements OnChanges {
       this.receiveOrder();
     } else {
       this.alertifyService.error('noPermission');
-    }
-  
+    } 
   }
 
   private receiveOrder() {

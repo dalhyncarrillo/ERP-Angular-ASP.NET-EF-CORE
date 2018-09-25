@@ -60,7 +60,7 @@ namespace ERP.API.Data
         }
         public async Task<Order> GetOrder(int id)
         {
-           return await this.context.Orders.FirstOrDefaultAsync(order => order.OrderId == id);
+           return await this.context.Orders.Include(order => order.Supplier).FirstOrDefaultAsync(order => order.OrderId == id);
         }
 
         public async Task<bool> CreateOrder(Order orderToCreate)

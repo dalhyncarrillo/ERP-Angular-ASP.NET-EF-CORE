@@ -28,7 +28,7 @@ import { SupplierService } from './_services/supplier.service';
 import { SupplierDetailComponent } from './suppliers/supplier-detail/supplier-detail.component';
 import { SupplierCreateDialogComponent } from './suppliers/supplier-create-dialog/supplier-create-dialog.component';
 import { ConfirmationDialogComponent } from './ConfirmationDialog/ConfirmationDialog.component';
-import { TabsModule } from 'ngx-bootstrap';
+import { TabsModule, TimepickerModule  } from 'ngx-bootstrap';
 import { AppMaterialModule } from './/app-material.module';
 import { EmployeeListComponent } from './employee/employee-list/employee-list.component';
 import { EmployeeDetailComponent } from './employee/employee-detail/employee-detail.component';
@@ -40,6 +40,7 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { EmployeeRoleComponent } from './employee/employee-role/employee-role.component';
 import { EmployeeRoleAddDialogComponent } from './employee/employee-role-add-dialog/employee-role-add-dialog.component';
 import { EmployeeChangePasswordDialogComponent } from './employee/employee-change-password-dialog/employee-change-password-dialog.component';
+import { MomentModule } from 'ngx-moment';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -74,6 +75,7 @@ export function createTranslateLoader(http: HttpClient) {
     EmployeeChangePasswordDialogComponent
 ],
   imports: [
+    MomentModule,
     TranslateModule.forRoot({
       loader: {
           provide: TranslateLoader,
@@ -81,6 +83,7 @@ export function createTranslateLoader(http: HttpClient) {
           deps: [HttpClient]
       }
     }),
+    TimepickerModule.forRoot(),
     TabsModule.forRoot(),
     AppMaterialModule,
     ReactiveFormsModule,

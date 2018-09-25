@@ -8,6 +8,7 @@ using ERP.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using System;
 
 namespace ERP.API.Controllers
 {
@@ -31,12 +32,12 @@ namespace ERP.API.Controllers
             return Ok(ordersToReturn);
         }
 
-
         [HttpGet("{id}")]
         public async Task<IActionResult> GetOrder(int id) 
         {
             var order = await this.repository.GetOrder(id);
-            return Ok(order);
+            var orderToReturn = this.mapper.Map<OrderDetailDto>(order);
+            return Ok(orderToReturn);
         }
 
         [HttpDelete("{id}")]
@@ -79,7 +80,8 @@ namespace ERP.API.Controllers
                 
             await this.updateItemQuantityOrdered(orderToUpdate.OrderId);
             
-            return Ok(updatedOrder);
+            var updatedOrderToReturn = this.mapper.Map<OrderDetailDto>(updatedOrder);
+            return Ok(updatedOrderToReturn);
         }
 
         private async Task updateItemQuantityOrdered(int orderId)
@@ -106,13 +108,14 @@ namespace ERP.API.Controllers
             var updatedOrder = await this.repository.UpdateEntity(orderToUpdate);
             if(updatedOrder == null)
                 return BadRequest("Error change happened");
-                
-            await this.updateItemQuantities(orderToUpdate.OrderId);
-            
-            return Ok(updatedOrder);
+
+            await this.updateItemQuantitiesOnHand(orderToUpdate.OrderId);   
+
+            var updatedOrderToReturn = this.mapper.Map<OrderDetailDto>(updatedOrder);
+            return Ok(updatedOrderToReturn);
         }
 
-        private async Task updateItemQuantities(int orderId)
+        private async Task updateItemQuantitiesOnHand(int orderId)
         {
             var orderItems = await this.repository.GetOrderItems(orderId);
             var items =  await this.repository.GetItems();

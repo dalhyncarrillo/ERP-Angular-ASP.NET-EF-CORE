@@ -36,6 +36,7 @@ export class OrderService {
   }
 
   createOrder(orderToCreate: Order) {
+    console.log(orderToCreate);
     return this.http.post(environment.baseurl + 'orders', orderToCreate);
   }
   

@@ -18,7 +18,7 @@ body {
     color: white !important;
   }
 
-  table {
+  .tableFormat {
     margin-left: 15px;
     width: 100%;
     padding: 15px;
