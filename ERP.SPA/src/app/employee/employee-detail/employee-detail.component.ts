@@ -32,10 +32,6 @@ export class EmployeeDetailComponent implements OnChanges, OnInit {
     this.checkIfItIsMyProfile();
   }
 
-  ngOnChanges() {
-    this.getEmployeeDetail(this.employee.employeeId);
-  }
-
   getPositions() {
     this.authService.getPositions().subscribe((success: Position[]) => {
       this.positions = success;
@@ -49,6 +45,10 @@ export class EmployeeDetailComponent implements OnChanges, OnInit {
     } else {
       this.getEmployeeDetail(this.employee.employeeId);
     }
+  }
+
+  ngOnChanges() {
+    this.getEmployeeDetail(this.employee.employeeId);
   }
 
     getEmployeeDetail(employeeId: number) {

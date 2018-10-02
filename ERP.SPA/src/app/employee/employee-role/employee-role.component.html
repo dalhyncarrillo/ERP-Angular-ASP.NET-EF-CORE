@@ -8,7 +8,7 @@
       <td>{{role.roleId}}</td>
       <td *ngIf="getCurrentLang() == 'en'">{{role.roleNameEn}}</td>
       <td *ngIf="getCurrentLang() == 'hu'">{{role.roleNameHu}}</td>
-      <button class="btn btn-danger" (click)="onDeleteRole(role)">Delete</button>
+      <button class="btn btn-danger" (click)="onDeleteRole(role)" *ngIf="!isMyProfile">Delete</button>
   </tr>
 </table>
-<button class="btn btn-primary toolBar" (click)="onAddRole()"><i class="fa fa-plus"></i></button>
+<button class="btn btn-primary toolBar" (click)="onAddRole()" *ngIf="!isMyProfile"><i class="fa fa-plus"></i></button>

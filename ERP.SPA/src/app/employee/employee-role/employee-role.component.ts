@@ -16,6 +16,7 @@ import { LanguageService } from '../../_services/language.service';
 })
 export class EmployeeRoleComponent implements OnChanges {
   @Input() employee: Employee;
+  @Input() isMyProfile: boolean;
 
   changeOccured = false;
   employeeRoles: Role[];
