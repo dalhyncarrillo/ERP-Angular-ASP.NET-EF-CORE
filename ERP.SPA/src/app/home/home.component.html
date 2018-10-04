@@ -1,2 +1,74 @@
 <app-login *ngIf="!loggedIn()"></app-login>
 <app-employee-change-password-dialog *ngIf="isFirstLogin()"></app-employee-change-password-dialog>
+<div *ngIf="loggedIn()">
+        <header class="masthead text-center text-white">
+                <div class="container my-auto">
+                  <div class="row">
+                    <div class="col-lg-10 mx-auto container text-shadow">
+                      <h1>{{"erp" | translate}}</h1>
+                      <hr>
+                    </div>
+                    <div class="col-lg-8 mx-auto">
+                      <h4 class="text-faded mb-5 text-orange">{{"welcome" | translate}}</h4>
+                      <h5 class="text-orange text-faded mb-4" >{{"createdBy" | translate }}</h5>
+                      <a class="btn btn-primary btn-xl" (click)="scroll(about)">{{"getStarted" | translate}}</a>
+                    </div>
+                  </div>
+                </div>
+              </header>
+          
+              <section class="bg-primary" #about>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-lg-8 mx-auto text-center">
+                      <h2 class="section-heading text-white text-shadow">{{"whatCanYouDoHere" | translate}}</h2>
+                      <hr class="light my-4">
+                      <p class="text-faded text-white text-shadow">{{"about" | translate }}</p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              
+              <section id="services">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-lg-12 text-center">
+                          <h2 class="section-heading text-orange">{{"functionalities" | translate}}</h2>
+                          <hr class="my-4">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="container">
+                      <div class="row">
+                            <div class="col-lg-3 col-md-6 text-center">
+                                    <div class="service-box mt-5 mx-auto">
+                                      <i [routerLink]="['/employees']" class="fas fa-4x fa-user text-orange mb-3 sr-icon-3"></i>
+                                      <h3 class="mb-3 text-orange">{{"employees" | translate}}</h3>
+                                      <p class="text-muted mb-0">You can use this theme as is, or you can make changes!</p>
+                                    </div>
+                              </div>
+                        <div class="col-lg-3 col-md-6 text-center">
+                          <div class="service-box mt-5 mx-auto">
+                              <i [routerLink]="['/suppliers']" class="fas fa-4x fa-store text-orange mb-3 sr-icon-3"></i>
+                            <h3 class="mb-3 text-orange">{{"suppliers" | translate}}</h3>
+                            <p class="text-muted mb-0">You can use this theme as is, or you can make changes!</p>
+                          </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 text-center">
+                          <div class="service-box mt-5 mx-auto">
+                            <i [routerLink]="['/items']"class="fas fa-4x fa-tshirt text-orange mb-3 sr-icon-3"></i>
+                            <h3  routerLinkActive="router-link-active"  class="mb-3 text-orange">{{"items" | translate}}</h3>
+                            <p class="text-muted mb-0">We update dependencies to keep things fresh.</p>
+                          </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 text-center">
+                          <div class="service-box mt-5 mx-auto">
+                            <i [routerLink]="['/orders']" routerLinkActive="router-link-active"  class="fas fa-4x fa-shopping-cart text-orange mb-3 sr-icon-4"></i>
+                            <h3 class="mb-3 text-orange">{{"orders" | translate}}</h3>
+                            <p class="text-muted mb-0">You have to make your websites with love these days!</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+</div>

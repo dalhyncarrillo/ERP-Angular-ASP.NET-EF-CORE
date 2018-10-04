@@ -14,7 +14,7 @@
             <input matInput placeholder="Lead Time" formControlName="leadTimeCtrl" required>
           </mat-form-field>
           <div>
-              <button class="btn btn-primary" matStepperNext>Next</button>
+              <button class="btn btn-orange" matStepperNext>Next</button>
           </div>
         </form>
     </mat-step>   
@@ -29,8 +29,8 @@
           <input matInput placeholder="Unit Cost" formControlName="unitCostCtrl" required>
         </mat-form-field>
         <div>
-          <button class="btn btn-primary" matStepperNext>Next</button>
-          <button class="btn btn-primary" matStepperPrevious>Back</button>        
+          <button class="btn btn-orange" matStepperNext>Next</button>
+          <button class="btn btn-orange" matStepperPrevious>Back</button>        
         </div>
       </form>
     </mat-step>
@@ -39,7 +39,7 @@
       You are now done.
       <div>
           <button class="btn btn-success" (click)="createNewItemSupplier()" matStepperNext>Add</button>
-          <button class="btn btn-primary" matStepperPrevious>Back</button> 
+          <button class="btn btn-orange" matStepperPrevious>Back</button> 
         <button class="btn btn-danger" (click)="stepper.reset()">Reset</button>
       </div>
     </mat-step>

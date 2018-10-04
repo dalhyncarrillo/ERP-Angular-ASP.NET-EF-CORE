@@ -7,6 +7,15 @@
     "enterEmail":"Enter your e-mail address",
     "enterPassword": "Enter your password",
 
+    "erp": "Enterprise Resource Planning",
+    "welcome": "This ERP Single Page Application  was created as part of my thesis for Eszterházy Károly University.",
+    "createdBy": "created by Jordan Rigo",
+    "getStarted": "Let's Get Started!",
+    "whatCanYouDoHere": "What can you do here?",
+    "about": "You can keep track of your employees, purchase items in order to maintain your stock holdings and be in touch with your suppliers.",
+    "functionalities": "Functionalities",
+
+
     "home" : "Home",
     "employees" : "Employees",
     "suppliers":"Suppliers",

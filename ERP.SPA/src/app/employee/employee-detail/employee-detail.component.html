@@ -57,8 +57,8 @@
                       </div>
                     </div>
             
-                <button class="btn btn-primary" type="button" *ngIf="!isMyProfile" [disabled]="form.invalid" (click)="updateEmployee()">{{"update" | translate}}</button>
-                <button class="btn btn-primary" type="button" *ngIf="isMyProfile" [routerLink]="['/employees','changepassword']" >{{"changePassword" | translate}}</button>
+                <button class="btn btn-orange" type="button" *ngIf="!isMyProfile" [disabled]="form.invalid" (click)="updateEmployee()">{{"update" | translate}}</button>
+                <button class="btn btn-orange" type="button" *ngIf="isMyProfile" [routerLink]="['/employees','changepassword']" >{{"changePassword" | translate}}</button>
         </form>
     </tab>
     <tab heading="{{'roleName' | translate}}">

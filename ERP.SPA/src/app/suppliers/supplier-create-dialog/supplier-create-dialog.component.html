@@ -6,7 +6,7 @@
         <input matInput placeholder="Supplier name" formControlName="nameCtrl" required>
       </mat-form-field>
       <div>
-        <button class="btn btn-primary" matStepperNext>Next</button>
+        <button class="btn btn-orange" matStepperNext>Next</button>
       </div>
     </form>
   </mat-step>
@@ -21,8 +21,8 @@
         <input matInput placeholder="Address" formControlName="addressCtrl" required>
       </mat-form-field>
       <div>
-        <button class="btn btn-primary" matStepperNext>Next</button>
-        <button class="btn btn-primary" matStepperPrevious>Back</button>        
+        <button class="btn btn-orange" matStepperNext>Next</button>
+        <button class="btn btn-orange" matStepperPrevious>Back</button>        
       </div>
     </form>
   </mat-step>
@@ -37,8 +37,8 @@
           <input matInput placeholder="Phone" formControlName="phoneCtrl" pattern="^[0-9]*$" required>
         </mat-form-field>
         <div>
-            <button class="btn btn-primary" matStepperNext>Next</button>
-            <button class="btn btn-primary" matStepperPrevious>Back</button> 
+            <button class="btn btn-orange" matStepperNext>Next</button>
+            <button class="btn btn-orange" matStepperPrevious>Back</button> 
         </div>
       </form>
     </mat-step>
@@ -47,7 +47,7 @@
     You are now done.
     <div>
         <button class="btn btn-success" (click)="addNewSupplier()" matStepperNext>Add</button>
-        <button class="btn btn-primary" matStepperPrevious>Back</button> 
+        <button class="btn btn-orange" matStepperPrevious>Back</button> 
       <button class="btn btn-danger" (click)="stepper.reset()">Reset</button>
     </div>
   </mat-step>

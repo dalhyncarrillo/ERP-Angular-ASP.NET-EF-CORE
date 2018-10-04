@@ -41,11 +41,15 @@ import { EmployeeRoleComponent } from './employee/employee-role/employee-role.co
 import { EmployeeRoleAddDialogComponent } from './employee/employee-role-add-dialog/employee-role-add-dialog.component';
 import { EmployeeChangePasswordDialogComponent } from './employee/employee-change-password-dialog/employee-change-password-dialog.component';
 import { MomentModule } from 'ngx-moment';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
+export function getToken() {
+  return localStorage.getItem('token');
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -75,6 +79,7 @@ export function createTranslateLoader(http: HttpClient) {
     EmployeeChangePasswordDialogComponent
 ],
   imports: [
+    FontAwesomeModule,
     MomentModule,
     TranslateModule.forRoot({
       loader: {
@@ -92,10 +97,8 @@ export function createTranslateLoader(http: HttpClient) {
     FormsModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: () => {
-          return localStorage.getItem('token');
-        },
-        whitelistedDomains: ['localhost:5000']
+        tokenGetter: getToken,
+        whitelistedDomains: ['localhost:5000', 'jordanrigo-001-site1.ftempurl.com']
       }
     }),
   ],

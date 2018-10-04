@@ -7,6 +7,14 @@
     "enterEmail":"E-mail cím kitöltése kötelező!",
     "enterPassword": "Jelszó kitöltése kötelező!",
  
+    "erp": "Vállalatirányítási Rendszer",
+    "welcome": "Ez a Vállalatirányítási web applikáció a szakdolgozatom részeként jött létre, melyet az Eszterházy Károly Egyetemre készítettem.",
+    "createdBy": "készítette Rigó Jordán",
+    "getStarted": "Kezdjünk neki!",
+    "whatCanYouDoHere": "Mit tudsz csinálni?",
+    "about": "Nyomon követheted az alkalmazottakat, rendeléseket adhatsz le, hogy szinten tartsd az árukészletedet és kapcsolatban lehetsz a beszállítóiddal.",
+    "functionalities": "Funkcionalitások",
+
     "home" : "Főoldal",
     "employees" : "Alkalmazottak",
     "suppliers":"Beszállítók",

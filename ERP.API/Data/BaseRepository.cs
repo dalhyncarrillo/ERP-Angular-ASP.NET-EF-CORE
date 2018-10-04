@@ -37,7 +37,7 @@ namespace ERP.API.Data
                 await this.context.SaveChangesAsync();
                 return true;
             }
-            catch (DbUpdateConcurrencyException ex)  
+            catch (DbUpdateConcurrencyException)  
             {  
                 return false;
             }  

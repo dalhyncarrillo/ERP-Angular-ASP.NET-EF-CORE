@@ -1,8 +1,8 @@
 <div class="toolBar">
-  <button class="btn btn-primary" (click)="addSupplier()"><i class="fa fa-plus"></i></button>
+  <button class="btn btn-orange" [class.list-left-margin]="selectedSupplier" (click)="addSupplier()"><i class="fa fa-plus" ></i></button>
 </div>
 <div class="row">     
-  <div class="mat-elevation-z8 full-width" [class.col-md-4]="selectedSupplier">
+  <div class="mat-elevation-z8 full-width" [ngClass]="{'col-md-4': selectedSupplier, 'list-left-margin': selectedSupplier}">
       <mat-form-field class="margins">
           <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
         </mat-form-field>

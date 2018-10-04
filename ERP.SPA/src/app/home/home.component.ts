@@ -7,7 +7,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
@@ -18,6 +17,11 @@ export class HomeComponent implements OnInit {
   }
   loggedIn() {
     return this.authService.isLoggedIn();
+  }
+
+  scroll(el) {
+    el.scrollIntoView({behavior: "smooth", block: "start", inline: "start"});
+    // el.scrollIntoView();
   }
 
 }

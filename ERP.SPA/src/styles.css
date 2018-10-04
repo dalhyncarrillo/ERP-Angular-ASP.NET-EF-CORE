@@ -1,7 +1,22 @@
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 body {
    background-color: #fbfbfb;
-   
+   /* background-image: url("assets\images\background.jpg"); */
+}
+
+header {
+    background-image: url("assets\images\business1.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+h1 {
+    color:#e76c2f;
+}
+
+.text-orange {
+	color: #e76c2f;
 }
 .toolBar {
     margin: 15px;
@@ -14,11 +29,25 @@ body {
     box-shadow: 1px 1px 8px 0px rgba(19, 18, 21, 0.5);
 }
 .selected {
-    background-color: #2FA4E7 !important;
+    background-color: #e76c2f !important;
     color: white !important;
+  }
+  .btn-orange {
+    background-color: #e76c2f;
+    border-color: #e76c2f;
+    color: white;
+  }
+
+  .btn-orange:hover {
+    background-color: white;
+    color: #e76c2f;
+  }
+  .list-left-margin {
+      margin-left: 170px;
   }
 
   .tableFormat {
+
     margin-left: 15px;
     width: 100%;
     padding: 15px;
@@ -34,6 +63,7 @@ body {
   }
 
   .panel {
+    background-color: #fbfbfb;
     width: 100%;
     padding: 15px;
     box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
