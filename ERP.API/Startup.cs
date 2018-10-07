@@ -33,8 +33,8 @@ namespace ERP.API
             var key = Encoding.ASCII.GetBytes("super secret key");
             services.AddMvc();
             services.AddAutoMapper();
-            // var connection = @"Server=DESKTOP-U2AMBJE\SQLEXPRESS;Database=erp;Trusted_Connection=True;ConnectRetryCount=0;MultipleActiveResultSets=True";
-            var connection = @"Data Source=SQL6006.site4now.net;Initial Catalog=DB_A4165E_jordanrigo;User Id=DB_A4165E_jordanrigo_admin;Password=Simsons51b1993;"
+            var connection = @"Server=DESKTOP-U2AMBJE\SQLEXPRESS;Database=erp;Trusted_Connection=True;ConnectRetryCount=0;MultipleActiveResultSets=True";
+            // var connection = @"Data Source=SQL6006.site4now.net;Initial Catalog=DB_A4165E_jordanrigo;User Id=DB_A4165E_jordanrigo_admin;Password=Simsons51b1993;"
 ;
             services.AddDbContext<DataContext>(options => options.UseSqlServer(connection));
             services.AddScoped<IDataRepository, DataRepository>();

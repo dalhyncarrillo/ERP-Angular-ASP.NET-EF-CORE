@@ -1,64 +1,68 @@
 <div class="panel">
     <tabset>
         <tab heading="Details">
-                <div class="row">
-                        <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Status</label>
-                                    <br>
-                                    <mat-form-field>
-                                        <mat-select matInput [(value)]="item.status">
-                                            <mat-option *ngFor="let status of statuses" [value]="status">
-                                              {{status}}
-                                            </mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                </div>
-                             </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Status</label>
+                        <br>
+                        <mat-form-field>
+                            <mat-select matInput [(value)]="item.status">
+                                <mat-option *ngFor="let status of statuses" [value]="status">
+                                    {{status}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
                 </div>
-                <div class="row">
-                        <div class="col-md-6">
-                           <div class="form-group">
-                               <label>Item Id</label>
-                               <input type="text" class="form-control" name="inputItemId" [(ngModel)]="item.itemId" disabled>
-                           </div>
-                        </div>
-                        <div class="col-md-6">
-                           <div class="form-group">
-                               <label>Item Name</label>
-                               <input type="text" class="form-control" name="inputName" [(ngModel)]="item.name"  required>
-                           </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Retail Price</label>
-                                <input type="text" class="form-control" name="inputCity" [(ngModel)]="item.retailPrice" required>
-                            </div>
-                         </div>
-                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Average Cost</label>
-                                <input type="text" class="form-control" name="inputAddress" [(ngModel)]="item.avgCost" required disabled>
-                            </div>
-                         </div>
-                       </div>
-                       <div class="row">
-                           <div class="col-md-6">
-                              <div class="form-group">
-                                  <label>Quantity On Hand</label>
-                                  <input type="text" class="form-control" name="inputContactName" [(ngModel)]="item.quantityOnHand" required disabled>
-                              </div>
-                           </div>
-                           <div class="col-md-6">
-                              <div class="form-group">
-                                  <label>Quantity ordered</label>
-                                  <input type="text" class="form-control" name="inputPhone" [(ngModel)]="item.quantityOrdered" required disabled> 
-                              </div>
-                           </div>
-                         </div>
-                         <button class="btn btn-orange" (click)="updateItem()">Update</button>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Item Id</label>
+                        <input type="text" class="form-control" name="inputItemId" [(ngModel)]="item.itemId" disabled>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Item Name</label>
+                        <input type="text" class="form-control" name="inputName" [(ngModel)]="item.name" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Retail Price</label>
+                        <input type="text" class="form-control" name="inputCity" [(ngModel)]="item.retailPrice"
+                            required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Average Cost</label>
+                        <input type="text" class="form-control" name="inputAddress" [(ngModel)]="item.avgCost" required
+                            disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Quantity On Hand</label>
+                        <input type="text" class="form-control" name="inputContactName" [(ngModel)]="item.quantityOnHand"
+                            required disabled>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Quantity ordered</label>
+                        <input type="text" class="form-control" name="inputPhone" [(ngModel)]="item.quantityOrdered"
+                            required disabled>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-orange" (click)="updateItem()">Update</button>
         </tab>
         <tab heading="Suppliers">
             <table class="tableFormat">

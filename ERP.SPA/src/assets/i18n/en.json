@@ -14,6 +14,10 @@
     "whatCanYouDoHere": "What can you do here?",
     "about": "You can keep track of your employees, purchase items in order to maintain your stock holdings and be in touch with your suppliers.",
     "functionalities": "Functionalities",
+    "employeeFunc": "You can maintain your employee's profile, add appropriate roles to them, depending on their task to be fulfilled!",
+    "supplierFunc": "You can add new suppliers and keep detailed information of them!",
+    "itemFunc": "You can create new items, set the retail price and unit cost, keep track of both incoming and on hand quantities!",
+    "orderFunc": "You can purchase needed items from earlier defined suppliers, modify requested orders, approve and receive created orders!",
 
 
     "home" : "Home",
@@ -60,7 +64,8 @@
     "orderApprovedSuccess": "Order approved successfully",
     "orderReceivedSuccess": "Order received successfully",
     "youNotCreatedOrder": "No permission - You did NOT created this order",
-    "basketEmpty": "Error: Your basket is empty"
+    "basketEmpty": "Error: Your basket is empty",
+    "concurrencyError": "Error: Someone has already updated this order."
 
 
 }

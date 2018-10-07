@@ -1,23 +1,25 @@
-<button class="btn btn-orange toolBar" (click)="onSaveChanges()" *ngIf="changeOccured" [disabled]="getStatusOfOrder() === 'Requested' ? false : true">Save Changes</button>
+<button class="btn btn-orange toolBar" (click)="onSaveChanges()" *ngIf="changeOccured" [disabled]="getStatusOfOrder() === 'Requested' ? false : true">Save
+    Changes</button>
 <table class="tableFormat">
-  <tr>
-      <th>Item Id</th>
-      <th>Item Name</th>
-      <th>Unit Cost</th>
-      <th>Quantity</th>
-      <th>Total Cost</th>
-  </tr>
-  <tr *ngFor="let orderItem of orderItems">
-      <td>{{orderItem.itemId}}</td>
-      <td>{{orderItem.itemName}}</td>
-      <td>{{orderItem.unitCost}}</td>
-      <td>{{orderItem.quantity}}</td>
-      <td>{{orderItem.totalCost}}</td>
-      <button class="btn btn-danger" (click)="onDeleteItem(orderItems)" [disabled]="getStatusOfOrder() === 'Requested' ? false : true">Delete</button>
-  </tr>
-  <tr>
-      <th>Order Total Cost:</th>
-      <th>{{getOrderTotalCost()}}</th>
-  </tr>
+    <tr>
+        <th>Item Id</th>
+        <th>Item Name</th>
+        <th>Unit Cost</th>
+        <th>Quantity</th>
+        <th>Total Cost</th>
+    </tr>
+    <tr *ngFor="let orderItem of orderItems">
+        <td>{{orderItem.itemId}}</td>
+        <td>{{orderItem.itemName}}</td>
+        <td>{{orderItem.unitCost}}</td>
+        <td>{{orderItem.quantity}}</td>
+        <td>{{orderItem.totalCost}}</td>
+        <button class="btn btn-blue" (click)="onDeleteItem(orderItems)" [disabled]="getStatusOfOrder() === 'Requested' ? false : true">Delete</button>
+    </tr>
+    <tr>
+        <th>Order Total Cost:</th>
+        <th>{{getOrderTotalCost()}}</th>
+    </tr>
 </table>
-<button class="btn btn-orange toolBar" (click)="onAddItem()" [disabled]="getStatusOfOrder() === 'Requested' ? false : true"><i class="fa fa-plus"></i></button>
+<button class="btn btn-orange toolBar" (click)="onAddItem()" [disabled]="getStatusOfOrder() === 'Requested' ? false : true"><i
+        class="fa fa-plus"></i></button>

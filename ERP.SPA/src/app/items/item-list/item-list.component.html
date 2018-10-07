@@ -1,8 +1,9 @@
+<div class="container">
 <div class="toolBar">
     <button class="btn btn-orange" (click)="addItem()"><i class="fa fa-plus"></i></button>
 </div>
 <div class="row">  
-  <div class="mat-elevation-z8 full-width" [class.col-lg-4]="selectedItem">
+  <div class="mat-elevation-z8 full-width" [class.col-lg-6]="selectedItem">
       <mat-form-field class="margins">
           <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
         </mat-form-field>
@@ -43,7 +44,7 @@
     <app-item-detail [item]="selectedItem" *ngIf="selectedItem"></app-item-detail>
   </div>
 </div>
-
+</div>
 
 
 <!-- Copyright 2018 Google Inc. All Rights Reserved.

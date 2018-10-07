@@ -105,8 +105,8 @@
         <div class="col-md-2">
             <div class="form-group">
                 <br>
-                <button type="button" [disabled]="creationForm.get('quantity').hasError('required') || creationForm.get('selectedItemSupplier').hasError('required')" class="btn btn-success" (click)="onAddItem()">Add</button>
-                <button type="button" class="btn btn-danger" (click)="onRemoveItem()">Remove</button>
+                <button type="button" [disabled]="creationForm.get('quantity').hasError('required') || creationForm.get('selectedItemSupplier').hasError('required')" class="btn btn-orange" (click)="onAddItem()">Add</button>
+                <button type="button" class="btn btn-blue" (click)="onRemoveItem()">Remove</button>
             </div>
         </div>
     </div>

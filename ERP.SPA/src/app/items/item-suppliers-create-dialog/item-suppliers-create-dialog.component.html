@@ -11,7 +11,7 @@
             </mat-form-field>
           <br>
           <mat-form-field>
-            <input matInput placeholder="Lead Time" formControlName="leadTimeCtrl" required>
+            <input matInput placeholder="Lead Time" formControlName="leadTimeCtrl"  pattern="^[1-9]+[0-9]*$" required>
           </mat-form-field>
           <div>
               <button class="btn btn-orange" matStepperNext>Next</button>
@@ -22,11 +22,11 @@
       <form [formGroup]="secondFormGroup">
         <ng-template matStepLabel>Fill out Retail price and Unit Cost</ng-template>
         <mat-form-field>
-            <input matInput placeholder="Retail Price" formControlName="retailPriceCtrl" required>
+            <input matInput placeholder="Retail Price" formControlName="retailPriceCtrl" pattern="^[1-9]+[0-9]*$" required>
         </mat-form-field>
         <br>
         <mat-form-field>
-          <input matInput placeholder="Unit Cost" formControlName="unitCostCtrl" required>
+          <input matInput placeholder="Unit Cost" formControlName="unitCostCtrl"  pattern="^[1-9]+[0-9]*$" required>
         </mat-form-field>
         <div>
           <button class="btn btn-orange" matStepperNext>Next</button>
@@ -38,9 +38,9 @@
       <ng-template matStepLabel>Done</ng-template>
       You are now done.
       <div>
-          <button class="btn btn-success" (click)="createNewItemSupplier()" matStepperNext>Add</button>
-          <button class="btn btn-orange" matStepperPrevious>Back</button> 
-        <button class="btn btn-danger" (click)="stepper.reset()">Reset</button>
+          <button class="btn btn-orange" (click)="createNewItemSupplier()" matStepperNext>Add</button>
+          <button class="btn btn-blue" matStepperPrevious>Back</button> 
+        <button class="btn btn-blue" (click)="stepper.reset()">Reset</button>
       </div>
     </mat-step>
   </mat-horizontal-stepper>

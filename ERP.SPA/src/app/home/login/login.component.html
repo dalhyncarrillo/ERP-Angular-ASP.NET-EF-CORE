@@ -20,7 +20,7 @@
     </div>
     <br>
 
-    <button class="btn btn-lg btn-primary btn-block" [disabled]="!signinForm.valid" type="submit">{{"signIn"|translate}}</button>
+    <button class="btn btn-lg btn-blue btn-block" [disabled]="!signinForm.valid" type="submit">{{"signIn"|translate}}</button>
     <div class="text-muted text-center">
       <img  style="width: 30px; height: 20px;" (click)="onFlagClick('hu')" *ngIf="this.languageService.currentLang == 'en'" src="assets\icons\Custom-Icon-Design-All-Country-Flag-Hungary-Flag.ico">
       <img style="width: 30px; height: 20px;" (click)="onFlagClick('en')"*ngIf="this.languageService.currentLang == 'hu'" src="assets\icons\United-Kingdom-Flag.png">

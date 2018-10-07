@@ -57,8 +57,8 @@ export class EmployeeRoleComponent implements OnChanges {
 
   onAddRole() {
     let dialogRef = this.dialog.open(EmployeeRoleAddDialogComponent, {
-      height: '800px',
-      width: '1200px',
+      height: '300px',
+      width: '800px',
       data: {employeeId: this.employee.employeeId}
     });
     

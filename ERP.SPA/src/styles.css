@@ -33,6 +33,7 @@ h1 {
     color: white !important;
   }
   .btn-orange {
+    margin: 5px;
     background-color: #e76c2f;
     border-color: #e76c2f;
     color: white;
@@ -42,15 +43,34 @@ h1 {
     background-color: white;
     color: #e76c2f;
   }
+
+  .btn-blue {
+    border-color: #2FA4E7;
+    background-color: #2FA4E7;
+    color: white;
+    margin: 5px;
+  }
+
+  th, td {
+    border-bottom: 1px solid #ddd;
+}
+
+  .btn-blue:hover {
+
+    background-color: white;
+    color:#2FA4E7;
+  }
   .list-left-margin {
       margin-left: 170px;
   }
 
   .tableFormat {
-
     margin-left: 15px;
-    width: 100%;
+    width: 95%;
     padding: 15px;
+}
+.container {
+    max-width: 1500px;
 }
 
   .full-width {

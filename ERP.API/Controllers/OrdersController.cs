@@ -76,7 +76,7 @@ namespace ERP.API.Controllers
             orderToUpdate.Status = "Approved";
             var updatedOrder = await this.repository.UpdateEntity(orderToUpdate);
             if(updatedOrder == null)
-                return BadRequest("Error change happened");
+                return BadRequest("concurrencyError");
                 
             await this.updateItemQuantityOrdered(orderToUpdate.OrderId);
             
@@ -105,9 +105,10 @@ namespace ERP.API.Controllers
         public async Task<IActionResult> ReceiveOrder([FromBody] Order orderToUpdate)
         {
             orderToUpdate.Status = "Received";
+            orderToUpdate.ReceivedDate = DateTime.Parse(DateTime.Now.ToString("MM/dd/yyyy HH:mm"));
             var updatedOrder = await this.repository.UpdateEntity(orderToUpdate);
             if(updatedOrder == null)
-                return BadRequest("Error change happened");
+                return BadRequest("concurrencyError");
 
             await this.updateItemQuantitiesOnHand(orderToUpdate.OrderId);   
 

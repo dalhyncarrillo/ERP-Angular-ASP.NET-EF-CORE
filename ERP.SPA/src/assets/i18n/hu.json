@@ -10,10 +10,14 @@
     "erp": "Vállalatirányítási Rendszer",
     "welcome": "Ez a Vállalatirányítási web applikáció a szakdolgozatom részeként jött létre, melyet az Eszterházy Károly Egyetemre készítettem.",
     "createdBy": "készítette Rigó Jordán",
-    "getStarted": "Kezdjünk neki!",
+    "getStarted": "Vágjunk bele!",
     "whatCanYouDoHere": "Mit tudsz csinálni?",
-    "about": "Nyomon követheted az alkalmazottakat, rendeléseket adhatsz le, hogy szinten tartsd az árukészletedet és kapcsolatban lehetsz a beszállítóiddal.",
+    "about": "Nyomonkövetheted az alkalmazottakat, rendeléseket adhatsz le, hogy szinten tartsd az árukészletedet és kapcsolatban lehetsz a beszállítóiddal.",
     "functionalities": "Funkcionalitások",
+    "employeeFunc": "Karbantarhatod az alkalmazottjaid profiljait, az elvégzendő feladatoknak megfelelően jogusoltságokat rendelhetsz hozzájuk!",
+    "supplierFunc": "Létrehozhatsz új beszállítókat és részletes adatokat tárolhatsz róluk!",
+    "itemFunc": "Új árukat hozhatsz létre, beállíthatod az eladási árat, költséget, nyomonkövetheted a beérkező és raktáron lévő árumennyiséget!",
+    "orderFunc": "Korábban meghatározott beszállítóktól árukat igényelhetsz, módosíthatod az igényelt rendelést. Elfogadhatod és bevételezheted a rendeléseket!",
 
     "home" : "Főoldal",
     "employees" : "Alkalmazottak",
@@ -55,5 +59,6 @@
     "orderApprovedSuccess": "Rendelés sikeresen elfogadva",
     "orderReceivedSuccess": "Rendelés sikeresen átvéve",
     "youNotCreatedOrder": "Művelet megtagadva - Nem te hoztad létre a rendelést",
-    "basketEmpty": "Hiba: A Kosár nem lehet üres"
+    "basketEmpty": "Hiba: A Kosár nem lehet üres",
+    "concurrencyError": "Hiba: A rendelés módosítva lett"
 }
