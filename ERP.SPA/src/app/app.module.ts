@@ -28,7 +28,7 @@ import { SupplierService } from './_services/supplier.service';
 import { SupplierDetailComponent } from './suppliers/supplier-detail/supplier-detail.component';
 import { SupplierCreateDialogComponent } from './suppliers/supplier-create-dialog/supplier-create-dialog.component';
 import { ConfirmationDialogComponent } from './ConfirmationDialog/ConfirmationDialog.component';
-import { TabsModule, TimepickerModule  } from 'ngx-bootstrap';
+import { TabsModule, TimepickerModule,BsDropdownModule   } from 'ngx-bootstrap';
 import { AppMaterialModule } from './/app-material.module';
 import { EmployeeListComponent } from './employee/employee-list/employee-list.component';
 import { EmployeeDetailComponent } from './employee/employee-detail/employee-detail.component';
@@ -90,6 +90,7 @@ export function getToken() {
     }),
     TimepickerModule.forRoot(),
     TabsModule.forRoot(),
+    BsDropdownModule.forRoot(),
     AppMaterialModule,
     ReactiveFormsModule,
     AppRoutingModule,

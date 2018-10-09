@@ -1,54 +1,54 @@
 <mat-horizontal-stepper [linear]="true" #stepper>
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Fill out Supplier name</ng-template>
+      <ng-template matStepLabel>{{"fillOutSupp" | translate}}</ng-template>
       <mat-form-field>
-        <input matInput placeholder="Supplier name" formControlName="nameCtrl" required>
+        <input matInput placeholder="{{'supplier' | translate}}" formControlName="nameCtrl" required>
       </mat-form-field>
       <div>
-        <button class="btn btn-orange" matStepperNext>Next</button>
+        <button class="btn btn-orange" matStepperNext>{{"next" | translate}}</button>
       </div>
     </form>
   </mat-step>
   <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Fill out Supplier address</ng-template>
+      <ng-template matStepLabel>{{"fillOutSuppAdd" | translate}}</ng-template>
       <mat-form-field>
-          <input matInput placeholder="City" formControlName="cityCtrl" required>
+        <input matInput placeholder="{{'city' | translate}}" formControlName="cityCtrl" required>
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input matInput placeholder="Address" formControlName="addressCtrl" required>
+        <input matInput placeholder="{{'address' | translate}}" formControlName="addressCtrl" required>
       </mat-form-field>
       <div>
-        <button class="btn btn-orange" matStepperNext>Next</button>
-        <button class="btn btn-orange" matStepperPrevious>Back</button>        
+        <button class="btn btn-orange" matStepperNext>{{"next" | translate}}</button>
+        <button class="btn btn-blue" matStepperPrevious>{{"back" |translate}}</button>
       </div>
     </form>
   </mat-step>
   <mat-step [stepControl]="thirdFormGroup">
-      <form [formGroup]="thirdFormGroup">
-        <ng-template matStepLabel>Fill out Supplier contact</ng-template>
-        <mat-form-field>
-            <input matInput placeholder="Contant Person" formControlName="contactNameCtrl" required>
-        </mat-form-field>
-        <br>
-        <mat-form-field>
-          <input matInput placeholder="Phone" formControlName="phoneCtrl" pattern="^[0-9]*$" required>
-        </mat-form-field>
-        <div>
-            <button class="btn btn-orange" matStepperNext>Next</button>
-            <button class="btn btn-orange" matStepperPrevious>Back</button> 
-        </div>
-      </form>
-    </mat-step>
+    <form [formGroup]="thirdFormGroup">
+      <ng-template matStepLabel>{{"fillOutSuppCont" | translate}}</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="{{'contactPerson' | translate}}" formControlName="contactNameCtrl" required>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input matInput placeholder="{{'phone' | translate}}" formControlName="phoneCtrl" pattern="^[0-9]*$" required>
+      </mat-form-field>
+      <div>
+        <button class="btn btn-orange" matStepperNext>{{"next" | translate}}</button>
+        <button class="btn btn-blue" matStepperPrevious>{{"back" | translate}}</button>
+      </div>
+    </form>
+  </mat-step>
   <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    You are now done.
+    <ng-template matStepLabel>{{"done" | translate}}</ng-template>
+    {{"nowDone" | translate}}
     <div>
-        <button class="btn btn-success" (click)="addNewSupplier()" matStepperNext>Add</button>
-        <button class="btn btn-orange" matStepperPrevious>Back</button> 
-      <button class="btn btn-danger" (click)="stepper.reset()">Reset</button>
+      <button class="btn btn-orange" (click)="addNewSupplier()" matStepperNext>{{"add" | translate}}</button>
+      <button class="btn btn-blue" matStepperPrevious>{{"back" | translate}}</button>
+      <button class="btn btn-blue" (click)="stepper.reset()">{{"reset" |translate}}</button>
     </div>
   </mat-step>
 </mat-horizontal-stepper>

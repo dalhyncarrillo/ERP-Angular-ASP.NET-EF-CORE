@@ -1,10 +1,10 @@
 <div class="panel">
     <tabset>
-        <tab heading="Order">
+        <tab heading="{{'order' |translate}}">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Order Id</label>
+                        <label>{{"orderId" |translate}}</label>
                         <input type="text" class="form-control" name="orderId" [(ngModel)]="order.orderId" disabled>
                     </div>
                 </div>
@@ -19,14 +19,14 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Supplier Id</label>
+                        <label>{{"supplierId" | translate}}</label>
                         <input type="text" class="form-control" name="supplierId" [(ngModel)]="order.supplierId"
                             required disabled>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Supplier Name</label>
+                        <label>{{"supplier" | translate}}</label>
                         <input type="text" class="form-control" name="supplierName" [(ngModel)]="order.supplierName"
                             required disabled>
                     </div>
@@ -35,14 +35,14 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Created By</label>
+                        <label>{{"createdBy" | translate}}</label>
                         <input type="text" class="form-control" name="createdById" [(ngModel)]="order.createdBy"
                             required disabled>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Approved By</label>
+                        <label>{{"approvedBy" | translate}}</label>
                         <input type="text" class="form-control" name="approvedById" [(ngModel)]="order.approvedBy"
                             required disabled>
                     </div>
@@ -51,14 +51,14 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Requesed Date</label>
+                        <label>{{"requestedDate" | translate}}</label>
                         <input type="text" class="form-control" name="requestedDate" [ngModel]="order.requestedDate | amFromUtc | amLocal | amDateFormat: 'YYYY-MM-DD HH:mm'"
                             (ngModelChange)="order.requestedDate = $event" required disabled>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Received Date</label>
+                        <label>{{"receivedDate" | translate}}</label>
                         <input type="text" class="form-control" name="receivedDate" [ngModel]="order.receivedDate | amFromUtc | amLocal | amDateFormat: 'YYYY-MM-DD'" (ngModelChange)="order.receivedDate = $event" required disabled>
                     </div>
                 </div>
@@ -66,18 +66,18 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Total Cost</label>
+                        <label>{{"totalCost" | translate}}</label>
                         <input type="text" class="form-control" name="totalCost" [(ngModel)]="order.totalCost" required
                             disabled>
                     </div>
                 </div>
             </div>
-            <button class="btn btn-orange" (click)="onApproveOrder()" *ngIf="getStatusOfOrder() ==='Requested'">Approve</button>
-            <button class="btn btn-orange" (click)="onReceiveOrder()" *ngIf="getStatusOfOrder() ==='Approved'">Receive</button>
-            <button class="btn btn-blue" (click)="onDeleteOrder()" *ngIf="isDeletableOrder()">Delete Order</button>
+            <button class="btn btn-orange" (click)="onApproveOrder()" *ngIf="getStatusOfOrder() ==='Requested'">{{"approve" | translate}}</button>
+            <button class="btn btn-orange" (click)="onReceiveOrder()" *ngIf="getStatusOfOrder() ==='Approved'">{{"receive" | translate}}</button>
+            <button class="btn btn-blue" (click)="onDeleteOrder()" *ngIf="isDeletableOrder()">{{"delete" | translate }}</button>
 
         </tab>
-        <tab heading="Items">
+        <tab heading="{{'items' | translate}}">
             <app-order-items [order]="order"></app-order-items>
         </tab>
     </tabset>

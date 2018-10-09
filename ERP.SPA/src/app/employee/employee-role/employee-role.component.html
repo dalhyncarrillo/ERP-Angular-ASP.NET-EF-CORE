@@ -2,13 +2,12 @@
     <tr>
         <th>Role Id</th>
         <th>{{"roleName" |translate}}</th>
-
     </tr>
     <tr *ngFor="let role of employeeRoles">
         <td>{{role.roleId}}</td>
         <td *ngIf="getCurrentLang() == 'en'">{{role.roleNameEn}}</td>
         <td *ngIf="getCurrentLang() == 'hu'">{{role.roleNameHu}}</td>
-        <button class="btn btn-blue" (click)="onDeleteRole(role)" *ngIf="!isMyProfile">Delete</button>
+        <button class="btn btn-blue" (click)="onDeleteRole(role)" *ngIf="!isMyProfile">{{"delete" | translate}}</button>
     </tr>
 </table>
 <button class="btn btn-orange toolBar" (click)="onAddRole()" *ngIf="!isMyProfile"><i class="fa fa-plus"></i></button>

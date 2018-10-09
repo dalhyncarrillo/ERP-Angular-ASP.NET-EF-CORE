@@ -1,6 +1,6 @@
 <div class="panel">
     <tabset>
-        <tab heading="Details">
+        <tab heading="{{'details' | translate}}">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -19,13 +19,13 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Item Id</label>
+                        <label>{{"itemId" | translate }}</label>
                         <input type="text" class="form-control" name="inputItemId" [(ngModel)]="item.itemId" disabled>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Item Name</label>
+                        <label>{{"itemName" | translate}}</label>
                         <input type="text" class="form-control" name="inputName" [(ngModel)]="item.name" required>
                     </div>
                 </div>
@@ -33,14 +33,14 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Retail Price</label>
+                        <label>{{"retailPrice" | translate }}</label>
                         <input type="text" class="form-control" name="inputCity" [(ngModel)]="item.retailPrice"
                             required>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Average Cost</label>
+                        <label>{{"averageCost" | translate }}</label>
                         <input type="text" class="form-control" name="inputAddress" [(ngModel)]="item.avgCost" required
                             disabled>
                     </div>
@@ -49,28 +49,28 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Quantity On Hand</label>
+                        <label>{{"quantityOnHand" | translate}}</label>
                         <input type="text" class="form-control" name="inputContactName" [(ngModel)]="item.quantityOnHand"
                             required disabled>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Quantity ordered</label>
+                        <label>{{"quantityOrdered" | translate }}</label>
                         <input type="text" class="form-control" name="inputPhone" [(ngModel)]="item.quantityOrdered"
                             required disabled>
                     </div>
                 </div>
             </div>
-            <button class="btn btn-orange" (click)="updateItem()">Update</button>
+            <button class="btn btn-orange" (click)="updateItem()">{{"update" | translate}}</button>
         </tab>
-        <tab heading="Suppliers">
+        <tab heading="{{'suppliers' | translate}}">
             <table class="tableFormat">
                 <tr>
-                    <th>Supplier Name</th>
-                    <th>Unit Cost</th>
-                    <th>Lead Time</th>
-                    <th>Primary Supplier</th>
+                    <th>{{"supplier" |translate}}</th>
+                    <th>{{"unitCost" | translate}}</th>
+                    <th>{{"leadTime" |translate}}</th>
+                    <th>{{"primarySupplier" | translate}}</th>
                 </tr>
                 <tr *ngFor="let itemSupplier of itemSuppliers">
                     <td>{{itemSupplier.supplierName}}</td>

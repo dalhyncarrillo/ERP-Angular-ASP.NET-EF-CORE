@@ -2,14 +2,35 @@
     "signIn": "Sign In",   
     "emailAddress": "Email address",
     "password": "Password",
+    "submit": "Submit",
     "delete":"Delete",
     "update":"Update",
-    "enterEmail":"Enter your e-mail address",
-    "enterPassword": "Enter your password",
+    "add": "Add",
+    "reset": "Reset",
+    "next": "Next",
+    "back": "Back",
+
+    "firstLogin":"As It is your first login, you MUST change your default password.",
+
+    "isRequired": "is required!",
+    "emailFormatRequired": "The format of the provided e-mail address is NOT correct!",
+    "fillOutSupp": "Fill out supplier name",
+    "fillOutSuppAdd": "Fill out supplier address",
+    "fillOutSuppCont":"Fill ou supplier contact",
+    "nowDone": "You are now done.",
+    "done": "Done",
+    "enterEmail":"Enter e-mail address",
+    "enterPassword": "Enter password",
+
+    "selectSupplier" : "Select Supplier",
+    "fillItemName" : "Fill out Item name",
+    "fillRetailAndCost" : "Fill out Retail price and Unit Cost",
+
+    "chooseOne": "Choose One",
 
     "erp": "Enterprise Resource Planning",
     "welcome": "This ERP Single Page Application  was created as part of my thesis for Eszterházy Károly University.",
-    "createdBy": "created by Jordan Rigo",
+    "createdByJordan": "created by Jordan Rigo",
     "getStarted": "Let's Get Started!",
     "whatCanYouDoHere": "What can you do here?",
     "about": "You can keep track of your employees, purchase items in order to maintain your stock holdings and be in touch with your suppliers.",
@@ -40,16 +61,38 @@
 
     "currentPassword": "Current Password",
     "confirmPassword": "Confirm Password",
-    
-
 
     
+    "supplierId": "Supplier Id",
     "supplier": "Supplier",
     "name":"Name",
     "city":"City",
     "address":"Address",
     "contactPerson":"Contact Person",
     "phone": "Phone",
+    "unitCost": "Unit Cost",
+    "leadTime": "Lead Time",
+    "primarySupplier": "Primary Supplier",
+
+    "itemId":"Item Id",
+    "itemName": "Item Name",
+    "retailPrice": "Retail Price",
+    "averageCost": "Average Cost",
+    "quantityOnHand": "Quantity On Hand",
+    "quantityOrdered": "Quantity Ordered",
+
+    "requestedDate":"Requested Date",
+    "order": "Order",
+    "totalCost" : "Total Cost",
+    "orderId": "Order Id",
+    "createdBy": "Created By",
+    "approvedBy": "Approved By",
+    "receivedDate" : "Received Date",
+    "approve" : "Approve",
+    "receive" : "Receive",
+    "saveChanges" : "Save Changes",
+    "quantity": "Quantity",
+
 
     "loginSuccess":"You successfully logged in.",
     "loginError": "Invalid email or password!",
@@ -65,7 +108,5 @@
     "orderReceivedSuccess": "Order received successfully",
     "youNotCreatedOrder": "No permission - You did NOT created this order",
     "basketEmpty": "Error: Your basket is empty",
-    "concurrencyError": "Error: Someone has already updated this order."
-
-
+    "concurrencyError": "Error: Someone has already updated this order"
 }

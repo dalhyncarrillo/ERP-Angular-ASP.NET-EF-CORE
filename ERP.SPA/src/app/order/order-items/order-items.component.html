@@ -1,12 +1,11 @@
-<button class="btn btn-orange toolBar" (click)="onSaveChanges()" *ngIf="changeOccured" [disabled]="getStatusOfOrder() === 'Requested' ? false : true">Save
-    Changes</button>
+<button class="btn btn-orange toolBar" (click)="onSaveChanges()" *ngIf="changeOccured" [disabled]="getStatusOfOrder() === 'Requested' ? false : true">{{"saveChanges" | translate</button>
 <table class="tableFormat">
     <tr>
-        <th>Item Id</th>
-        <th>Item Name</th>
-        <th>Unit Cost</th>
-        <th>Quantity</th>
-        <th>Total Cost</th>
+        <th>{{"itemId" | translate}}</th>
+        <th>{{"itemName" | translate}}</th>
+        <th>{{"unitCost" | translate}}</th>
+        <th>{{"quantityOrdered" | translate}}</th>
+        <th>{{"totalCost" | translate}}</th>
     </tr>
     <tr *ngFor="let orderItem of orderItems">
         <td>{{orderItem.itemId}}</td>
@@ -14,12 +13,11 @@
         <td>{{orderItem.unitCost}}</td>
         <td>{{orderItem.quantity}}</td>
         <td>{{orderItem.totalCost}}</td>
-        <button class="btn btn-blue" (click)="onDeleteItem(orderItems)" [disabled]="getStatusOfOrder() === 'Requested' ? false : true">Delete</button>
-    </tr>
-    <tr>
-        <th>Order Total Cost:</th>
-        <th>{{getOrderTotalCost()}}</th>
+        <button class="btn btn-blue" (click)="onDeleteItem(orderItems)" [disabled]="getStatusOfOrder() === 'Requested' ? false : true">{{"delete" | translate}}</button>
     </tr>
 </table>
+<div class="row">
+    <h6>{{"order" | translate}} {{"totalCost" | translate}}: {{getOrderTotalCost()}}</h6>
+</div>
 <button class="btn btn-orange toolBar" (click)="onAddItem()" [disabled]="getStatusOfOrder() === 'Requested' ? false : true"><i
         class="fa fa-plus"></i></button>

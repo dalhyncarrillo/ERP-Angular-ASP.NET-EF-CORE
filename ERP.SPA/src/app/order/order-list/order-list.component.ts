@@ -56,8 +56,8 @@ export class OrderListComponent implements OnInit {
   addOrder() {
     if(this.authService.isPurchaseAllowed()) {
       let dialogRef = this.dialog.open(OrderCreateDialogComponent, {
-        height: '1700px',
-        width: '1700px',
+        height: '800px',
+        width: '1200px',
       }).afterClosed().subscribe(result => {
         if(result != null) {
           this.orders.push(result);

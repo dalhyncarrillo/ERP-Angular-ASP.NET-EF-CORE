@@ -1,44 +1,58 @@
-<div class="panel">
-    <div class="row">
-      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+<div class="row">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
         <div class="form-group">
-          <label>Email address</label>
-          <input type="email" class="form-control" formControlName="email" placeholder="Enter email" [ngClass]="{'is-invalid' : registerForm.get('email').errors && registerForm.get('email').touched}">
-          <p class="validation-error-message" *ngIf="registerForm.get('email').hasError('required') && registerForm.get('email').touched">Email address is required!</p>
-          <p class="validation-error-message" *ngIf="registerForm.get('email').hasError('email') && registerForm.get('email').touched">The format of the provided e-mail address is NOT correct!</p>
+            <label>{{"emailAddress" | translate}}</label>
+            <input type="email" class="form-control" formControlName="email" placeholder="{{'emailAddress' | translate}}"
+                [ngClass]="{'is-invalid' : registerForm.get('email').errors && registerForm.get('email').touched}">
+            <p class="validation-error-message" *ngIf="registerForm.get('email').hasError('required') && registerForm.get('email').touched">{{"emailAddress"
+                | translate}} {{"isRequired" | translate}}</p>
+            <p class="validation-error-message" *ngIf="registerForm.get('email').hasError('email') && registerForm.get('email').touched">{{"emailFormatRequired"
+                | translate }}</p>
         </div>
         <div class="form-group">
-            <label>First Name</label>
-            <input type="text" class="form-control" formControlName="firstName"  placeholder="Enter First name"[ngClass]="{'is-invalid' : registerForm.get('firstName').errors && registerForm.get('firstName').touched}" >
-            <p class="validation-error-message" *ngIf="registerForm.get('firstName').hasError('required') && registerForm.get('firstName').touched">First Name is required!</p>
+            <label>{{"firstName" | translate}}</label>
+            <input type="text" class="form-control" formControlName="firstName" placeholder="{{'firstName' | translate}}"
+                [ngClass]="{'is-invalid' : registerForm.get('firstName').errors && registerForm.get('firstName').touched}">
+            <p class="validation-error-message" *ngIf="registerForm.get('firstName').hasError('required') && registerForm.get('firstName').touched">{{"firstName"
+                | translate}} {{"isRequired" | translate}}</p>
         </div>
         <div class="form-group">
-            <label>Last Name</label>
-            <input type="text" class="form-control" formControlName="lastName"  placeholder="Enter Last name" [ngClass]="{'is-invalid' : registerForm.get('lastName').errors && registerForm.get('lastName').touched}" >
-            <p class="validation-error-message" *ngIf="registerForm.get('lastName').hasError('required') && registerForm.get('lastName').touched">Last Name is required!</p>
+            <label>{{"lastName" | translate}}</label>
+            <input type="text" class="form-control" formControlName="lastName" placeholder="{{'lastName' | translate}}"
+                [ngClass]="{'is-invalid' : registerForm.get('lastName').errors && registerForm.get('lastName').touched}">
+            <p class="validation-error-message" *ngIf="registerForm.get('lastName').hasError('required') && registerForm.get('lastName').touched">{{"lastName"
+                | translate}} {{"isRequired" | translate}}</p>
         </div>
         <div class="form-group">
-            <label>Date Of Birth</label>
-            <input type="text" class="form-control" formControlName="dateOfBirth" placeholder="Enter Birthdate" [ngClass]="{'is-invalid' : registerForm.get('dateOfBirth').errors && registerForm.get('dateOfBirth').touched}">
-        </div>
-        <div class="form-group">
-            <label>Salary</label>
-            <input type="text" class="form-control" formControlName="salary" placeholder="Enter Salary" [ngClass]="{'is-invalid' : registerForm.get('salary').errors && registerForm.get('salary').touched}">
-        </div>
-        <div class="form-group">
-            <label>Position</label>
+            <label>{{"dateOfBirth" | translate }}</label>
             <br>
             <mat-form-field>
-                <mat-select matInput placeholder="Choose one" formControlName="position">
+                <input matInput formControlName="dateOfBirth" [matDatepicker]="picker" placeholder="Choose a date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <p class="validation-error-message" *ngIf="registerForm.get('dateOfBirth').hasError('required') && registerForm.get('dateOfBirth').touched">{{"dateOfBirth"
+                | translate}} {{"isRequired" | translate}}</p>
+        </div>
+        <div class="form-group">
+            <label>{{"salary" | translate}}</label>
+            <input pattern="^[1-9]+[0-9]*$" type="number" class="form-control" formControlName="salary" placeholder="{{'salary' | translate}}"
+                [ngClass]="{'is-invalid' : registerForm.get('salary').errors && registerForm.get('salary').touched}">
+            <p class="validation-error-message" *ngIf="registerForm.get('salary').hasError('required') && registerForm.get('salary').touched">{{"salary"
+                | translate}} {{"isRequired" | translate}}</p>
+        </div>
+        <div class="form-group">
+            <label>{{"position" |translate}}</label>
+            <br>
+            <mat-form-field>
+                <mat-select matInput placeholder="{{'chooseOne' | translate}}" formControlName="position">
                     <mat-option *ngFor="let position of positions" [value]="position">
-                      {{position.positionName}}
+                        {{position.positionName}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
 
         </div>
-        <button type="submit" class="btn btn-orange">Submit</button>
-      </form>
-    </div>
+        <button type="submit" class="btn btn-orange">{{"submit" | translate}}</button>
+    </form>
 </div>
-  

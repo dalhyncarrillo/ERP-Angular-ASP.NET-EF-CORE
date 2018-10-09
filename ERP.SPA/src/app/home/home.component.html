@@ -1,6 +1,12 @@
 <app-login *ngIf="!loggedIn()"></app-login>
-<app-employee-change-password-dialog *ngIf="isFirstLogin()"></app-employee-change-password-dialog>
-<div *ngIf="loggedIn()">
+<div *ngIf="isFirstLogin()">
+    <h4 class="text-orange text-center mt-5">
+      {{"firstLogin" | translate}}
+    </h4>
+    <app-employee-change-password-dialog></app-employee-change-password-dialog>
+</div>
+
+<div *ngIf="!isFirstLogin() && loggedIn()">
   <header class="masthead text-center">
     <div class="container my-auto">
       <div class="row">
@@ -10,7 +16,7 @@
         </div>
         <div class="col-lg-8 mx-auto">
           <h4 class="text-faded mb-3 text-orange">{{"welcome" | translate}}</h4>
-          <h5 class="text-orange mb-4">{{"createdBy" | translate }}</h5>
+          <h5 class="text-orange mb-4">{{"createdByJordan" | translate }}</h5>
           <button class="btn btn-blue btn-xl" (click)="scroll(about)">{{"getStarted" | translate}}</button>
         </div>
       </div>

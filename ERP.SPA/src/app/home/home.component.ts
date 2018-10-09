@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   }
 
   isFirstLogin() {
-    return localStorage.getItem('isFirstLogin') == 'true' ? true : false;
+    return localStorage.getItem('isFirstLogin') === 'true' ? true : false;
   }
   loggedIn() {
     return this.authService.isLoggedIn();
