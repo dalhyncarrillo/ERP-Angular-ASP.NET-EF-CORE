@@ -51,5 +51,15 @@ namespace ERP.API.Controllers
                 return BadRequest("Error - Item Supplier NOT created");
             return Ok(itemSupplier);
         }
+
+        [HttpDelete("{itemId}/{supplierId}")]
+        public async Task<IActionResult> DeleteItemSupplier(int itemId, int supplierId)
+        {
+            var itemSupplier = await this.repository.GetItemSupplier(itemId, supplierId);
+            if(itemSupplier == null)
+                return BadRequest();
+            await this.repository.Delete(itemSupplier);
+            return Ok();
+        }
     }
 }

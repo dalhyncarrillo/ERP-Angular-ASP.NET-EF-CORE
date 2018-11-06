@@ -1,7 +1,6 @@
 
   <form class="form-signin" #signinForm="ngForm" (ngSubmit)="login()">
     <div class="text-center mb-4">
-      <img class="mb-4" src="" alt="LOGO ELERES" width="72" height="72">
       <h1 >{{"signIn"| translate}}</h1>
       <hr>
       <p></p>
@@ -25,6 +24,6 @@
       <img  style="width: 30px; height: 20px;" (click)="onFlagClick('hu')" *ngIf="this.languageService.currentLang == 'en'" src="assets\icons\Custom-Icon-Design-All-Country-Flag-Hungary-Flag.ico">
       <img style="width: 30px; height: 20px;" (click)="onFlagClick('en')"*ngIf="this.languageService.currentLang == 'hu'" src="assets\icons\United-Kingdom-Flag.png">
     </div>
-    <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2018</p>
+    <p class="mt-5 mb-3 text-muted text-center">&copy; 2018-2019</p>
   </form>
 

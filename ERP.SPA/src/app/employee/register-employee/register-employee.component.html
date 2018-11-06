@@ -15,6 +15,7 @@
                 [ngClass]="{'is-invalid' : registerForm.get('firstName').errors && registerForm.get('firstName').touched}">
             <p class="validation-error-message" *ngIf="registerForm.get('firstName').hasError('required') && registerForm.get('firstName').touched">{{"firstName"
                 | translate}} {{"isRequired" | translate}}</p>
+            <p *ngIf="registerForm.get('firstName').dirty">({{"defaultPassword" | translate}})</p>
         </div>
         <div class="form-group">
             <label>{{"lastName" | translate}}</label>

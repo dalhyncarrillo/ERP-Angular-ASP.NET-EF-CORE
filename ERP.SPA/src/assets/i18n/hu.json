@@ -55,6 +55,7 @@
     "lastName":"Vezetéknév",
     "position":"Pozíció",
     "details":"Részletek",
+    "defaultPassword":"Ez a mező lesz az alapértelmezett jelszó, kisbetűvel!",
     "roleName" : "Jogosultság",
     "salary":"Bér",
     "dateOfBirth":"Születési dátum",
@@ -62,6 +63,7 @@
 
     "currentPassword": "Jelenlegi Jelszó",
     "confirmPassword": "Jelszó megerősítése",
+    "wrongCurrentPassword": "A megadott jelszó helytelen",
 
     "supplierId": "Beszállító Id",
     "supplier": "Beszállító",
@@ -98,7 +100,7 @@
     "loginError": "Hibás e-mail vagy jelszó!",
     "updateSuccess": "Sikeres módosítás!",
     "deleteSuccess": "Sikeres törlés!",
-    "createSuccess": "Sikeres létrehozás!",
+    "createSuccess": "Sikeres létrehozás! Alapértelmezett jelszó: keresztnév kisbetűkkel!",
     "supplierAddSuccess": "Beszállító sikeresen hozzáadva az áruhoz",
     "supplierAddError": "Beszállító már hozzá lett adva az áruhoz!",
     "orderCreateSuccess": "Rendelés sikeresen létrehozva",

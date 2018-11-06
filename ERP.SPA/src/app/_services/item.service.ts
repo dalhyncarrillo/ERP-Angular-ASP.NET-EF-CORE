@@ -38,6 +38,10 @@ export class ItemService {
     return this.http.post(environment.baseurl + 'itemSuppliers', itemSuppliersToCreate);
   }
 
+  deleteItemSupplier(itemId: number, supplierId: number) {
+    return this.http.delete(environment.baseurl + 'itemSuppliers/' + itemId + '/' + supplierId);
+  }
+
   updateItem(itemToTupdate) {
     return this.http.put(environment.baseurl + 'items', itemToTupdate);
   }

@@ -15,7 +15,9 @@ namespace ERP.API.Helpers
 
             CreateMap<ItemSupplier, ItemSupplierDto>()
                 .ForMember(dest => dest.SupplierName, opt => {
-                    opt.MapFrom(src => src.Supplier.Name);
+                    opt.MapFrom(src => src.Supplier.Name);})
+                .ForMember(dest => dest.SupplierId, opt => {
+                    opt.MapFrom(src => src.Supplier.SupplierId);
             });
 
             CreateMap<ItemSupplier, ItemSupplierDto>()

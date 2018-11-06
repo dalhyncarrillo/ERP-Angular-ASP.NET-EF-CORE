@@ -126,7 +126,6 @@ namespace ERP.API.Controllers
                 {
                     if(item.ItemId == orderItem.ItemId)
                     {
-                        //http://www.szamvitelnavigator.hu/2012/10/csusztatott-sulyozott-gordulo-atlagar.html
                         item.AvgCost = (item.QuantityOnHand * item.AvgCost + orderItem.Quantity * orderItem.UnitCost) / (item.QuantityOnHand + orderItem.Quantity);
                         item.QuantityOrdered -= orderItem.Quantity;
                         item.QuantityOnHand += orderItem.Quantity;

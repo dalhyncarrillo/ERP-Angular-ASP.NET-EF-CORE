@@ -75,7 +75,7 @@ export class OrderItemsComponent implements OnChanges {
     let dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       height: '250px',
       width: '500px',
-      data: { message: 'Are you sure you want to delete?\n' + orderItem.itemId}
+      data: { message: 'Are you sure you want to delete?'}
     });
     dialogRef.afterClosed().subscribe(result => {
       if(result === 'yes') {

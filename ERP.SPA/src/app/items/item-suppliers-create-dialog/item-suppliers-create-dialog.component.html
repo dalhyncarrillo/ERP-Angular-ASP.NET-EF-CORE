@@ -22,10 +22,6 @@
   <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup">
       <ng-template matStepLabel>{{"fillRetailAndCost" | translate}}</ng-template>
-      <mat-form-field>
-        <input matInput placeholder="{{'retailPrice' | translate}}" formControlName="retailPriceCtrl" pattern="^[1-9]+[0-9]*$"
-          required>
-      </mat-form-field>
       <br>
       <mat-form-field>
         <input matInput placeholder="{{'unitCost' | translate}}" formControlName="unitCostCtrl" pattern="^[1-9]+[0-9]*$"

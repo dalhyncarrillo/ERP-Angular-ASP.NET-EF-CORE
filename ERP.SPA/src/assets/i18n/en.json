@@ -54,6 +54,7 @@
     "lastName":"Last Name",
     "position":"Position",
     "details":"Details",
+    "defaultPassword":"It is going to be the default password, lowercase!",
     "roleName" : "Role Name",
     "salary":"Salary",
     "dateOfBirth":"Date of Birth",
@@ -61,6 +62,7 @@
 
     "currentPassword": "Current Password",
     "confirmPassword": "Confirm Password",
+    "wrongCurrentPassword": "The current password is incorrect",
 
     
     "supplierId": "Supplier Id",
@@ -98,7 +100,7 @@
     "loginError": "Invalid email or password!",
     "updateSuccess": "Update is successful!",
     "deleteSuccess": "Delete is successful!",
-    "createSuccess": "Create is successful!",
+    "createSuccess": "Create is successful! Default password: Given first name with lower case!",
     "supplierAddSuccess": "Supplier successfully added to the item",
     "supplierAddError": "This supplier already belongs to the item!",
     "orderCreateSuccess": "Order created successfully",

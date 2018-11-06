@@ -77,6 +77,7 @@
                     <td>{{itemSupplier.unitCost}}</td>
                     <td>{{itemSupplier.leadTime}}</td>
                     <td>{{itemSupplier.isPrimary}}</td>
+                    <button class="btn btn-blue" (click)="onDeleteItemSupplier(itemSupplier)">{{"delete" | translate}}</button>
                 </tr>
             </table>
             <button class="btn btn-orange toolBar" (click)="addSupplier()"><i class="fa fa-plus"></i></button>

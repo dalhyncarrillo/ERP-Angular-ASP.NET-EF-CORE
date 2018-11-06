@@ -1,6 +1,7 @@
 import { StatusService } from './../../_services/status.service';
 import { ItemSuppliersCreateDialogComponent } from './../item-suppliers-create-dialog/item-suppliers-create-dialog.component';
 import { ItemSuppliers } from './../../_models/item-suppliers.model';
+import { ConfirmationDialogComponent } from './../../ConfirmationDialog/ConfirmationDialog.component';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { ItemService } from './../../_services/item.service';
@@ -61,6 +62,22 @@ export class ItemDetailComponent implements OnInit {
     error => {
       this.aleritfyService.error('Error: ' + error.error);
       this.getItem();
+    });
+  }
+
+  private onDeleteItemSupplier(itemSupplier: ItemSuppliers) {
+    let dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      height: '250px',
+      width: '500px',
+      data: { message: 'Are you sure you want to delete?'}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result === 'yes') {
+        this.itemService.deleteItemSupplier(itemSupplier.itemId, itemSupplier.supplierId).subscribe(result => {
+          this.aleritfyService.success('deleteSuccess');
+          this.itemSuppliers.splice(this.itemSuppliers.findIndex(element => element.supplierId === itemSupplier.supplierId), 1);
+        })
+      }
     });
   }
 }
