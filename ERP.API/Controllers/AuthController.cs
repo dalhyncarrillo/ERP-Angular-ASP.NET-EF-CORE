@@ -108,7 +108,7 @@ namespace ERP.API.Controllers
                 {
                     new Claim(ClaimTypes.Name, employee.Email),
                     new Claim(ClaimTypes.Role, employee.PositionId.ToString()),
-                     new Claim(ClaimTypes.NameIdentifier, employee.EmployeeId.ToString())
+                    new Claim(ClaimTypes.NameIdentifier, employee.EmployeeId.ToString())
 
                 }),
                 Expires = DateTime.Now.AddDays(1),

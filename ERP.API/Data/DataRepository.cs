@@ -108,17 +108,6 @@ namespace ERP.API.Data
         {
             return await this.context.Employees.Include(employee => employee.Position).FirstOrDefaultAsync(employee => employee.EmployeeId == employeeId);
         }
-
-        public Task<Item> UpdateItem(Item item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Order> UpdateOrder(Order order)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<IEnumerable<Supplier>> GetActiveSuppliers()
         {
             return await this.context.Suppliers.Where(supplier => supplier.Status.Equals(ACTIVE_ENTITY)).ToListAsync();

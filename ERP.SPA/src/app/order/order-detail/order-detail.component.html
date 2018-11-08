@@ -57,7 +57,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="form-group" *ngIf="order.receivedDate != null"  >
+                    <div class="form-group" *ngIf="order.receivedDate != null">
                         <label>{{"receivedDate" | translate}}</label>
                         <input type="text" class="form-control" name="receivedDate" [ngModel]="order.receivedDate | amFromUtc | amLocal | amDateFormat: 'YYYY-MM-DD'" (ngModelChange)="order.receivedDate = $event" required disabled>
                     </div>

@@ -38,12 +38,13 @@ namespace ERP.API.Data
         private bool verifyPassword(string password, Employee employee)
         {
             var hashedInputPassword = KeyDerivation.Pbkdf2(
-                           password: password,
-                           salt: employee.PasswordSalt,
-                           prf: KeyDerivationPrf.HMACSHA1,
-                           iterationCount: 10000,
-                           numBytesRequested: 256 / 8
-                       );
+                password: password,
+                salt: employee.PasswordSalt,
+                prf: KeyDerivationPrf.HMACSHA1,
+                iterationCount: 10000,
+                numBytesRequested: 256 / 8
+            );
+
             for (int i = 0; i < employee.PasswordHash.Length; i++)
             {
                 if (hashedInputPassword[i] != employee.PasswordHash[i])
