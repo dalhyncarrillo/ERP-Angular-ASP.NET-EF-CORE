@@ -11,7 +11,6 @@ namespace ERP.API.Models
         public Item Item { get; set; }
         public int Quantity { get; set; }
         public double UnitCost { get; set; }
-        public double TotalCost { get; set; }
         [Timestamp]  
         public byte[] Timestamp { get; set; }  
     }

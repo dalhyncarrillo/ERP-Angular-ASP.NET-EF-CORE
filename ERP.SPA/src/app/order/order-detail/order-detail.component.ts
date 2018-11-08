@@ -31,10 +31,8 @@ export class OrderDetailComponent implements OnChanges {
   }
 
   getOrderDetails() {
-
     this.orderService.getOrderDetails(this.order.orderId).subscribe(data => {
       this.order = data;  
-      console.log(this.order);  
     });
   }
 

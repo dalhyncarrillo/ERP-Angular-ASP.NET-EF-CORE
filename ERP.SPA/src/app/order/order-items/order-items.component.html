@@ -1,4 +1,5 @@
-<button class="btn btn-orange toolBar" (click)="onSaveChanges()" *ngIf="changeOccured" [disabled]="getStatusOfOrder() === 'Requested' ? false : true">{{"saveChanges" | translate}}</button>
+<button class="btn btn-orange toolBar" (click)="onAddItem()" [disabled]="getStatusOfOrder() === 'Requested' ? false : true"><i class="fa fa-plus"></i></button>
+
 <table class="tableFormat">
     <tr>
         <th>{{"itemId" | translate}}</th>
@@ -19,5 +20,4 @@
 <div class="row">
     <h6>{{"order" | translate}} {{"totalCost" | translate}}: {{getOrderTotalCost()}}</h6>
 </div>
-<button class="btn btn-orange toolBar" (click)="onAddItem()" [disabled]="getStatusOfOrder() === 'Requested' ? false : true"><i
-        class="fa fa-plus"></i></button>
+<button class="btn btn-orange toolBar" (click)="onSaveChanges()" *ngIf="changeOccured" [disabled]="getStatusOfOrder() === 'Requested' ? false : true">{{"saveChanges" | translate}}</button>
