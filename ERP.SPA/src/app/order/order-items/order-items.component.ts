@@ -30,7 +30,7 @@ export class OrderItemsComponent implements OnChanges {
    }
 
   getOrderitems() {
-     this.orderService.getOrderItems(this.order.orderId).subscribe(data => {
+     this.orderService.getOrderItems(this.order.orderId).subscribe((data: OrderItems[]) => {
        this.orderItems = data;
      });
    }
@@ -58,7 +58,7 @@ export class OrderItemsComponent implements OnChanges {
       data: {order: this.order, orderItems: this.orderItems}
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      this.changeOccured = false;
     });
   }
   onDeleteItem(orderItem: OrderItems ) {
@@ -75,11 +75,12 @@ export class OrderItemsComponent implements OnChanges {
     let dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       height: '250px',
       width: '500px',
-      data: { message: 'Are you sure you want to delete?\n' + orderItem.itemId}
+      data: { message: 'Are you sure you want to delete?'}
     });
     dialogRef.afterClosed().subscribe(result => {
+      this.changeOccured = false;
       if(result === 'yes') {
-          this.orderItems.splice(this.orderItems.findIndex(element => element.itemId === orderItem.itemId), 1);
+        this.orderItems.splice(this.orderItems.findIndex(element => element.itemId === orderItem.itemId), 1);
       }
     });
   }

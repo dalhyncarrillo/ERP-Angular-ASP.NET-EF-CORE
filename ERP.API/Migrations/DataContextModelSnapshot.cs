@@ -169,8 +169,6 @@ namespace ERP.API.Migrations
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate();
 
-                    b.Property<double>("TotalCost");
-
                     b.Property<double>("UnitCost");
 
                     b.HasKey("OrderId", "ItemId");

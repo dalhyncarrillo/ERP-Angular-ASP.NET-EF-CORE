@@ -4,9 +4,9 @@ export interface Order {
     supplierName: string;
     status: string;
     totalCost: number;
-    approvedBy: number;
+    approvedBy?: number;
     createdBy: number;
     requestedDate: Date;
-    receivedDate: Date;
+    receivedDate?: Date;
     timestamp?;
 }

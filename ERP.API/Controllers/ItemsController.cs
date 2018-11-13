@@ -59,7 +59,7 @@ namespace ERP.API.Controllers
         {
             var updatedItem = await this.repository.UpdateEntity(itemToUpdate);
             if(updatedItem == null)
-                return NotFound("This item is NOT found");
+                return NotFound("Error change happened");
             
             return Ok(updatedItem);
         }

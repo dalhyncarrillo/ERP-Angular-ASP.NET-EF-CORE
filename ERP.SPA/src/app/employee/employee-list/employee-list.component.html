@@ -1,8 +1,9 @@
+<div class="container">
 <div class="toolBar">
-  <button class="btn btn-primary" (click)="createEmployee()"><i class="fa fa-plus"></i></button>
+  <button class="btn btn-orange" (click)="createEmployee()"><i class="fa fa-plus"></i></button>
 </div>
 <div class="row">     
-  <div class="mat-elevation-z8 full-width" [class.col-md-4]="selectedEmployee">
+  <div class="mat-elevation-z8 full-width" [class.col-lg-6]="selectedEmployee">
       <mat-form-field class="margins">
           <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
         </mat-form-field>
@@ -34,13 +35,8 @@
   
     <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
   </div>
-  <div class="col-md-6">
+  <div class="col-lg-6">
     <app-employee-detail *ngIf="selectedEmployee" [employee]="selectedEmployee" (employeeUpdatedEvent)="employeeUpdatedInDetailComponent($event)" ></app-employee-detail>
   </div>
 </div>
-
-
-
-<!-- Copyright 2018 Google Inc. All Rights Reserved.
-    Use of this source code is governed by an MIT-style license that
-    can be found in the LICENSE file at http://angular.io/license -->
+</div>

@@ -43,7 +43,7 @@ export class EmployeeChangePasswordDialogComponent implements OnInit {
       this.router.navigate(['/']);
     },
     error => {
-      this.alertifyService.error(error);
+      this.alertifyService.error('wrongCurrentPassword');
     })
   }
 

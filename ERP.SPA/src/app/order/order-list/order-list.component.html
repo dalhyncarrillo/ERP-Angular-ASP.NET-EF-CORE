@@ -1,51 +1,48 @@
-<div class="toolBar">
-  <button class="btn btn-primary" (click)="addOrder()"><i class="fa fa-plus"></i></button>
-</div>
-<div class="row">  
-<div class="mat-elevation-z8 full-width" [class.col-md-4]="selectedOrder">
-    <mat-form-field class="margins">
+<div class="container">
+  <div class="toolBar">
+    <button class="btn btn-orange" (click)="addOrder()"><i class="fa fa-plus"></i></button>
+  </div>
+  <div class="row">
+    <div class="mat-elevation-z8 full-width" [class.col-lg-6]="selectedOrder">
+      <mat-form-field class="margins">
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
       </mat-form-field>
-  <table class="tableFormat"  mat-table [dataSource]="dataSource" matSort>
+      <table class="tableFormat" mat-table [dataSource]="dataSource" matSort>
 
-    <ng-container matColumnDef="orderId">
-      <th mat-header-cell *matHeaderCellDef  mat-sort-header> # </th>
-      <td mat-cell *matCellDef="let element"> {{element.orderId}} </td>
-    </ng-container>
+        <ng-container matColumnDef="orderId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> # </th>
+          <td mat-cell *matCellDef="let element"> {{element.orderId}} </td>
+        </ng-container>
 
-    <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef  mat-sort-header> Status </th>
-      <td mat-cell *matCellDef="let element"> {{element.status}} </td>
-    </ng-container>
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+          <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+        </ng-container>
 
-    <ng-container matColumnDef="supplierName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Supplier </th>
-      <td mat-cell *matCellDef="let element"> {{element.supplierName}} </td>
-    </ng-container>
+        <ng-container matColumnDef="supplierName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> {{"supplier" | translate}} </th>
+          <td mat-cell *matCellDef="let element"> {{element.supplierName}} </td>
+        </ng-container>
 
-    <ng-container matColumnDef="requestedDate">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Requested Date </th>
-      <td mat-cell *matCellDef="let element"> {{element.requestedDate | amFromUtc | amLocal | amDateFormat: 'YYYY-MM-DD HH:mm' }} </td>
-    </ng-container>
+        <ng-container matColumnDef="requestedDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>  {{"requestedDate" | translate}} </th>
+          <td mat-cell *matCellDef="let element"> {{element.requestedDate | amFromUtc | amLocal | amDateFormat:
+            'YYYY-MM-DD HH:mm' }} </td>
+        </ng-container>
 
-    <ng-container matColumnDef="totalCost">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Cost </th>
-        <td mat-cell *matCellDef="let element"> {{element.totalCost}} </td>
-      </ng-container>
+        <ng-container matColumnDef="totalCost">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> {{"totalCost" | translate}} </th>
+          <td mat-cell *matCellDef="let element"> {{element.totalCost}} </td>
+        </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onOrderSelected(row)" [class.selected]="row === selectedOrder"></tr>
-  </table>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onOrderSelected(row)" [class.selected]="row === selectedOrder"></tr>
+      </table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-</div>
-  <div class="col-md-6">
-    <app-order-detail [order]="selectedOrder" (orderDeletedEvent)="orderDeleted($event)" *ngIf="selectedOrder"></app-order-detail> 
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+    <div class="col-lg-6">
+      <app-order-detail [order]="selectedOrder" (orderDeletedEvent)="orderDeleted($event)" *ngIf="selectedOrder"></app-order-detail>
+    </div>
   </div>
 </div>
-
-
-
-<!-- Copyright 2018 Google Inc. All Rights Reserved.
-  Use of this source code is governed by an MIT-style license that
-  can be found in the LICENSE file at http://angular.io/license -->

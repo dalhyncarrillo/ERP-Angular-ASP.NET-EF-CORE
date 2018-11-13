@@ -65,6 +65,7 @@ export class OrderAddItemComponent implements OnInit {
     let itemToBeAdded: OrderItems = {
       orderId: this.data.order.orderId,
       itemId: this.creationForm.get("selectedItemSupplier").value.itemId,
+      itemName: this.creationForm.get("selectedItemSupplier").value.itemName,
       quantity: this.creationForm.get("quantity").value,
       unitCost: this.creationForm.get("selectedItemSupplier").value.unitCost,
       totalCost:

@@ -1,44 +1,125 @@
-@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 body {
-   background-color: #fbfbfb;
-   
+  background-color:#fbfbfb;
+  /* background-image: url("assets\images\background.jpg"); */
+}
+
+.register-form {
+    margin: 0 auto;
+    margin-top: 15px;
+    width:25%;
+    /* border-radius: 14px; */
+    padding: 10px 15px;
+    background-color: white;
+    box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
+}
+
+.order-create-form {
+  width:100%;
+  /* border-radius: 14px; */
+  padding: 10px 15px;
+}
+
+header {
+  background-image: url("assets\images\business1.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+h1 {
+  color: #e76c2f;
+}
+
+.text-orange {
+  color: #e76c2f;
 }
 .toolBar {
-    margin: 15px;
+  margin: 15px;
 }
 .form-signin {
-    width: 100%;
-    max-width: 330px;
-    padding: 15px;
-    margin: 85px auto;
-    box-shadow: 1px 1px 8px 0px rgba(19, 18, 21, 0.5);
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: 85px auto;
+  background-color: white;
+  box-shadow: 1px 1px 8px 0px rgba(19, 18, 21, 0.5);
 }
 .selected {
-    background-color: #2FA4E7 !important;
-    color: white !important;
-  }
-
-  .tableFormat {
-    margin-left: 15px;
-    width: 100%;
-    padding: 15px;
+  background-color: #e76c2f !important;
+  color: white !important;
+}
+.btn-orange {
+  margin: 3px;
+  background-color: #e76c2f;
+  border-color: #e76c2f;
+  color: white;
+}
+.btn-order-add {
+  margin: 7px;
+  line-height: 1.5;
 }
 
-  .full-width {
-      width: 100%;
-  }
+.btn-orange:hover {
+  background-color: white;
+  color: #e76c2f;
+}
 
-  .margins {
-      margin-left: 35px;
-      margin-top: 20px;
-  }
+.btn-blue {
+  border-color: #2fa4e7;
+  background-color: #2fa4e7;
+  color: white;
+  margin: 3px;
+}
+.tableFormat > th,
+.tableFormat > td {
+  border-bottom: 1px solid #ddd;
+}
 
-  .panel {
-    width: 100%;
-    padding: 15px;
-    box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
-    min-height: 100%;
-    }
-    .validation-error-message  {
-        color: red;
-    }
+.btn-blue:hover {
+  background-color: white;
+  color: #2fa4e7;
+}
+.list-left-margin {
+  margin-left: 170px;
+}
+
+.tableFormat {
+  background-color: #fbfbfb;
+  width: 100%;
+  padding: 15px;
+}
+
+.items-to-order {
+  width: 100%;
+  margin: 3px;
+  background-color: #fbfbfb;
+  padding: 15px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+.container {
+  max-width: 1500px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.margins {
+  margin-left: 35px;
+  margin-top: 20px;
+}
+
+.panel {
+  background-color: #fbfbfb;
+  width: 100%;
+  padding: 15px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  min-height: 100%;
+}
+
+.validation-error-message {
+  color: red;
+}

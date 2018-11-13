@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary" *ngIf="loggedIn()">
-  <a class="navbar-brand">Navbar</a>
-  <button class="navbar-toggler" type="button" appDropdown aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"  data-toggle="dropdown"  aria-haspopup="true"></span>
+  <!-- <a class="navbar-brand">Navbar</a> -->
+  <button appDropdown class="navbar-toggler" type="button" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon" data-toggle="dropdown" aria-haspopup="true"></span>
   </button>
 
   <div class="collapse navbar-collapse">
@@ -22,20 +22,18 @@
         <a class="nav-link" [routerLink]="['/orders']">{{"orders"| translate}}</a>
       </li>
     </ul>
-    <div class="btn-group" style="margin-right: 100px">
-        <button appDropdown type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {{"settings" |translate}}
-        </button>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" [routerLink]="['/employees','profile']">Profile</a>
-          <a class="dropdown-item"  *ngIf="this.languageService.currentLang === 'hu'" (click)="changeLang('en')">English</a>
-          <a class="dropdown-item" *ngIf="this.languageService.currentLang === 'en'"  (click)="changeLang('hu')">Magyar</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" (click)="logout()">{{"logout" |translate}}</a>
-        </div>
+    <div class="btn-group" dropdown style="margin-right: 100px">
+      <button type="button" dropdownToggle class="btn btn-secondary text-orange dropdown-toggle" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        {{"settings" |translate}}
+      </button>
+      <div *dropdownMenu class="dropdown-menu">
+        <a class="dropdown-item" [routerLink]="['/employees','profile']">Profile</a>
+        <a class="dropdown-item" *ngIf="this.languageService.currentLang === 'hu'" (click)="changeLang('en')">English</a>
+        <a class="dropdown-item" *ngIf="this.languageService.currentLang === 'en'" (click)="changeLang('hu')">Magyar</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" (click)="logout()">{{"logout" |translate}}</a>
       </div>
-
-    
-      
+    </div>
   </div>
 </nav>

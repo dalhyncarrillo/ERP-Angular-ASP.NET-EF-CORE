@@ -41,7 +41,12 @@ export class OrderService {
   }
   
   getOrderItems(orderId: number) {
-    return this.http.get<OrderItems[]>(environment.baseurl + 'OrderItems/' + orderId);
+    return this.http.get<OrderItems[]>(environment.baseurl + 'OrderItems/' + orderId).map(orderItems => {
+      orderItems.forEach(element => {
+        element.totalCost = element.quantity *  element.unitCost;
+      });
+      return orderItems;
+    });
   }
   
   createOrderItem(itemsOfOrderToCreate: OrderItems[]) {

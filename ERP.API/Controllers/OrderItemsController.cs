@@ -32,21 +32,9 @@ namespace ERP.API.Controllers
         }
 
         [HttpPost]
-        //TODO
         public async Task<IActionResult> CreateOrderItems([FromBody] List<OrderItem> orderItemToCreate) 
         {
             await this.repository.AddOrderItem(orderItemToCreate);
-            /*
-            OrderItem createdOrderItem = null; 
-            if(orderItemToCreate != null)
-            {
-                createdOrderItem = await this.repository.Add(orderItemToCreate);
-            }
-            if(createdOrderItem == null)
-            {
-                return BadRequest();
-            }
-            */
             return Ok();
         }
 

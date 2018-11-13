@@ -19,7 +19,6 @@ namespace ERP.API.Data
         Task<IEnumerable<ItemSupplier>> GetItemSuppliers(int itemId);
         Task<ItemSupplier> GetItemSupplier(int itemId, int supplierId);
         Task<IEnumerable<ItemSupplier>> GetItemsOfSupplier(int supplierId); 
-        Task<Item> UpdateItem(Item item);
         Task<IEnumerable<Order>> GetOrders();
         Task<Order> GetOrder(int id);
         Task<IEnumerable<OrderItem>> GetOrderItems(int orderId);
@@ -27,7 +26,6 @@ namespace ERP.API.Data
         Task<bool> UpdateOrderItems(IEnumerable<OrderItem> orderItemsToUpdate, int orderId);
         Task<OrderItem> GetSingleOrderItems(int orderId, int itemId);
         Task<bool> AddOrderItem(IEnumerable<OrderItem> orderItems);
-        Task<Order> UpdateOrder(Order order);
         Task<IEnumerable<Employee>> GetEmployees();
         Task<Employee> GetEmployee(int employeeId);
     }

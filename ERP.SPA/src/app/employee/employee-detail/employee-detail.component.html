@@ -1,4 +1,4 @@
-<div class="panel" *ngIf="employee && selectedPosition">
+<div class="panel" *ngIf="employee">
   <tabset>
     <tab heading="{{'details' | translate}}">
         <form  #form="ngForm">
@@ -57,12 +57,12 @@
                       </div>
                     </div>
             
-                <button class="btn btn-primary" type="button" *ngIf="!isMyProfile" [disabled]="form.invalid" (click)="updateEmployee()">{{"update" | translate}}</button>
-                <button class="btn btn-primary" type="button" *ngIf="isMyProfile" [routerLink]="['/employees','changepassword']" >{{"changePassword" | translate}}</button>
+                <button class="btn btn-orange" type="button" *ngIf="!isMyProfile" [disabled]="form.invalid" (click)="updateEmployee()">{{"update" | translate}}</button>
+                <button class="btn btn-orange" type="button" *ngIf="isMyProfile" [routerLink]="['/employees','changepassword']" >{{"changePassword" | translate}}</button>
         </form>
     </tab>
     <tab heading="{{'roleName' | translate}}">
-      <app-employee-role [employee]="employee"></app-employee-role>
+      <app-employee-role [employee]="employee" [isMyProfile]="isMyProfile"></app-employee-role>
     </tab>
   </tabset> 
 </div>  

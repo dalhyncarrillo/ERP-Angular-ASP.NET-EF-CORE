@@ -10,7 +10,7 @@ import { LanguageService } from '../../_services/language.service';
 })
 export class LoginComponent implements OnInit {
   emp: any = {};
-  constructor(private languageService: LanguageService, private authService: AuthService, private alertify: AlertifyService) { }
+  constructor(public languageService: LanguageService, private authService: AuthService, private alertify: AlertifyService) { }
 
   ngOnInit() {
   }

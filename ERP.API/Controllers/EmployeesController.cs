@@ -62,6 +62,7 @@ namespace ERP.API.Controllers
             await this.repo.SaveChangesAsync();
 
             return Ok();
+            //TODO implementalni a szalkezelest!
             // if(updatedEmployee == null)
             //     return BadRequest("The record you are trying to update has been modified!");
             //return Ok(updatedEmployee);

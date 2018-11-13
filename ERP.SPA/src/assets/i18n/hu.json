@@ -2,11 +2,47 @@
     "signIn": "Bejelentkezés",
     "emailAddress": "Email cím",
     "password":"Jelszó",
+    "submit": "Létrehoz",
     "delete":"Törlés",
     "update":"Módosít",
+    "add": "Hozzáad",
+    "reset": "Újra kezd",
+    "next": "Következő",
+    "back": "Vissza",
+
+    "firstLogin":"Mivel ez az első bejelentkezésed meg kell változtatnod az alap jelszót.",
+
+    "isRequired": "kitöltése kötelező!",
+    "emailFormatRequired": "A megadott e-mail cím formátuma nem megfelelő!",
+
+    "fillOutSupp": "Add meg a beszállító nevét",
+    "fillOutSuppAdd": "Add meg a beszállító címét",
+    "fillOutSuppCont":"Add meg a beszállító elérhetőségét",
+    "nowDone": "Kitöltötted a szükséges mezőket.",
+    "done": "Végeztél",
+
+    "selectSupplier" : "Beszállító kiválasztása",
+    "fillItemName" : "Add meg az áru nevét",
+    "fillRetailAndCost" : "Add meg az eladási árat és költséget",
+
+    "chooseOne": "Válassz...",
+
+
     "enterEmail":"E-mail cím kitöltése kötelező!",
     "enterPassword": "Jelszó kitöltése kötelező!",
  
+    "erp": "Vállalatirányítási Rendszer",
+    "welcome": "Ez a Vállalatirányítási web applikáció a szakdolgozatom részeként jött létre, melyet az Eszterházy Károly Egyetemre készítettem.",
+    "createdByJordan": "készítette Rigó Jordán",
+    "getStarted": "Vágjunk bele!",
+    "whatCanYouDoHere": "Mit tudsz csinálni?",
+    "about": "Nyomonkövetheted az alkalmazottakat, rendeléseket adhatsz le, hogy szinten tartsd az árukészletedet és kapcsolatban lehetsz a beszállítóiddal.",
+    "functionalities": "Funkcionalitások",
+    "employeeFunc": "Karbantarhatod az alkalmazottjaid profiljait, az elvégzendő feladatoknak megfelelően jogusoltságokat rendelhetsz hozzájuk!",
+    "supplierFunc": "Létrehozhatsz új beszállítókat és részletes adatokat tárolhatsz róluk!",
+    "itemFunc": "Új árukat hozhatsz létre, beállíthatod az eladási árat, költséget, nyomonkövetheted a beérkező és raktáron lévő árumennyiséget!",
+    "orderFunc": "Korábban meghatározott beszállítóktól árukat igényelhetsz, módosíthatod az igényelt rendelést. Elfogadhatod és bevételezheted a rendeléseket!",
+
     "home" : "Főoldal",
     "employees" : "Alkalmazottak",
     "suppliers":"Beszállítók",
@@ -19,6 +55,7 @@
     "lastName":"Vezetéknév",
     "position":"Pozíció",
     "details":"Részletek",
+    "defaultPassword":"Ez a mező lesz az alapértelmezett jelszó, kisbetűvel!",
     "roleName" : "Jogosultság",
     "salary":"Bér",
     "dateOfBirth":"Születési dátum",
@@ -26,19 +63,44 @@
 
     "currentPassword": "Jelenlegi Jelszó",
     "confirmPassword": "Jelszó megerősítése",
+    "wrongCurrentPassword": "A megadott jelszó helytelen",
 
+    "supplierId": "Beszállító Id",
     "supplier": "Beszállító",
     "name":"Név",
     "city":"Város",
     "address":"Cím",
-    "contactPerson":"Kapcsolat tartó",
+    "contactPerson":"Kapcsolattartó",
     "phone": "Telefonszám",
+    "unitCost": "Egység költség",
+    "leadTime": "Szállítási idő",
+    "primarySupplier": "Elsődleges Beszállító",
+
+    "itemId":"Áru Id",
+    "itemName": "Áru",
+    "retailPrice": "Eladási Ár",
+    "averageCost": "Átlag költség",
+    "quantityOnHand": "Raktáron Lévő Készlet",
+    "quantityOrdered": "Rendelt Készlet",
+
+    "requestedDate":"Kiszállítás dátuma",
+    "order": "Rendelés",
+    "totalCost" : "Teljes költség",
+    "orderId": "Rendelés Id",
+    "createdBy": "Létrehozta",
+    "approvedBy": "Elfogadta",
+    "receivedDate" : "Bevételezés dátuma",
+    "approve" : "Elfogad",
+    "receive" : "Bevételez",
+    "saveChanges" : "Változások mentése",
+    "quantity": "Mennyiség",
+
 
     "loginSuccess":"Sikeresen bejelentkeztél.",
     "loginError": "Hibás e-mail vagy jelszó!",
     "updateSuccess": "Sikeres módosítás!",
     "deleteSuccess": "Sikeres törlés!",
-    "createSuccess": "Sikeres létrehozás!",
+    "createSuccess": "Sikeres létrehozás! Alapértelmezett jelszó: keresztnév kisbetűkkel!",
     "supplierAddSuccess": "Beszállító sikeresen hozzáadva az áruhoz",
     "supplierAddError": "Beszállító már hozzá lett adva az áruhoz!",
     "orderCreateSuccess": "Rendelés sikeresen létrehozva",
@@ -47,5 +109,6 @@
     "orderApprovedSuccess": "Rendelés sikeresen elfogadva",
     "orderReceivedSuccess": "Rendelés sikeresen átvéve",
     "youNotCreatedOrder": "Művelet megtagadva - Nem te hoztad létre a rendelést",
-    "basketEmpty": "Hiba: A Kosár nem lehet üres"
+    "basketEmpty": "Hiba: A Kosár nem lehet üres",
+    "concurrencyError": "Hiba: A rendelés módosítva lett"
 }

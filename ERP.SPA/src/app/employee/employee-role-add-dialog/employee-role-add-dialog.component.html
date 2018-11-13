@@ -1,13 +1,12 @@
 <table class="tableFormat">
-  <tr>
-      <th>Role Id</th>
-      <th>{{"roleName" |translate}}</th>
-
-  </tr>
-  <tr *ngFor="let role of roles" (click)="onRoleSelected(role)" [class.selected]="role === selectedRole">
-      <td>{{role.roleId}}</td>
-      <td *ngIf="this.languageService.currentLang == 'en'">{{role.roleNameEn}}</td>
-      <td *ngIf="this.languageService.currentLang == 'hu'">{{role.roleNameHu}}</td>
-  </tr>
+    <tr>
+        <th>Role Id</th>
+        <th>{{"roleName" |translate}}</th>
+    </tr>
+    <tr *ngFor="let role of roles" (click)="onRoleSelected(role)" [class.selected]="role === selectedRole">
+        <td>{{role.roleId}}</td>
+        <td *ngIf="this.languageService.currentLang == 'en'">{{role.roleNameEn}}</td>
+        <td *ngIf="this.languageService.currentLang == 'hu'">{{role.roleNameHu}}</td>
+    </tr>
 </table>
-<button class="btn button-success" (click)="createEmployeeRole()" [disabled]="!selectedRole">Create</button>
+<button class="btn btn-orange" (click)="createEmployeeRole()" [disabled]="!selectedRole">Create</button>

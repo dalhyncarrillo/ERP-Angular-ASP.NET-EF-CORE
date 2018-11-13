@@ -2,10 +2,44 @@
     "signIn": "Sign In",   
     "emailAddress": "Email address",
     "password": "Password",
+    "submit": "Submit",
     "delete":"Delete",
     "update":"Update",
-    "enterEmail":"Enter your e-mail address",
-    "enterPassword": "Enter your password",
+    "add": "Add",
+    "reset": "Reset",
+    "next": "Next",
+    "back": "Back",
+
+    "firstLogin":"As It is your first login, you MUST change your default password.",
+
+    "isRequired": "is required!",
+    "emailFormatRequired": "The format of the provided e-mail address is NOT correct!",
+    "fillOutSupp": "Fill out supplier name",
+    "fillOutSuppAdd": "Fill out supplier address",
+    "fillOutSuppCont":"Fill ou supplier contact",
+    "nowDone": "You are now done.",
+    "done": "Done",
+    "enterEmail":"Enter e-mail address",
+    "enterPassword": "Enter password",
+
+    "selectSupplier" : "Select Supplier",
+    "fillItemName" : "Fill out Item name",
+    "fillRetailAndCost" : "Fill out Retail price and Unit Cost",
+
+    "chooseOne": "Choose One",
+
+    "erp": "Enterprise Resource Planning",
+    "welcome": "This ERP Single Page Application  was created as part of my thesis for Eszterházy Károly University.",
+    "createdByJordan": "created by Jordan Rigo",
+    "getStarted": "Let's Get Started!",
+    "whatCanYouDoHere": "What can you do here?",
+    "about": "You can keep track of your employees, purchase items in order to maintain your stock holdings and be in touch with your suppliers.",
+    "functionalities": "Functionalities",
+    "employeeFunc": "You can maintain your employee's profile, add appropriate roles to them, depending on their task to be fulfilled!",
+    "supplierFunc": "You can add new suppliers and keep detailed information of them!",
+    "itemFunc": "You can create new items, set the retail price and unit cost, keep track of both incoming and on hand quantities!",
+    "orderFunc": "You can purchase needed items from earlier defined suppliers, modify requested orders, approve and receive created orders!",
+
 
     "home" : "Home",
     "employees" : "Employees",
@@ -20,6 +54,7 @@
     "lastName":"Last Name",
     "position":"Position",
     "details":"Details",
+    "defaultPassword":"It is going to be the default password, lowercase!",
     "roleName" : "Role Name",
     "salary":"Salary",
     "dateOfBirth":"Date of Birth",
@@ -27,22 +62,45 @@
 
     "currentPassword": "Current Password",
     "confirmPassword": "Confirm Password",
-    
+    "wrongCurrentPassword": "The current password is incorrect",
 
-
     
+    "supplierId": "Supplier Id",
     "supplier": "Supplier",
     "name":"Name",
     "city":"City",
     "address":"Address",
     "contactPerson":"Contact Person",
     "phone": "Phone",
+    "unitCost": "Unit Cost",
+    "leadTime": "Lead Time",
+    "primarySupplier": "Primary Supplier",
+
+    "itemId":"Item Id",
+    "itemName": "Item Name",
+    "retailPrice": "Retail Price",
+    "averageCost": "Average Cost",
+    "quantityOnHand": "Quantity On Hand",
+    "quantityOrdered": "Quantity Ordered",
+
+    "requestedDate":"Requested Date",
+    "order": "Order",
+    "totalCost" : "Total Cost",
+    "orderId": "Order Id",
+    "createdBy": "Created By",
+    "approvedBy": "Approved By",
+    "receivedDate" : "Received Date",
+    "approve" : "Approve",
+    "receive" : "Receive",
+    "saveChanges" : "Save Changes",
+    "quantity": "Quantity",
+
 
     "loginSuccess":"You successfully logged in.",
     "loginError": "Invalid email or password!",
     "updateSuccess": "Update is successful!",
     "deleteSuccess": "Delete is successful!",
-    "createSuccess": "Create is successful!",
+    "createSuccess": "Create is successful! Default password: Given first name with lower case!",
     "supplierAddSuccess": "Supplier successfully added to the item",
     "supplierAddError": "This supplier already belongs to the item!",
     "orderCreateSuccess": "Order created successfully",
@@ -51,7 +109,6 @@
     "orderApprovedSuccess": "Order approved successfully",
     "orderReceivedSuccess": "Order received successfully",
     "youNotCreatedOrder": "No permission - You did NOT created this order",
-    "basketEmpty": "Error: Your basket is empty"
-
-
+    "basketEmpty": "Error: Your basket is empty",
+    "concurrencyError": "Error: Someone has already updated this order"
 }

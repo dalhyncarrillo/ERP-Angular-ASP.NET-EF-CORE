@@ -35,7 +35,6 @@ export class ItemSuppliersCreateDialogComponent implements OnInit {
       leadTimeCtrl: ['', Validators.required]
     });
     this.secondFormGroup = this._formBuilder.group({
-      retailPriceCtrl: ['', Validators.required],
       unitCostCtrl: ['', Validators.required]
     });
  
@@ -53,8 +52,6 @@ export class ItemSuppliersCreateDialogComponent implements OnInit {
       supplierId: this.firstFormGroup.get('supplierCtrl').value.supplierId,
       supplierName: this.firstFormGroup.get('supplierCtrl').value.name,
       leadTime: this.firstFormGroup.get('leadTimeCtrl').value,
-
-      retailPrice: this.secondFormGroup.get('retailPriceCtrl').value,
       unitCost: this.secondFormGroup.get('unitCostCtrl').value,
       isPrimary: false
     }

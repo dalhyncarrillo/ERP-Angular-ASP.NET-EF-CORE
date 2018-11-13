@@ -28,7 +28,7 @@ import { SupplierService } from './_services/supplier.service';
 import { SupplierDetailComponent } from './suppliers/supplier-detail/supplier-detail.component';
 import { SupplierCreateDialogComponent } from './suppliers/supplier-create-dialog/supplier-create-dialog.component';
 import { ConfirmationDialogComponent } from './ConfirmationDialog/ConfirmationDialog.component';
-import { TabsModule, TimepickerModule  } from 'ngx-bootstrap';
+import { TabsModule, TimepickerModule,BsDropdownModule   } from 'ngx-bootstrap';
 import { AppMaterialModule } from './/app-material.module';
 import { EmployeeListComponent } from './employee/employee-list/employee-list.component';
 import { EmployeeDetailComponent } from './employee/employee-detail/employee-detail.component';
@@ -41,11 +41,15 @@ import { EmployeeRoleComponent } from './employee/employee-role/employee-role.co
 import { EmployeeRoleAddDialogComponent } from './employee/employee-role-add-dialog/employee-role-add-dialog.component';
 import { EmployeeChangePasswordDialogComponent } from './employee/employee-change-password-dialog/employee-change-password-dialog.component';
 import { MomentModule } from 'ngx-moment';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
+export function getToken() {
+  return localStorage.getItem('token');
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -75,6 +79,7 @@ export function createTranslateLoader(http: HttpClient) {
     EmployeeChangePasswordDialogComponent
 ],
   imports: [
+    FontAwesomeModule,
     MomentModule,
     TranslateModule.forRoot({
       loader: {
@@ -85,6 +90,7 @@ export function createTranslateLoader(http: HttpClient) {
     }),
     TimepickerModule.forRoot(),
     TabsModule.forRoot(),
+    BsDropdownModule.forRoot(),
     AppMaterialModule,
     ReactiveFormsModule,
     AppRoutingModule,
@@ -92,10 +98,8 @@ export function createTranslateLoader(http: HttpClient) {
     FormsModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: () => {
-          return localStorage.getItem('token');
-        },
-        whitelistedDomains: ['localhost:5000']
+        tokenGetter: getToken,
+        whitelistedDomains: ['localhost:5000', 'jordanrigo-001-site1.ftempurl.com']
       }
     }),
   ],

@@ -1,46 +1,45 @@
 <mat-horizontal-stepper [linear]="true" #stepper>
-    <mat-step [stepControl]="firstFormGroup">
-        <form [formGroup]="firstFormGroup">
-          <ng-template matStepLabel>Select Supplier</ng-template>
-          <mat-form-field>
-              <mat-select matInput placeholder="Choose one" formControlName="supplierCtrl" required>
-                  <mat-option *ngFor="let supplier of suppliers" [value]="supplier">
-                    {{supplier.name}}
-                  </mat-option>
-                </mat-select>
-            </mat-form-field>
-          <br>
-          <mat-form-field>
-            <input matInput placeholder="Lead Time" formControlName="leadTimeCtrl" required>
-          </mat-form-field>
-          <div>
-              <button class="btn btn-primary" matStepperNext>Next</button>
-          </div>
-        </form>
-    </mat-step>   
-    <mat-step [stepControl]="secondFormGroup">
-      <form [formGroup]="secondFormGroup">
-        <ng-template matStepLabel>Fill out Retail price and Unit Cost</ng-template>
-        <mat-form-field>
-            <input matInput placeholder="Retail Price" formControlName="retailPriceCtrl" required>
-        </mat-form-field>
-        <br>
-        <mat-form-field>
-          <input matInput placeholder="Unit Cost" formControlName="unitCostCtrl" required>
-        </mat-form-field>
-        <div>
-          <button class="btn btn-primary" matStepperNext>Next</button>
-          <button class="btn btn-primary" matStepperPrevious>Back</button>        
-        </div>
-      </form>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      You are now done.
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>{{"selectSupplier" | translate}}</ng-template>
+      <mat-form-field>
+        <mat-select matInput placeholder="{{'chooseOne' | translate}}" formControlName="supplierCtrl" required>
+          <mat-option *ngFor="let supplier of suppliers" [value]="supplier">
+            {{supplier.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input matInput placeholder="{{'leadTime' |translate}}" formControlName="leadTimeCtrl" pattern="^[1-9]+[0-9]*$"
+          required>
+      </mat-form-field>
       <div>
-          <button class="btn btn-success" (click)="createNewItemSupplier()" matStepperNext>Add</button>
-          <button class="btn btn-primary" matStepperPrevious>Back</button> 
-        <button class="btn btn-danger" (click)="stepper.reset()">Reset</button>
+        <button class="btn btn-orange" matStepperNext>{{"next" | translate }}</button>
       </div>
-    </mat-step>
-  </mat-horizontal-stepper>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>{{"fillRetailAndCost" | translate}}</ng-template>
+      <br>
+      <mat-form-field>
+        <input matInput placeholder="{{'unitCost' | translate}}" formControlName="unitCostCtrl" pattern="^[1-9]+[0-9]*$"
+          required>
+      </mat-form-field>
+      <div>
+        <button class="btn btn-orange" matStepperNext>{{"next" | translate }}</button>
+        <button class="btn btn-orange" matStepperPrevious>{{"back" | translate }}</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>{{"done" | translate}}</ng-template>
+    {{"nowDone" | translate}}
+    <div>
+      <button class="btn btn-orange" (click)="createNewItemSupplier()" matStepperNext>{{"add" |translate}}</button>
+      <button class="btn btn-blue" matStepperPrevious>{{"back" | translate }}</button>
+      <button class="btn btn-blue" (click)="stepper.reset()">{{"reset" | translate}}</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

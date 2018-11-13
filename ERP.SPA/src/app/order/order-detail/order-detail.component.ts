@@ -31,9 +31,8 @@ export class OrderDetailComponent implements OnChanges {
   }
 
   getOrderDetails() {
-
     this.orderService.getOrderDetails(this.order.orderId).subscribe(data => {
-      this.order = data;    
+      this.order = data;  
     });
   }
 
@@ -67,12 +66,13 @@ export class OrderDetailComponent implements OnChanges {
     this.order.approvedBy = +localStorage.getItem('employeeId');
     this.orderService.approveOrder(this.order).subscribe((success: Order) => {
       if(success.status === 'Approved') {
-        this.order = success;
+        this.order.status = success.status;
+        this.order.timestamp = success.timestamp;
         this.alertifyService.success('orderApprovedSuccess');
       }
     },
     error => {
-        this.alertifyService.error('Error: ' + error.error);
+        this.alertifyService.error(error.error);
     });
   }
 
@@ -87,12 +87,14 @@ export class OrderDetailComponent implements OnChanges {
   private receiveOrder() {
     this.orderService.receiveOrder(this.order).subscribe((success: Order) => {
       if(success.status === 'Received') {
-        this.order = success;
+        this.order.status = success.status;
+        this.order.receivedDate = success.receivedDate;
+        this.order.timestamp = success.timestamp;
         this.alertifyService.success('orderReceivedSuccess');
       }
     },
     error => {
-      this.alertifyService.error('Error: ' + error.error);
+      this.alertifyService.error(error.error);
     });
   }
 
